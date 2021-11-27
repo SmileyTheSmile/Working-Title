@@ -1,4 +1,4 @@
-﻿{
+{
     "files.exclude":
     {
         "**/.DS_Store":true,
@@ -10,7 +10,7 @@
         "**/*.suo":true,
         "**/*.user":true,
         "**/*.userprefs":true,
-        "**/*.unityproj":true,
+        "**/*.unityproj":false,
         "**/*.dll":true,
         "**/*.exe":true,
         "**/*.pdf":true,
