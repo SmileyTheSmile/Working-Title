@@ -10,22 +10,24 @@ public class PlayerState {
 
     protected float startTime;
 
-    private string animBoolNime;
+    private string animBoolName;
 
-    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolNime) {
+    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
         this.player = player;
         this.stateMachine = stateMachine;
         this.playerData = playerData;
-        this.animBoolNime = animBoolNime;
+        this.animBoolName = animBoolName;
     }
 
     public virtual void Enter() {
         DoChecks();
+        player.animator.SetBool(animBoolName, true);
         startTime = Time.time;
+        Debug.Log(animBoolName);
     }
 
     public virtual void Exit() {
-        
+        player.animator.SetBool(animBoolName, false);
     }
 
     public virtual void LogicUpdate() {
