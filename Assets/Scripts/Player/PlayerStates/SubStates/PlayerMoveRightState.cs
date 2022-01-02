@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundedState : PlayerState
+public class PlayerMoveRightState : PlayerMoveState
 {
-
-    protected int inputX;
-    protected int inputY;
-
-    public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
+    public PlayerMoveRightState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void DoChecks()
     {
@@ -19,6 +15,7 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
     }
+
     public override void Exit()
     {
         base.Exit();
@@ -27,8 +24,6 @@ public class PlayerGroundedState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        inputX = player.inputHandler.normalizedInputX;
     }
 
     public override void PhysicsUpdate()

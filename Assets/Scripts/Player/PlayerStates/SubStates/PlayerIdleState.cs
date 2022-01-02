@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerState {
-    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolNime) : base(player, stateMachine, playerData, animBoolNime) {}
+public class PlayerIdleState : PlayerGroundedState
+{
+    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void DoChecks()
     {
@@ -13,6 +14,7 @@ public class PlayerIdleState : PlayerState {
     public override void Enter()
     {
         base.Enter();
+        player.SetVelocityX(0f);
     }
 
     public override void Exit()
@@ -24,9 +26,8 @@ public class PlayerIdleState : PlayerState {
     {
         base.LogicUpdate();
 
-        if (input.x != 0f) {
-            stateMachine.ChangeState(player.playerMoveState);
-        }
+        if (inputX > 0) { stateMachine.ChangeState(player.playerMoveRightState); }
+        else if (inputX < 0) { stateMachine.ChangeState(player.playerMoveLeftState); }
     }
 
     public override void PhysicsUpdate()

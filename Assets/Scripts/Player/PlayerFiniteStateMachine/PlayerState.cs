@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState {
+public class PlayerState
+{
 
     protected Player player;
     protected PlayerStateMachine stateMachine;
@@ -12,33 +13,41 @@ public class PlayerState {
 
     private string animBoolName;
 
-    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
+    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName)
+    {
         this.player = player;
         this.stateMachine = stateMachine;
         this.playerData = playerData;
         this.animBoolName = animBoolName;
     }
 
-    public virtual void Enter() {
+    public virtual void Enter()
+    {
         DoChecks();
+
         player.animator.SetBool(animBoolName, true);
         startTime = Time.time;
+
         Debug.Log(animBoolName);
     }
 
-    public virtual void Exit() {
+    public virtual void Exit()
+    {
         player.animator.SetBool(animBoolName, false);
     }
 
-    public virtual void LogicUpdate() {
-        
+    public virtual void LogicUpdate()
+    {
+
     }
 
-    public virtual void PhysicsUpdate() {
+    public virtual void PhysicsUpdate()
+    {
         DoChecks();
     }
 
-    public virtual void DoChecks() {
-        
+    public virtual void DoChecks()
+    {
+
     }
 }
