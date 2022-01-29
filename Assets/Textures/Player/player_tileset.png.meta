@@ -329,7 +329,7 @@ TextureImporter:
       name: player_tileset_10
       rect:
         serializedVersion: 2
-        x: 4
+        x: 3
         y: 1312
         width: 64
         height: 64
@@ -350,7 +350,7 @@ TextureImporter:
       name: player_tileset_11
       rect:
         serializedVersion: 2
-        x: 4
+        x: 3
         y: 1245
         width: 64
         height: 64
@@ -371,8 +371,8 @@ TextureImporter:
       name: player_tileset_12
       rect:
         serializedVersion: 2
-        x: 4
-        y: 1176
+        x: 3
+        y: 1178
         width: 64
         height: 64
       alignment: 0
@@ -384,6 +384,27 @@ TextureImporter:
       bones: []
       spriteID: 18d6737cb55819d448843a29cca796f1
       internalID: -2078267938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_tileset_13
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1111
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0deb3dcfefd0e5f4382a2e66f8de5e93
+      internalID: 1867126814
       vertices: []
       indices: 
       edges: []
@@ -410,6 +431,7 @@ TextureImporter:
       player_tileset_9: -1717187729
       player_tileset_12: -2078267938
       player_tileset_4: -1439665963
+      player_tileset_13: 1867126814
       player_tileset_7: 1628481800
       player_tileset_5: -1950748132
   spritePackingTag: 
