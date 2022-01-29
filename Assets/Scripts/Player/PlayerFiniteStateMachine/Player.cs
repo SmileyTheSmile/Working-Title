@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     public PlayerJumpState playerJumpState { get; private set; }
     public PlayerLandState playerLandState { get; private set; }
     public PlayerInAirState playerInAirState { get; private set; }
+    public PlayerWallSlideState playerWallSlideState { get; private set; }
+    public PlayerWallGrabState playerWallGrabState { get; private set; }
+    public PlayerWallClimbState playerWallClimbState { get; private set; }
 
     public PlayerInputHandler inputHandler { get; private set; }
 
@@ -27,6 +30,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private Transform groundCheck;
+    [SerializeField]
+    private Transform wallCheck;
 
     private void Awake()
     {
@@ -35,9 +40,12 @@ public class Player : MonoBehaviour
         playerIdleState = new PlayerIdleState(this, stateMachine, playerData, "idle");
         playerMoveRightState = new PlayerMoveRightState(this, stateMachine, playerData, "moveRight");
         playerMoveLeftState = new PlayerMoveLeftState(this, stateMachine, playerData, "moveLeft");
-        playerJumpState = new PlayerJumpState(this, stateMachine, playerData, "jump");
+        playerJumpState = new PlayerJumpState(this, stateMachine, playerData, "inAir");
         playerInAirState = new PlayerInAirState(this, stateMachine, playerData, "inAir");
         playerLandState = new PlayerLandState(this, stateMachine, playerData, "land");
+        playerWallSlideState = new PlayerWallSlideState(this, stateMachine, playerData, "wallSlide");
+        playerWallClimbState = new PlayerWallClimbState(this, stateMachine, playerData, "wallClimb");
+        playerWallGrabState = new PlayerWallGrabState(this, stateMachine, playerData, "wallGrab");
     }
 
     private void Start()
@@ -54,6 +62,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         currentVelocity = rigidBody.velocity;
+        facingDirection = inputHandler.normalizedInputX;
         stateMachine.CurrentState.LogicUpdate();
     }
 
@@ -80,4 +89,12 @@ public class Player : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
     }
+
+    public bool CheckIfTouchingWall()
+    {
+        return Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
+    }
+
+    private void AnimationTrigger() => stateMachine.CurrentState.AnimationTrigger();
+    private void AnimationFinishedTrigger() => stateMachine.CurrentState.AnimationFinishedTrigger();
 }

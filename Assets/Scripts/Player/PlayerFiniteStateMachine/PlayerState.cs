@@ -9,6 +9,8 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
 
+    protected bool isAnimationFinished;
+
     protected float startTime;
 
     private string animBoolName;
@@ -27,8 +29,9 @@ public class PlayerState
 
         player.animator.SetBool(animBoolName, true);
         startTime = Time.time;
+        isAnimationFinished = false;
 
-        Debug.Log(animBoolName);
+        //Debug.Log(animBoolName);
     }
 
     public virtual void Exit()
@@ -38,7 +41,7 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-
+        Debug.Log(player.facingDirection);
     }
 
     public virtual void PhysicsUpdate()
@@ -46,8 +49,12 @@ public class PlayerState
         DoChecks();
     }
 
-    public virtual void DoChecks()
-    {
+    public virtual void DoChecks() { }
 
+    public virtual void AnimationTrigger() { }
+
+    public virtual void AnimationFinishedTrigger()
+    {
+        isAnimationFinished = true;
     }
 }
