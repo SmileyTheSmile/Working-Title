@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public PlayerWallSlideState playerWallSlideState { get; private set; }
     public PlayerWallGrabState playerWallGrabState { get; private set; }
     public PlayerWallClimbState playerWallClimbState { get; private set; }
+    public PlayerWallJumpState playerWallJumpState { get; private set; }
 
     public PlayerInputHandler inputHandler { get; private set; }
 
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         playerWallSlideState = new PlayerWallSlideState(this, stateMachine, playerData, "wallSlide");
         playerWallClimbState = new PlayerWallClimbState(this, stateMachine, playerData, "wallClimb");
         playerWallGrabState = new PlayerWallGrabState(this, stateMachine, playerData, "wallGrab");
+        playerWallJumpState = new PlayerWallJumpState(this, stateMachine, playerData, "inAir");
     }
 
     private void Start()
@@ -85,12 +87,25 @@ public class Player : MonoBehaviour
         currentVelocity = workspace;
     }
 
+    public void SetVelocity(float velocity, Vector2 angle, int direction)
+    {
+        angle.Normalize();
+        workspace.Set(angle.x * velocity * direction, angle.y * velocity);
+        rigidBody.velocity = workspace;
+        currentVelocity = workspace;
+    }
+
     public bool CheckIfGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
     }
 
     public bool CheckIfTouchingWall()
+    {
+        return Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
+    }
+
+    public bool CheckIfTouchingWallBack()
     {
         return Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
     }

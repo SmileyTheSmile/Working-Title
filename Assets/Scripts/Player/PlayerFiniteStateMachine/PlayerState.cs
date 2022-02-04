@@ -10,6 +10,7 @@ public class PlayerState
     protected PlayerData playerData;
 
     protected bool isAnimationFinished;
+    protected bool isExitingState;
 
     protected float startTime;
 
@@ -30,18 +31,20 @@ public class PlayerState
         player.animator.SetBool(animBoolName, true);
         startTime = Time.time;
         isAnimationFinished = false;
+        isExitingState = false;
 
-        //Debug.Log(animBoolName);
+        Debug.Log(animBoolName);
     }
 
     public virtual void Exit()
     {
         player.animator.SetBool(animBoolName, false);
+        isExitingState = true;
     }
 
     public virtual void LogicUpdate()
     {
-        Debug.Log(player.facingDirection);
+
     }
 
     public virtual void PhysicsUpdate()

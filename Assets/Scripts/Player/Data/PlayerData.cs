@@ -23,6 +23,11 @@ public class PlayerData : ScriptableObject
     [Header("Wall Slide State")]
     public float wallSlideVelocity = 3f;
 
+    [Header("Wall Jump State")]
+    public float wallJumpVelocity = 15f;
+    public float wallJumpTime = 0.6f;
+    public Vector2 wallJumpAngle = new Vector2(1, 2);
+
     [Header("Check Variables")]
     public float groundCheckRadius = 0.5f;
     public float wallCheckDistance = 5f;
