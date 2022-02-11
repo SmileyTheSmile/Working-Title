@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
 {
-
     protected int inputX;
     protected int inputY;
+
     private bool grabInput;
     private bool jumpInput;
     private bool isGrounded;

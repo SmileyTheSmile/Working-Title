@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerState
 {
-
     protected Player player;
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
@@ -56,8 +55,5 @@ public class PlayerState
 
     public virtual void AnimationTrigger() { }
 
-    public virtual void AnimationFinishedTrigger()
-    {
-        isAnimationFinished = true;
-    }
+    public virtual void AnimationFinishedTrigger() => isAnimationFinished = true;
 }

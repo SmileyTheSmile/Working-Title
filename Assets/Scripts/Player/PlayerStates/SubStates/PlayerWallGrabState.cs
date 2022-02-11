@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class PlayerWallGrabState : PlayerTouchingWallState
 {
-
     private Vector2 holdPosition;
 
-    public PlayerWallGrabState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
-    {
-    }
+    public PlayerWallGrabState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void DoChecks()
     {
@@ -29,22 +26,25 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     {
         base.Exit();
     }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (!isExitingState)
+        if (isExitingState)
         {
-            HoldPosition();
+            return;
+        }
 
-            if (inputY > 0)
-            {
-                stateMachine.ChangeState(player.playerWallClimbState);
-            }
-            else if (inputY < 0 || !grabInput)
-            {
-                stateMachine.ChangeState(player.playerWallSlideState);
-            }
+        HoldPosition();
+
+        if (inputY > 0)
+        {
+            stateMachine.ChangeState(player.playerWallClimbState);
+        }
+        else if (inputY < 0 || !grabInput)
+        {
+            stateMachine.ChangeState(player.playerWallSlideState);
         }
     }
 

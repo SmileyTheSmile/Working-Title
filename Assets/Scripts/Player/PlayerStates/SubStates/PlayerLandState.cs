@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerLandState : PlayerGroundedState
 {
-    public PlayerLandState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
-    {
-    }
+    public PlayerLandState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void DoChecks()
     {
@@ -17,10 +15,12 @@ public class PlayerLandState : PlayerGroundedState
     {
         base.Enter();
     }
+
     public override void Exit()
     {
         base.Exit();
     }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -28,13 +28,9 @@ public class PlayerLandState : PlayerGroundedState
 
         if (!isExitingState)
         {
-            if (inputX > 0f)
+            if (inputX != 0)
             {
-                stateMachine.ChangeState(player.playerMoveRightState);
-            }
-            else if (inputX < 0f)
-            {
-                stateMachine.ChangeState(player.playerMoveLeftState);
+                stateMachine.ChangeState(player.playerMoveState);
             }
             else if (isAnimationFinished)
             {

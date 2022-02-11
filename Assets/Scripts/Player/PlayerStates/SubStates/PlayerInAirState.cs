@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
+    private int inputX;
+
+    private float startWallCoyoteTime;
 
     private bool isGrounded;
     private bool jumpInput;
@@ -16,10 +19,6 @@ public class PlayerInAirState : PlayerState
     private bool wallJumpCoyoteTime;
     private bool isTouchingWall;
     private bool isTouchingWallBack;
-
-    private int inputX;
-
-    private float startWallCoyoteTime;
 
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
@@ -48,6 +47,11 @@ public class PlayerInAirState : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+        oldIsTouchingWall = false;
+        oldIsTouchingWallBack = false;
+        isTouchingWall = false;
+        isTouchingWallBack = false;
     }
 
     public override void LogicUpdate()
@@ -61,7 +65,6 @@ public class PlayerInAirState : PlayerState
         jumpInput = player.inputHandler.jumpInput;
         grabInput = player.inputHandler.grabInput;
         jumpInputStop = player.inputHandler.jumpInputStop;
-        Debug.Log(isTouchingWall);
 
         CheckJumpMultiplier();
 
@@ -90,9 +93,10 @@ public class PlayerInAirState : PlayerState
         }
         else
         {
+            player.CheckIfShouldFlip(inputX);
             player.SetVelocityX(playerData.movementVelocity * inputX);
 
-            player.animator.SetFloat("velocityX", player.currentVelocity.x);
+            player.animator.SetFloat("velocityX", Mathf.Abs(player.currentVelocity.x));
             player.animator.SetFloat("velocityY", player.currentVelocity.y);
         }
     }
@@ -104,17 +108,19 @@ public class PlayerInAirState : PlayerState
 
     private void CheckJumpMultiplier()
     {
-        if (isJumping)
+        if (!isJumping)
         {
-            if (jumpInputStop)
-            {
-                player.SetVelocityY(player.currentVelocity.y * playerData.variableJumpHeightMultiplier);
-                isJumping = false;
-            }
-            else if (player.currentVelocity.y <= 0f)
-            {
-                isJumping = false;
-            }
+            return;
+        }
+
+        if (jumpInputStop)
+        {
+            player.SetVelocityY(player.currentVelocity.y * playerData.variableJumpHeightMultiplier);
+            isJumping = false;
+        }
+        else if (player.currentVelocity.y <= 0f)
+        {
+            isJumping = false;
         }
     }
 

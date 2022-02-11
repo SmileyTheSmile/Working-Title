@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class PlayerTouchingWallState : PlayerState
 {
+    protected int inputX;
+    protected int inputY;
+
     protected bool isGrounded;
     protected bool isTouchingWall;
     protected bool grabInput;
     protected bool jumpInput;
-    protected int inputX;
-    protected int inputY;
 
-    public PlayerTouchingWallState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
-    {
-    }
+    public PlayerTouchingWallState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void DoChecks()
     {
@@ -47,8 +46,7 @@ public class PlayerTouchingWallState : PlayerState
             player.playerWallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.playerWallJumpState);
         }
-
-        if (isGrounded && !grabInput)
+        else if (isGrounded && !grabInput)
         {
             stateMachine.ChangeState(player.playerIdleState);
         }

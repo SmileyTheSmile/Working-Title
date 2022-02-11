@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public PlayerStateMachine stateMachine { get; private set; }
     public PlayerIdleState playerIdleState { get; private set; }
-    public PlayerMoveRightState playerMoveRightState { get; private set; }
-    public PlayerMoveLeftState playerMoveLeftState { get; private set; }
+    public PlayerMoveState playerMoveState { get; private set; }
     public PlayerJumpState playerJumpState { get; private set; }
     public PlayerLandState playerLandState { get; private set; }
     public PlayerInAirState playerInAirState { get; private set; }
@@ -16,15 +14,16 @@ public class Player : MonoBehaviour
     public PlayerWallGrabState playerWallGrabState { get; private set; }
     public PlayerWallClimbState playerWallClimbState { get; private set; }
     public PlayerWallJumpState playerWallJumpState { get; private set; }
+    public PlayerLedgeClimbState playerLedgeClimbState { get; private set; }
 
     public PlayerInputHandler inputHandler { get; private set; }
 
     public Rigidbody2D rigidBody { get; private set; }
     public Animator animator { get; private set; }
-    public Vector2 currentVelocity { get; private set; }
-    public int facingDirection { get; private set; }
 
+    public Vector2 currentVelocity { get; private set; }
     private Vector2 workspace;
+    public Vector2 wallJumpAngle;
 
     [SerializeField]
     private PlayerData playerData;
@@ -32,15 +31,20 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform groundCheck;
     [SerializeField]
+    private Transform ledgeCheck;
+    [SerializeField]
     private Transform wallCheck;
+
+    public int facingDirection { get; private set; }
 
     private void Awake()
     {
         stateMachine = new PlayerStateMachine();
 
+        wallJumpAngle = (Vector2)(Quaternion.Euler(0, 0, playerData.wallJumpAngle) * Vector2.right);
+
         playerIdleState = new PlayerIdleState(this, stateMachine, playerData, "idle");
-        playerMoveRightState = new PlayerMoveRightState(this, stateMachine, playerData, "moveRight");
-        playerMoveLeftState = new PlayerMoveLeftState(this, stateMachine, playerData, "moveLeft");
+        playerMoveState = new PlayerMoveState(this, stateMachine, playerData, "move");
         playerJumpState = new PlayerJumpState(this, stateMachine, playerData, "inAir");
         playerInAirState = new PlayerInAirState(this, stateMachine, playerData, "inAir");
         playerLandState = new PlayerLandState(this, stateMachine, playerData, "land");
@@ -48,6 +52,7 @@ public class Player : MonoBehaviour
         playerWallClimbState = new PlayerWallClimbState(this, stateMachine, playerData, "wallClimb");
         playerWallGrabState = new PlayerWallGrabState(this, stateMachine, playerData, "wallGrab");
         playerWallJumpState = new PlayerWallJumpState(this, stateMachine, playerData, "inAir");
+        playerLedgeClimbState = new PlayerLedgeClimbState(this, stateMachine, playerData, "ledgeClimb");
     }
 
     private void Start()
@@ -56,15 +61,14 @@ public class Player : MonoBehaviour
         inputHandler = GetComponent<PlayerInputHandler>();
         rigidBody = GetComponent<Rigidbody2D>();
 
-        stateMachine.Initialize(playerIdleState);
-
         facingDirection = 1;
+
+        stateMachine.Initialize(playerIdleState);
     }
 
     private void Update()
     {
         currentVelocity = rigidBody.velocity;
-        facingDirection = inputHandler.normalizedInputX;
         stateMachine.CurrentState.LogicUpdate();
     }
 
@@ -95,6 +99,20 @@ public class Player : MonoBehaviour
         currentVelocity = workspace;
     }
 
+    private void Flip()
+    {
+        facingDirection *= -1;
+        transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public void CheckIfShouldFlip(int xInput)
+    {
+        if (xInput != 0 && xInput != facingDirection)
+        {
+            Flip();
+        }
+    }
+
     public bool CheckIfGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
@@ -108,6 +126,11 @@ public class Player : MonoBehaviour
     public bool CheckIfTouchingWallBack()
     {
         return Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
+    }
+
+    public bool CheckIfTouchingLedge()
+    {
+        return Physics2D.Raycast(ledgeCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
     }
 
     private void AnimationTrigger() => stateMachine.CurrentState.AnimationTrigger();

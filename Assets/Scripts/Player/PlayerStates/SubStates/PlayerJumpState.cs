@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAbilityState
 {
-
     private int amountOfJumpsLeft;
 
     public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
@@ -46,7 +45,10 @@ public class PlayerJumpState : PlayerAbilityState
     public bool CanJump()
     {
         if (amountOfJumpsLeft > 0)
+        {
             return true;
+        }
+
         return false;
     }
 

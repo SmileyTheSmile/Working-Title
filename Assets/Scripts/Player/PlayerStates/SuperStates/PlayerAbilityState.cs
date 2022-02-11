@@ -6,6 +6,7 @@ public class PlayerAbilityState : PlayerState
 {
     protected bool isAbilityDone;
     private bool isGrounded;
+
     public PlayerAbilityState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void DoChecks()
@@ -31,16 +32,18 @@ public class PlayerAbilityState : PlayerState
     {
         base.LogicUpdate();
 
-        if (isAbilityDone)
+        if (!isAbilityDone)
         {
-            if (isGrounded && player.currentVelocity.y < 0.01)
-            {
-                stateMachine.ChangeState(player.playerIdleState);
-            }
-            else
-            {
-                stateMachine.ChangeState(player.playerInAirState);
-            }
+            return;
+        }
+
+        if (isGrounded && player.currentVelocity.y < 0.01)
+        {
+            stateMachine.ChangeState(player.playerIdleState);
+        }
+        else
+        {
+            stateMachine.ChangeState(player.playerInAirState);
         }
     }
 

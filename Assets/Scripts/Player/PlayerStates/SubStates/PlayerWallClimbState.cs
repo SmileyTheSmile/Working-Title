@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerWallClimbState : PlayerTouchingWallState
 {
-    public PlayerWallClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
-    {
-    }
+    public PlayerWallClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void DoChecks()
     {
@@ -17,6 +15,7 @@ public class PlayerWallClimbState : PlayerTouchingWallState
     {
         base.Enter();
     }
+
     public override void Exit()
     {
         base.Exit();
@@ -26,14 +25,16 @@ public class PlayerWallClimbState : PlayerTouchingWallState
     {
         base.LogicUpdate();
 
-        if (!isExitingState)
+        if (isExitingState)
         {
-            player.SetVelocityY(playerData.wallClimbVelocity);
+            return;
+        }
 
-            if (inputY != 1 && !isExitingState)
-            {
-                stateMachine.ChangeState(player.playerWallGrabState);
-            }
+        player.SetVelocityY(playerData.wallClimbVelocity);
+
+        if (inputY != 1)
+        {
+            stateMachine.ChangeState(player.playerWallGrabState);
         }
 
     }

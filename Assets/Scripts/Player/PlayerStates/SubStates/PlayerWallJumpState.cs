@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerWallJumpState : PlayerAbilityState
 {
-
     private int wallJumpDirection;
+
     public PlayerWallJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void AnimationFinishedTrigger()
@@ -27,9 +27,11 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         base.Enter();
 
+        player.inputHandler.UseJumpInput();
         player.playerJumpState.ResetAmountOfJumpsLeft();
         player.playerJumpState.DecreaseAmountOfJumpsLeft();
-        player.SetVelocity(playerData.wallJumpVelocity, playerData.wallJumpAngle, wallJumpDirection);
+        player.SetVelocity(playerData.wallJumpVelocity, player.wallJumpAngle, wallJumpDirection);
+        player.CheckIfShouldFlip(wallJumpDirection);
     }
 
     public override void Exit()
@@ -42,7 +44,7 @@ public class PlayerWallJumpState : PlayerAbilityState
         base.LogicUpdate();
 
         player.animator.SetFloat("velocityX", player.currentVelocity.y);
-        player.animator.SetFloat("velocityY", player.currentVelocity.x);
+        player.animator.SetFloat("velocityY", Mathf.Abs(player.currentVelocity.x));
 
         if (Time.time >= startTime + playerData.wallJumpTime)
         {
@@ -54,6 +56,7 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         base.PhysicsUpdate();
     }
+
     public void DetermineWallJumpDirection(bool isTouchingWall)
     {
         if (isTouchingWall)
