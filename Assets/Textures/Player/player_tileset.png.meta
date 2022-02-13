@@ -325,6 +325,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: player_tileset_10
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1308
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01926373f644747489a3d981b4be8a19
+      internalID: -1701523612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -339,6 +360,7 @@ TextureImporter:
       player_tileset_0: 2090860059
       player_tileset_8: -581743990
       player_tileset_6: 534267246
+      player_tileset_10: -1701523612
       player_tileset_3: -882700674
       player_tileset_1: 672487983
       player_tileset_2: -389155729

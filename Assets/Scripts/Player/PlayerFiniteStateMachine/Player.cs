@@ -99,10 +99,27 @@ public class Player : MonoBehaviour
         currentVelocity = workspace;
     }
 
+    public void SetVelocityZero()
+    {
+        rigidBody.velocity = Vector2.zero;
+        currentVelocity = Vector2.zero;
+    }
+
     private void Flip()
     {
         facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public Vector2 DetermineCornerPosition()
+    {
+        RaycastHit2D hitX = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
+        float distX = hitX.distance;
+        workspace.Set(distX * facingDirection, 0f);
+        RaycastHit2D hitY = Physics2D.Raycast(ledgeCheck.position + (Vector3)(workspace), Vector2.down, ledgeCheck.position.y - wallCheck.position.y, playerData.whatIsGround);
+        float distY = hitY.distance;
+        workspace.Set(wallCheck.position.x + (distX * facingDirection), ledgeCheck.position.y - distY);
+        return workspace;
     }
 
     public void CheckIfShouldFlip(int xInput)

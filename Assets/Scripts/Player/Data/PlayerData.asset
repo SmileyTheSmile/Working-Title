@@ -21,9 +21,11 @@ MonoBehaviour:
   wallSlideVelocity: 3
   wallJumpVelocity: 15
   wallJumpTime: 0.6
-  wallJumpAngle: {x: 1, y: 2}
+  wallJumpAngle: 45
   groundCheckRadius: 0.5
   wallCheckDistance: 0.6
+  startOffset: {x: -1.975, y: 0}
+  stopOffset: {x: 0, y: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8

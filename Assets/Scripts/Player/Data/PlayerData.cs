@@ -32,5 +32,9 @@ public class PlayerData : ScriptableObject
     public float groundCheckRadius = 0.5f;
     public float wallCheckDistance = 5f;
 
+    [Header("Ledge Climb State")]
+    public Vector2 startOffset;
+    public Vector2 stopOffset;
+
     public LayerMask whatIsGround;
 }
