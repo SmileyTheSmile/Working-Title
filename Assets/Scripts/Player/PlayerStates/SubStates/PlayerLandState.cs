@@ -30,11 +30,11 @@ public class PlayerLandState : PlayerGroundedState
         {
             if (inputX != 0)
             {
-                stateMachine.ChangeState(player.playerMoveState);
+                stateMachine.ChangeState(player.moveState);
             }
             else if (isAnimationFinished)
             {
-                stateMachine.ChangeState(player.playerIdleState);
+                stateMachine.ChangeState(player.idleState);
             }
         }
     }

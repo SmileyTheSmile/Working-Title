@@ -34,7 +34,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
 
         if (grabInput && inputY == 0)
         {
-            stateMachine.ChangeState(player.playerWallGrabState);
+            stateMachine.ChangeState(player.wallGrabState);
         }
     }
 

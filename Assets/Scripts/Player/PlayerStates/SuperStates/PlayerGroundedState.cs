@@ -9,8 +9,10 @@ public class PlayerGroundedState : PlayerState
 
     private bool grabInput;
     private bool jumpInput;
+    private bool dashInput;
     private bool isGrounded;
     private bool isTouchingWall;
+    private bool isTouchingLedge;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
@@ -20,13 +22,15 @@ public class PlayerGroundedState : PlayerState
 
         isGrounded = player.CheckIfGrounded();
         isTouchingWall = player.CheckIfTouchingWall();
+        isTouchingLedge = player.CheckIfTouchingLedge();
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        player.playerJumpState.ResetAmountOfJumpsLeft();
+        player.jumpState.ResetAmountOfJumpsLeft();
+        player.dashState.ResetCanDash();
     }
     public override void Exit()
     {
@@ -38,21 +42,23 @@ public class PlayerGroundedState : PlayerState
         base.LogicUpdate();
 
         inputX = player.inputHandler.normalizedInputX;
+        inputY = player.inputHandler.normalizedInputY;
         jumpInput = player.inputHandler.jumpInput;
         grabInput = player.inputHandler.grabInput;
+        dashInput = player.inputHandler.dashInput;
 
-        if (jumpInput && player.playerJumpState.CanJump())
+        if (jumpInput && player.jumpState.CanJump())
         {
-            stateMachine.ChangeState(player.playerJumpState);
+            stateMachine.ChangeState(player.jumpState);
         }
         else if (!isGrounded)
         {
-            player.playerInAirState.StartCoyoteTime();
-            stateMachine.ChangeState(player.playerInAirState);
+            player.inAirState.StartCoyoteTime();
+            stateMachine.ChangeState(player.inAirState);
         }
-        else if (isTouchingWall && grabInput)
+        else if (isTouchingWall && grabInput && isTouchingLedge)
         {
-            stateMachine.ChangeState(player.playerWallGrabState);
+            stateMachine.ChangeState(player.wallGrabState);
         }
     }
 

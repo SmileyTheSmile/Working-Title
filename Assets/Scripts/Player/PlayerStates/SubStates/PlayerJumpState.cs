@@ -23,7 +23,7 @@ public class PlayerJumpState : PlayerAbilityState
         DecreaseAmountOfJumpsLeft();
         player.inputHandler.UseJumpInput();
         player.SetVelocityY(playerData.jumpVelocity);
-        player.playerInAirState.SetIsJumping();
+        player.inAirState.SetIsJumping();
         isAbilityDone = true;
     }
 

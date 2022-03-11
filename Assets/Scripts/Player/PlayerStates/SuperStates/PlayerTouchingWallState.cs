@@ -25,7 +25,7 @@ public class PlayerTouchingWallState : PlayerState
 
         if (isTouchingWall && !isTouchingLedge)
         {
-            player.playerLedgeClimbState.SetDetectedPosition(player.transform.position);
+            player.ledgeClimbState.SetDetectedPosition(player.transform.position);
         }
     }
 
@@ -50,21 +50,21 @@ public class PlayerTouchingWallState : PlayerState
 
         if (jumpInput)
         {
-            player.playerWallJumpState.DetermineWallJumpDirection(isTouchingWall);
-            stateMachine.ChangeState(player.playerWallJumpState);
+            player.wallJumpState.DetermineWallJumpDirection(isTouchingWall);
+            stateMachine.ChangeState(player.wallJumpState);
         }
         else if (isGrounded && !grabInput)
         {
-            stateMachine.ChangeState(player.playerIdleState);
+            stateMachine.ChangeState(player.idleState);
         }
         else if (!isTouchingWall || (inputX != player.facingDirection && !grabInput))
         {
-            stateMachine.ChangeState(player.playerInAirState);
+            stateMachine.ChangeState(player.inAirState);
         }
-        else if (isTouchingWall && !isTouchingLedge)
-        {
-            stateMachine.ChangeState(player.playerLedgeClimbState);
-        }
+        //else if (isTouchingWall && !isTouchingLedge)
+        //{
+        //    stateMachine.ChangeState(player.ledgeClimbState);
+        //}
     }
 
     public override void PhysicsUpdate()
