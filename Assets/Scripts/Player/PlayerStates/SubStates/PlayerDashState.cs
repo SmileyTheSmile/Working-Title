@@ -59,49 +59,45 @@ public class PlayerDashState : PlayerAbilityState
     {
         base.LogicUpdate();
 
-        if (!isExitingState)
+        player.animator.SetFloat("velocityY", player.currentVelocity.y);
+        player.animator.SetFloat("velocityX", Mathf.Abs(player.currentVelocity.x));
+
+
+        if (isHolding)
         {
+            dashDirectionInput = player.inputHandler.mouseDirectionInput;
+            dashInputStop = player.inputHandler.dashInputStop;
 
-            player.animator.SetFloat("velocityY", player.currentVelocity.y);
-            player.animator.SetFloat("velocityX", Mathf.Abs(player.currentVelocity.x));
-
-
-            if (isHolding)
+            if (dashDirectionInput != Vector2.zero)
             {
-                dashDirectionInput = player.inputHandler.mouseDirectionInput;
-                dashInputStop = player.inputHandler.dashInputStop;
-
-                if (dashDirectionInput != Vector2.zero)
-                {
-                    dashDirection = dashDirectionInput;
-                    dashDirection.Normalize();
-                }
-
-                float angle = Vector2.SignedAngle(Vector2.right, dashDirection);
-                player.dashDirectionIndicator.rotation = Quaternion.Euler(0f, 0f, angle - 45f);
-
-                if (dashInputStop || Time.unscaledTime >= startTime + playerData.maxHoldTime)
-                {
-                    isHolding = false;
-                    Time.timeScale = 1f;
-                    startTime = Time.time;
-                    player.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
-                    player.rigidBody.drag = playerData.drag;
-                    player.SetVelocity(playerData.dashVelocity, dashDirection);
-                    PlaceAfterImage();
-                }
+                dashDirection = dashDirectionInput;
+                dashDirection.Normalize();
             }
-            else
-            {
-                player.SetVelocity(playerData.dashVelocity, dashDirection);
-                CheckIfShouldPlaceAfterImage();
 
-                if (Time.time >= startTime + playerData.dashTime)
-                {
-                    player.rigidBody.drag = 0f;
-                    isAbilityDone = true;
-                    lastDashTime = Time.time;
-                }
+            float angle = Vector2.SignedAngle(Vector2.right, dashDirection);
+            player.dashDirectionIndicator.rotation = Quaternion.Euler(0f, 0f, angle - 45f);
+
+            if (dashInputStop || Time.unscaledTime >= startTime + playerData.maxHoldTime)
+            {
+                isHolding = false;
+                Time.timeScale = 1f;
+                startTime = Time.time;
+                player.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
+                player.rigidBody.drag = playerData.drag;
+                player.SetVelocity(playerData.dashVelocity, dashDirection);
+                PlaceAfterImage();
+            }
+        }
+        else
+        {
+            player.SetVelocity(playerData.dashVelocity, dashDirection);
+            CheckIfShouldPlaceAfterImage();
+
+            if (Time.time >= startTime + playerData.dashTime)
+            {
+                player.rigidBody.drag = 0f;
+                isAbilityDone = true;
+                lastDashTime = Time.time;
             }
         }
     }

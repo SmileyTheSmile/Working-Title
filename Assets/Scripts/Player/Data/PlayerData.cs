@@ -46,5 +46,8 @@ public class PlayerData : ScriptableObject
     public float dashEndYMultiplier = 0.2f;
     public float distanceBetweenAfterImages = 0.5f;
 
+    [Header("Crouch State")]
+    public float crouchMovementVelocity = 5f;
+
     public LayerMask whatIsGround;
 }

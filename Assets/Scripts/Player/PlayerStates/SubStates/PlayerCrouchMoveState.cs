@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCrouchIdleState : PlayerGroundedState
+public class PlayerCrouchMoveState : PlayerGroundedState
 {
-    public PlayerCrouchIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
+    public PlayerCrouchMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
 
     public override void DoChecks()
     {
@@ -30,13 +30,17 @@ public class PlayerCrouchIdleState : PlayerGroundedState
             return;
         }
 
-        if (inputX != 0)
+        player.SetVelocityX(playerData.crouchMovementVelocity * player.facingDirection);
+
+        player.CheckIfShouldFlip(inputX);
+
+        if (inputX == 0)
         {
-            stateMachine.ChangeState(player.crouchMoveState);
+            stateMachine.ChangeState(player.crouchIdleState);
         }
         else if (inputY != -1)
         {
-            stateMachine.ChangeState(player.crouchIdleState);
+            stateMachine.ChangeState(player.moveState);
         }
     }
 
