@@ -28,15 +28,9 @@ public class Player : MonoBehaviour
     public Animator animator { get; private set; }
     public PlayerInventory inventory { get; private set; }
 
-    public Vector2 currentVelocity { get; private set; }
-
     public Transform dashDirectionIndicator { get; private set; }
-    public Transform facingDirectionIndicator { get; private set; }
 
     public Core core { get; private set; }
-
-    [SerializeField]
-    private Transform shotgun;
 
     private Vector2 workspace;
     public Vector2 wallJumpAngle;
@@ -44,23 +38,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerData playerData;
 
-
-    [SerializeField]
-    private Transform groundCheck;
-
-    [SerializeField]
-    private Transform ceilingCheck;
-
-    [SerializeField]
-    private Transform ledgeCheck;
-
-    [SerializeField]
-    private Transform wallCheck;
-
     public Vector2 mouseDirection;
     public Vector2 mouseDirectionInput;
 
-    public int facingDirection { get; private set; }
+    [SerializeField]
+    private Transform shotgun;
+
     private float angle;
 
     private void Awake()
@@ -96,9 +79,6 @@ public class Player : MonoBehaviour
         movementCollider = GetComponent<BoxCollider2D>();
 
         dashDirectionIndicator = transform.Find("DashDirectionIndicator");
-        facingDirectionIndicator = transform.Find("FacingDirectionIndicator");
-
-        facingDirection = 1;
 
         inventory = GetComponent<PlayerInventory>();
         primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
@@ -109,10 +89,17 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        currentVelocity = rigidBody.velocity;
+        core.LogicUpdate();
         stateMachine.CurrentState.LogicUpdate();
-
         UpdateGunTemporary();
+
+        //LogImportantInfo();
+    }
+
+    private void LogImportantInfo()
+    {
+        core.collisionSenses.LogCurrentCollisions();
+        Debug.Log(stateMachine.CurrentState.ToString());
     }
 
     private void UpdateGunTemporary()
@@ -134,24 +121,6 @@ public class Player : MonoBehaviour
         stateMachine.CurrentState.PhysicsUpdate();
     }
 
-    private void Flip()
-    {
-        facingDirection *= -1;
-        facingDirectionIndicator.Rotate(0.0f, 180.0f, 0.0f);
-        shotgun.transform.position += new Vector3(facingDirection * 0.5f, 0f, 0f);
-    }
-
-    public Vector2 DetermineCornerPosition()
-    {
-        RaycastHit2D hitX = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-        float distX = hitX.distance;
-        workspace.Set(distX * facingDirection, 0f);
-        RaycastHit2D hitY = Physics2D.Raycast(ledgeCheck.position + (Vector3)(workspace), Vector2.down, ledgeCheck.position.y - wallCheck.position.y + 0.15f, playerData.whatIsGround);
-        float distY = hitY.distance;
-        workspace.Set(wallCheck.position.x + (distX * facingDirection), ledgeCheck.position.y - distY);
-        return workspace;
-    }
-
     public void SetColliderHeight(float height)
     {
         Vector2 center = movementCollider.offset;
@@ -163,40 +132,7 @@ public class Player : MonoBehaviour
         movementCollider.offset = center;
     }
 
-    public void CheckIfShouldFlip(int inputX)
-    {
-        if (inputX != 0 && inputX != facingDirection)
-        {
-            Flip();
-        }
-    }
 
-    public bool CheckIfGrounded()
-    {
-        return Physics2D.BoxCast(movementCollider.bounds.center, movementCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.down, playerData.groundCheckHeight, playerData.whatIsGround);
-        //return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
-    }
-
-    public bool CheckForCeiling()
-    {
-        return Physics2D.BoxCast(movementCollider.bounds.center, movementCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.up, playerData.groundCheckHeight, playerData.whatIsGround);
-        //return Physics2D.OverlapCircle(ceilingCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
-    }
-
-    public bool CheckIfTouchingWall()
-    {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
-
-    public bool CheckIfTouchingWallBack()
-    {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
-
-    public bool CheckIfTouchingLedge()
-    {
-        return Physics2D.Raycast(ledgeCheck.position, Vector2.right * facingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
 
     private void AnimationTrigger() => stateMachine.CurrentState.AnimationTrigger();
     private void AnimationFinishedTrigger() => stateMachine.CurrentState.AnimationFinishedTrigger();

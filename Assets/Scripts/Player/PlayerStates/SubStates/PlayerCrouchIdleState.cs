@@ -16,7 +16,9 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         base.Enter();
 
         core.movement.SetVelocityZero();
+
         player.SetColliderHeight(playerData.crouchColliderHeight);
+        core.collisionSenses.ceilingCheck.transform.position -= new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
     }
 
     public override void Exit()
@@ -24,6 +26,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         base.Exit();
 
         player.SetColliderHeight(playerData.standColliderHeight);
+        core.collisionSenses.ceilingCheck.transform.position += new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
     }
 
     public override void LogicUpdate()

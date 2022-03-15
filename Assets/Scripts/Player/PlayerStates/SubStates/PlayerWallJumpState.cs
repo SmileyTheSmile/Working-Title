@@ -31,7 +31,7 @@ public class PlayerWallJumpState : PlayerAbilityState
         player.jumpState.ResetAmountOfJumpsLeft();
         player.jumpState.DecreaseAmountOfJumpsLeft();
         core.movement.SetVelocity(playerData.wallJumpVelocity, player.wallJumpAngle, wallJumpDirection);
-        player.CheckIfShouldFlip(wallJumpDirection);
+        core.movement.CheckIfShouldFlip(wallJumpDirection);
     }
 
     public override void Exit()
@@ -43,8 +43,8 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         base.LogicUpdate();
 
-        player.animator.SetFloat("velocityX", player.currentVelocity.y);
-        player.animator.SetFloat("velocityY", Mathf.Abs(player.currentVelocity.x));
+        player.animator.SetFloat("velocityX", core.movement.currentVelocity.y);
+        player.animator.SetFloat("velocityY", Mathf.Abs(core.movement.currentVelocity.x));
 
         if (Time.time >= startTime + playerData.wallJumpTime)
         {
@@ -61,11 +61,11 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         if (isTouchingWall)
         {
-            wallJumpDirection = -player.facingDirection;
+            wallJumpDirection = -core.movement.facingDirection;
         }
         else
         {
-            wallJumpDirection = player.facingDirection;
+            wallJumpDirection = core.movement.facingDirection;
         }
     }
 }

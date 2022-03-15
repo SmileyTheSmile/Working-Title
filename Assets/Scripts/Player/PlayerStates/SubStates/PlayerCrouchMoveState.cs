@@ -14,7 +14,9 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+
         player.SetColliderHeight(playerData.crouchColliderHeight);
+        core.collisionSenses.ceilingCheck.transform.position -= new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
     }
 
     public override void Exit()
@@ -22,6 +24,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
         base.Exit();
 
         player.SetColliderHeight(playerData.standColliderHeight);
+        core.collisionSenses.ceilingCheck.transform.position += new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
     }
 
     public override void LogicUpdate()
@@ -33,9 +36,9 @@ public class PlayerCrouchMoveState : PlayerGroundedState
             return;
         }
 
-        core.movement.SetVelocityX(playerData.crouchMovementVelocity * player.facingDirection);
+        core.movement.SetVelocityX(playerData.crouchMovementVelocity * core.movement.facingDirection);
 
-        player.CheckIfShouldFlip(inputX);
+        core.movement.CheckIfShouldFlip(inputX);
 
         if (inputX == 0)
         {

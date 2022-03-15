@@ -39,7 +39,7 @@ public class PlayerDashState : PlayerAbilityState
         canDash = false;
 
         player.inputHandler.UseDashInput();
-        dashDirection = Vector2.right * player.facingDirection;
+        dashDirection = Vector2.right * core.movement.facingDirection;
 
         player.dashDirectionIndicator.gameObject.SetActive(true);
         Time.timeScale = playerData.holdTimeScale;
@@ -52,9 +52,9 @@ public class PlayerDashState : PlayerAbilityState
 
         player.dashDirectionIndicator.gameObject.SetActive(false);
 
-        if (player.currentVelocity.y > 0)
+        if (core.movement.currentVelocity.y > 0)
         {
-            core.movement.SetVelocityY(player.currentVelocity.y * playerData.dashEndYMultiplier);
+            core.movement.SetVelocityY(core.movement.currentVelocity.y * playerData.dashEndYMultiplier);
         }
     }
 
@@ -67,8 +67,8 @@ public class PlayerDashState : PlayerAbilityState
             return;
         }
 
-        player.animator.SetFloat("velocityY", player.currentVelocity.y);
-        player.animator.SetFloat("velocityX", Mathf.Abs(player.currentVelocity.x));
+        player.animator.SetFloat("velocityY", core.movement.currentVelocity.y);
+        player.animator.SetFloat("velocityX", Mathf.Abs(core.movement.currentVelocity.x));
 
 
         if (isHolding)
@@ -90,7 +90,7 @@ public class PlayerDashState : PlayerAbilityState
                 isHolding = false;
                 Time.timeScale = 1f;
                 startTime = Time.time;
-                player.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
+                core.movement.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
                 player.rigidBody.drag = playerData.drag;
                 core.movement.SetVelocity(playerData.dashVelocity, dashDirection);
                 PlaceAfterImage();
