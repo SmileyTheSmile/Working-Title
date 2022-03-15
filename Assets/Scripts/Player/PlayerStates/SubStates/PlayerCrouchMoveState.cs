@@ -14,11 +14,14 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        player.SetColliderHeight(playerData.crouchColliderHeight);
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        player.SetColliderHeight(playerData.standColliderHeight);
     }
 
     public override void LogicUpdate()
@@ -30,7 +33,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
             return;
         }
 
-        player.SetVelocityX(playerData.crouchMovementVelocity * player.facingDirection);
+        core.movement.SetVelocityX(playerData.crouchMovementVelocity * player.facingDirection);
 
         player.CheckIfShouldFlip(inputX);
 
@@ -38,7 +41,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
         {
             stateMachine.ChangeState(player.crouchIdleState);
         }
-        else if (inputY != -1)
+        else if (inputY != -1 && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.moveState);
         }

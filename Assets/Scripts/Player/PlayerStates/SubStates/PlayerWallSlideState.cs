@@ -30,7 +30,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
             return;
         }
 
-        player.SetVelocityY(-playerData.wallSlideVelocity);
+        core.movement.SetVelocityY(-playerData.wallSlideVelocity);
 
         if (grabInput && inputY == 0)
         {

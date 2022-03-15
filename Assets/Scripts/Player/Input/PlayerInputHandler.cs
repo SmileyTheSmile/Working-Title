@@ -23,6 +23,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool grabInput { get; private set; }
     public bool dashInput { get; private set; }
     public bool dashInputStop { get; private set; }
+    public bool[] attackInputs { get; private set; }
 
     [SerializeField]
     private float inputHoldTime = 0.2f;
@@ -33,6 +34,9 @@ public class PlayerInputHandler : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
 
+        int count = Enum.GetValues(typeof(CombatInputs)).Length;
+        attackInputs = new bool[count];
+
         camera = Camera.main;
     }
 
@@ -40,23 +44,10 @@ public class PlayerInputHandler : MonoBehaviour
     {
         rawMovementInput = context.ReadValue<Vector2>();
 
-        if (Mathf.Abs(rawMovementInput.x) > 0.5f)
-        {
-            normalizedInputX = (int)(rawMovementInput * Vector2.right).normalized.x;
-        }
-        else
-        {
-            normalizedInputX = 0;
-        }
+        normalizedInputX = Mathf.RoundToInt(rawMovementInput.x);
+        normalizedInputY = Mathf.RoundToInt(rawMovementInput.y);
 
-        if (Mathf.Abs(rawMovementInput.y) > 0.5f)
-        {
-            normalizedInputY = (int)(rawMovementInput * Vector2.up).normalized.y;
-        }
-        else
-        {
-            normalizedInputY = 0;
-        }
+
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
@@ -109,6 +100,31 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public void OnPrimaryAttackInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            attackInputs[(int)CombatInputs.primary] = true;
+        }
+        if (context.canceled)
+        {
+            attackInputs[(int)CombatInputs.primary] = false;
+        }
+    }
+
+    public void OnSecondaryAttackInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            attackInputs[(int)CombatInputs.secondary] = true;
+        }
+        if (context.canceled)
+        {
+            attackInputs[(int)CombatInputs.secondary] = false;
+        }
+
+    }
+
     private void Update()
     {
         CheckJumpInputHoldTime();
@@ -135,4 +151,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void UseDashInput() => dashInput = false;
 
+}
+
+public enum CombatInputs
+{
+    primary,
+    secondary
 }

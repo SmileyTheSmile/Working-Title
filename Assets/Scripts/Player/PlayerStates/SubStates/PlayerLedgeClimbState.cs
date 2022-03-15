@@ -11,6 +11,7 @@ public class PlayerLedgeClimbState : PlayerState
 
     private bool isHanging;
     private bool isClimbing;
+    private bool isTouchingCeiling;
     private bool jumpInput;
 
     private int inputX;
@@ -27,7 +28,7 @@ public class PlayerLedgeClimbState : PlayerState
     {
         base.Enter();
 
-        player.SetVelocityZero();
+        core.movement.SetVelocityY(playerData.jumpVelocity);
         player.transform.position = detectedPos;
         cornerPos = player.DetermineCornerPosition();
 
@@ -56,29 +57,37 @@ public class PlayerLedgeClimbState : PlayerState
 
         if (isAnimationFinished)
         {
+            if (isTouchingCeiling)
+            {
+                stateMachine.ChangeState(player.crouchIdleState);
+            }
+
             stateMachine.ChangeState(player.idleState);
         }
-
-        inputX = player.inputHandler.normalizedInputX;
-        inputY = player.inputHandler.normalizedInputY;
-        jumpInput = player.inputHandler.jumpInput;
-
-        player.SetVelocityZero();
-        player.transform.position = startPos;
-
-        if (inputX == player.facingDirection && isHanging && !isClimbing)
+        else
         {
-            isClimbing = true;
-            player.animator.SetBool("ledgeClimb", true);
-        }
-        else if (inputY == -1 && isHanging && !isClimbing)
-        {
-            stateMachine.ChangeState(player.inAirState);
-        }
-        else if (jumpInput && !isClimbing)
-        {
-            player.wallJumpState.DetermineWallJumpDirection(true);
-            stateMachine.ChangeState(player.wallJumpState);
+            inputX = player.inputHandler.normalizedInputX;
+            inputY = player.inputHandler.normalizedInputY;
+            jumpInput = player.inputHandler.jumpInput;
+
+            core.movement.SetVelocityZero();
+            player.transform.position = startPos;
+
+            if (inputX == player.facingDirection && isHanging && !isClimbing)
+            {
+                CheckForSpace();
+                isClimbing = true;
+                player.animator.SetBool("ledgeClimb", true);
+            }
+            else if (inputY == -1 && isHanging && !isClimbing)
+            {
+                stateMachine.ChangeState(player.inAirState);
+            }
+            else if (jumpInput && !isClimbing)
+            {
+                player.wallJumpState.DetermineWallJumpDirection(true);
+                stateMachine.ChangeState(player.wallJumpState);
+            }
         }
     }
 
@@ -99,6 +108,11 @@ public class PlayerLedgeClimbState : PlayerState
         base.AnimationFinishedTrigger();
 
         player.animator.SetBool("ledgeClimb", false);
+    }
+
+    public void CheckForSpace()
+    {
+        isTouchingCeiling = Physics2D.Raycast(cornerPos + (Vector2.up * 0.015f) + (Vector2.right * player.facingDirection * 0.015f), Vector2.up, playerData.standColliderHeight, playerData.whatIsGround);
     }
 
     public void SetDetectedPosition(Vector2 pos) => detectedPos = pos;

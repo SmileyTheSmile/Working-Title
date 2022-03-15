@@ -30,7 +30,7 @@ public class PlayerWallClimbState : PlayerTouchingWallState
             return;
         }
 
-        player.SetVelocityY(playerData.wallClimbVelocity);
+        core.movement.SetVelocityY(playerData.wallClimbVelocity);
 
         if (inputY != 1)
         {

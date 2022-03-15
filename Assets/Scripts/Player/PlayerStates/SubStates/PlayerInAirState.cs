@@ -20,6 +20,7 @@ public class PlayerInAirState : PlayerState
     private bool isTouchingWall;
     private bool isTouchingWallBack;
     private bool isTouchingLedge;
+    private bool isTouchingCeiling;
     private bool dashInput;
 
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
@@ -77,7 +78,15 @@ public class PlayerInAirState : PlayerState
 
         CheckJumpMultiplier();
 
-        if (isGrounded && player.currentVelocity.y < 0.01)
+        if (player.inputHandler.attackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
+        {
+            stateMachine.ChangeState(player.primaryAttackState);
+        }
+        else if (player.inputHandler.attackInputs[(int)CombatInputs.secondary])
+        {
+            stateMachine.ChangeState(player.secondaryAttackState);
+        }
+        else if (isGrounded && player.currentVelocity.y < 0.01)
         {
             stateMachine.ChangeState(player.landState);
         }
@@ -111,7 +120,7 @@ public class PlayerInAirState : PlayerState
         else
         {
             player.CheckIfShouldFlip(inputX);
-            player.SetVelocityX(playerData.movementVelocity * inputX);
+            core.movement.SetVelocityX(playerData.movementVelocity * inputX);
 
             player.animator.SetFloat("velocityX", Mathf.Abs(player.currentVelocity.x));
             player.animator.SetFloat("velocityY", player.currentVelocity.y);
@@ -132,7 +141,7 @@ public class PlayerInAirState : PlayerState
 
         if (jumpInputStop)
         {
-            player.SetVelocityY(player.currentVelocity.y * playerData.variableJumpHeightMultiplier);
+            core.movement.SetVelocityY(player.currentVelocity.y * playerData.variableJumpHeightMultiplier);
             isJumping = false;
         }
         else if (player.currentVelocity.y <= 0f)

@@ -14,11 +14,16 @@ public class PlayerCrouchIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+
+        core.movement.SetVelocityZero();
+        player.SetColliderHeight(playerData.crouchColliderHeight);
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        player.SetColliderHeight(playerData.standColliderHeight);
     }
 
     public override void LogicUpdate()
@@ -34,9 +39,9 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         {
             stateMachine.ChangeState(player.crouchMoveState);
         }
-        else if (inputY != -1)
+        else if (inputY != -1 && !isTouchingCeiling)
         {
-            stateMachine.ChangeState(player.crouchIdleState);
+            stateMachine.ChangeState(player.idleState);
         }
     }
 

@@ -18,15 +18,25 @@ public class Player : MonoBehaviour
     public PlayerDashState dashState { get; private set; }
     public PlayerCrouchIdleState crouchIdleState { get; private set; }
     public PlayerCrouchMoveState crouchMoveState { get; private set; }
+    public PlayerAttackState primaryAttackState { get; private set; }
+    public PlayerAttackState secondaryAttackState { get; private set; }
 
     public PlayerInputHandler inputHandler { get; private set; }
 
     public Rigidbody2D rigidBody { get; private set; }
+    public BoxCollider2D movementCollider { get; private set; }
     public Animator animator { get; private set; }
+    public PlayerInventory inventory { get; private set; }
 
     public Vector2 currentVelocity { get; private set; }
 
     public Transform dashDirectionIndicator { get; private set; }
+    public Transform facingDirectionIndicator { get; private set; }
+
+    public Core core { get; private set; }
+
+    [SerializeField]
+    private Transform shotgun;
 
     private Vector2 workspace;
     public Vector2 wallJumpAngle;
@@ -34,8 +44,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerData playerData;
 
+
     [SerializeField]
     private Transform groundCheck;
+
+    [SerializeField]
+    private Transform ceilingCheck;
 
     [SerializeField]
     private Transform ledgeCheck;
@@ -51,6 +65,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        core = GetComponentInChildren<Core>();
+
         stateMachine = new PlayerStateMachine();
 
         wallJumpAngle = (Vector2)(Quaternion.Euler(0, 0, playerData.wallJumpAngle) * Vector2.right);
@@ -67,7 +83,9 @@ public class Player : MonoBehaviour
         ledgeClimbState = new PlayerLedgeClimbState(this, stateMachine, playerData, "ledgeClimb");
         dashState = new PlayerDashState(this, stateMachine, playerData, "inAir");
         crouchIdleState = new PlayerCrouchIdleState(this, stateMachine, playerData, "crouchIdle");
-        crouchMoveState = new PlayerCrouchMoveState(this, stateMachine, playerData, "crouchIdle");
+        crouchMoveState = new PlayerCrouchMoveState(this, stateMachine, playerData, "crouchMove");
+        primaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
+        secondaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
     }
 
     private void Start()
@@ -75,9 +93,16 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         inputHandler = GetComponent<PlayerInputHandler>();
         rigidBody = GetComponent<Rigidbody2D>();
+        movementCollider = GetComponent<BoxCollider2D>();
+
         dashDirectionIndicator = transform.Find("DashDirectionIndicator");
+        facingDirectionIndicator = transform.Find("FacingDirectionIndicator");
 
         facingDirection = 1;
+
+        inventory = GetComponent<PlayerInventory>();
+        primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
+        //secondaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.secondary]);
 
         stateMachine.Initialize(idleState);
     }
@@ -101,7 +126,7 @@ public class Player : MonoBehaviour
         }
 
         angle = Vector2.SignedAngle(Vector2.right, mouseDirection);
-        dashDirectionIndicator.rotation = Quaternion.Euler(0f, 0f, angle);
+        shotgun.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void FixedUpdate()
@@ -109,45 +134,11 @@ public class Player : MonoBehaviour
         stateMachine.CurrentState.PhysicsUpdate();
     }
 
-    public void SetVelocityX(float velocity)
-    {
-        workspace.Set(velocity, currentVelocity.y);
-        rigidBody.velocity = workspace;
-        currentVelocity = workspace;
-    }
-
-    public void SetVelocityY(float velocity)
-    {
-        workspace.Set(currentVelocity.x, velocity);
-        rigidBody.velocity = workspace;
-        currentVelocity = workspace;
-    }
-
-    public void SetVelocity(float velocity, Vector2 angle, int direction)
-    {
-        angle.Normalize();
-        workspace.Set(angle.x * velocity * direction, angle.y * velocity);
-        rigidBody.velocity = workspace;
-        currentVelocity = workspace;
-    }
-
-    public void SetVelocity(float velocity, Vector2 direction)
-    {
-        workspace = velocity * direction;
-        rigidBody.velocity = workspace;
-        currentVelocity = workspace;
-    }
-
-    public void SetVelocityZero()
-    {
-        rigidBody.velocity = Vector2.zero;
-        currentVelocity = Vector2.zero;
-    }
-
     private void Flip()
     {
         facingDirection *= -1;
-        transform.Rotate(0.0f, 180.0f, 0.0f);
+        facingDirectionIndicator.Rotate(0.0f, 180.0f, 0.0f);
+        shotgun.transform.position += new Vector3(facingDirection * 0.5f, 0f, 0f);
     }
 
     public Vector2 DetermineCornerPosition()
@@ -161,9 +152,20 @@ public class Player : MonoBehaviour
         return workspace;
     }
 
-    public void CheckIfShouldFlip(int xInput)
+    public void SetColliderHeight(float height)
     {
-        if (xInput != 0 && xInput != facingDirection)
+        Vector2 center = movementCollider.offset;
+        workspace.Set(movementCollider.size.x, height);
+
+        center.y += ((height - movementCollider.size.y) / 2);
+
+        movementCollider.size = workspace;
+        movementCollider.offset = center;
+    }
+
+    public void CheckIfShouldFlip(int inputX)
+    {
+        if (inputX != 0 && inputX != facingDirection)
         {
             Flip();
         }
@@ -171,7 +173,14 @@ public class Player : MonoBehaviour
 
     public bool CheckIfGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
+        return Physics2D.BoxCast(movementCollider.bounds.center, movementCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.down, playerData.groundCheckHeight, playerData.whatIsGround);
+        //return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
+    }
+
+    public bool CheckForCeiling()
+    {
+        return Physics2D.BoxCast(movementCollider.bounds.center, movementCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.up, playerData.groundCheckHeight, playerData.whatIsGround);
+        //return Physics2D.OverlapCircle(ceilingCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
     }
 
     public bool CheckIfTouchingWall()

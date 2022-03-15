@@ -121,6 +121,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: particles_tileset_2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 936
+        width: 34
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6a90eeb968057f49baf6783e52d2eb7
+      internalID: -498396447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -134,6 +155,7 @@ TextureImporter:
     nameFileIdTable:
       particles_tileset_1: -1436328237
       particles_tileset_0: -1282542583
+      particles_tileset_2: -498396447
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

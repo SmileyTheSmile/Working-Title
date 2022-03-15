@@ -15,7 +15,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
 
-        player.SetVelocityX(0f);
+        core.movement.SetVelocityX(0f);
     }
 
     public override void Exit()
@@ -26,6 +26,11 @@ public class PlayerIdleState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (isExitingState)
+        {
+            return;
+        }
 
         if (inputX != 0)
         {
