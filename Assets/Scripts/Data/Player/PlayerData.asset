@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c67c7b5e23afc4181bb9d2e6555a6c, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  movementVelocity: 10
+  movementVelocity: 8
   jumpVelocity: 10
   amountOfJumps: 2
   coyoteTime: 0.2
@@ -22,8 +22,6 @@ MonoBehaviour:
   wallJumpVelocity: 15
   wallJumpTime: 0.6
   wallJumpAngle: 45
-  groundCheckHeight: 0.5
-  wallCheckDistance: 0.6
   startOffset: {x: -1.975, y: 0}
   stopOffset: {x: 0, y: 0}
   dashCooldown: 0.5

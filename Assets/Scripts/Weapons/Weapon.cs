@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField]
-    private ScriptableWeaponData weaponData;
+    private WeaponData weaponData;
 
     protected Animator baseAnimator;
     protected Animator weaponAnimator;

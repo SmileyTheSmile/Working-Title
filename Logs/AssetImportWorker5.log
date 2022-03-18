@@ -1,0 +1,171 @@
+Using pre-set license
+Built from '2021.2/staging' branch; Version is '2021.2.5f1 (4ec9a5e799f5) revision 5163429'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19042) 64bit CoreSingleLanguage' Language: 'ru' Physical Memory: 3531 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker5
+-projectPath
+E:/My Stuff/My Games/Working Title
+-logFile
+Logs/AssetImportWorker5.log
+-srvPort
+53539
+Successfully changed project path to: E:/My Stuff/My Games/Working Title
+E:/My Stuff/My Games/Working Title
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Cannot open lmdb database .//Library/ArtifactDB because another process has a lock on it. Will retry.
+Refreshing native plugins compatible for Editor in 183.97 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.2.5f1 (4ec9a5e799f5)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/My Stuff/My Games/Working Title/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce MX230 (ID=0x1d11)
+    Vendor:   NVIDIA
+    VRAM:     1984 MB
+    Driver:   30.0.15.1123
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56672
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.016400 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 176.46 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.227 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1228ms)
+		BeginReloadAssembly (213ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (854ms)
+			LoadAssemblies (209ms)
+			RebuildTransferFunctionScriptingTraits (1ms)
+			SetupTypeCache (173ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (54ms)
+			SetupLoadedEditorAssemblies (517ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (35ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (177ms)
+				BeforeProcessingInitializeOnLoad (4ms)
+				ProcessInitializeOnLoadAttributes (224ms)
+				ProcessInitializeOnLoadMethodAttributes (76ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.034168 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 687.76 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+DllNotFoundException: Unable to load the unmanaged library `E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.burst@1.6.0\.Runtime\burst-llvm-11.dll`, error code 1114
+  at Burst.Backend.UnmanagedLibrary+WindowsUnmanagedLibrary.LoadLibrary (System.String name, System.Boolean addPlatformPrefix, System.Boolean addPlatformFileExtension) [0x00037] in <bfbc7148e2ae410cb20a284c249430f7>:0 
+  at Burst.Backend.UnmanagedLibrary.LoadLibrary (System.String name, System.Boolean addPlatformPrefix, System.Boolean addPlatformFileExtension) [0x00020] in <bfbc7148e2ae410cb20a284c249430f7>:0 
+  at Burst.Backend.StandardCompilerBackend..ctor (System.String nativeSharedLibraryName) [0x0000d] in <bfbc7148e2ae410cb20a284c249430f7>:0 
+  at Burst.Backend.StandardCompilerBackend.GetSingleton (System.String backendName) [0x0001f] in <bfbc7148e2ae410cb20a284c249430f7>:0 
+  at Burst.Backend.StandardCompilerBackend.GetDefault () [0x00000] in <bfbc7148e2ae410cb20a284c249430f7>:0 
+  at Burst.Compiler.IL.Jit.JitCompilerService..ctor (System.Int32 numberOfThreads, System.String libraryCacheFolderName, System.Boolean isDebuggingOverride) [0x000d8] in <685f0c65f2a448a78ba2734aa17d6be3>:0 
+  at Burst.Compiler.IL.Jit.JitCompilerService..ctor () [0x00000] in <685f0c65f2a448a78ba2734aa17d6be3>:0 
+Unity.Burst.LowLevel.BurstCompilerService:InitializeInternal(String, ExtractCompilerFlags)
+Unity.Burst.LowLevel.BurstCompilerService:Initialize(String, ExtractCompilerFlags)
+Unity.Burst.Editor.BurstLoader:.cctor()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor(IntPtr)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor(RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes(Type[])
+
+Unexpected error while trying to initialize the burst JIT compiler: Unexpected exception occured while initializing burst JitCompilerService
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+Unity.Burst.LowLevel.BurstCompilerService:Initialize (string,Unity.Burst.LowLevel.BurstCompilerService/ExtractCompilerFlags)
+Unity.Burst.Editor.BurstLoader:.cctor () (at Library/PackageCache/com.unity.burst@1.6.0/Runtime/Editor/BurstLoader.cs:138)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Library/PackageCache/com.unity.burst@1.6.0/Runtime/Editor/BurstLoader.cs Line: 138)
+
+System.TypeInitializationException: The type initializer for 'Unity.Burst.Editor.BurstReflection' threw an exception. ---> System.OutOfMemoryException: Out of memory
+  at (wrapper managed-to-native) System.Object.__icall_wrapper_ves_icall_array_new_specific(intptr,int)
+  at System.Collections.Generic.List`1[T]..ctor (System.Int32 capacity) [0x00021] in <00c558282d074245ab3496e2d108079b>:0 
+  at UnityEditor.Scripting.ScriptCompilation.EditorBuildRules.AddScriptAssemblyReferences (UnityEditor.Scripting.ScriptCompilation.ScriptAssembly& scriptAssembly, UnityEditor.Scripting.ScriptCompilation.TargetAssembly targetAssembly, UnityEditor.Scripting.ScriptCompilation.ScriptAssemblySettings settings, UnityEditor.Scripting.ScriptCompilation.EditorBuildRules+CompilationAssemblies assemblies, System.Collections.Generic.IDictionary`2[TKey,TValue] targetToScriptAssembly, UnityEditor.Scripting.ScriptCompilation.ICompilationSetupWarningTracker warningSink) [0x001b8] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at UnityEditor.Scripting.ScriptCompilation.EditorBuildRules.ToScriptAssemblies (System.Collections.Generic.IDictionary`2[TKey,TValue] targetAssemblies, UnityEditor.Scripting.ScriptCompilation.ScriptAssemblySettings settings, UnityEditor.Scripting.ScriptCompilation.EditorBuildRules+CompilationAssemblies assemblies, UnityEditor.Scripting.ScriptCompilation.ICompilationSetupWarningTracker warningSink, UnityEditor.Scripting.ScriptCompilation.ISafeModeInfo safeModeInfo) [0x002bd] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at UnityEditor.Scripting.ScriptCompilation.EditorBuildRules.GetAllScriptAssemblies (System.Collections.Generic.Dictionary`2[TKey,TValue] allSourceFiles, System.String projectDirectory, UnityEditor.Scripting.ScriptCompilation.ScriptAssemblySettings settings, UnityEditor.Scripting.ScriptCompilation.EditorBuildRules+CompilationAssemblies assemblies, UnityEditor.Scripting.ScriptCompilation.ISafeModeInfo safeModeInfo, UnityEditor.Scripting.ScriptCompilation.TargetAssemblyType onlyIncludeType, System.Func`2[T,TResult] targetAssemblyCondition, UnityEditor.Scripting.ScriptCompilation.ICompilationSetupWarningTracker warningSink) [0x00116] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at UnityEditor.Scripting.ScriptCompilation.EditorCompilation.GetAllScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.ScriptAssemblySettings settings, UnityEditor.Scripting.ScriptCompilation.PrecompiledAssembly[] unityAssembliesArg, System.Collections.Generic.Dictionary`2[TKey,TValue] precompiledAssembliesArg, System.String[] defines, System.Func`2[T,TResult] targetAssemblyCondition) [0x00095] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at UnityEditor.Scripting.ScriptCompilation.EditorCompilation.GetAllScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.EditorScriptCompilationOptions options, UnityEditor.Scripting.ScriptCompilation.PrecompiledAssembly[] unityAssembliesArg, System.Collections.Generic.Dictionary`2[TKey,TValue] precompiledAssembliesArg, System.String[] defines) [0x00009] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Scripting.ScriptCompilation.EditorScriptCompilationOptions options) [0x0002d] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00056] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Scripting.ScriptCompilation.EditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00001] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Compilation.AssembliesType assembliesType) [0x00006] in <3cbc70f1ae9747e88614d75932150c59>:0 
+  at Unity.Burst.Editor.BurstReflection..cctor () [0x0002f] in E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.burst@1.6.0\Runtime\Editor\BurstReflection.cs:618 
+   --- End of inner exception stack trace ---
+  at Unity.Burst.Editor.BurstLoader..cctor () [0x00153] in E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.burst@1.6.0\Runtime\Editor\BurstLoader.cs:169 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Could not allocate 40960 bytes
+Crash!!!
+  ERROR: Error while initializing dbghelp.dll, GetLastError: 'Операция успешно завершена.' (Address: 0000000000000000)
+
+========== OUTPUTTING STACK TRACE ==================
+
+  ERROR: Error while initializing dbghelp.dll, GetLastError: 'Операция успешно завершена.' (Address: 0000000000000000)
+
+========== END OF STACKTRACE ===========
+
+A crash has been intercepted by the crash handler. For call stack and other details, see the latest crash report generated in:
+ * C:/Users/ASUS/AppData/Local/Temp/Unity/Editor/Crashes
