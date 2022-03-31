@@ -10,12 +10,13 @@ public class PlayerAbilityState : PlayerState
 
     #region Utility Variables
     protected bool isAbilityDone;
+    protected bool crouchInput;
 
     #endregion
 
     #region State Functions
 
-    public PlayerAbilityState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
+    public PlayerAbilityState(Player player, FiniteStateMachine stateMachine, string animBoolName, PlayerData playerData)
     : base(player, stateMachine, animBoolName, playerData) { }
 
     public override void DoChecks()
@@ -32,11 +33,6 @@ public class PlayerAbilityState : PlayerState
         isAbilityDone = false;
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -46,19 +42,30 @@ public class PlayerAbilityState : PlayerState
             return;
         }
 
+        crouchInput = player.inputHandler.crouchInput;
+
         if (isGrounded && core.movement.currentVelocity.y < 0.01)
         {
-            stateMachine.ChangeState(player.idleState);
+            if (crouchInput)
+            {
+                stateMachine.ChangeState(player.crouchIdleState);
+            }
+            else
+            {
+                stateMachine.ChangeState(player.idleState);
+            }
         }
-        else
+        else if (!isGrounded)
         {
-            stateMachine.ChangeState(player.inAirState);
+            if (crouchInput)
+            {
+                stateMachine.ChangeState(player.crouchInAirState);
+            }
+            else
+            {
+                stateMachine.ChangeState(player.inAirState);
+            }
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
     }
 
     #endregion

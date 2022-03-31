@@ -6,8 +6,8 @@ public class GenericState
 {
     #region State Components
 
-    protected Core core;
     protected FiniteStateMachine stateMachine;
+    protected Core core;
 
     #endregion
 

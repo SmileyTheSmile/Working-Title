@@ -15,7 +15,7 @@ E:/My Stuff/My Games/Working Title
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-53539
+63118
 Successfully changed project path to: E:/My Stuff/My Games/Working Title
 E:/My Stuff/My Games/Working Title
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ E:/My Stuff/My Games/Working Title
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 677.39 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 969.72 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.2.5f1 (4ec9a5e799f5)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/Resources/UnitySubsystems
@@ -55,458 +55,957 @@ Initialize engine version: 2021.2.5f1 (4ec9a5e799f5)
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: Microsoft Basic Render Driver (ID=0x8c)
-    Vendor:   Microsoft
-    VRAM:     1765 MB
-received signal from system: SIGSEGV
-Obtained 43 stack frames
-0x00007ff7dea8e40d (Unity) 
-0x00007ff7dea95169 (Unity) 
-0x00007ff7df9df703 (Unity) 
-0x00007ff7dea941a6 (Unity) 
-0x00007ff7dea8da3c (Unity) 
-0x00007ff7e0d4f612 (Unity) 
-0x00007ff7e0e0dfcc (Unity) 
-0x00007ff7e0d1b9f0 (Unity) 
-0x00007ffdeaad20cf (ntdll) 
-0x00007ffdeaa81454 (ntdll) 
-0x00007ffdeaad0bfe (ntdll) 
-0x00007ff7de31d066 (Unity) 
-0x00007ff7de31be56 (Unity) 
-0x00007ff7de3292f4 (Unity) 
-0x00007ff7de32a3e4 (Unity) 
-0x00007ff7de323db2 (Unity) 
-0x00007ff7de326e0c (Unity) 
-0x00007ff7ddd42584 (Unity) 
-0x00007ff7de7f1004 (Unity) 
-0x00007ff7de2fa628 (Unity) 
-0x00007ff7dea351a7 (Unity) 
-0x00007ff7dea4f349 (Unity) 
-0x00007ff7dea4d5fe (Unity) 
-0x00007ff7dea5af2b (Unity) 
-0x00007ff7dea58f3f (Unity) 
-0x00007ff7dea3b370 (Unity) 
-0x00007ff7dea3a7ea (Unity) 
-0x00007ff7dea4020c (Unity) 
-0x00007ff7dea40aa1 (Unity) 
-0x00007ff7dea407e7 (Unity) 
-0x00007ff7de7828fc (Unity) 
-0x00007ff7dea68aaf (Unity) 
-0x00007ff7dea6951c (Unity) 
-0x00007ff7dea69673 (Unity) 
-0x00007ff7dea3bf2f (Unity) 
-0x00007ff7dea3caff (Unity) 
-0x00007ff7df46dea5 (Unity) 
-0x00007ff7de6728f3 (Unity) 
-0x00007ff7df59e2ef (Unity) 
-0x00007ff7df9e9de8 (Unity) 
-0x00007ff7e0cf92c2 (Unity) 
-0x00007ffde9707034 (KERNEL32) 
-0x00007ffdeaa82651 (ntdll) 
+    Renderer: NVIDIA GeForce MX230 (ID=0x1d11)
+    Vendor:   NVIDIA
+    VRAM:     1984 MB
+    Driver:   30.0.15.1123
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56792
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.020825 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 243.15 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.815 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1817ms)
+		BeginReloadAssembly (244ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (3ms)
+		EndReloadAssembly (1348ms)
+			LoadAssemblies (234ms)
+			RebuildTransferFunctionScriptingTraits (2ms)
+			SetupTypeCache (335ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (85ms)
+			SetupLoadedEditorAssemblies (770ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (60ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (243ms)
+				BeforeProcessingInitializeOnLoad (4ms)
+				ProcessInitializeOnLoadAttributes (346ms)
+				ProcessInitializeOnLoadMethodAttributes (114ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.035054 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 202.28 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.881 seconds
+Domain Reload Profiling:
+	ReloadAssembly (4883ms)
+		BeginReloadAssembly (464ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (12ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (49ms)
+		EndReloadAssembly (4178ms)
+			LoadAssemblies (401ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (701ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (175ms)
+			SetupLoadedEditorAssemblies (2677ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (24ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (202ms)
+				BeforeProcessingInitializeOnLoad (220ms)
+				ProcessInitializeOnLoadAttributes (2094ms)
+				ProcessInitializeOnLoadMethodAttributes (108ms)
+				AfterProcessingInitializeOnLoad (27ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (16ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.23 seconds
+Refreshing native plugins compatible for Editor in 2.33 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4981 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 66 unused Assets / (0.6 MB). Loaded Objects now: 5429.
+Memory consumption went from 188.9 MB to 188.4 MB.
+Total: 19.408400 ms (FindLiveObjects: 2.368600 ms CreateObjectMapping: 1.447400 ms MarkObjects: 14.278900 ms  DeleteObjects: 1.308700 ms)
 
-Crash!!!
-SymInit: Symbol-SearchPath: '.;E:\My Stuff\My Games\Working Title;E:\My Stuff\My Games\Working Title\Library\BurstCache\JIT;C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor;C:\WINDOWS;C:\WINDOWS\system32;SRV*C:\websymbols*http://msdl.microsoft.com/download/symbols;', symOptions: 534, UserName: 'ASUS'
-OS-Version: 10.0.0
-: (00007FF7DDA60000), size: 72966144 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\Unity.exe'
-: (00007FFDEAA30000), size: 2052096 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\ntdll.dll'
-: (00007FFDE96F0000), size: 778240 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\KERNEL32.DLL'
-: (00007FFDE8570000), size: 2916352 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\KERNELBASE.dll'
-: (00007FFDE8840000), size: 1400832 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\CRYPT32.dll'
-: (00007FFDE8470000), size: 1048576 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ucrtbase.dll'
-: (00007FFDE9FB0000), size: 1703936 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDE8A30000), size: 139264 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\win32u.dll'
-: (00007FFDE9A80000), size: 176128 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\GDI32.dll'
-: (00007FFDE82B0000), size: 1093632 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\gdi32full.dll'
-: (00007FFDE8120000), size: 643072 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\msvcp_win.dll'
-: (00007FFDA0870000), size: 10215424 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\libfbxsdk.dll'
-: (00007FFDE8A60000), size: 712704 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ADVAPI32.dll'
-: (00007FFDE8B10000), size: 647168 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\msvcrt.dll'
-: (00007FFDC9E00000), size: 208896 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\optix.6.0.0.dll'
-: (00007FFDD5930000), size: 180224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\s3tcompress.dll'
-: (00007FFDE8BB0000), size: 638976 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\sechost.dll'
-: (00007FFD9E0B0000), size: 5066752 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\etccompress.dll'
-: (00007FFDEA690000), size: 1200128 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\RPCRT4.dll'
-: (00007FFDE8C50000), size: 7618560 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SHELL32.dll'
-: (00007FFDA3140000), size: 1740800 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\ispc_texcomp.dll'
-: (00007FFDE9E10000), size: 348160 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SHLWAPI.dll'
-: (0000000180000000), size: 6582272 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\FreeImage.dll'
-: (00007FFDA2EA0000), size: 1441792 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\compress_bc7e.dll'
-: (00007FFDE9E70000), size: 1220608 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ole32.dll'
-: (00007FFD7D9C0000), size: 35123200 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDE9AB0000), size: 3489792 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDE0E40000), size: 45056 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDEA620000), size: 438272 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDEA180000), size: 196608 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\IMM32.dll'
-: (00007FFDA3710000), size: 1187840 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\umbraoptimizer64.dll'
-: (00007FFDEA1B0000), size: 4653056 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SETUPAPI.dll'
-: (00007FFDE81C0000), size: 319488 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\cfgmgr32.dll'
-: (00007FFDE8280000), size: 159744 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\bcrypt.dll'
-: (00007FFDE9620000), size: 839680 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\OLEAUT32.dll'
-: (00007FFDE8210000), size: 425984 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\WINTRUST.dll'
-: (00007FFDB79F0000), size: 1204224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\OPENGL32.dll'
-: (00007FFDC7F30000), size: 180224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\GLU32.dll'
-: (00007FFDE7560000), size: 241664 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL'
-: (00007FFDC15F0000), size: 389120 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\tbb12.dll'
-: (00007FFDCC680000), size: 581632 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCP140.dll'
-: (00007FFDCC660000), size: 110592 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\VCRUNTIME140.dll'
-: (00007FFDD7F10000), size: 1085440 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDDF1F0000), size: 159744 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\WINMM.dll'
-: (00007FFDE69D0000), size: 53248 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\HID.DLL'
-: (00007FFDA1790000), size: 2961408 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\RadeonImageFilters.dll'
-: (00007FFD80CA0000), size: 9306112 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDE5F20000), size: 192512 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDE0050000), size: 40960 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDDD9A0000), size: 36864 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDCF8B0000), size: 49152 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\VCRUNTIME140_1.dll'
-: (00007FFDD6F30000), size: 94208 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\RadeonML.dll'
-: (00007FFDBBE70000), size: 479232 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\SketchUpCommonPreferences.dll'
-: (00007FFDCEFD0000), size: 49152 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\Secur32.dll'
-: (00007FFDE8010000), size: 204800 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\SSPICLI.DLL'
-: (0000020380040000), size: 12779520 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\OpenRL.dll'
-: (0000000063160000), size: 622592 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCP100.dll'
-: (0000000063200000), size: 860160 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCR100.dll'
-: (00007FFD7C9D0000), size: 16711680 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDE7870000), size: 434176 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDA8D60000), size: 413696 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDA0420000), size: 978944 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDA5780000), size: 679936 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (0000020380C90000), size: 61440 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDB6400000), size: 372736 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDE7D00000), size: 73728 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-: (00007FFDE6030000), size: 73728 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\kernel.appcore.dll'
-: (00007FFDE89A0000), size: 532480 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\uxtheme.dll:uxtheme.dll (00007FFDE5B50000), size: 647168 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1266
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\shcore.dll:shcore.dll (00007FFDE9560000), size: 708608 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\windows.storage.dll:windows.storage.dll (00007FFDE6230000), size: 7946240 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\Wldp.dll:Wldp.dll (00007FFDE7B30000), size: 180224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\Wldp.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\SYSTEM32\profapi.dll:profapi.dll (00007FFDE8060000), size: 126976 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.844
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\IconCodecService.dll:IconCodecService.dll (00007FFDE0E50000), size: 36864 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\WindowsCodecs.dll:WindowsCodecs.dll (00007FFDE2260000), size: 1785856 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1151
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\clbcatq.dll:clbcatq.dll (00007FFDEA910000), size: 692224 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 2001.12.10941.16384
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\netprofm.dll:netprofm.dll (00007FFDE31F0000), size: 253952 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\netprofm.dll', fileVersion: 10.0.19041.906
-C:\WINDOWS\System32\npmproxy.dll:npmproxy.dll (00007FFDDD200000), size: 65536 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.906
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\NSI.dll:NSI.dll (00007FFDEA150000), size: 32768 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.610
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dhcpcsvc6.DLL:dhcpcsvc6.DLL (00007FFDDFDE0000), size: 94208 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dhcpcsvc.DLL:dhcpcsvc.DLL (00007FFDDFC10000), size: 118784 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\DNSAPI.dll:DNSAPI.dll (00007FFDE75A0000), size: 827392 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Bonjour\mdnsNSP.dll:mdnsNSP.dll (0000000062FE0000), size: 155648 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Bonjour\mdnsNSP.dll', fileVersion: 3.0.0.10
-C:\WINDOWS\System32\fwpuclnt.dll:fwpuclnt.dll (00007FFDD6490000), size: 520192 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1526
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Windows\System32\rasadhlp.dll:rasadhlp.dll (00007FFDD5430000), size: 40960 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\NVUnityPlugin.DLL:NVUnityPlugin.DLL (00007FFD9DF30000), size: 1536000 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\Data\Tools\astcenc-avx2.dll:astcenc-avx2.dll (00007FFD9DEA0000), size: 561152 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\d3d11.dll:d3d11.dll (00007FFDE40F0000), size: 2506752 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1202
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dxgi.dll:dxgi.dll (00007FFDE6A30000), size: 995328 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\cryptnet.dll:cryptnet.dll (00007FFDDFF30000), size: 200704 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.906
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\cryptbase.dll:cryptbase.dll (00007FFDE7A80000), size: 49152 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\imagehlp.dll:imagehlp.dll (00007FFDEA160000), size: 118784 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1415
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\CRYPTSP.dll:CRYPTSP.dll (00007FFDE7A60000), size: 98304 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\rsaenh.dll:rsaenh.dll (00007FFDE7190000), size: 212992 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1052
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\D3D10Warp.dll:D3D10Warp.dll (00007FFDE0120000), size: 7299072 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dxcore.dll:dxcore.dll (00007FFDDFE40000), size: 241664 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\wbem\wbemprox.dll:wbemprox.dll (00007FFDDD340000), size: 69632 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1320
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\wbemcomn.dll:wbemcomn.dll (00007FFDDD270000), size: 589824 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\wbem\wbemsvc.dll:wbemsvc.dll (00007FFDD8AD0000), size: 81920 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1320
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\wbem\fastprox.dll:fastprox.dll (00007FFDD8AF0000), size: 1093632 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.546
-C:\WINDOWS\SYSTEM32\amsi.dll:amsi.dll (00007FFDD7870000), size: 102400 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.746
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\USERENV.dll:USERENV.dll (00007FFDE7FE0000), size: 188416 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.572
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files (x86)\Kaspersky Lab\Kaspersky Free 21.3\x64\antimalware_provider.dll:antimalware_provider.dll (00007FFDD7540000), size: 2277376 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 30.587.0.880
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dbghelp.dll:dbghelp.dll (00007FFDDD480000), size: 1982464 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.867
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\psapi.dll:psapi.dll (00007FFDE9610000), size: 32768 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1282.225704 seconds.
+  path: Assets/Scripts/Entities/Player/Components/PlayerCore.cs
+  artifactKey: Guid(e051fe5e74014e64f9da20ac6f6995d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Entities/Player/Components/PlayerCore.cs using Guid(e051fe5e74014e64f9da20ac6f6995d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c9490e8028d2ae516ea59183dca5f84') in 0.083272 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.068567 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 63.28 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  7.446 seconds
+Domain Reload Profiling:
+	ReloadAssembly (7455ms)
+		BeginReloadAssembly (3264ms)
+			ExecutionOrderSort (1ms)
+			DisableScriptedObjects (152ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (3ms)
+			CreateAndSetChildDomain (2048ms)
+		EndReloadAssembly (3828ms)
+			LoadAssemblies (844ms)
+			RebuildTransferFunctionScriptingTraits (5ms)
+			SetupTypeCache (1065ms)
+			ReleaseScriptCaches (14ms)
+			RebuildScriptCaches (144ms)
+			SetupLoadedEditorAssemblies (1725ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (94ms)
+				SetLoadedEditorAssemblies (10ms)
+				RefreshPlugins (65ms)
+				BeforeProcessingInitializeOnLoad (217ms)
+				ProcessInitializeOnLoadAttributes (1143ms)
+				ProcessInitializeOnLoadMethodAttributes (159ms)
+				AfterProcessingInitializeOnLoad (35ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (33ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.00 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4958 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5444.
+Memory consumption went from 187.7 MB to 187.1 MB.
+Total: 19.403900 ms (FindLiveObjects: 1.972800 ms CreateObjectMapping: 3.235600 ms MarkObjects: 13.194000 ms  DeleteObjects: 0.996600 ms)
 
-========== OUTPUTTING STACK TRACE ==================
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.014031 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 3.52 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.772 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3774ms)
+		BeginReloadAssembly (526ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (19ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (1ms)
+			CreateAndSetChildDomain (127ms)
+		EndReloadAssembly (2976ms)
+			LoadAssemblies (491ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (972ms)
+			ReleaseScriptCaches (10ms)
+			RebuildScriptCaches (164ms)
+			SetupLoadedEditorAssemblies (1162ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (28ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (4ms)
+				BeforeProcessingInitializeOnLoad (187ms)
+				ProcessInitializeOnLoadAttributes (832ms)
+				ProcessInitializeOnLoadMethodAttributes (82ms)
+				AfterProcessingInitializeOnLoad (27ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (22ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 9.82 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4957 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.5 MB). Loaded Objects now: 5458.
+Memory consumption went from 187.6 MB to 187.1 MB.
+Total: 61.222800 ms (FindLiveObjects: 16.051900 ms CreateObjectMapping: 7.211600 ms MarkObjects: 36.263600 ms  DeleteObjects: 1.689000 ms)
 
-SymInit: Symbol-SearchPath: '.;E:\My Stuff\My Games\Working Title;E:\My Stuff\My Games\Working Title\Library\BurstCache\JIT;C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor;C:\WINDOWS;C:\WINDOWS\system32;SRV*C:\websymbols*http://msdl.microsoft.com/download/symbols;', symOptions: 534, UserName: 'ASUS'
-OS-Version: 10.0.0
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\Unity.exe:Unity.exe (00007FF7DDA60000), size: 72966144 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\Unity.exe', fileVersion: 2021.2.5.51621
-C:\WINDOWS\SYSTEM32\ntdll.dll:ntdll.dll (00007FFDEAA30000), size: 2052096 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\ntdll.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\System32\KERNEL32.DLL:KERNEL32.DLL (00007FFDE96F0000), size: 778240 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\KERNEL32.DLL', fileVersion: 10.0.19041.1566
-C:\WINDOWS\System32\KERNELBASE.dll:KERNELBASE.dll (00007FFDE8570000), size: 2916352 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\KERNELBASE.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\System32\CRYPT32.dll:CRYPT32.dll (00007FFDE8840000), size: 1400832 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\CRYPT32.dll', fileVersion: 10.0.19041.1320
-C:\WINDOWS\System32\ucrtbase.dll:ucrtbase.dll (00007FFDE8470000), size: 1048576 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ucrtbase.dll', fileVersion: 10.0.19041.789
-C:\WINDOWS\System32\USER32.dll:USER32.dll (00007FFDE9FB0000), size: 1703936 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1503
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\win32u.dll:win32u.dll (00007FFDE8A30000), size: 139264 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\win32u.dll', fileVersion: 10.0.19041.1586
-C:\WINDOWS\System32\GDI32.dll:GDI32.dll (00007FFDE9A80000), size: 176128 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\GDI32.dll', fileVersion: 10.0.19041.1202
-C:\WINDOWS\System32\gdi32full.dll:gdi32full.dll (00007FFDE82B0000), size: 1093632 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\gdi32full.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\System32\msvcp_win.dll:msvcp_win.dll (00007FFDE8120000), size: 643072 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\msvcp_win.dll', fileVersion: 10.0.19041.789
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\libfbxsdk.dll:libfbxsdk.dll (00007FFDA0870000), size: 10215424 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\libfbxsdk.dll', fileVersion: 2020.2.0.0
-C:\WINDOWS\System32\ADVAPI32.dll:ADVAPI32.dll (00007FFDE8A60000), size: 712704 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ADVAPI32.dll', fileVersion: 10.0.19041.1466
-C:\WINDOWS\System32\msvcrt.dll:msvcrt.dll (00007FFDE8B10000), size: 647168 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\msvcrt.dll', fileVersion: 7.0.19041.546
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\optix.6.0.0.dll:optix.6.0.0.dll (00007FFDC9E00000), size: 208896 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\optix.6.0.0.dll', fileVersion: 6.0.0.0
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\s3tcompress.dll:s3tcompress.dll (00007FFDD5930000), size: 180224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\s3tcompress.dll'
-C:\WINDOWS\System32\sechost.dll:sechost.dll (00007FFDE8BB0000), size: 638976 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\sechost.dll', fileVersion: 10.0.19041.1586
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\etccompress.dll:etccompress.dll (00007FFD9E0B0000), size: 5066752 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\etccompress.dll'
-C:\WINDOWS\System32\RPCRT4.dll:RPCRT4.dll (00007FFDEA690000), size: 1200128 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\RPCRT4.dll', fileVersion: 10.0.19041.1466
-C:\WINDOWS\System32\SHELL32.dll:SHELL32.dll (00007FFDE8C50000), size: 7618560 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SHELL32.dll', fileVersion: 10.0.19041.1566
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\ispc_texcomp.dll:ispc_texcomp.dll (00007FFDA3140000), size: 1740800 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\ispc_texcomp.dll'
-C:\WINDOWS\System32\SHLWAPI.dll:SHLWAPI.dll (00007FFDE9E10000), size: 348160 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SHLWAPI.dll', fileVersion: 10.0.19041.1023
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\FreeImage.dll:FreeImage.dll (0000000180000000), size: 6582272 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\FreeImage.dll', fileVersion: 3.18.0.0
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\compress_bc7e.dll:compress_bc7e.dll (00007FFDA2EA0000), size: 1441792 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\compress_bc7e.dll'
-C:\WINDOWS\System32\ole32.dll:ole32.dll (00007FFDE9E70000), size: 1220608 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\ole32.dll', fileVersion: 10.0.19041.1202
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\OpenImageDenoise.dll:OpenImageDenoise.dll (00007FFD7D9C0000), size: 35123200 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 1.3.0.0
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\combase.dll:combase.dll (00007FFDE9AB0000), size: 3489792 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\WinPixEventRuntime.dll:WinPixEventRuntime.dll (00007FFDE0E40000), size: 45056 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 1.0.1812.6001
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\WS2_32.dll:WS2_32.dll (00007FFDEA620000), size: 438272 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\IMM32.dll:IMM32.dll (00007FFDEA180000), size: 196608 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\IMM32.dll', fileVersion: 10.0.19041.546
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\umbraoptimizer64.dll:umbraoptimizer64.dll (00007FFDA3710000), size: 1187840 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\umbraoptimizer64.dll'
-C:\WINDOWS\System32\SETUPAPI.dll:SETUPAPI.dll (00007FFDEA1B0000), size: 4653056 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\SETUPAPI.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\System32\cfgmgr32.dll:cfgmgr32.dll (00007FFDE81C0000), size: 319488 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\cfgmgr32.dll', fileVersion: 10.0.19041.1151
-C:\WINDOWS\System32\bcrypt.dll:bcrypt.dll (00007FFDE8280000), size: 159744 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\bcrypt.dll', fileVersion: 10.0.19041.1023
-C:\WINDOWS\System32\OLEAUT32.dll:OLEAUT32.dll (00007FFDE9620000), size: 839680 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\OLEAUT32.dll', fileVersion: 10.0.19041.985
-C:\WINDOWS\System32\WINTRUST.dll:WINTRUST.dll (00007FFDE8210000), size: 425984 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\WINTRUST.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\SYSTEM32\OPENGL32.dll:OPENGL32.dll (00007FFDB79F0000), size: 1204224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\OPENGL32.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\SYSTEM32\GLU32.dll:GLU32.dll (00007FFDC7F30000), size: 180224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\GLU32.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL:IPHLPAPI.DLL (00007FFDE7560000), size: 241664 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL', fileVersion: 10.0.19041.546
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\tbb12.dll:tbb12.dll (00007FFDC15F0000), size: 389120 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\tbb12.dll'
-C:\WINDOWS\SYSTEM32\MSVCP140.dll:MSVCP140.dll (00007FFDCC680000), size: 581632 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCP140.dll', fileVersion: 14.30.30704.0
-C:\WINDOWS\SYSTEM32\VCRUNTIME140.dll:VCRUNTIME140.dll (00007FFDCC660000), size: 110592 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\VCRUNTIME140.dll', fileVersion: 14.30.30704.0
-C:\WINDOWS\SYSTEM32\WINHTTP.dll:WINHTTP.dll (00007FFDD7F10000), size: 1085440 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.19041.1566
-C:\WINDOWS\SYSTEM32\WINMM.dll:WINMM.dll (00007FFDDF1F0000), size: 159744 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\WINMM.dll', fileVersion: 10.0.19041.546
-C:\WINDOWS\SYSTEM32\HID.DLL:HID.DLL (00007FFDE69D0000), size: 53248 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\HID.DLL', fileVersion: 10.0.19041.546
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\RadeonImageFilters.dll:RadeonImageFilters.dll (00007FFDA1790000), size: 2961408 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\RadeonImageFilters.dll', fileVersion: 1.7.0.0
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\SketchUpAPI.dll:SketchUpAPI.dll (00007FFD80CA0000), size: 9306112 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 20.2.172.0
-C:\WINDOWS\SYSTEM32\dwmapi.dll:dwmapi.dll (00007FFDE5F20000), size: 192512 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.746
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\VERSION.dll:VERSION.dll (00007FFDE0050000), size: 40960 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\WSOCK32.dll:WSOCK32.dll (00007FFDDD9A0000), size: 36864 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\VCRUNTIME140_1.dll:VCRUNTIME140_1.dll (00007FFDCF8B0000), size: 49152 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\VCRUNTIME140_1.dll', fileVersion: 14.30.30704.0
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\RadeonML.dll:RadeonML.dll (00007FFDD6F30000), size: 94208 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\RadeonML.dll', fileVersion: 0.9.11.0
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\SketchUpCommonPreferences.dll:SketchUpCommonPreferences.dll (00007FFDBBE70000), size: 479232 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\SketchUpCommonPreferences.dll', fileVersion: 20.2.172.37
-C:\WINDOWS\SYSTEM32\Secur32.dll:Secur32.dll (00007FFDCEFD0000), size: 49152 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\Secur32.dll', fileVersion: 10.0.19041.546
-C:\WINDOWS\SYSTEM32\SSPICLI.DLL:SSPICLI.DLL (00007FFDE8010000), size: 204800 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\SSPICLI.DLL', fileVersion: 10.0.19041.1586
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\OpenRL.dll:OpenRL.dll (0000020380040000), size: 12779520 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\OpenRL.dll', fileVersion: 1.5.0.2907
-C:\WINDOWS\SYSTEM32\MSVCP100.dll:MSVCP100.dll (0000000063160000), size: 622592 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCP100.dll', fileVersion: 10.0.40219.325
-C:\WINDOWS\SYSTEM32\MSVCR100.dll:MSVCR100.dll (0000000063200000), size: 860160 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\MSVCR100.dll', fileVersion: 10.0.40219.325
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\embree.dll:embree.dll (00007FFD7C9D0000), size: 16711680 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 2.14.0.0
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\MSWSOCK.DLL:MSWSOCK.DLL (00007FFDE7870000), size: 434176 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\tbb.dll:tbb.dll (00007FFDA8D60000), size: 413696 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 2017.0.2016.1004
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\MSVCR120.dll:MSVCR120.dll (00007FFDA0420000), size: 978944 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 12.0.40660.0
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\MSVCP120.dll:MSVCP120.dll (00007FFDA5780000), size: 679936 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 12.0.40660.0
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\OpenRL_pthread.dll:OpenRL_pthread.dll (0000020380C90000), size: 61440 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 2.9.0.0
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\tbbmalloc.dll:tbbmalloc.dll (00007FFDB6400000), size: 372736 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 2017.0.2016.1004
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\MSASN1.dll:MSASN1.dll (00007FFDE7D00000), size: 73728 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\kernel.appcore.dll:kernel.appcore.dll (00007FFDE6030000), size: 73728 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\kernel.appcore.dll', fileVersion: 10.0.19041.546
-C:\WINDOWS\System32\bcryptPrimitives.dll:bcryptPrimitives.dll (00007FFDE89A0000), size: 532480 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1415
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\uxtheme.dll:uxtheme.dll (00007FFDE5B50000), size: 647168 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1266
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\shcore.dll:shcore.dll (00007FFDE9560000), size: 708608 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\windows.storage.dll:windows.storage.dll (00007FFDE6230000), size: 7946240 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\Wldp.dll:Wldp.dll (00007FFDE7B30000), size: 180224 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\SYSTEM32\Wldp.dll', fileVersion: 10.0.19041.1566
-C:\WINDOWS\SYSTEM32\profapi.dll:profapi.dll (00007FFDE8060000), size: 126976 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.844
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\IconCodecService.dll:IconCodecService.dll (00007FFDE0E50000), size: 36864 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\WindowsCodecs.dll:WindowsCodecs.dll (00007FFDE2260000), size: 1785856 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1151
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\clbcatq.dll:clbcatq.dll (00007FFDEA910000), size: 692224 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 2001.12.10941.16384
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\netprofm.dll:netprofm.dll (00007FFDE31F0000), size: 253952 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\System32\netprofm.dll', fileVersion: 10.0.19041.906
-C:\WINDOWS\System32\npmproxy.dll:npmproxy.dll (00007FFDDD200000), size: 65536 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.906
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\NSI.dll:NSI.dll (00007FFDEA150000), size: 32768 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.610
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dhcpcsvc6.DLL:dhcpcsvc6.DLL (00007FFDDFDE0000), size: 94208 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dhcpcsvc.DLL:dhcpcsvc.DLL (00007FFDDFC10000), size: 118784 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\DNSAPI.dll:DNSAPI.dll (00007FFDE75A0000), size: 827392 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Bonjour\mdnsNSP.dll:mdnsNSP.dll (0000000062FE0000), size: 155648 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files\Bonjour\mdnsNSP.dll', fileVersion: 3.0.0.10
-C:\WINDOWS\System32\fwpuclnt.dll:fwpuclnt.dll (00007FFDD6490000), size: 520192 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1526
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Windows\System32\rasadhlp.dll:rasadhlp.dll (00007FFDD5430000), size: 40960 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\NVUnityPlugin.DLL:NVUnityPlugin.DLL (00007FFD9DF30000), size: 1536000 (result: 8), SymType: '-unknown-', PDB: ''
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files\Unity\Hub\Editor\2021.2.5f1\Editor\Data\Tools\astcenc-avx2.dll:astcenc-avx2.dll (00007FFD9DEA0000), size: 561152 (result: 0), SymType: '-deferred-', PDB: ''
-C:\WINDOWS\SYSTEM32\d3d11.dll:d3d11.dll (00007FFDE40F0000), size: 2506752 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1202
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dxgi.dll:dxgi.dll (00007FFDE6A30000), size: 995328 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\cryptnet.dll:cryptnet.dll (00007FFDDFF30000), size: 200704 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.906
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\cryptbase.dll:cryptbase.dll (00007FFDE7A80000), size: 49152 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\imagehlp.dll:imagehlp.dll (00007FFDEA160000), size: 118784 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1415
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\CRYPTSP.dll:CRYPTSP.dll (00007FFDE7A60000), size: 98304 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\rsaenh.dll:rsaenh.dll (00007FFDE7190000), size: 212992 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1052
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\D3D10Warp.dll:D3D10Warp.dll (00007FFDE0120000), size: 7299072 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dxcore.dll:dxcore.dll (00007FFDDFE40000), size: 241664 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\wbem\wbemprox.dll:wbemprox.dll (00007FFDDD340000), size: 69632 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1320
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\wbemcomn.dll:wbemcomn.dll (00007FFDDD270000), size: 589824 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1566
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\wbem\wbemsvc.dll:wbemsvc.dll (00007FFDD8AD0000), size: 81920 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.1320
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\system32\wbem\fastprox.dll:fastprox.dll (00007FFDD8AF0000), size: 1093632 (result: 0), SymType: '-nosymbols-', PDB: 'C:\WINDOWS\system32\wbem\fastprox.dll', fileVersion: 10.0.19041.546
-C:\WINDOWS\SYSTEM32\amsi.dll:amsi.dll (00007FFDD7870000), size: 102400 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.746
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\USERENV.dll:USERENV.dll (00007FFDE7FE0000), size: 188416 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.572
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\Program Files (x86)\Kaspersky Lab\Kaspersky Free 21.3\x64\antimalware_provider.dll:antimalware_provider.dll (00007FFDD7540000), size: 2277376 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 30.587.0.880
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\SYSTEM32\dbghelp.dll:dbghelp.dll (00007FFDDD480000), size: 1982464 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.867
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-C:\WINDOWS\System32\psapi.dll:psapi.dll (00007FFDE9610000), size: 32768 (result: 8), SymType: '-unknown-', PDB: '', fileVersion: 10.0.19041.546
-  ERROR: LoadModule, GetLastError: 'Недостаточно ресурсов памяти для обработки этой команды.' (Address: 0000000000000000)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA7E388)
-0x00007FF7DEA7E388 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA7E4A1)
-0x00007FF7DEA7E4A1 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA8DB75)
-0x00007FF7DEA8DB75 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7E0D4F612)
-0x00007FF7E0D4F612 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7E0E0DFCC)
-0x00007FF7E0E0DFCC (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7E0D1B9F0)
-0x00007FF7E0D1B9F0 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FFDEAAD20CF)
-0x00007FFDEAAD20CF (ntdll) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FFDEAA81454)
-0x00007FFDEAA81454 (ntdll) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FFDEAAD0BFE)
-0x00007FFDEAAD0BFE (ntdll) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE31D066)
-0x00007FF7DE31D066 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE31BE56)
-0x00007FF7DE31BE56 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE3292F4)
-0x00007FF7DE3292F4 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE32A3E4)
-0x00007FF7DE32A3E4 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE323DB2)
-0x00007FF7DE323DB2 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE326E0C)
-0x00007FF7DE326E0C (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DDD42584)
-0x00007FF7DDD42584 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE7F1004)
-0x00007FF7DE7F1004 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE2FA628)
-0x00007FF7DE2FA628 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA351A7)
-0x00007FF7DEA351A7 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA4F349)
-0x00007FF7DEA4F349 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA4D5FE)
-0x00007FF7DEA4D5FE (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA5AF2B)
-0x00007FF7DEA5AF2B (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA58F3F)
-0x00007FF7DEA58F3F (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA3B370)
-0x00007FF7DEA3B370 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA3A7EA)
-0x00007FF7DEA3A7EA (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA4020C)
-0x00007FF7DEA4020C (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA40AA1)
-0x00007FF7DEA40AA1 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA407E7)
-0x00007FF7DEA407E7 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE7828FC)
-0x00007FF7DE7828FC (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA68AAF)
-0x00007FF7DEA68AAF (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA6951C)
-0x00007FF7DEA6951C (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA69673)
-0x00007FF7DEA69673 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA3BF2F)
-0x00007FF7DEA3BF2F (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DEA3CAFF)
-0x00007FF7DEA3CAFF (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DF46DEA5)
-0x00007FF7DF46DEA5 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DE6728F3)
-0x00007FF7DE6728F3 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DF59E2EF)
-0x00007FF7DF59E2EF (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7DF9E9DE8)
-0x00007FF7DF9E9DE8 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FF7E0CF92C2)
-0x00007FF7E0CF92C2 (Unity) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FFDE9707034)
-0x00007FFDE9707034 (KERNEL32) (function-name not available)
-  ERROR: SymGetSymFromAddr64, GetLastError: 'Попытка обращения к неверному адресу.' (Address: 00007FFDEAA82651)
-0x00007FFDEAA82651 (ntdll) (function-name not available)
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.023390 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 4.47 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  6.100 seconds
+Domain Reload Profiling:
+	ReloadAssembly (6113ms)
+		BeginReloadAssembly (2174ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (120ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (1ms)
+			CreateAndSetChildDomain (923ms)
+		EndReloadAssembly (3476ms)
+			LoadAssemblies (704ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (981ms)
+			ReleaseScriptCaches (14ms)
+			RebuildScriptCaches (199ms)
+			SetupLoadedEditorAssemblies (1414ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (44ms)
+				SetLoadedEditorAssemblies (2ms)
+				RefreshPlugins (5ms)
+				BeforeProcessingInitializeOnLoad (174ms)
+				ProcessInitializeOnLoadAttributes (1059ms)
+				ProcessInitializeOnLoadMethodAttributes (105ms)
+				AfterProcessingInitializeOnLoad (24ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (26ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.32 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4958 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5473.
+Memory consumption went from 187.7 MB to 187.1 MB.
+Total: 17.286100 ms (FindLiveObjects: 1.308500 ms CreateObjectMapping: 1.857300 ms MarkObjects: 12.942800 ms  DeleteObjects: 1.171700 ms)
 
-========== END OF STACKTRACE ===========
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.015928 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 4.68 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  5.221 seconds
+Domain Reload Profiling:
+	ReloadAssembly (5225ms)
+		BeginReloadAssembly (1246ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (57ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (6ms)
+			CreateAndSetChildDomain (562ms)
+		EndReloadAssembly (3568ms)
+			LoadAssemblies (574ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (1001ms)
+			ReleaseScriptCaches (9ms)
+			RebuildScriptCaches (210ms)
+			SetupLoadedEditorAssemblies (1527ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (41ms)
+				SetLoadedEditorAssemblies (4ms)
+				RefreshPlugins (5ms)
+				BeforeProcessingInitializeOnLoad (191ms)
+				ProcessInitializeOnLoadAttributes (1169ms)
+				ProcessInitializeOnLoadMethodAttributes (89ms)
+				AfterProcessingInitializeOnLoad (27ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (22ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 4.30 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4958 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5487.
+Memory consumption went from 187.7 MB to 187.1 MB.
+Total: 27.299800 ms (FindLiveObjects: 1.990400 ms CreateObjectMapping: 7.364600 ms MarkObjects: 15.826300 ms  DeleteObjects: 2.113400 ms)
 
-A crash has been intercepted by the crash handler. For call stack and other details, see the latest crash report generated in:
- * C:/Users/ASUS/AppData/Local/Temp/Unity/Editor/Crashes
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.014764 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.51 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.461 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3462ms)
+		BeginReloadAssembly (521ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (17ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (131ms)
+		EndReloadAssembly (2621ms)
+			LoadAssemblies (455ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (592ms)
+			ReleaseScriptCaches (4ms)
+			RebuildScriptCaches (152ms)
+			SetupLoadedEditorAssemblies (1254ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (30ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (3ms)
+				BeforeProcessingInitializeOnLoad (166ms)
+				ProcessInitializeOnLoadAttributes (947ms)
+				ProcessInitializeOnLoadMethodAttributes (81ms)
+				AfterProcessingInitializeOnLoad (25ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (22ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.97 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4958 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5501.
+Memory consumption went from 187.5 MB to 187.0 MB.
+Total: 14.387300 ms (FindLiveObjects: 1.386800 ms CreateObjectMapping: 1.784000 ms MarkObjects: 9.990500 ms  DeleteObjects: 1.222300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 628.220868 seconds.
+  path: Assets/Scripts/Entities/Player/Components/PlayerCoreComponent.cs
+  artifactKey: Guid(978a75020b42bb945ae09dcab69237cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Entities/Player/Components/PlayerCoreComponent.cs using Guid(978a75020b42bb945ae09dcab69237cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b1c0ee8f233aca9c2a083f27817f1fc') in 0.026137 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.049982 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 3.16 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  6.972 seconds
+Domain Reload Profiling:
+	ReloadAssembly (6991ms)
+		BeginReloadAssembly (3136ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (232ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (2ms)
+			CreateAndSetChildDomain (1737ms)
+		EndReloadAssembly (3427ms)
+			LoadAssemblies (624ms)
+			RebuildTransferFunctionScriptingTraits (2ms)
+			SetupTypeCache (1263ms)
+			ReleaseScriptCaches (8ms)
+			RebuildScriptCaches (129ms)
+			SetupLoadedEditorAssemblies (1269ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (43ms)
+				SetLoadedEditorAssemblies (4ms)
+				RefreshPlugins (3ms)
+				BeforeProcessingInitializeOnLoad (179ms)
+				ProcessInitializeOnLoadAttributes (932ms)
+				ProcessInitializeOnLoadMethodAttributes (82ms)
+				AfterProcessingInitializeOnLoad (25ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (22ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 4.37 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4958 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5515.
+Memory consumption went from 187.7 MB to 187.2 MB.
+Total: 23.014800 ms (FindLiveObjects: 1.894400 ms CreateObjectMapping: 2.800700 ms MarkObjects: 16.527400 ms  DeleteObjects: 1.787300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012718 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.35 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.252 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3254ms)
+		BeginReloadAssembly (388ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (14ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (131ms)
+		EndReloadAssembly (2632ms)
+			LoadAssemblies (239ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (618ms)
+			ReleaseScriptCaches (5ms)
+			RebuildScriptCaches (147ms)
+			SetupLoadedEditorAssemblies (1321ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (35ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (3ms)
+				BeforeProcessingInitializeOnLoad (183ms)
+				ProcessInitializeOnLoadAttributes (974ms)
+				ProcessInitializeOnLoadMethodAttributes (99ms)
+				AfterProcessingInitializeOnLoad (25ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (23ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.03 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4958 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5529.
+Memory consumption went from 187.8 MB to 187.2 MB.
+Total: 16.871900 ms (FindLiveObjects: 1.855400 ms CreateObjectMapping: 2.171700 ms MarkObjects: 11.908000 ms  DeleteObjects: 0.933000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012035 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 10.93 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  5.186 seconds
+Domain Reload Profiling:
+	ReloadAssembly (5208ms)
+		BeginReloadAssembly (2373ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (292ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (2ms)
+			CreateAndSetChildDomain (842ms)
+		EndReloadAssembly (2352ms)
+			LoadAssemblies (544ms)
+			RebuildTransferFunctionScriptingTraits (1ms)
+			SetupTypeCache (564ms)
+			ReleaseScriptCaches (62ms)
+			RebuildScriptCaches (97ms)
+			SetupLoadedEditorAssemblies (1086ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (29ms)
+				SetLoadedEditorAssemblies (2ms)
+				RefreshPlugins (11ms)
+				BeforeProcessingInitializeOnLoad (142ms)
+				ProcessInitializeOnLoadAttributes (829ms)
+				ProcessInitializeOnLoadMethodAttributes (58ms)
+				AfterProcessingInitializeOnLoad (16ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (18ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.73 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4955 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 44 unused Assets / (0.6 MB). Loaded Objects now: 5540.
+Memory consumption went from 187.7 MB to 187.2 MB.
+Total: 18.903600 ms (FindLiveObjects: 1.089800 ms CreateObjectMapping: 3.419600 ms MarkObjects: 13.227500 ms  DeleteObjects: 1.163900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.043735 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.55 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.049 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3050ms)
+		BeginReloadAssembly (409ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (15ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (1ms)
+			CreateAndSetChildDomain (114ms)
+		EndReloadAssembly (2421ms)
+			LoadAssemblies (412ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (558ms)
+			ReleaseScriptCaches (4ms)
+			RebuildScriptCaches (128ms)
+			SetupLoadedEditorAssemblies (1157ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (27ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (3ms)
+				BeforeProcessingInitializeOnLoad (161ms)
+				ProcessInitializeOnLoadAttributes (866ms)
+				ProcessInitializeOnLoadMethodAttributes (79ms)
+				AfterProcessingInitializeOnLoad (20ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (20ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.38 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4955 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.5 MB). Loaded Objects now: 5554.
+Memory consumption went from 187.7 MB to 187.2 MB.
+Total: 10.704400 ms (FindLiveObjects: 0.907900 ms CreateObjectMapping: 1.087400 ms MarkObjects: 7.706200 ms  DeleteObjects: 0.996700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008821 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.46 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.568 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2569ms)
+		BeginReloadAssembly (327ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (9ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (77ms)
+		EndReloadAssembly (2045ms)
+			LoadAssemblies (222ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (596ms)
+			ReleaseScriptCaches (5ms)
+			RebuildScriptCaches (122ms)
+			SetupLoadedEditorAssemblies (932ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (30ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (144ms)
+				ProcessInitializeOnLoadAttributes (672ms)
+				ProcessInitializeOnLoadMethodAttributes (67ms)
+				AfterProcessingInitializeOnLoad (16ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (16ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.20 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4955 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5568.
+Memory consumption went from 187.6 MB to 187.0 MB.
+Total: 16.710300 ms (FindLiveObjects: 1.234100 ms CreateObjectMapping: 1.534600 ms MarkObjects: 11.786800 ms  DeleteObjects: 2.151000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008623 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 3.28 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.091 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3092ms)
+		BeginReloadAssembly (384ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (16ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (99ms)
+		EndReloadAssembly (2482ms)
+			LoadAssemblies (265ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (660ms)
+			ReleaseScriptCaches (4ms)
+			RebuildScriptCaches (123ms)
+			SetupLoadedEditorAssemblies (1139ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (42ms)
+				SetLoadedEditorAssemblies (2ms)
+				RefreshPlugins (3ms)
+				BeforeProcessingInitializeOnLoad (153ms)
+				ProcessInitializeOnLoadAttributes (844ms)
+				ProcessInitializeOnLoadMethodAttributes (74ms)
+				AfterProcessingInitializeOnLoad (20ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (22ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.79 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4955 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5582.
+Memory consumption went from 187.8 MB to 187.2 MB.
+Total: 11.510800 ms (FindLiveObjects: 1.087300 ms CreateObjectMapping: 1.205400 ms MarkObjects: 8.397200 ms  DeleteObjects: 0.818900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.018540 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.46 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.446 seconds
+Domain Reload Profiling:
+	ReloadAssembly (4457ms)
+		BeginReloadAssembly (1804ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (122ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (4ms)
+			CreateAndSetChildDomain (782ms)
+		EndReloadAssembly (2369ms)
+			LoadAssemblies (482ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (708ms)
+			ReleaseScriptCaches (3ms)
+			RebuildScriptCaches (84ms)
+			SetupLoadedEditorAssemblies (1032ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (27ms)
+				SetLoadedEditorAssemblies (3ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (136ms)
+				ProcessInitializeOnLoadAttributes (775ms)
+				ProcessInitializeOnLoadMethodAttributes (72ms)
+				AfterProcessingInitializeOnLoad (17ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (19ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.27 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4955 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5596.
+Memory consumption went from 187.8 MB to 187.2 MB.
+Total: 9.921600 ms (FindLiveObjects: 0.699900 ms CreateObjectMapping: 0.231200 ms MarkObjects: 7.841300 ms  DeleteObjects: 1.147100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.013445 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.68 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.381 seconds
+Domain Reload Profiling:
+	ReloadAssembly (4394ms)
+		BeginReloadAssembly (1765ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (114ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (1ms)
+			CreateAndSetChildDomain (624ms)
+		EndReloadAssembly (2347ms)
+			LoadAssemblies (609ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (823ms)
+			ReleaseScriptCaches (4ms)
+			RebuildScriptCaches (96ms)
+			SetupLoadedEditorAssemblies (921ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (34ms)
+				SetLoadedEditorAssemblies (3ms)
+				RefreshPlugins (3ms)
+				BeforeProcessingInitializeOnLoad (138ms)
+				ProcessInitializeOnLoadAttributes (671ms)
+				ProcessInitializeOnLoadMethodAttributes (57ms)
+				AfterProcessingInitializeOnLoad (15ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (21ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.36 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4955 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5610.
+Memory consumption went from 187.8 MB to 187.2 MB.
+Total: 19.217100 ms (FindLiveObjects: 1.083800 ms CreateObjectMapping: 0.976700 ms MarkObjects: 14.458500 ms  DeleteObjects: 2.695200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.009175 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 39.35 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.132 seconds
+Domain Reload Profiling:
+	ReloadAssembly (4136ms)
+		BeginReloadAssembly (1373ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (83ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (1ms)
+			CreateAndSetChildDomain (785ms)
+		EndReloadAssembly (2529ms)
+			LoadAssemblies (270ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (660ms)
+			ReleaseScriptCaches (123ms)
+			RebuildScriptCaches (183ms)
+			SetupLoadedEditorAssemblies (1044ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (66ms)
+				SetLoadedEditorAssemblies (3ms)
+				RefreshPlugins (40ms)
+				BeforeProcessingInitializeOnLoad (152ms)
+				ProcessInitializeOnLoadAttributes (709ms)
+				ProcessInitializeOnLoadMethodAttributes (58ms)
+				AfterProcessingInitializeOnLoad (15ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (17ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.47 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4955 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.5 MB). Loaded Objects now: 5624.
+Memory consumption went from 187.9 MB to 187.4 MB.
+Total: 22.718100 ms (FindLiveObjects: 3.569200 ms CreateObjectMapping: 3.263000 ms MarkObjects: 12.446800 ms  DeleteObjects: 3.436700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.011989 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.63 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.512 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3514ms)
+		BeginReloadAssembly (521ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (24ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (172ms)
+		EndReloadAssembly (2626ms)
+			LoadAssemblies (432ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (711ms)
+			ReleaseScriptCaches (5ms)
+			RebuildScriptCaches (126ms)
+			SetupLoadedEditorAssemblies (1164ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (31ms)
+				SetLoadedEditorAssemblies (2ms)
+				RefreshPlugins (3ms)
+				BeforeProcessingInitializeOnLoad (169ms)
+				ProcessInitializeOnLoadAttributes (857ms)
+				ProcessInitializeOnLoadMethodAttributes (80ms)
+				AfterProcessingInitializeOnLoad (22ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (21ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.09 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4955 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (0.6 MB). Loaded Objects now: 5638.
+Memory consumption went from 187.8 MB to 187.2 MB.
+Total: 11.770000 ms (FindLiveObjects: 0.992700 ms CreateObjectMapping: 1.081700 ms MarkObjects: 8.473700 ms  DeleteObjects: 1.216200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

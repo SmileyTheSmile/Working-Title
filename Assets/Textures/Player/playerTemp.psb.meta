@@ -365,15 +365,15 @@ ScriptedImporter:
     uvTransform: {x: 76, y: 364}
   - name: crouchIdle
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5, y: 1}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 76
       y: 436
       width: 64
-      height: 64
+      height: 32
     spriteID: ea962fe87dc57a44ca57d70b51b47b12
     spriteBone: []
     spriteOutline: []
@@ -386,15 +386,15 @@ ScriptedImporter:
     uvTransform: {x: 76, y: 436}
   - name: crouchMove
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5, y: 1}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 148
-      y: 4
+      x: 76
+      y: 476
       width: 64
-      height: 64
+      height: 32
     spriteID: 87d002e7f06f43a4db452fe37faa9694
     spriteBone: []
     spriteOutline: []
@@ -404,18 +404,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 148, y: 4}
+    uvTransform: {x: 76, y: 476}
   - name: crouchInAir
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5, y: 1}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 148
-      y: 76
+      y: 4
       width: 64
-      height: 64
+      height: 32
     spriteID: 5fab5de1871912a47bae9c4c42bb865f
     spriteBone: []
     spriteOutline: []
@@ -425,18 +425,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 148, y: 76}
+    uvTransform: {x: 148, y: 4}
   - name: crouchFall
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5, y: 1}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 148
-      y: 148
+      y: 44
       width: 64
-      height: 64
+      height: 32
     spriteID: f239a8590d489f74ca95ff3e45997de7
     spriteBone: []
     spriteOutline: []
@@ -446,18 +446,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 148, y: 148}
+    uvTransform: {x: 148, y: 44}
   - name: crouchLand
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5, y: 1}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 148
-      y: 220
+      y: 84
       width: 64
-      height: 64
+      height: 32
     spriteID: e544dfb08e9ed1f4aae8ea929351a0cb
     spriteBone: []
     spriteOutline: []
@@ -467,18 +467,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 148, y: 220}
+    uvTransform: {x: 148, y: 84}
   - name: crouchJump
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5, y: 1}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 148
-      y: 292
+      y: 124
       width: 64
-      height: 64
+      height: 32
     spriteID: 4d1d8d852027c3b4090d6828b669a1ad
     spriteBone: []
     spriteOutline: []
@@ -488,18 +488,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 148, y: 292}
+    uvTransform: {x: 148, y: 124}
   - name: crouchJumpX
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5, y: 1}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 148
-      y: 364
+      y: 164
       width: 64
-      height: 64
+      height: 32
     spriteID: de8d7a4a562a3f449ab2bef80f650a21
     spriteBone: []
     spriteOutline: []
@@ -509,7 +509,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 148, y: 364}
+    uvTransform: {x: 148, y: 164}
   rigSpriteImportData:
   - name: idle
     originalName: 
@@ -1106,7 +1106,7 @@ ScriptedImporter:
     parentIndex: 16
     spriteID: 87d002e7f06f43a4db452fe37faa9694
     layerID: 15
-    mosaicPosition: {x: 148, y: 4}
+    mosaicPosition: {x: 76, y: 476}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -1116,7 +1116,7 @@ ScriptedImporter:
     parentIndex: 16
     spriteID: 5fab5de1871912a47bae9c4c42bb865f
     layerID: 44
-    mosaicPosition: {x: 148, y: 76}
+    mosaicPosition: {x: 148, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -1126,7 +1126,7 @@ ScriptedImporter:
     parentIndex: 16
     spriteID: f239a8590d489f74ca95ff3e45997de7
     layerID: 45
-    mosaicPosition: {x: 148, y: 148}
+    mosaicPosition: {x: 148, y: 44}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -1136,7 +1136,7 @@ ScriptedImporter:
     parentIndex: 16
     spriteID: e544dfb08e9ed1f4aae8ea929351a0cb
     layerID: 28
-    mosaicPosition: {x: 148, y: 220}
+    mosaicPosition: {x: 148, y: 84}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -1146,7 +1146,7 @@ ScriptedImporter:
     parentIndex: 16
     spriteID: 4d1d8d852027c3b4090d6828b669a1ad
     layerID: 26
-    mosaicPosition: {x: 148, y: 292}
+    mosaicPosition: {x: 148, y: 124}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -1156,7 +1156,7 @@ ScriptedImporter:
     parentIndex: 16
     spriteID: de8d7a4a562a3f449ab2bef80f650a21
     layerID: 43
-    mosaicPosition: {x: 148, y: 364}
+    mosaicPosition: {x: 148, y: 164}
     flatten: 0
     isImported: 1
     isVisible: 1

@@ -21,7 +21,8 @@ public class PlayerAttackState : PlayerAbilityState
 
     #region State Functions
 
-    public PlayerAttackState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) { }
+    public PlayerAttackState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
+    : base(player, stateMachine, animBoolName, playerData) { }
 
     public override void DoChecks()
     {

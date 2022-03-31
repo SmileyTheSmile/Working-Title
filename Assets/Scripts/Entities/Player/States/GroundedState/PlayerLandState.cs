@@ -13,24 +13,31 @@ public class PlayerLandState : PlayerGroundedState
 
         if (inputX != 0)
         {
-            if (inputY != -1)
+            if (crouchInput)
+            {
+                core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+                stateMachine.ChangeState(player.crouchMoveState);
+            }
+            else
             {
                 stateMachine.ChangeState(player.moveState);
             }
-            else
-            {
-                stateMachine.ChangeState(player.crouchMoveState);
-            }
         }
-        else if (isAnimationFinished)
+        else
         {
-            if (inputY != -1)
+            if (isAnimationFinished)
             {
-                stateMachine.ChangeState(player.idleState);
-            }
-            else
-            {
-                stateMachine.ChangeState(player.crouchIdleState);
+                if (crouchInput)
+                {
+                    core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+                    stateMachine.ChangeState(player.crouchIdleState);
+                }
+                else
+                {
+                    stateMachine.ChangeState(player.idleState);
+                }
             }
         }
     }

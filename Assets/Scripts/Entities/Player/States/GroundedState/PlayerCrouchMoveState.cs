@@ -7,29 +7,6 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     public PlayerCrouchMoveState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, playerData, animBoolName) { }
 
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-
-        core.movement.SquashColliderDown(playerData.crouchColliderHeight);
-
-        core.collisionSenses.ceilingCheck.transform.position -= new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        core.movement.SquashColliderDown(playerData.standColliderHeight);
-
-        core.collisionSenses.ceilingCheck.transform.position += new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -37,19 +14,28 @@ public class PlayerCrouchMoveState : PlayerGroundedState
         core.movement.SetVelocityX(playerData.crouchMovementVelocity * core.movement.facingDirection);
         core.movement.CheckIfShouldFlip(inputX);
 
-        if (inputX == 0)
+        if (inputX != 0f)
         {
-            stateMachine.ChangeState(player.crouchIdleState);
-        }
-        else if (!crouchInput && !isTouchingCeiling)
-        {
-            stateMachine.ChangeState(player.moveState);
-        }
-    }
+            if (!crouchInput && !isTouchingCeiling)
+            {
+                core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
+                stateMachine.ChangeState(player.moveState);
+            }
+        }
+        else
+        {
+            if (!crouchInput && !isTouchingCeiling)
+            {
+                core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+                stateMachine.ChangeState(player.idleState);
+            }
+            else
+            {
+                stateMachine.ChangeState(player.crouchIdleState);
+            }
+        }
     }
 
     #endregion

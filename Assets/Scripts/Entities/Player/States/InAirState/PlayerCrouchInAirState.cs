@@ -2,41 +2,48 @@ using UnityEngine;
 
 public class PlayerCrouchInAirState : PlayerInAirState
 {
-    public PlayerCrouchInAirState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName) { }
+    private int amountOfCrouchesLeft;
 
-    public override void DoChecks()
+    public PlayerCrouchInAirState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
+    : base(player, stateMachine, playerData, animBoolName)
     {
-        base.DoChecks();
+        amountOfCrouchesLeft = playerData.amountOfCrouches;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        //core.movement.SetColliderHeight(playerData.crouchColliderHeight, ColliderLocation.top);
-
-        //core.collisionSenses.ceilingCheck.transform.position -= new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
-        //core.collisionSenses.groundCheck.transform.position += new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        //core.movement.SetColliderHeight(playerData.standColliderHeight, ColliderLocation.top);
-
-        //core.collisionSenses.ceilingCheck.transform.position += new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
-        //core.collisionSenses.groundCheck.transform.position -= new Vector3(0f, (playerData.standColliderHeight - playerData.crouchColliderHeight) / 2, 0f);
+        DecreaseAmountOfCrouchesLeft();
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (!crouchInput && !isGrounded)
+        {
+            core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+            stateMachine.ChangeState(player.inAirState);
+        }
     }
 
-    public override void PhysicsUpdate()
+    #region Utility Functions
+
+    public bool CanCrouch()
     {
-        base.PhysicsUpdate();
+        if (amountOfCrouchesLeft > 0)
+        {
+            return true;
+        }
+
+        return false;
     }
+
+    public void ResetAmountOfCrouchesLeft() => amountOfCrouchesLeft = playerData.amountOfCrouches;
+
+    public void DecreaseAmountOfCrouchesLeft() => amountOfCrouchesLeft--;
+
+    #endregion
 }

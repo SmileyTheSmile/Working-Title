@@ -38,8 +38,8 @@ public class EntityGeneric : MonoBehaviour
 
     public FiniteStateMachine stateMachine { get; private set; }
 
-    private Animator _animator;
-    public Core _core;
+    protected Animator _animator;
+    protected Core _core;
 
     #endregion
 
@@ -53,20 +53,16 @@ public class EntityGeneric : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _core = GetComponentInChildren<Core>();
         _animator = GetComponent<Animator>();
+        _core = GetComponentInChildren<Core>();
 
         stateMachine = new FiniteStateMachine();
-    }
-
-    protected virtual void Start()
-    {
-
     }
 
     protected virtual void Update()
     {
         _core.LogicUpdate();
+
         stateMachine.currentState.LogicUpdate();
     }
 
@@ -74,6 +70,8 @@ public class EntityGeneric : MonoBehaviour
     {
         stateMachine.currentState.PhysicsUpdate();
     }
+
+    protected virtual void Start() { }
 
     #endregion
 

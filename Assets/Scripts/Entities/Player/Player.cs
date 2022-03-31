@@ -52,6 +52,7 @@ public class Player : EntityGeneric
 
         inputHandler = GetComponent<PlayerInputHandler>();
         inventory = GetComponent<PlayerInventory>();
+        //Time.timeScale = playerData.holdTimeScale;
 
         primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
         //secondaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.secondary]);
@@ -111,7 +112,8 @@ public class Player : EntityGeneric
     private void LogImportantInfo() //Log the current info about player
     {
         //core.collisionSenses.LogCurrentCollisions();
-        //Debug.Log(stateMachine.currentState.ToString());
+        //inputHandler.LogAllInputs();
+        stateMachine.LogCurrentState();
     }
 
     #endregion

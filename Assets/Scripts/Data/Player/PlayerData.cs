@@ -24,6 +24,7 @@ public class PlayerData : ScriptableObject
     [Header("In Air State")]
     public float coyoteTime = 0.2f;
     public float variableJumpHeightMultiplier = 0.5f;
+    public float airControlPercentage = 0.5f;
 
     #endregion
 
@@ -50,11 +51,10 @@ public class PlayerData : ScriptableObject
 
     #endregion
 
-    #region Wall Climb State
+    #region Ledge Climb State
 
     [Header("Ledge Climb State")]
-    public Vector2 startOffset;
-    public Vector2 stopOffset;
+    public float ledgeClimbVelocity = 5f;
 
     #endregion
 
@@ -63,7 +63,7 @@ public class PlayerData : ScriptableObject
     [Header("Dash State")]
     public float dashCooldown = 0.5f;
     public float maxHoldTime = 1f;
-    public float holdTimeScale = 0.25f;
+    public float holdTimeScale = 0.1f;
     public float dashTime = 0.2f;
     public float dashVelocity = 30f;
     public float drag = 10f;
@@ -72,12 +72,13 @@ public class PlayerData : ScriptableObject
 
     #endregion
 
-    #region Crouch State
+    #region Crouch States
 
-    [Header("Crouch State")]
+    [Header("Crouch States")]
     public float crouchMovementVelocity = 5f;
     public float crouchColliderHeight = 0.5f;
     public float standColliderHeight = 1f;
+    public int amountOfCrouches = 2;
 
     #endregion
 

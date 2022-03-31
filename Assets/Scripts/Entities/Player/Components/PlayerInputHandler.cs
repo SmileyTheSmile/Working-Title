@@ -198,6 +198,15 @@ public class PlayerInputHandler : MonoBehaviour
     public void UseDashInput() => dashInput = false; //Disable dash input
 
     #endregion
+
+    #region Editor Functions
+
+    public void LogAllInputs() //Process crouch input
+    {
+        Debug.Log($"Crouch = {crouchInput}, Jump = {jumpInput}");
+    }
+
+    #endregion
 }
 
 public enum CombatInputs

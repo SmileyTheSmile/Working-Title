@@ -16,6 +16,7 @@ public class PlayerGroundedState : PlayerState
     #region Check Variables
 
     protected bool isGrounded;
+    protected bool isCrouching;
     protected bool isTouchingCeiling;
     protected bool isTouchingWall;
     protected bool isTouchingLedge;
@@ -32,9 +33,9 @@ public class PlayerGroundedState : PlayerState
         base.DoChecks();
 
         isGrounded = core.collisionSenses.Ground;
+        isTouchingCeiling = core.collisionSenses.Ceiling;
         isTouchingWall = core.collisionSenses.WallFront;
         isTouchingLedge = core.collisionSenses.LedgeHorizontal;
-        isTouchingCeiling = core.collisionSenses.Ceiling;
     }
 
     public override void Enter()
@@ -42,12 +43,8 @@ public class PlayerGroundedState : PlayerState
         base.Enter();
 
         player.jumpState.ResetAmountOfJumpsLeft();
+        player.crouchInAirState.ResetAmountOfCrouchesLeft();
         player.dashState.ResetCanDash();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 
     public override void LogicUpdate()
@@ -61,6 +58,7 @@ public class PlayerGroundedState : PlayerState
         jumpInput = player.inputHandler.jumpInput;
         crouchInput = player.inputHandler.crouchInput;
 
+        //Ability States
         if (player.inputHandler.attackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.primaryAttackState);
@@ -69,22 +67,29 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.secondaryAttackState);
         }
-
-        if (jumpInput && player.jumpState.CanJump() && !isTouchingCeiling)
+        else if (jumpInput && player.jumpState.CanJump() && !isTouchingCeiling)
         {
-            if (crouchInput)
+            if (crouchInput && player.crouchInAirState.CanCrouch())
             {
+                //core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
                 stateMachine.ChangeState(player.crouchJumpState);
             }
             else
             {
+                //core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
                 stateMachine.ChangeState(player.jumpState);
             }
         }
-        else if (!isGrounded)
+        else if (dashInput && player.dashState.CheckIfCanDash() && !isTouchingCeiling)
         {
-            player.inAirState.StartCoyoteTime();
+            stateMachine.ChangeState(player.dashState);
+        }
 
+        //Other States
+        if (!isGrounded)
+        {
             if (crouchInput)
             {
                 stateMachine.ChangeState(player.crouchInAirState);
@@ -98,15 +103,6 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.wallGrabState);
         }
-        else if (dashInput && player.dashState.CheckIfCanDash() && !isTouchingCeiling)
-        {
-            stateMachine.ChangeState(player.dashState);
-        }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
     }
 
     #endregion

@@ -40,15 +40,14 @@ public class Core : MonoBehaviour
 
     #region Private Core Components
 
-    private Movement _movement;
-
-    private CollisionSenses _collisionSenses;
+    protected Movement _movement;
+    protected CollisionSenses _collisionSenses;
 
     #endregion
 
     #region Unity Functions
 
-    private void Awake()
+    public void Awake()
     {
         _movement = GetComponentInChildren<Movement>();
         _collisionSenses = GetComponentInChildren<CollisionSenses>();
@@ -61,6 +60,30 @@ public class Core : MonoBehaviour
     public void LogicUpdate()
     {
         _movement.LogicUpdate();
+    }
+
+    #endregion
+
+    #region Utility Functions
+
+    public void SquashColliderDown(float biggerHeight, float smallerHeight)
+    {
+        _movement.SquashColliderDown(smallerHeight);
+
+        if (_collisionSenses.ceilingCheck)
+        {
+            _collisionSenses.ceilingCheck.transform.position -= Vector3.up * ((biggerHeight - smallerHeight) * _movement.defaultSize.y);
+        }
+    }
+
+    public void UnSquashColliderDown(float biggerHeight, float smallerHeight)
+    {
+        movement.ResetColliderHeight();
+
+        if (_collisionSenses.ceilingCheck)
+        {
+            _collisionSenses.ceilingCheck.transform.position += Vector3.up * ((biggerHeight - smallerHeight) * _movement.defaultSize.y);
+        }
     }
 
     #endregion

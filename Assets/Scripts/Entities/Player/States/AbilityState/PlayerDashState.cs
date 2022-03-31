@@ -26,7 +26,7 @@ public class PlayerDashState : PlayerAbilityState
     #region State Functions
 
     public PlayerDashState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName) { }
+    : base(player, stateMachine, animBoolName, playerData) { }
 
     public override void DoChecks()
     {

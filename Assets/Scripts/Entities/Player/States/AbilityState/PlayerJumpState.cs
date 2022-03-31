@@ -11,14 +11,9 @@ public class PlayerJumpState : PlayerAbilityState
     #region State Functions
 
     public PlayerJumpState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName)
+    : base(player, stateMachine, animBoolName, playerData)
     {
         amountOfJumpsLeft = playerData.amountOfJumps;
-    }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
     }
 
     public override void Enter()
@@ -33,21 +28,6 @@ public class PlayerJumpState : PlayerAbilityState
 
         DecreaseAmountOfJumpsLeft();
         isAbilityDone = true;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
     }
 
     #endregion

@@ -7,30 +7,23 @@ public class PlayerIdleState : PlayerGroundedState
     public PlayerIdleState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, playerData, animBoolName) { }
 
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-
     public override void Enter()
     {
         base.Enter();
-        core.movement.SetVelocityX(0f);
-    }
 
-    public override void Exit()
-    {
-        base.Exit();
+        core.movement.SetVelocityX(0f);
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (inputX != 0)
+        if (inputX != 0f)
         {
             if (crouchInput)
             {
+                core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
                 stateMachine.ChangeState(player.crouchMoveState);
             }
             else
@@ -40,13 +33,10 @@ public class PlayerIdleState : PlayerGroundedState
         }
         else if (crouchInput)
         {
+            core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
             stateMachine.ChangeState(player.crouchIdleState);
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
     }
 
     #endregion

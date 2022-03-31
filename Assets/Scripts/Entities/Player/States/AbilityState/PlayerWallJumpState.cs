@@ -12,12 +12,7 @@ public class PlayerWallJumpState : PlayerAbilityState
     #region State Functions
 
     public PlayerWallJumpState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName) { }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
+    : base(player, stateMachine, animBoolName, playerData) { }
 
     public override void Enter()
     {
@@ -32,30 +27,22 @@ public class PlayerWallJumpState : PlayerAbilityState
 
         core.movement.SetVelocity(playerData.wallJumpVelocity, wallJumpAngle, wallJumpDirection);
         core.movement.CheckIfShouldFlip(wallJumpDirection);
+
+        isAbilityDone = true;
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-
-        player.animator.SetFloat("velocityX", core.movement.currentVelocity.y);
-        player.animator.SetFloat("velocityY", Mathf.Abs(core.movement.currentVelocity.x));
-
-        if (Time.time >= startTime + playerData.wallJumpTime)
-        {
-            isAbilityDone = true;
-        }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
+    //public override void LogicUpdate()
+    //{
+    //    base.LogicUpdate();
+    //
+    //    player.animator.SetFloat("velocityX", core.movement.currentVelocity.y);
+    //    player.animator.SetFloat("velocityY", Mathf.Abs(core.movement.currentVelocity.x));
+    //
+    //    if (Time.time >= startTime + playerData.wallJumpTime)
+    //    {
+    //        isAbilityDone = true;
+    //    }
+    //}
 
     #endregion
 

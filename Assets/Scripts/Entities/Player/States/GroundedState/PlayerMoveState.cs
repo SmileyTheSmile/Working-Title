@@ -31,18 +31,22 @@ public class PlayerMoveState : PlayerGroundedState
 
         if (inputX == 0f)
         {
-            stateMachine.ChangeState(player.idleState);
-        }
-        else if (crouchInput)
-        {
-            if (inputX != 0f)
+            if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchMoveState);
+                core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+                stateMachine.ChangeState(player.crouchIdleState);
             }
             else
             {
-                stateMachine.ChangeState(player.crouchIdleState);
+                stateMachine.ChangeState(player.idleState);
             }
+        }
+        else if (crouchInput)
+        {
+            core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+            stateMachine.ChangeState(player.crouchMoveState);
         }
     }
 
