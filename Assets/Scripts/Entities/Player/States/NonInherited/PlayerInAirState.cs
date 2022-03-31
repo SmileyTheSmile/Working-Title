@@ -145,15 +145,13 @@ public class PlayerInAirState : PlayerState
             {
                 stateMachine.ChangeState(player.wallSlideState);
             }
-            else if (!isTouchingLedge && !isGrounded)
+            else if (!isTouchingLedge && !isGrounded && !isTouchingCeiling)
             {
                 stateMachine.ChangeState(player.ledgeClimbState);
             }
         }
         else if (crouchInput && player.crouchInAirState.CanCrouch() && !isGrounded)
         {
-            core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
             stateMachine.ChangeState(player.crouchInAirState);
         }
         else

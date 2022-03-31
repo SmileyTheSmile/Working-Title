@@ -15,8 +15,6 @@ public class PlayerLandState : PlayerGroundedState
         {
             if (crouchInput)
             {
-                core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
                 stateMachine.ChangeState(player.crouchMoveState);
             }
             else
@@ -30,8 +28,6 @@ public class PlayerLandState : PlayerGroundedState
             {
                 if (crouchInput)
                 {
-                    core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
                     stateMachine.ChangeState(player.crouchIdleState);
                 }
                 else

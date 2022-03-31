@@ -16,6 +16,7 @@ public class PlayerTouchingWallState : PlayerState
     protected bool isGrounded;
     protected bool isTouchingWall;
     protected bool isTouchingLedge;
+    protected bool isTouchingCeiling;
 
     #endregion
 
@@ -31,16 +32,7 @@ public class PlayerTouchingWallState : PlayerState
         isGrounded = core.collisionSenses.Ground;
         isTouchingWall = core.collisionSenses.WallFront;
         isTouchingLedge = core.collisionSenses.LedgeHorizontal;
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
+        isTouchingCeiling = core.collisionSenses.Ceiling;
     }
 
     public override void LogicUpdate()
@@ -65,15 +57,10 @@ public class PlayerTouchingWallState : PlayerState
         {
             stateMachine.ChangeState(player.inAirState);
         }
-        else if (isTouchingWall && !isTouchingLedge)
+        else if (isTouchingWall && !isTouchingLedge && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.ledgeClimbState);
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
     }
 
     #endregion

@@ -71,14 +71,10 @@ public class PlayerGroundedState : PlayerState
         {
             if (crouchInput && player.crouchInAirState.CanCrouch())
             {
-                //core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
                 stateMachine.ChangeState(player.crouchJumpState);
             }
             else
             {
-                //core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
                 stateMachine.ChangeState(player.jumpState);
             }
         }

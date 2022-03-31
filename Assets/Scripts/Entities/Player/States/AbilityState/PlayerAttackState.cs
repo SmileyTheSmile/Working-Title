@@ -24,11 +24,6 @@ public class PlayerAttackState : PlayerAbilityState
     public PlayerAttackState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, animBoolName, playerData) { }
 
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-
     public override void Enter()
     {
         base.Enter();
@@ -60,16 +55,6 @@ public class PlayerAttackState : PlayerAbilityState
         {
             core.movement.SetVelocityX(velocityToSet * core.movement.facingDirection);
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
-    public override void AnimationTrigger()
-    {
-        base.AnimationTrigger();
     }
 
     public override void AnimationFinishedTrigger()

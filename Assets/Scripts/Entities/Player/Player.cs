@@ -113,7 +113,7 @@ public class Player : EntityGeneric
     {
         //core.collisionSenses.LogCurrentCollisions();
         //inputHandler.LogAllInputs();
-        stateMachine.LogCurrentState();
+        //stateMachine.LogCurrentState();
     }
 
     #endregion

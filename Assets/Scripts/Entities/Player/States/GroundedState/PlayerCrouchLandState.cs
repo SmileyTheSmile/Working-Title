@@ -5,6 +5,34 @@ public class PlayerCrouchLandState : PlayerGroundedState
     public PlayerCrouchLandState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, playerData, animBoolName) { }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        crouchInput = player.inputHandler.crouchInput;
+
+        if (core.movement.crouchingForm == PlayerCrouchingForm.normal && crouchInput)
+        {
+            core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+            core.movement.crouchingForm = PlayerCrouchingForm.crouchingDown;
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        crouchInput = player.inputHandler.crouchInput;
+
+        if (!crouchInput && core.movement.crouchingForm == PlayerCrouchingForm.crouchingDown && !isTouchingCeiling)
+        {
+            core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+            core.movement.crouchingForm = PlayerCrouchingForm.normal;
+        }
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -17,8 +45,6 @@ public class PlayerCrouchLandState : PlayerGroundedState
             }
             else
             {
-                core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
                 stateMachine.ChangeState(player.moveState);
             }
         }
@@ -32,8 +58,6 @@ public class PlayerCrouchLandState : PlayerGroundedState
                 }
                 else
                 {
-                    core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
                     stateMachine.ChangeState(player.idleState);
                 }
             }

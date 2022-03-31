@@ -14,7 +14,30 @@ public class PlayerCrouchInAirState : PlayerInAirState
     {
         base.Enter();
 
+        crouchInput = player.inputHandler.crouchInput;
+
         DecreaseAmountOfCrouchesLeft();
+
+        if (core.movement.crouchingForm == PlayerCrouchingForm.normal && crouchInput)
+        {
+            core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+            core.movement.crouchingForm = PlayerCrouchingForm.crouchingDown;
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        crouchInput = player.inputHandler.crouchInput;
+
+        if ((!crouchInput && core.movement.crouchingForm == PlayerCrouchingForm.crouchingDown && !isTouchingCeiling) || (!isTouchingWall && !isTouchingCeiling))
+        {
+            core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
+
+            core.movement.crouchingForm = PlayerCrouchingForm.normal;
+        }
     }
 
     public override void LogicUpdate()
@@ -23,8 +46,6 @@ public class PlayerCrouchInAirState : PlayerInAirState
 
         if (!crouchInput && !isGrounded)
         {
-            core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
             stateMachine.ChangeState(player.inAirState);
         }
     }

@@ -35,13 +35,14 @@ public class Movement : CoreComponent
     protected Rigidbody2D _rigidBody;
     protected BoxCollider2D _boxCollider;
 
+    public PlayerCrouchingForm crouchingForm;
     public Transform dashDirectionIndicator { get; private set; }
     public Transform facingDirectionIndicator { get; private set; }
     public Vector2 currentVelocity { get; private set; }
+    public Vector2 defaultSize { get; private set; }
     public int facingDirection { get; private set; }
 
     private Vector2 workspace;
-    public Vector2 defaultSize;
 
     #endregion
 
@@ -58,6 +59,7 @@ public class Movement : CoreComponent
         facingDirectionIndicator = transform.Find("FacingDirectionIndicator");
 
         defaultSize = _boxCollider.size;
+        crouchingForm = PlayerCrouchingForm.normal;
 
         facingDirection = 1;
     }
@@ -233,4 +235,11 @@ public class Movement : CoreComponent
     }
 
     #endregion
+}
+
+public enum PlayerCrouchingForm
+{
+    normal,
+    crouchingDown,
+    crouchingUp
 }
