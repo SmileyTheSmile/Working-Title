@@ -54,8 +54,8 @@ public class Player : EntityGeneric
         inventory = GetComponent<PlayerInventory>();
         //Time.timeScale = playerData.holdTimeScale;
 
-        primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
-        //secondaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.secondary]);
+        //primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
+        secondaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
 
         stateMachine.Initialize(idleState);
     }
