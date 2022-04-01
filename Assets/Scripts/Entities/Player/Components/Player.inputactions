@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WeaponScroll",
+                    "type": "Value",
+                    "id": "41c0dbdd-3629-4cd7-9709-8d2e2106557c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -219,6 +228,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b9e19e0d-1ba3-4b46-9806-3af69a0b1905",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "WeaponScroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

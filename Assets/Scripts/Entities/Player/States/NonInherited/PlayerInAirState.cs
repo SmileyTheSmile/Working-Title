@@ -212,7 +212,6 @@ public class PlayerInAirState : PlayerState
 
     public void StopWallJumpCoyoteTime() => wallJumpCoyoteTime = false;
     public void StartCoyoteTime() => coyoteTime = true;
-    public void StopCoyoteTime() => coyoteTime = false;
     public void SetIsJumping() => isJumping = true;
 
     #endregion

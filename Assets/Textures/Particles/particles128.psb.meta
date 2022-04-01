@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 334b41ff83cc49d4c9b09ecbe045d141
+guid: e938a10be98e780418700c71b48e6b96
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -90,18 +90,39 @@ ScriptedImporter:
     parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
   mosaicSpriteImportData:
-  - name: hurt
+  - name: arrow
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 140
+      y: 4
+      width: 35
+      height: 13
+    spriteID: 36f477854a77a2c4bbe0a60857c4f670
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 94, y: -62}
+  - name: dashDirection
+    originalName: 
+    pivot: {x: 0.1, y: 0.5}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 64
-      height: 64
-    spriteID: 709496e137870e14fb5543c991542f71
+      width: 128
+      height: 16
+    spriteID: 93e06363a895b3e4c9d6a8b3373c4d52
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -110,51 +131,30 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 4, y: 4}
-  - name: move
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 76
-      width: 64
-      height: 64
-    spriteID: dce61acd31fc8fa46a36a80b92c513a4
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 76}
-  - name: idle
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 148
-      width: 64
-      height: 64
-    spriteID: bb64db71a340b504c85d04ea9fa8ad64
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 148}
+    uvTransform: {x: 4, y: -108}
   rigSpriteImportData:
-  - name: hurt
+  - name: arrow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 140
+      y: 4
+      width: 35
+      height: 13
+    spriteID: 8e1639d661a775d4491df90b286c1639
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 94, y: -62}
+  - name: dashDirection
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -163,9 +163,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 64
-      height: 64
-    spriteID: abfcec961df0ae34e8098fa5786a009b
+      width: 128
+      height: 16
+    spriteID: 701b78d7eceaf8549997674fffaaf55b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -174,49 +174,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 4, y: 4}
-  - name: move
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 76
-      width: 64
-      height: 64
-    spriteID: 99cdf1b3572505749b840098ff342653
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 76}
-  - name: idle
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 148
-      width: 64
-      height: 64
-    spriteID: 80aed1b090be47b4f9aaf7253a1764dc
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: 148}
+    uvTransform: {x: 4, y: -108}
   characterData:
     bones: []
     parts: []
@@ -290,64 +248,44 @@ ScriptedImporter:
   spritePackingTag: 
   resliceFromLayer: 0
   mosaicPSDLayers:
-  - name: hurt
-    spriteName: hurt
+  - name: arrow
+    spriteName: arrow
     isGroup: 0
     parentIndex: -1
-    spriteID: 709496e137870e14fb5543c991542f71
+    spriteID: 36f477854a77a2c4bbe0a60857c4f670
     layerID: 4
-    mosaicPosition: {x: 4, y: 4}
+    mosaicPosition: {x: 140, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: move
-    spriteName: move
+  - name: dashDirection
+    spriteName: dashDirection
     isGroup: 0
     parentIndex: -1
-    spriteID: dce61acd31fc8fa46a36a80b92c513a4
+    spriteID: 93e06363a895b3e4c9d6a8b3373c4d52
     layerID: 3
-    mosaicPosition: {x: 4, y: 76}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: idle
-    spriteName: idle
-    isGroup: 0
-    parentIndex: -1
-    spriteID: bb64db71a340b504c85d04ea9fa8ad64
-    layerID: 2
-    mosaicPosition: {x: 4, y: 148}
+    mosaicPosition: {x: 4, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
   rigPSDLayers:
-  - name: hurt
-    spriteName: hurt
+  - name: arrow
+    spriteName: arrow
     isGroup: 0
     parentIndex: -1
-    spriteID: abfcec961df0ae34e8098fa5786a009b
+    spriteID: 8e1639d661a775d4491df90b286c1639
     layerID: 4
-    mosaicPosition: {x: 4, y: 4}
+    mosaicPosition: {x: 140, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: move
-    spriteName: move
+  - name: dashDirection
+    spriteName: dashDirection
     isGroup: 0
     parentIndex: -1
-    spriteID: 99cdf1b3572505749b840098ff342653
+    spriteID: 701b78d7eceaf8549997674fffaaf55b
     layerID: 3
-    mosaicPosition: {x: 4, y: 76}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: idle
-    spriteName: idle
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 80aed1b090be47b4f9aaf7253a1764dc
-    layerID: 2
-    mosaicPosition: {x: 4, y: 148}
+    mosaicPosition: {x: 4, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1

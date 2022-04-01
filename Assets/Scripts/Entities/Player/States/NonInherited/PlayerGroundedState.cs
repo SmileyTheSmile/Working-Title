@@ -95,7 +95,7 @@ public class PlayerGroundedState : PlayerState
                 stateMachine.ChangeState(player.inAirState);
             }
         }
-        else if (isTouchingWall && grabInput && isTouchingLedge)
+        else if (isTouchingWall && grabInput && isTouchingLedge && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.wallGrabState);
         }

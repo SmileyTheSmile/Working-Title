@@ -112,7 +112,7 @@ public class Player : EntityGeneric
     private void LogImportantInfo() //Log the current info about player
     {
         //core.collisionSenses.LogCurrentCollisions();
-        //inputHandler.LogAllInputs();
+        inputHandler.LogAllInputs();
         //stateMachine.LogCurrentState();
     }
 

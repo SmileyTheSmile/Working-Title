@@ -24,6 +24,7 @@ MonoBehaviour:
   wallJumpTime: 0.6
   wallJumpAngle: 45
   ledgeClimbVelocity: 7
+  ledgeCheckDisabledTime: 1
   dashCooldown: 0.5
   maxHoldTime: 1
   holdTimeScale: 0.25

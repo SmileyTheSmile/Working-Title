@@ -13,9 +13,9 @@ public class GenericState
 
     #region Utility Variables
 
+    public float startTime;
     protected bool isAnimationFinished;
     protected bool isExitingState;
-    protected float startTime;
     protected string animBoolName;
 
     #endregion

@@ -9,6 +9,8 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 rawMovementInput { get; private set; }
     public Vector2 rawDashDirectionInput { get; private set; }
 
+    public float rawWeaponSwitchInput { get; private set; }
+
     public bool jumpInput { get; private set; }
     public bool jumpInputStop { get; private set; }
     public bool grabInput { get; private set; }
@@ -25,13 +27,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public int normalizedInputX { get; private set; }
     public int normalizedInputY { get; private set; }
+    public int weaponSwitchInput { get; private set; }
 
     #endregion
 
     #region Input System Components
 
     private PlayerInput playerInput;
-    private Camera camera;
 
     #endregion
 
@@ -52,8 +54,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
         attackInputs = new bool[count];
-
-        camera = Camera.main;
     }
 
     private void Update()
@@ -170,7 +170,13 @@ public class PlayerInputHandler : MonoBehaviour
         {
             attackInputs[(int)CombatInputs.secondary] = false;
         }
+    }
 
+    public void OnWeaponSwitchInput(InputAction.CallbackContext context) //Process weapon switch input
+    {
+        rawWeaponSwitchInput = context.ReadValue<Vector2>().y;
+
+        weaponSwitchInput = Math.Sign(rawWeaponSwitchInput);
     }
 
     #endregion
@@ -203,7 +209,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void LogAllInputs() //Process crouch input
     {
-        Debug.Log($"Crouch = {crouchInput}, Jump = {jumpInput}");
+        Debug.Log($"Crouch = {crouchInput}, Jump = {jumpInput}, Weapon Switch = {weaponSwitchInput}");
     }
 
     #endregion

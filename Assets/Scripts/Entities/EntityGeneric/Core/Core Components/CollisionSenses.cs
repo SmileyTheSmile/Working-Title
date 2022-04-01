@@ -119,6 +119,16 @@ public class CollisionSenses : CoreComponent
         _halfGroundCheckHeight = _groundCheckHeight / 2;
     }
 
+    public void DisableLedgeCheck()
+    {
+        ledgeCheckHorizontal.gameObject.SetActive(false);
+    }
+
+    public void EnableLedgeCheck()
+    {
+        ledgeCheckHorizontal.gameObject.SetActive(true);
+    }
+
     #endregion
 
     #region Check Functions

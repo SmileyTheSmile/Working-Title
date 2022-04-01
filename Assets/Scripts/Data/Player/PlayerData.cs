@@ -55,6 +55,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Ledge Climb State")]
     public float ledgeClimbVelocity = 5f;
+    public float ledgeCheckDisabledTime = 0.2f;
 
     #endregion
 
