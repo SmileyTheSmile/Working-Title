@@ -101,10 +101,6 @@ public class Player : EntityGeneric
         secondaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
     }
 
-    protected override void AnimationTrigger() => stateMachine.currentState.AnimationTrigger();
-
-    protected override void AnimationFinishedTrigger() => stateMachine.currentState.AnimationFinishedTrigger();
-
     #endregion
 
     #region Editor Functions
@@ -112,7 +108,7 @@ public class Player : EntityGeneric
     private void LogImportantInfo() //Log the current info about player
     {
         //core.collisionSenses.LogCurrentCollisions();
-        inputHandler.LogAllInputs();
+        //inputHandler.LogAllInputs();
         //stateMachine.LogCurrentState();
     }
 

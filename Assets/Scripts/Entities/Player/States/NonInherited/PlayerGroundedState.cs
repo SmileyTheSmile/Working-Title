@@ -10,6 +10,7 @@ public class PlayerGroundedState : PlayerState
     protected bool grabInput;
     protected bool crouchInput;
     protected bool jumpInput;
+    protected bool jumpInputStop;
 
     #endregion
 
@@ -56,7 +57,9 @@ public class PlayerGroundedState : PlayerState
         grabInput = player.inputHandler.grabInput;
         dashInput = player.inputHandler.dashInput;
         jumpInput = player.inputHandler.jumpInput;
+        jumpInputStop = player.inputHandler.jumpInputStop;
         crouchInput = player.inputHandler.crouchInput;
+        Debug.Log(jumpInput);
 
         //Ability States
         if (player.inputHandler.attackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
@@ -67,7 +70,7 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.secondaryAttackState);
         }
-        else if (jumpInput && player.jumpState.CanJump() && !isTouchingCeiling)
+        else if ((jumpInput && player.jumpState.CanJump() && !isTouchingCeiling))
         {
             if (crouchInput && player.crouchInAirState.CanCrouch())
             {
