@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class EntityGeneric : MonoBehaviour
 {
-    #region Entity Components
-
     public Animator animator
     {
         get
@@ -41,15 +39,7 @@ public class EntityGeneric : MonoBehaviour
     protected Animator _animator;
     protected Core _core;
 
-    #endregion
-
-    #region Utility Variables
-
     private Vector2 workspace;
-
-    #endregion
-
-    #region Unity Functions
 
     protected virtual void Awake()
     {
@@ -58,6 +48,8 @@ public class EntityGeneric : MonoBehaviour
 
         stateMachine = new FiniteStateMachine();
     }
+
+    protected virtual void Start() { }
 
     protected virtual void Update()
     {
@@ -71,14 +63,6 @@ public class EntityGeneric : MonoBehaviour
         stateMachine.currentState.PhysicsUpdate();
     }
 
-    protected virtual void Start() { }
-
-    #endregion
-
-    #region Animation Functions
-
     protected virtual void AnimationTrigger() => stateMachine.currentState.AnimationTrigger();
     protected virtual void AnimationFinishedTrigger() => stateMachine.currentState.AnimationFinishedTrigger();
-
-    #endregion
 }

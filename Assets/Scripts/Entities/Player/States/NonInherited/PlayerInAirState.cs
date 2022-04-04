@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    #region Input Variables
-
     protected int inputX;
     protected int inputY;
     protected bool dashInput;
@@ -11,10 +9,7 @@ public class PlayerInAirState : PlayerState
     protected bool crouchInput;
     protected bool jumpInput;
     protected bool jumpInputStop;
-
-    #endregion
-
-    #region Check Variables
+    protected Vector2 mousePositionInput;
 
     protected bool isGrounded;
     protected bool isTouchingWall;
@@ -25,21 +20,16 @@ public class PlayerInAirState : PlayerState
     protected bool isTouchingCeiling;
     protected bool isJumping;
 
-    #endregion
-
-    #region Utility Variables
-
     private float wallJumpCoyoteTimeStart;
+    private float airControlPercentage = 1f;
     private bool coyoteTime;
     private bool wallJumpCoyoteTime;
-    private float airControlPercentage = 1f;
-
-    #endregion
-
-    #region State Functions
 
     public PlayerInAirState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, animBoolName, playerData) { }
+    : base(player, stateMachine, animBoolName, playerData)
+    {
+        airControlPercentage = playerData.defaultAirControlPercentage;
+    }
 
     public override void DoChecks()
     {
@@ -87,12 +77,13 @@ public class PlayerInAirState : PlayerState
         crouchInput = player.inputHandler.crouchInput;
         jumpInput = player.inputHandler.jumpInput;
         jumpInputStop = player.inputHandler.jumpInputStop;
+        mousePositionInput = player.inputHandler.mousePositionInput;
 
         CheckJumpMultiplier();
         CheckCoyoteTime();
         CheckWallJumpCoyoteTime();
+        core.movement.CheckIfShouldFlip(inputX, mousePositionInput.x);
 
-        //Ability States
         if (player.inputHandler.attackInputs[(int)CombatInputs.primary])
         {
             //stateMachine.ChangeState(player.primaryAttackState);
@@ -156,17 +147,12 @@ public class PlayerInAirState : PlayerState
         }
         else
         {
-            core.movement.CheckIfShouldFlip(inputX);
             core.movement.SetVelocityX(playerData.movementVelocity * inputX * airControlPercentage);
 
             player.animator.SetFloat("velocityX", Mathf.Abs(core.movement.currentVelocity.x));
             player.animator.SetFloat("velocityY", core.movement.currentVelocity.y);
         }
     }
-
-    #endregion
-
-    #region Utility Functions
 
     private void CheckCoyoteTime()
     {
@@ -213,6 +199,4 @@ public class PlayerInAirState : PlayerState
     public void StopWallJumpCoyoteTime() => wallJumpCoyoteTime = false;
     public void StartCoyoteTime() => coyoteTime = true;
     public void SetIsJumping() => isJumping = true;
-
-    #endregion
 }

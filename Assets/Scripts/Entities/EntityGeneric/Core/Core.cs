@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Core : MonoBehaviour
 {
-    #region Public Wrapper Core Components
-
     public Movement movement
     {
         get
@@ -36,35 +34,37 @@ public class Core : MonoBehaviour
         private set => _collisionSenses = value;
     }
 
-    #endregion
+    public WeaponHandler weaponHandler
+    {
+        get
+        {
+            if (_collisionSenses)
+            {
+                return _weaponHandler;
+            }
 
-    #region Private Core Components
+            Debug.Log("Missing Weapons Core Component on " + transform.parent.name);
+
+            return null;
+        }
+        private set => _weaponHandler = value;
+    }
 
     protected Movement _movement;
     protected CollisionSenses _collisionSenses;
-
-    #endregion
-
-    #region Unity Functions
+    protected WeaponHandler _weaponHandler;
 
     public void Awake()
     {
         _movement = GetComponentInChildren<Movement>();
         _collisionSenses = GetComponentInChildren<CollisionSenses>();
+        _weaponHandler = GetComponentInChildren<WeaponHandler>();
     }
-
-    #endregion
-
-    #region Update Functions
 
     public void LogicUpdate()
     {
         _movement.LogicUpdate();
     }
-
-    #endregion
-
-    #region Utility Functions
 
     public void SquashColliderDown(float biggerHeight, float smallerHeight)
     {
@@ -85,6 +85,4 @@ public class Core : MonoBehaviour
             _collisionSenses.ceilingCheck.transform.position += Vector3.up * ((biggerHeight - smallerHeight) * _movement.defaultSize.y);
         }
     }
-
-    #endregion
 }

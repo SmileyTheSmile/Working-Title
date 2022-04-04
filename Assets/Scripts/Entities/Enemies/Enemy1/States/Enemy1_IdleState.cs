@@ -1,19 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy1_IdleState : Enemy1State
 {
-    #region Utility Variables
-
     protected bool flipAfterIdle;
     protected bool isIdleTimeOver;
 
     protected float idleTime;
-
-    #endregion
-
-    #region State Functions
 
     public Enemy1_IdleState(Enemy1 enemy, FiniteStateMachine stateMachine, EnemyData enemyData, string animBoolName)
     : base(enemy, stateMachine, enemyData, animBoolName) { }
@@ -48,15 +40,6 @@ public class Enemy1_IdleState : Enemy1State
         }
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
-    #endregion
-
-    #region Utility Functions
-
     public void SetFlipAfterIdle(bool flip)
     {
         flipAfterIdle = flip;
@@ -66,6 +49,4 @@ public class Enemy1_IdleState : Enemy1State
     {
         idleTime = Random.Range(enemyData.minIdleTime, enemyData.maxIdleTime);
     }
-
-    #endregion
 }

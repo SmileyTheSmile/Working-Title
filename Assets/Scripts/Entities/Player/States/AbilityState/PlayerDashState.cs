@@ -2,36 +2,17 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerAbilityState
 {
-    #region Input Variables
+    private Vector2 dashDirectionInput;
+    private Vector2 dashDirection;
 
-    public Vector2 dashDirectionInput;
-    public bool dashInputStop;
+    private float lastDashTime;
 
-    #endregion
-
-    #region Check Variables
-
-    public bool canDash;
-    public bool isHolding;
-
-    #endregion
-
-    #region Utility Variables
-
-    public float lastDashTime;
-    public Vector2 dashDirection;
-
-    #endregion
-
-    #region State Functions
+    private bool dashInputStop;
+    private bool canDash;
+    private bool isHolding;
 
     public PlayerDashState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, animBoolName, playerData) { }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
 
     public override void Enter()
     {
@@ -74,7 +55,7 @@ public class PlayerDashState : PlayerAbilityState
 
         if (isHolding)
         {
-            dashDirectionInput = player.inputHandler.mouseDirectionInput;
+            dashDirectionInput = player.inputHandler.mousePositionInput;
             dashInputStop = player.inputHandler.dashInputStop;
 
             if (dashDirectionInput != Vector2.zero)
@@ -110,21 +91,10 @@ public class PlayerDashState : PlayerAbilityState
         }
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
-    #endregion
-
-    #region Utility Functions
-
     public bool CheckIfCanDash()
     {
         return canDash && Time.time >= lastDashTime + playerData.dashCooldown;
     }
 
     public void ResetCanDash() => canDash = true;
-
-    #endregion
 }

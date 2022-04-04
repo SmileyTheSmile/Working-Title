@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class EnemyState : GenericState
 {
     protected EnemyData enemyData;

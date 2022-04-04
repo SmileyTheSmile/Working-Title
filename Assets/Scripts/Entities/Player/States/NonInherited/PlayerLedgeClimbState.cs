@@ -9,8 +9,6 @@ public class PlayerLedgeClimbState : PlayerAbilityState
     {
         base.Enter();
 
-        player.core.collisionSenses.DisableLedgeCheck();
-
         core.movement.SetVelocityY(playerData.ledgeClimbVelocity);
         isAbilityDone = true;
     }

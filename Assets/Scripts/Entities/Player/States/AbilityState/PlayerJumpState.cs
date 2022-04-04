@@ -2,13 +2,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAbilityState
 {
-    #region Utility Variables
-
     private int amountOfJumpsLeft;
-
-    #endregion
-
-    #region State Functions
 
     public PlayerJumpState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, animBoolName, playerData)
@@ -30,10 +24,6 @@ public class PlayerJumpState : PlayerAbilityState
         isAbilityDone = true;
     }
 
-    #endregion
-
-    #region Utility Functions
-
     public bool CanJump()
     {
         if (amountOfJumpsLeft > 0)
@@ -47,6 +37,4 @@ public class PlayerJumpState : PlayerAbilityState
     public void ResetAmountOfJumpsLeft() => amountOfJumpsLeft = playerData.amountOfJumps;
 
     public void DecreaseAmountOfJumpsLeft() => amountOfJumpsLeft--;
-
-    #endregion
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TempShootScript : MonoBehaviour
 {
     public Transform gun;
+    public Transform cursor;
     public Transform firePoint;
     public GameObject bulletPrefab;
     public ParticleSystem impactEffect;
@@ -18,9 +19,10 @@ public class TempShootScript : MonoBehaviour
     private float shotDelay = 0.2f;
     public bool addBulletSpread;
     private float lastShotTime;
+    private int pelletNum = 5;
     private Vector2 direction;
-    private Vector2 bulletSpread = new Vector2(-1f, 1f);
-    private Vector2 mouseDirectionInput;
+    private Vector2 bulletSpread = new Vector2(-0.1f, 0.1f);
+    private Vector2 mousePositionInput;
     //public float fireRate;
     //private float damage = 20f;
     //private float readyForNextShot;
@@ -32,8 +34,10 @@ public class TempShootScript : MonoBehaviour
 
     private void Update()
     {
-        mouseDirectionInput = inputHandler.mouseDirectionInput;
-        direction = mouseDirectionInput - (Vector2)gun.position;
+        //mousePositionInput = inputHandler.mousePositionInput;
+        mousePositionInput = cursor.position;
+        direction = mousePositionInput - (Vector2)firePoint.position;
+
         FaceMouse();
 
         if (inputHandler.attackInputs[(int)CombatInputs.primary])
@@ -54,6 +58,8 @@ public class TempShootScript : MonoBehaviour
     private void FaceMouse()
     {
         gun.transform.right = direction;
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //gun.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void ShootProjectile()
@@ -67,7 +73,7 @@ public class TempShootScript : MonoBehaviour
     {
         animator.SetTrigger("Shoot");
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, mouseDirectionInput);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, mousePositionInput);
 
         if (hitInfo)
         {
@@ -90,7 +96,7 @@ public class TempShootScript : MonoBehaviour
         else
         {
             lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, mouseDirectionInput * 100);
+            lineRenderer.SetPosition(1, mousePositionInput * 100);
         }
 
         lineRenderer.enabled = true;
@@ -109,22 +115,26 @@ public class TempShootScript : MonoBehaviour
             bulletParticles.Play();
         }
 
-        Vector2 direction = GetDirection();
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, Mathf.Infinity, layerMask);
-
-        if (hit)
+        for (int i = 0; i < pelletNum; i++)
         {
-            TrailRenderer trail = Instantiate(bulletTrail, firePoint.position, Quaternion.identity);
+            direction = GetDirection();
 
-            StartCoroutine(SpawnTrail(trail, hit));
+            RaycastHit2D hit = Physics2D.Raycast(firePoint.position + Vector3.right * 0.2f, direction, Mathf.Infinity, layerMask);
 
-            lastShotTime = Time.time;
+            if (hit)
+            {
+                TrailRenderer trail = Instantiate(bulletTrail, firePoint.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, hit));
+            }
         }
+
+        lastShotTime = Time.time;
     }
 
     private Vector2 GetDirection()
     {
-        direction = mouseDirectionInput - (Vector2)gun.position;
+        direction = mousePositionInput - (Vector2)gun.position;
 
         Debug.Log(direction);
 
@@ -164,4 +174,9 @@ public class TempShootScript : MonoBehaviour
 
         Destroy(trail.gameObject, trail.time);
     }
+
+    /*private void OnDrawGizmos()
+    {
+        UnityEditor.Handles.DrawWireDisc(gun.position, Vector3.forward, 0.8f);
+    }*/
 }

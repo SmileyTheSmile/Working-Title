@@ -17,9 +17,10 @@ MonoBehaviour:
   amountOfJumps: 1
   coyoteTime: 0.2
   variableJumpHeightMultiplier: 0.5
+  defaultAirControlPercentage: 1
   airControlPercentage: 0.5
   wallClimbVelocity: 3
-  wallSlideVelocity: 3
+  wallSlideVelocity: 2
   wallJumpVelocity: 10
   wallJumpTime: 0.6
   wallJumpAngle: 45

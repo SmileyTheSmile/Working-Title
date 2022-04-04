@@ -11,6 +11,7 @@ public class PlayerGroundedState : PlayerState
     protected bool crouchInput;
     protected bool jumpInput;
     protected bool jumpInputStop;
+    protected Vector2 mousePositionInput;
 
     #endregion
 
@@ -59,7 +60,9 @@ public class PlayerGroundedState : PlayerState
         jumpInput = player.inputHandler.jumpInput;
         jumpInputStop = player.inputHandler.jumpInputStop;
         crouchInput = player.inputHandler.crouchInput;
-        Debug.Log(jumpInput);
+        mousePositionInput = player.inputHandler.mousePositionInput;
+
+        core.movement.CheckIfShouldFlip(inputX, mousePositionInput.x);
 
         //Ability States
         if (player.inputHandler.attackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
@@ -98,7 +101,7 @@ public class PlayerGroundedState : PlayerState
                 stateMachine.ChangeState(player.inAirState);
             }
         }
-        else if (isTouchingWall && grabInput && isTouchingLedge && !isTouchingCeiling)
+        else if (isTouchingWall && grabInput && isTouchingLedge && !isTouchingCeiling && !crouchInput)
         {
             stateMachine.ChangeState(player.wallGrabState);
         }

@@ -4,23 +4,14 @@ using UnityEngine;
 
 public class GenericState
 {
-    #region State Components
-
     protected FiniteStateMachine stateMachine;
     protected Core core;
-
-    #endregion
-
-    #region Utility Variables
 
     public float startTime;
     protected bool isAnimationFinished;
     protected bool isExitingState;
     protected string animBoolName;
 
-    #endregion
-
-    #region State Functions
     public GenericState(FiniteStateMachine stateMachine, string animBoolName)
     {
         this.stateMachine = stateMachine;
@@ -59,6 +50,4 @@ public class GenericState
     public virtual void AnimationTrigger() { } //What to do in animation events in Animator
 
     public virtual void AnimationFinishedTrigger() => isAnimationFinished = true; //What to do on finished animation in Animator
-
-    #endregion
 }

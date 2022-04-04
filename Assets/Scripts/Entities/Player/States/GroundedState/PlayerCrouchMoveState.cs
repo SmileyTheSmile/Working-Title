@@ -40,7 +40,6 @@ public class PlayerCrouchMoveState : PlayerGroundedState
         base.LogicUpdate();
 
         core.movement.SetVelocityX(playerData.crouchMovementVelocity * core.movement.facingDirection);
-        core.movement.CheckIfShouldFlip(inputX);
 
         if (inputX != 0f)
         {

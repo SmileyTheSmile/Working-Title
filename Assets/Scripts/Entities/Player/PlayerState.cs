@@ -1,11 +1,7 @@
 public class PlayerState : GenericState
 {
-    #region State Components
-
     protected Player player;
     protected PlayerData playerData;
-
-    #endregion
 
     public PlayerState(Player player, FiniteStateMachine stateMachine, string animBoolName, PlayerData playerData)
     : base(stateMachine, animBoolName)

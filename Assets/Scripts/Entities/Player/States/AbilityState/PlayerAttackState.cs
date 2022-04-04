@@ -2,24 +2,14 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerAbilityState
 {
-    #region Input Variables
+    private Weapon weapon;
 
     private int inputX;
-
-    #endregion
-
-    #region Utility Variables
-
-    private Weapon weapon;
 
     private float velocityToSet;
 
     private bool setVelocity;
     private bool shouldCheckFlip;
-
-    #endregion
-
-    #region State Functions
 
     public PlayerAttackState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, animBoolName, playerData) { }
@@ -64,10 +54,6 @@ public class PlayerAttackState : PlayerAbilityState
         isAbilityDone = true;
     }
 
-    #endregion
-
-    #region Utility Functions
-
     public void SetWeapon(Weapon weapon)
     {
         this.weapon = weapon;
@@ -86,6 +72,4 @@ public class PlayerAttackState : PlayerAbilityState
     {
         shouldCheckFlip = value;
     }
-
-    #endregion
 }

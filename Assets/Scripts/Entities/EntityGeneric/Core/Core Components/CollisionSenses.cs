@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CollisionSenses : CoreComponent
 {
-    #region Public Wrapper Variables
-
     public Transform groundCheck
     {
         get
@@ -74,17 +72,12 @@ public class CollisionSenses : CoreComponent
 
     public float wallCheckDistance { get => _wallCheckDistance; set => _wallCheckDistance = value; }
 
-    #endregion
-
-    #region Private Variables
-
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private Transform _ceilingCheck;
     [SerializeField] private Transform _wallCheck;
     [SerializeField] private Transform _ledgeCheckHorizontal;
     [SerializeField] private Transform _ledgeCheckVertical;
 
-    [SerializeField] private BoxCollider2D _collider;
     [SerializeField] private LayerMask _whatIsGround;
 
     [SerializeField] private float _groundCheckHeight = 0.2f;
@@ -95,14 +88,12 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private float _ceilingWidthOffset = 0.01f;
     [SerializeField] private float _wallCheckDistance = 0.5f;
 
+    private BoxCollider2D _collider;
+
     private float _halfCeilingCheckWidth;
     private float _halfCeilingCheckHeight;
     private float _halfGroundCheckWidth;
     private float _halfGroundCheckHeight;
-
-    #endregion
-
-    #region Unity Functions
 
     protected override void Awake()
     {
@@ -118,20 +109,6 @@ public class CollisionSenses : CoreComponent
         _halfGroundCheckWidth = _groundCheckWidth / 2;
         _halfGroundCheckHeight = _groundCheckHeight / 2;
     }
-
-    public void DisableLedgeCheck()
-    {
-        ledgeCheckHorizontal.gameObject.SetActive(false);
-    }
-
-    public void EnableLedgeCheck()
-    {
-        ledgeCheckHorizontal.gameObject.SetActive(true);
-    }
-
-    #endregion
-
-    #region Check Functions
 
     public bool Ground //Check if entity is grounded
     {
@@ -163,16 +140,12 @@ public class CollisionSenses : CoreComponent
         get => Physics2D.Raycast(_ledgeCheckVertical.position, Vector2.down, _wallCheckDistance, _whatIsGround);
     }
 
-    #endregion
-
-    #region Editor Functions
-
     public void LogCurrentCollisions() //Debug all check values
     {
         Debug.Log($"Ground = {Ground.ToString()}, Ceiling = {Ceiling.ToString()}, Ledge = {LedgeHorizontal.ToString()}, Wall Front = {WallFront.ToString()}, Wall Back = {WallBack.ToString()}");
     }
 
-    void OnDrawGizmosSelected() //Draw check gizmos
+    void OnDrawGizmos() //Draw check gizmos
     {
         if (_groundCheck)
         {
@@ -200,7 +173,7 @@ public class CollisionSenses : CoreComponent
             UnityEditor.Handles.DrawLine(new Vector2(_ceilingCheck.position.x + _halfCeilingCheckWidth, _ceilingCheck.position.y - _halfCeilingCheckHeight), new Vector2(_ceilingCheck.position.x - _halfCeilingCheckWidth, _ceilingCheck.position.y - _halfCeilingCheckHeight));
         }
 
-        if (_ledgeCheckHorizontal)
+        /*if (_ledgeCheckHorizontal)
         {
             if (LedgeHorizontal)
                 UnityEditor.Handles.color = Color.green;
@@ -223,8 +196,6 @@ public class CollisionSenses : CoreComponent
             else
                 UnityEditor.Handles.color = Color.red;
             UnityEditor.Handles.DrawLine(_wallCheck.position, Vector3.right * core.movement.facingDirection * _wallCheckDistance * -1 + _wallCheck.position);
-        }
+        }*/
     }
-
-    #endregion
 }

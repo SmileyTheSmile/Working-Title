@@ -4,12 +4,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    #region Raw Input Variables
-
     public Vector2 rawMovementInput { get; private set; }
-    public Vector2 rawDashDirectionInput { get; private set; }
+    public Vector2 rawMouseInput { get; private set; }
+    public Vector3 mousePositionInput { get; private set; }
 
     public float rawWeaponSwitchInput { get; private set; }
+    public float mouseAngle { get; private set; }
+
+    private PlayerInput playerInput;
 
     public bool jumpInput { get; private set; }
     public bool jumpInputStop { get; private set; }
@@ -19,38 +21,22 @@ public class PlayerInputHandler : MonoBehaviour
     public bool crouchInput { get; private set; }
     public bool[] attackInputs { get; private set; }
 
-    #endregion
-
-    #region Processed Input Variables
-
-    public Vector2 mouseDirectionInput { get; private set; }
-
     public int normalizedInputX { get; private set; }
     public int normalizedInputY { get; private set; }
     public int weaponSwitchInput { get; private set; }
 
-    #endregion
+    [SerializeField] private float inputHoldTime = 0.2f;
 
-    #region Input System Components
+    private Camera mainCamera;
 
-    private PlayerInput playerInput;
-
-    #endregion
-
-    #region Utility Variables
-
-    [SerializeField]
-    private float inputHoldTime = 0.2f;
     private float jumpInputStartTime;
     private float dashInputStartTime;
-
-    #endregion
-
-    #region Unity Functions
 
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+
+        mainCamera = Camera.main;
 
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
         attackInputs = new bool[count];
@@ -62,10 +48,6 @@ public class PlayerInputHandler : MonoBehaviour
         CheckDashInputHoldTime();
     }
 
-    #endregion
-
-    #region Input Processing Functions
-
     public void OnMoveInput(InputAction.CallbackContext context) //Process WASD input
     {
         rawMovementInput = context.ReadValue<Vector2>();
@@ -73,14 +55,7 @@ public class PlayerInputHandler : MonoBehaviour
         normalizedInputX = Mathf.RoundToInt(rawMovementInput.x);
         normalizedInputY = Mathf.RoundToInt(rawMovementInput.y);
 
-        if (normalizedInputY == -1)
-        {
-            crouchInput = true;
-        }
-        else
-        {
-            crouchInput = false;
-        }
+        crouchInput = (normalizedInputY == -1);
     }
 
     public void OnJumpInput(InputAction.CallbackContext context) //Process jump input
@@ -115,9 +90,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnDashDirectionInput(InputAction.CallbackContext context) //Process mouse position input
     {
-        rawDashDirectionInput = context.ReadValue<Vector2>();
+        rawMouseInput = context.ReadValue<Vector2>();
 
-        mouseDirectionInput = new Vector2(rawDashDirectionInput.x - (Screen.width / 2), rawDashDirectionInput.y - (Screen.height / 2));
+        mousePositionInput = new Vector3(rawMouseInput.x, rawMouseInput.y, 10);
+
+        mousePositionInput = mainCamera.ScreenToWorldPoint(mousePositionInput);
+        //mouseAngle = Mathf.Atan2(mousePositionInput.y, mousePositionInput.x) * Mathf.Rad2Deg;
     }
 
     public void OnGrabInput(InputAction.CallbackContext context) //Process wall grab input
@@ -179,10 +157,6 @@ public class PlayerInputHandler : MonoBehaviour
         weaponSwitchInput = Math.Sign(rawWeaponSwitchInput);
     }
 
-    #endregion
-
-    #region Utility Functions
-
     public void CheckJumpInputHoldTime() //Check if jump button has been held for value in inputHoldTime
     {
         if (Time.time >= jumpInputStartTime + inputHoldTime)
@@ -203,16 +177,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void UseDashInput() => dashInput = false; //Disable dash input
 
-    #endregion
-
-    #region Editor Functions
-
     public void LogAllInputs() //Process crouch input
     {
         Debug.Log($"Crouch = {crouchInput}, Jump = {jumpInput}, Weapon Switch = {weaponSwitchInput}");
     }
-
-    #endregion
 }
 
 public enum CombatInputs

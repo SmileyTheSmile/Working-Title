@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Player : EntityGeneric
 {
-    #region States
-
     public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
@@ -26,18 +24,10 @@ public class Player : EntityGeneric
     public PlayerAttackState primaryAttackState { get; private set; }
     public PlayerAttackState secondaryAttackState { get; private set; }
 
-    #endregion
-
-    #region Player Components
-
     [SerializeField] private PlayerData playerData;
 
     public PlayerInputHandler inputHandler { get; private set; }
     public PlayerInventory inventory { get; private set; }
-
-    #endregion
-
-    #region Unity Functions
 
     protected override void Awake()
     {
@@ -72,10 +62,6 @@ public class Player : EntityGeneric
         base.FixedUpdate();
     }
 
-    #endregion
-
-    #region Utility Functions
-
     private void SetupStates() //Create all the player states
     {
         idleState = new PlayerIdleState(this, stateMachine, playerData, "idle");
@@ -101,10 +87,6 @@ public class Player : EntityGeneric
         secondaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
     }
 
-    #endregion
-
-    #region Editor Functions
-
     private void LogImportantInfo() //Log the current info about player
     {
         //core.collisionSenses.LogCurrentCollisions();
@@ -112,5 +94,9 @@ public class Player : EntityGeneric
         //stateMachine.LogCurrentState();
     }
 
-    #endregion
+    private void OnDrawGizmos()
+    {
+        UnityEditor.Handles.DrawWireDisc(this.transform.position, Vector3.forward, 0.4f);
+        UnityEditor.Handles.DrawWireDisc(this.transform.position, Vector3.forward, 0.8f);
+    }
 }

@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Enemy1_MoveState : Enemy1State
 {
-    #region Check Variables
-
     protected bool isDetectingWall;
     protected bool isDetectingLedge;
-
-    #endregion
-
-    #region State Functions
 
     public Enemy1_MoveState(Enemy1 enemy, FiniteStateMachine stateMachine, EnemyData enemyData, string animBoolName)
     : base(enemy, stateMachine, enemyData, animBoolName) { }
@@ -24,11 +18,6 @@ public class Enemy1_MoveState : Enemy1State
 
         isDetectingLedge = core.collisionSenses.LedgeVertical;
         isDetectingWall = core.collisionSenses.WallFront;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 
     public override void LogicUpdate()
@@ -49,6 +38,4 @@ public class Enemy1_MoveState : Enemy1State
         isDetectingLedge = core.collisionSenses.LedgeVertical;
         isDetectingWall = core.collisionSenses.WallFront;
     }
-
-    #endregion
 }

@@ -2,25 +2,16 @@ using UnityEngine;
 
 public class PlayerTouchingWallState : PlayerState
 {
-    #region Input Variables
-
     protected int inputX;
     protected int inputY;
     protected bool grabInput;
     protected bool jumpInput;
-
-    #endregion
-
-    #region Check Variables
+    protected bool crouchInput;
 
     protected bool isGrounded;
     protected bool isTouchingWall;
     protected bool isTouchingLedge;
     protected bool isTouchingCeiling;
-
-    #endregion
-
-    #region State Functions
 
     public PlayerTouchingWallState(Player player, FiniteStateMachine stateMachine, string animBoolName, PlayerData playerData)
     : base(player, stateMachine, animBoolName, playerData) { }
@@ -43,6 +34,7 @@ public class PlayerTouchingWallState : PlayerState
         inputY = player.inputHandler.normalizedInputY;
         grabInput = player.inputHandler.grabInput;
         jumpInput = player.inputHandler.jumpInput;
+        crouchInput = player.inputHandler.crouchInput;
 
         if (jumpInput)
         {
@@ -53,6 +45,10 @@ public class PlayerTouchingWallState : PlayerState
         {
             stateMachine.ChangeState(player.idleState);
         }
+        else if (isGrounded && crouchInput && !isTouchingCeiling)
+        {
+            stateMachine.ChangeState(player.crouchIdleState);
+        }
         else if (!isTouchingWall || (inputX != core.movement.facingDirection && !grabInput))
         {
             stateMachine.ChangeState(player.inAirState);
@@ -62,6 +58,4 @@ public class PlayerTouchingWallState : PlayerState
             stateMachine.ChangeState(player.ledgeClimbState);
         }
     }
-
-    #endregion
 }
