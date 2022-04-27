@@ -4,7 +4,6 @@ using System.Collections;
 
 public class Cursor : MonoBehaviour
 {
-    private Transform cursor;
     private Camera mainCamera;
     private PlayerInputHandler inputHandler;
 
@@ -17,49 +16,45 @@ public class Cursor : MonoBehaviour
 
     private void Awake()
     {
-        cursor = GetComponent<Transform>();
         inputHandler = GetComponentInParent<PlayerInputHandler>();
 
         target = transform.Find("CameraTarget");
+        
         mainCamera = Camera.main;
     }
 
     private void Update()
     {
+        mousePosition = inputHandler.mousePositionInput;
+
         UpdateCursorPosition();
         UpdateCameraTargetPosition();
     }
 
     private void UpdateCursorPosition()
     {
-        mousePosition = Input.mousePosition;
-        mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
-
-        cursor.position = Vector2.Lerp(cursor.position, mousePosition, Time.time);
+        transform.position = mousePosition;
     }
 
     private void UpdateCameraTargetPosition()
     {
-        targetPosition = (playerCenter.position + cursor.position) / 2;
-
-        //Debug.Log($"{targetPosition}, {firePoint.position}");
-        //Debug.Log(firePoint.position - cursor.position);
+        targetPosition = (playerCenter.position + mousePosition) / 2;
 
         targetPosition.x = Mathf.Clamp(targetPosition.x, playerCenter.position.x - threshold.x, playerCenter.position.x + threshold.x);
         targetPosition.y = Mathf.Clamp(targetPosition.y, playerCenter.position.y - threshold.y, playerCenter.position.y + threshold.y);
 
-        target.position = Vector2.Lerp(target.position, targetPosition, Time.time);
+        target.position = targetPosition;
     }
 
     void OnDrawGizmos()
     {
-        UnityEditor.Handles.DrawDottedLine(playerCenter.position, cursor.position, 1f);
-        UnityEditor.Handles.DrawDottedLine(target.position, cursor.position, 1f);
+        UnityEditor.Handles.DrawDottedLine(playerCenter.position, transform.position, 1f);
+        UnityEditor.Handles.DrawDottedLine(target.position, transform.position, 1f);
         UnityEditor.Handles.DrawDottedLine(playerCenter.position, target.position, 1f);
 
         UnityEditor.Handles.DrawWireDisc(targetPosition, Vector3.forward, 0.4f);
-        UnityEditor.Handles.DrawWireDisc(cursor.position, Vector3.forward, 0.4f);
-
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, 0.4f);
+ 
         UnityEditor.Handles.DrawLine(new Vector2(playerCenter.position.x - threshold.x, playerCenter.position.y + threshold.y), new Vector2(playerCenter.position.x + threshold.x, playerCenter.position.y + threshold.y));
         UnityEditor.Handles.DrawLine(new Vector2(playerCenter.position.x - threshold.x, playerCenter.position.y + threshold.y), new Vector2(playerCenter.position.x - threshold.x, playerCenter.position.y - threshold.y));
         UnityEditor.Handles.DrawLine(new Vector2(playerCenter.position.x + threshold.x, playerCenter.position.y + threshold.y), new Vector2(playerCenter.position.x + threshold.x, playerCenter.position.y - threshold.y));

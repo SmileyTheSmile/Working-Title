@@ -34,14 +34,14 @@ public class Player : EntityGeneric
         base.Awake();
 
         SetupStates();
+
+        inputHandler = GetComponent<PlayerInputHandler>();
+        inventory = GetComponent<PlayerInventory>();
     }
 
     protected override void Start()
     {
         base.Start();
-
-        inputHandler = GetComponent<PlayerInputHandler>();
-        inventory = GetComponent<PlayerInventory>();
         //Time.timeScale = playerData.holdTimeScale;
 
         //primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
@@ -55,11 +55,6 @@ public class Player : EntityGeneric
         base.Update();
 
         LogImportantInfo();
-    }
-
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
     }
 
     private void SetupStates() //Create all the player states
@@ -97,6 +92,5 @@ public class Player : EntityGeneric
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.DrawWireDisc(this.transform.position, Vector3.forward, 0.4f);
-        UnityEditor.Handles.DrawWireDisc(this.transform.position, Vector3.forward, 0.8f);
     }
 }

@@ -4,67 +4,27 @@ public class CollisionSenses : CoreComponent
 {
     public Transform groundCheck
     {
-        get
-        {
-            if (_groundCheck)
-                return _groundCheck;
-
-            Debug.LogError("No Ground Check on " + core.transform.parent.name);
-            return null;
-        }
-
+        get => GenericNotImplementedError<Transform>.TryGet(_groundCheck, core.transform.parent.name);
         private set => _groundCheck = value;
     }
     public Transform ceilingCheck
     {
-        get
-        {
-            if (_ceilingCheck)
-                return _ceilingCheck;
-
-            Debug.LogError("No Ceiling Check on " + core.transform.parent.name);
-            return null;
-        }
-
+        get => GenericNotImplementedError<Transform>.TryGet(_ceilingCheck, core.transform.parent.name);
         private set => _ceilingCheck = value;
     }
     public Transform wallCheck
     {
-        get
-        {
-            if (_wallCheck)
-                return _wallCheck;
-
-            Debug.LogError("No Wall Check on " + core.transform.parent.name);
-            return null;
-        }
-
+        get => GenericNotImplementedError<Transform>.TryGet(_wallCheck, core.transform.parent.name);
         private set => _wallCheck = value;
     }
     public Transform ledgeCheckHorizontal
     {
-        get
-        {
-            if (_ledgeCheckHorizontal)
-                return _ledgeCheckHorizontal;
-
-            Debug.LogError("No Horizontal Ledge Check on " + core.transform.parent.name);
-            return null;
-        }
-
+        get => GenericNotImplementedError<Transform>.TryGet(_ledgeCheckHorizontal, core.transform.parent.name);
         private set => _ledgeCheckHorizontal = value;
     }
     public Transform ledgeCheckVertical
     {
-        get
-        {
-            if (_ledgeCheckVertical)
-                return _ledgeCheckVertical;
-
-            Debug.LogError("No Vertical Ledge Check on " + core.transform.parent.name);
-            return null;
-        }
-
+        get => GenericNotImplementedError<Transform>.TryGet(_ledgeCheckVertical, core.transform.parent.name);
         private set => _ledgeCheckVertical = value;
     }
 
@@ -112,7 +72,7 @@ public class CollisionSenses : CoreComponent
 
     public bool Ground //Check if entity is grounded
     {
-        get => Physics2D.OverlapBox(_groundCheck.position, new Vector2(_groundCheckWidth, _groundCheckHeight), 0f, _whatIsGround);
+        get => (Physics2D.OverlapBox(_groundCheck.position, new Vector2(_groundCheckWidth, _groundCheckHeight), 0f, _whatIsGround));
     }
 
     public bool Ceiling //Check if entity is touching ceiling
@@ -143,6 +103,14 @@ public class CollisionSenses : CoreComponent
     public void LogCurrentCollisions() //Debug all check values
     {
         Debug.Log($"Ground = {Ground.ToString()}, Ceiling = {Ceiling.ToString()}, Ledge = {LedgeHorizontal.ToString()}, Wall Front = {WallFront.ToString()}, Wall Back = {WallBack.ToString()}");
+    }
+
+    public void MoveCeilingCheck(float oldHeight, float newHeight, float defaultColliderHeight)
+    {
+        if (ceilingCheck)
+        {
+            ceilingCheck.transform.position += Vector3.up * ((oldHeight - newHeight) * defaultColliderHeight);
+        }
     }
 
     void OnDrawGizmos() //Draw check gizmos

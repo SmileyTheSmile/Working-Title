@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DashDirection",
-                    "type": "Value",
-                    "id": "fff81bf1-e7a3-47bb-90ac-420d94bfbcab",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "PrimaryAttack",
                     "type": "Button",
                     "id": "257e5655-731d-4cd8-9805-6b4765c7fdcf",
@@ -76,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MouseMoved",
+                    "type": "Value",
+                    "id": "fff81bf1-e7a3-47bb-90ac-420d94bfbcab",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "WeaponScroll",
@@ -156,17 +156,6 @@
                 },
                 {
                     "name": "",
-                    "id": "1512fe8e-0078-4063-9d34-2909447e8894",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "DashDirection",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "81e75027-d2cd-47bd-b523-ecb5c3f336e3",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -239,6 +228,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "WeaponScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1512fe8e-0078-4063-9d34-2909447e8894",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "MouseMoved",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

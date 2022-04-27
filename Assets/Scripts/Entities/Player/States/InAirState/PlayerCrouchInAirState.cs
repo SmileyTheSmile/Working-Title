@@ -18,12 +18,7 @@ public class PlayerCrouchInAirState : PlayerInAirState
 
         DecreaseAmountOfCrouchesLeft();
 
-        if (core.movement.crouchingForm == PlayerCrouchingForm.normal && crouchInput)
-        {
-            core.SquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
-            core.movement.crouchingForm = PlayerCrouchingForm.crouchingDown;
-        }
+        core.movement.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
 
     public override void Exit()
@@ -32,12 +27,7 @@ public class PlayerCrouchInAirState : PlayerInAirState
 
         crouchInput = player.inputHandler.crouchInput;
 
-        if ((!crouchInput && core.movement.crouchingForm == PlayerCrouchingForm.crouchingDown && !isTouchingCeiling) || (!isTouchingWall && !isTouchingCeiling))
-        {
-            core.UnSquashColliderDown(playerData.standColliderHeight, playerData.crouchColliderHeight);
-
-            core.movement.crouchingForm = PlayerCrouchingForm.normal;
-        }
+        core.movement.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
 
     public override void LogicUpdate()

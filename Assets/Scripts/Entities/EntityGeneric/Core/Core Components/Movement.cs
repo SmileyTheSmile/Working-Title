@@ -33,7 +33,6 @@ public class Movement : CoreComponent
     private BoxCollider2D _boxCollider;
 
     public PlayerCrouchingForm crouchingForm;
-    public Transform dashDirectionIndicator { get; private set; }
     public Transform facingDirectionIndicator { get; private set; }
     public Vector2 currentVelocity { get; private set; }
     public Vector2 defaultSize { get; private set; }
@@ -48,7 +47,6 @@ public class Movement : CoreComponent
         _rigidBody = GetComponentInParent<Rigidbody2D>();
         _boxCollider = GetComponentInParent<BoxCollider2D>();
 
-        dashDirectionIndicator = transform.Find("DashDirectionIndicator");
         facingDirectionIndicator = transform.Find("FacingDirectionIndicator");
 
         defaultSize = _boxCollider.size;
@@ -62,17 +60,12 @@ public class Movement : CoreComponent
         currentVelocity = _rigidBody.velocity;
     }
 
-    public virtual void Flip() //Flip the entity in the other direction
+    public void Flip() //Flip the entity in the other direction
     {
         facingDirection *= -1;
-        facingDirectionIndicator.Rotate(0f, 180f * facingDirection, 0f);
-        core.weaponHandler.currentWeapon.Rotate(0f, 180f * facingDirection, 0f);
-    }
 
-    public void ResetColliderHeight()
-    {
-        _boxCollider.size = defaultSize;
-        _boxCollider.offset = Vector2.zero;
+        facingDirectionIndicator.Rotate(0f, 180f * facingDirection, 0f);
+        core.weaponHandler.FlipCurrentWeapon(facingDirection);
     }
 
     public void CheckIfShouldFlip(int inputX) //Check if the entity should be flipped
@@ -96,21 +89,43 @@ public class Movement : CoreComponent
         }
     }
 
-    public void SquashColliderDown(float heightFraction)
+    public void CrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
     {
-        Vector2 center = _boxCollider.offset;
-        float height = _boxCollider.size.y * heightFraction;
+        if (crouchingForm == PlayerCrouchingForm.normal && crouchInput)
+        {
+            SquashColliderDown(biggerHeight, smallerHeight);
+        }
+    }
 
-        workspace.x = _boxCollider.size.x;
-        workspace.y = height;
-        center.y += ((height - _boxCollider.size.y) / 2);
-        //center.y += (height - _boxCollider.size.y) / 2;
+    public void UnCrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
+    {
+        if (((crouchingForm == PlayerCrouchingForm.crouchingDown && !crouchInput)
+        || (!core.collisionSenses.WallFront)) && !core.collisionSenses.Ceiling)
+        {
+            ResetColliderHeight(biggerHeight, smallerHeight);
+        }
+    }
 
-        _boxCollider.size = workspace;
-        _boxCollider.offset = center;
+    public void ResetColliderHeight(float biggerHeight, float smallerHeight)
+    {
+        crouchingForm = PlayerCrouchingForm.normal;
 
-        //SetOffsetY((height - _boxCollider.size.y) / 2);
-        //SetColliderHeight(height);
+        _boxCollider.size = defaultSize;
+        _boxCollider.offset = Vector2.zero;
+
+        core.collisionSenses.MoveCeilingCheck(biggerHeight, smallerHeight, defaultSize.y);
+    }
+
+    public void SquashColliderDown(float biggerHeight, float smallerHeight)
+    {
+        crouchingForm = PlayerCrouchingForm.crouchingDown;
+
+        float height = _boxCollider.size.y * smallerHeight;
+
+        SetColliderOffsetY((height - _boxCollider.size.y) / 2);
+        SetColliderSize(_boxCollider.size.x, height);
+
+        core.collisionSenses.MoveCeilingCheck(smallerHeight, biggerHeight, defaultSize.y);
     }
 
     public void SquashColliderUp(float heightFraction)
@@ -165,38 +180,11 @@ public class Movement : CoreComponent
         currentVelocity = Vector2.zero;
     }
 
-    public void SetColliderWidth(float width)
+    public void AddForceAtAngle(float force, float angle)
     {
-        //workspace.Set(width, _boxCollider.size.y);
-        workspace.y = _boxCollider.size.y;
-        workspace.x = Mathf.Lerp(_boxCollider.size.x, width, Time.fixedDeltaTime);
-        _boxCollider.size = workspace;
-    }
+        Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
 
-    public void SetColliderHeight(float height)
-    {
-        //workspace.Set(_boxCollider.size.x, height);
-        workspace.x = _boxCollider.size.x;
-        workspace.y = Mathf.Lerp(_boxCollider.size.y, height, Time.fixedDeltaTime);
-        _boxCollider.size = workspace;
-    }
-
-    public void LerpColliderWidth(float width)
-    {
-        Vector2 size = _boxCollider.size;
-
-        size.x = Mathf.Lerp(size.x, width, Time.fixedDeltaTime);
-
-        _boxCollider.size = size;
-    }
-
-    public void LerpColliderHeight(float height)
-    {
-        Vector2 size = _boxCollider.size;
-
-        size.y = Mathf.Lerp(size.y, height, Time.fixedDeltaTime);
-
-        _boxCollider.size = size;
+        _rigidBody.AddForce(dir * force, ForceMode2D.Impulse);
     }
 
     public void SetColliderSize(float width, float height)
@@ -205,29 +193,23 @@ public class Movement : CoreComponent
         _boxCollider.size = workspace;
     }
 
-    public void SetOffsetX(float offset)
+    public void SetColliderOffsetY(float offsetY)
     {
-        Vector2 center = _boxCollider.offset;
+        workspace = _boxCollider.offset;
 
-        center.x = Mathf.Lerp(center.x, offset, Time.fixedDeltaTime);
+        workspace.y += offsetY;
 
-        _boxCollider.offset = center;
-    }
-
-    public void SetOffsetY(float offset)
-    {
-        Vector2 center = _boxCollider.offset;
-
-        center.y = Mathf.Lerp(center.y, offset, Time.fixedDeltaTime);
-
-        _boxCollider.offset = center;
+        _boxCollider.offset = workspace;
     }
 
     public void SetOffset(float offsetX, float offsetY)
     {
-        Vector2 center = _boxCollider.offset;
+        workspace = _boxCollider.offset;
 
-        _boxCollider.offset.Set(center.x + offsetX, center.y + offsetY);
+        workspace.x += offsetX;
+        workspace.y += offsetY;
+
+        _boxCollider.offset = workspace;
     }
 }
 

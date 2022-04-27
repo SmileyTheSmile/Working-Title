@@ -1,154 +1,121 @@
-using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TempShootScript : MonoBehaviour
 {
-    public Transform gun;
-    public Transform cursor;
-    public Transform firePoint;
-    public GameObject bulletPrefab;
+    [SerializeField] private Transform gun;
+    [SerializeField] private Transform cursor;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Vector2 bulletSpread;
+    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private float screenShakeTime = 0.1f;
+    [SerializeField] private float screenShakeIntensity = 1f;
+    [SerializeField] private float shotDelay = 0.2f;
+    [SerializeField] private int pelletNum = 5;
+
+    public ParticleSystem muzzleFlashParticles;
     public ParticleSystem impactEffect;
-    public Animator animator;
-    public PlayerInputHandler inputHandler;
-    public LineRenderer lineRenderer;
-    public ParticleSystem bulletParticles;
     public TrailRenderer bulletTrail;
-    public LayerMask layerMask;
-    private float shotDelay = 0.2f;
-    public bool addBulletSpread;
+
+    private Vector2 bulletDirection;
+    private Vector2 gunDirection;
+    private Vector3 mousePositionInput;
+
+    private Player player;
+    private PlayerInputHandler inputHandler;
+    private Animator animator;
+    private bool addBulletSpread;
     private float lastShotTime;
-    private int pelletNum = 5;
-    private Vector2 direction;
-    private Vector2 bulletSpread = new Vector2(-0.1f, 0.1f);
-    private Vector2 mousePositionInput;
-    //public float fireRate;
-    //private float damage = 20f;
-    //private float readyForNextShot;
+    private float angle;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        inputHandler = GetComponentInParent<PlayerInputHandler>();
+        player = GetComponentInParent<Player>();
+
+        addBulletSpread = (bulletSpread != Vector2.zero);
     }
 
     private void Update()
     {
-        //mousePositionInput = inputHandler.mousePositionInput;
-        mousePositionInput = cursor.position;
-        direction = mousePositionInput - (Vector2)firePoint.position;
+        mousePositionInput = inputHandler.mousePositionInput;
 
-        FaceMouse();
-
-        if (inputHandler.attackInputs[(int)CombatInputs.primary])
-        {
-            /*if (Time.time > readyForNextShot)
-            {
-                readyForNextShot = Time.time + 1 / fireRate;
-                StartCoroutine(ShootRaycast());
-            }*/
-
-            if (lastShotTime + shotDelay < Time.time)
-            {
-                ShootRaycast();
-            }
-        }
+        HandleAiming();
+        ShootRaycast();
     }
 
-    private void FaceMouse()
+    private void HandleAiming()
     {
-        gun.transform.right = direction;
-        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //gun.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        gunDirection = (mousePositionInput - gun.position).normalized;
+        
+        angle = Vector2.SignedAngle(Vector2.right, gunDirection);
+        gun.rotation = Quaternion.Euler(0f, 0f, angle);
+
     }
 
     private void ShootProjectile()
     {
+        animator.SetTrigger("Shoot");
+
         GameObject bulletInstance = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        animator.SetTrigger("Shoot");
         Destroy(bulletInstance, 3);
-    }
-
-    private IEnumerator ShootRaycastOld()
-    {
-        animator.SetTrigger("Shoot");
-
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, mousePositionInput);
-
-        if (hitInfo)
-        {
-            Debug.Log(hitInfo.transform.name);
-
-            /*Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
-            if (enemy)
-            {
-                enemy.Hit(damage);
-            }*/
-
-            if (impactEffect)
-            {
-                Instantiate(impactEffect, transform.position, transform.rotation);
-            }
-
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, hitInfo.point);
-        }
-        else
-        {
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, mousePositionInput * 100);
-        }
-
-        lineRenderer.enabled = true;
-
-        yield return new WaitForSeconds(0.2f);
-
-        lineRenderer.enabled = false;
     }
 
     private void ShootRaycast()
     {
+        if (!(inputHandler.attackInputs[(int)CombatInputs.primary]))
+            return;
+
+        if (!(lastShotTime + shotDelay < Time.time))
+            return;
+
+        player.core.movement.AddForceAtAngle(10f, angle - 180);
+
         animator.SetTrigger("Shoot");
 
-        if (bulletParticles)
+        if (muzzleFlashParticles)
         {
-            bulletParticles.Play();
+            muzzleFlashParticles.Play();
         }
 
         for (int i = 0; i < pelletNum; i++)
         {
-            direction = GetDirection();
+            bulletDirection = GetBulletDirection();
 
-            RaycastHit2D hit = Physics2D.Raycast(firePoint.position + Vector3.right * 0.2f, direction, Mathf.Infinity, layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(firePoint.position + Vector3.right * 0.2f, bulletDirection, Mathf.Infinity, layerMask);
+
+            StartCoroutine(SpawnTrail(Instantiate(bulletTrail, firePoint.position, Quaternion.identity), hit));
 
             if (hit)
             {
-                TrailRenderer trail = Instantiate(bulletTrail, firePoint.position, Quaternion.identity);
-
-                StartCoroutine(SpawnTrail(trail, hit));
+                if (impactEffect)
+                {
+                    Instantiate(impactEffect, transform.position, transform.rotation);
+                }
             }
         }
+
+        CinemachineCameraShake.Instance.ShakeCamera(screenShakeIntensity, screenShakeTime);
 
         lastShotTime = Time.time;
     }
 
-    private Vector2 GetDirection()
+    private Vector2 GetBulletDirection()
     {
-        direction = mousePositionInput - (Vector2)gun.position;
-
-        Debug.Log(direction);
+        bulletDirection = (mousePositionInput - firePoint.position).normalized;
 
         if (addBulletSpread)
         {
-            direction += new Vector2(
+            bulletDirection += new Vector2(
                 Random.Range(-bulletSpread.x, bulletSpread.x),
                 Random.Range(-bulletSpread.y, bulletSpread.y)
             );
         }
 
-        Debug.Log(direction);
-
-        return direction;
+        return bulletDirection;
     }
 
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit2D hit)
@@ -174,9 +141,4 @@ public class TempShootScript : MonoBehaviour
 
         Destroy(trail.gameObject, trail.time);
     }
-
-    /*private void OnDrawGizmos()
-    {
-        UnityEditor.Handles.DrawWireDisc(gun.position, Vector3.forward, 0.8f);
-    }*/
 }

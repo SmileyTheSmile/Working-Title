@@ -126,7 +126,7 @@ public class PlayerInAirState : PlayerState
                 stateMachine.ChangeState(player.landState);
             }
         }
-        else if (isTouchingWall)
+        else if (isTouchingWall && !crouchInput)
         {
             if (grabInput && isTouchingLedge)
             {

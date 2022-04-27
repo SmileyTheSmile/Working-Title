@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityGeneric : MonoBehaviour
+public class EntityGeneric : MonoBehaviour, IDamageable
 {
     public Animator animator
     {
@@ -39,8 +39,6 @@ public class EntityGeneric : MonoBehaviour
     protected Animator _animator;
     protected Core _core;
 
-    private Vector2 workspace;
-
     protected virtual void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -61,6 +59,11 @@ public class EntityGeneric : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         stateMachine.currentState.PhysicsUpdate();
+    }
+
+    public virtual void Damage(float amount)
+    {
+
     }
 
     protected virtual void AnimationTrigger() => stateMachine.currentState.AnimationTrigger();

@@ -44,10 +44,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
+        ProcessMouseInput();
         CheckJumpInputHoldTime();
         CheckDashInputHoldTime();
     }
-
+    
     public void OnMoveInput(InputAction.CallbackContext context) //Process WASD input
     {
         rawMovementInput = context.ReadValue<Vector2>();
@@ -88,14 +89,9 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void OnDashDirectionInput(InputAction.CallbackContext context) //Process mouse position input
+    public void OnMouseMovedInput(InputAction.CallbackContext context) //Get raw mouse position input
     {
         rawMouseInput = context.ReadValue<Vector2>();
-
-        mousePositionInput = new Vector3(rawMouseInput.x, rawMouseInput.y, 10);
-
-        mousePositionInput = mainCamera.ScreenToWorldPoint(mousePositionInput);
-        //mouseAngle = Mathf.Atan2(mousePositionInput.y, mousePositionInput.x) * Mathf.Rad2Deg;
     }
 
     public void OnGrabInput(InputAction.CallbackContext context) //Process wall grab input
@@ -171,6 +167,14 @@ public class PlayerInputHandler : MonoBehaviour
         {
             dashInput = false;
         }
+    }
+
+    public void ProcessMouseInput() //Process mouse position input
+    {
+        mousePositionInput = new Vector3(rawMouseInput.x, rawMouseInput.y, 10);
+
+        mousePositionInput = mainCamera.ScreenToWorldPoint(mousePositionInput);
+        //mouseAngle = Mathf.Atan2(mousePositionInput.y, mousePositionInput.x) * Mathf.Rad2Deg;
     }
 
     public void UseJumpInput() => jumpInput = false; //Disable jump input
