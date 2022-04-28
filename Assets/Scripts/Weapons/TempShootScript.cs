@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TempShootScript : MonoBehaviour
 {
+    protected Movement movement
+    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+
+    private Movement _movement;
+
     [SerializeField] private Transform gun;
     [SerializeField] private Transform cursor;
     [SerializeField] private Transform firePoint;
@@ -23,7 +28,7 @@ public class TempShootScript : MonoBehaviour
     private Vector2 gunDirection;
     private Vector3 mousePositionInput;
 
-    private Player player;
+    private Core core;
     private PlayerInputHandler inputHandler;
     private Animator animator;
     private bool addBulletSpread;
@@ -34,7 +39,7 @@ public class TempShootScript : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         inputHandler = GetComponentInParent<PlayerInputHandler>();
-        player = GetComponentInParent<Player>();
+        core = GetComponentInParent<Core>();
 
         addBulletSpread = (bulletSpread != Vector2.zero);
     }
@@ -72,7 +77,7 @@ public class TempShootScript : MonoBehaviour
         if (!(lastShotTime + shotDelay < Time.time))
             return;
 
-        player.core.movement.AddForceAtAngle(10f, angle - 180);
+        movement?.AddForceAtAngle(10f, angle - 180);
 
         animator.SetTrigger("Shoot");
 

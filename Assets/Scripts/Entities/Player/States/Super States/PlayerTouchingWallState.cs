@@ -2,6 +2,15 @@ using UnityEngine;
 
 public class PlayerTouchingWallState : PlayerState
 {
+    private CollisionSenses collisionSenses
+    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+
+    protected Movement movement
+    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+
+    private CollisionSenses _collisionSenses;
+    private Movement _movement;
+
     protected int inputX;
     protected int inputY;
     protected bool grabInput;
@@ -20,10 +29,10 @@ public class PlayerTouchingWallState : PlayerState
     {
         base.DoChecks();
 
-        isGrounded = core.collisionSenses.Ground;
-        isTouchingWall = core.collisionSenses.WallFront;
-        isTouchingLedge = core.collisionSenses.LedgeHorizontal;
-        isTouchingCeiling = core.collisionSenses.Ceiling;
+        isGrounded = collisionSenses.Ground;
+        isTouchingWall = collisionSenses.WallFront;
+        isTouchingLedge = collisionSenses.LedgeHorizontal;
+        isTouchingCeiling = collisionSenses.Ceiling;
     }
 
     public override void LogicUpdate()
@@ -49,7 +58,7 @@ public class PlayerTouchingWallState : PlayerState
         {
             stateMachine.ChangeState(player.crouchIdleState);
         }
-        else if (!isTouchingWall || (inputX != core.movement.facingDirection && !grabInput))
+        else if (!isTouchingWall || (inputX != movement.facingDirection && !grabInput))
         {
             stateMachine.ChangeState(player.inAirState);
         }

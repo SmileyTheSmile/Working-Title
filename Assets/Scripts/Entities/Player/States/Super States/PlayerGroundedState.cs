@@ -2,7 +2,14 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
 {
-    #region Input Variables
+    private CollisionSenses collisionSenses
+    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+
+    protected Movement movement
+    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+
+    private CollisionSenses _collisionSenses;
+    private Movement _movement;
 
     protected int inputX;
     protected int inputY;
@@ -13,19 +20,11 @@ public class PlayerGroundedState : PlayerState
     protected bool jumpInputStop;
     protected Vector2 mousePositionInput;
 
-    #endregion
-
-    #region Check Variables
-
     protected bool isGrounded;
     protected bool isCrouching;
     protected bool isTouchingCeiling;
     protected bool isTouchingWall;
     protected bool isTouchingLedge;
-
-    #endregion
-
-    #region State Functions
 
     public PlayerGroundedState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, animBoolName, playerData) { }
@@ -34,10 +33,13 @@ public class PlayerGroundedState : PlayerState
     {
         base.DoChecks();
 
-        isGrounded = core.collisionSenses.Ground;
-        isTouchingCeiling = core.collisionSenses.Ceiling;
-        isTouchingWall = core.collisionSenses.WallFront;
-        isTouchingLedge = core.collisionSenses.LedgeHorizontal;
+        if (collisionSenses)
+        {
+            isGrounded = collisionSenses.Ground;
+            isTouchingCeiling = collisionSenses.Ceiling;
+            isTouchingWall = collisionSenses.WallFront;
+            isTouchingLedge = collisionSenses.LedgeHorizontal;
+        }
     }
 
     public override void Enter()
@@ -62,7 +64,7 @@ public class PlayerGroundedState : PlayerState
         crouchInput = player.inputHandler.crouchInput;
         mousePositionInput = player.inputHandler.mousePositionInput;
 
-        core.movement.CheckIfShouldFlip(inputX, mousePositionInput.x);
+        movement.CheckIfShouldFlip(inputX, mousePositionInput.x);
 
         //Ability States
         if (player.inputHandler.attackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
@@ -106,6 +108,4 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.wallGrabState);
         }
     }
-
-    #endregion
 }

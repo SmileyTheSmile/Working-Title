@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Enemy1_MoveState : Enemy1State
 {
+    private CollisionSenses collisionSenses
+    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+
+    protected Movement movement
+    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+
+    private CollisionSenses _collisionSenses;
+    private Movement _movement;
+
     protected bool isDetectingWall;
     protected bool isDetectingLedge;
 
@@ -14,10 +23,10 @@ public class Enemy1_MoveState : Enemy1State
     {
         base.Enter();
 
-        core.movement.SetVelocityX(enemyData.movementVelocity * core.movement.facingDirection);
+        movement?.SetVelocityX(enemyData.movementVelocity * movement.facingDirection);
 
-        isDetectingLedge = core.collisionSenses.LedgeVertical;
-        isDetectingWall = core.collisionSenses.WallFront;
+        isDetectingLedge = collisionSenses.LedgeVertical;
+        isDetectingWall = collisionSenses.WallFront;
     }
 
     public override void LogicUpdate()
@@ -35,7 +44,7 @@ public class Enemy1_MoveState : Enemy1State
     {
         base.PhysicsUpdate();
 
-        isDetectingLedge = core.collisionSenses.LedgeVertical;
-        isDetectingWall = core.collisionSenses.WallFront;
+        isDetectingLedge = collisionSenses.LedgeVertical;
+        isDetectingWall = collisionSenses.WallFront;
     }
 }

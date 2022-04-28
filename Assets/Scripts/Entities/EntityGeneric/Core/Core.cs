@@ -1,46 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Core : MonoBehaviour
 {
-    public Movement movement
-    {
-        get => GenericNotImplementedError<Movement>.TryGet(_movement, transform.parent.name);
-        private set => _movement = value;
-    }
-
-    public CollisionSenses collisionSenses
-    {
-        get => GenericNotImplementedError<CollisionSenses>.TryGet(_collisionSenses, transform.parent.name);
-        private set => _collisionSenses = value;
-    }
-
-    public WeaponHandler weaponHandler
-    {
-        get => GenericNotImplementedError<WeaponHandler>.TryGet(_weaponHandler, transform.parent.name);
-        private set => _weaponHandler = value;
-    }
-
-    public Combat combat
-    {
-        get => GenericNotImplementedError<Combat>.TryGet(_combat, transform.parent.name);
-        private set => _combat = value;
-    }
-
-    private Movement _movement;
-    private CollisionSenses _collisionSenses;
-    private WeaponHandler _weaponHandler;
-    private Combat _combat;
+    private readonly List<CoreComponent> coreComponents = new List<CoreComponent>();
 
     public void Awake()
     {
-        _movement = GetComponentInChildren<Movement>();
-        _collisionSenses = GetComponentInChildren<CollisionSenses>();
-        _weaponHandler = GetComponentInChildren<WeaponHandler>();
-        _combat = GetComponentInChildren<Combat>();
+
     }
 
     public void LogicUpdate()
     {
-        _movement.LogicUpdate();
+        foreach (CoreComponent component in coreComponents)
+        {
+            component.LogicUpdate();
+        }
+    }
+
+    public void AddComponent(CoreComponent component)
+    {
+        if (!coreComponents.Contains(component))
+        {
+            coreComponents.Add(component);
+        }
+    }
+
+    //Returns the first element of generic type T in coreComponents list
+    public T GetCoreComponent<T>() where T:CoreComponent
+    {
+        var component = coreComponents.OfType<T>().FirstOrDefault();
+
+        if (component == null)
+        {
+            Debug.LogWarning($"{typeof(T)} not found on {transform.parent.name}");
+        }
+
+        return component;
+    }
+
+    //Returns the first element of generic type T in coreComponents list
+    public T GetCoreComponent<T>(ref T value) where T : CoreComponent
+    {
+        value = GetCoreComponent<T>();
+
+        return value;
     }
 }

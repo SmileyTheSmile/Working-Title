@@ -2,6 +2,15 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
+    private CollisionSenses collisionSenses
+    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+
+    protected Movement movement
+    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+
+    private CollisionSenses _collisionSenses;
+    private Movement _movement;
+
     protected int inputX;
     protected int inputY;
     protected bool dashInput;
@@ -38,10 +47,10 @@ public class PlayerInAirState : PlayerState
         oldIsTouchingWall = isTouchingWall;
         oldIsTouchingWallBack = isTouchingWallBack;
 
-        isGrounded = core.collisionSenses.Ground;
-        isTouchingWall = core.collisionSenses.WallFront;
-        isTouchingWallBack = core.collisionSenses.WallBack;
-        isTouchingLedge = core.collisionSenses.LedgeHorizontal;
+        isGrounded = collisionSenses.Ground;
+        isTouchingWall = collisionSenses.WallFront;
+        isTouchingWallBack = collisionSenses.WallBack;
+        isTouchingLedge = collisionSenses.LedgeHorizontal;
 
         if (!wallJumpCoyoteTime && !isTouchingWall && !isTouchingWallBack && (oldIsTouchingWall && oldIsTouchingWallBack))
         {
@@ -82,7 +91,7 @@ public class PlayerInAirState : PlayerState
         CheckJumpMultiplier();
         CheckCoyoteTime();
         CheckWallJumpCoyoteTime();
-        core.movement.CheckIfShouldFlip(inputX, mousePositionInput.x);
+        movement?.CheckIfShouldFlip(inputX, mousePositionInput.x);
 
         if (player.inputHandler.attackInputs[(int)CombatInputs.primary])
         {
@@ -105,7 +114,7 @@ public class PlayerInAirState : PlayerState
             else if (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime)
             {
                 StopWallJumpCoyoteTime();
-                isTouchingWall = core.collisionSenses.WallFront;
+                isTouchingWall = collisionSenses.WallFront;
                 player.wallJumpState.DetermineWallJumpDirection(isTouchingWall);
                 stateMachine.ChangeState(player.wallJumpState);
             }
@@ -115,7 +124,7 @@ public class PlayerInAirState : PlayerState
             }
         }
 
-        if (isGrounded && core.movement.currentVelocity.y < 0.01)
+        if (isGrounded && movement.currentVelocity.y < 0.01)
         {
             if (crouchInput)
             {
@@ -132,7 +141,7 @@ public class PlayerInAirState : PlayerState
             {
                 stateMachine.ChangeState(player.wallGrabState);
             }
-            else if (inputX == core.movement.facingDirection && core.movement.currentVelocity.y <= 0f)
+            else if (inputX == movement.facingDirection && movement.currentVelocity.y <= 0f)
             {
                 stateMachine.ChangeState(player.wallSlideState);
             }
@@ -147,10 +156,10 @@ public class PlayerInAirState : PlayerState
         }
         else
         {
-            core.movement.SetVelocityX(playerData.movementVelocity * inputX * airControlPercentage);
+            movement?.SetVelocityX(playerData.movementVelocity * inputX * airControlPercentage);
 
-            player.animator.SetFloat("velocityX", Mathf.Abs(core.movement.currentVelocity.x));
-            player.animator.SetFloat("velocityY", core.movement.currentVelocity.y);
+            player.animator.SetFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
+            player.animator.SetFloat("velocityY", movement.currentVelocity.y);
         }
     }
 
@@ -187,10 +196,10 @@ public class PlayerInAirState : PlayerState
 
         if (jumpInputStop)
         {
-            core.movement.SetVelocityY(core.movement.currentVelocity.y * playerData.variableJumpHeightMultiplier);
+            movement?.SetVelocityY(movement.currentVelocity.y * playerData.variableJumpHeightMultiplier);
             isJumping = false;
         }
-        else if (core.movement.currentVelocity.y <= 0f)
+        else if (movement.currentVelocity.y <= 0f)
         {
             isJumping = false;
         }

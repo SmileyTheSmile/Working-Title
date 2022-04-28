@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class CollisionSenses : CoreComponent
 {
+    protected Movement movement
+    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+
+    private Movement _movement;
+
     public Transform groundCheck
     {
         get => GenericNotImplementedError<Transform>.TryGet(_groundCheck, core.transform.parent.name);
@@ -82,17 +87,17 @@ public class CollisionSenses : CoreComponent
 
     public bool WallFront  //Check if entity is touching a wall in front of it
     {
-        get => Physics2D.Raycast(_wallCheck.position, Vector2.right * core.movement.facingDirection, _wallCheckDistance, _whatIsGround);
+        get => Physics2D.Raycast(_wallCheck.position, Vector2.right * movement.facingDirection, _wallCheckDistance, _whatIsGround);
     }
 
     public bool WallBack //Check if entity is touching a wall at its back
     {
-        get => Physics2D.Raycast(_wallCheck.position, Vector2.right * -core.movement.facingDirection, _wallCheckDistance, _whatIsGround);
+        get => Physics2D.Raycast(_wallCheck.position, Vector2.right * -movement.facingDirection, _wallCheckDistance, _whatIsGround);
     }
 
     public bool LedgeHorizontal //Check if entity is nearing a ledge when wall climbing
     {
-        get => Physics2D.Raycast(_ledgeCheckHorizontal.position, Vector2.right * core.movement.facingDirection, _wallCheckDistance, _whatIsGround);
+        get => Physics2D.Raycast(_ledgeCheckHorizontal.position, Vector2.right * movement.facingDirection, _wallCheckDistance, _whatIsGround);
     }
 
     public bool LedgeVertical //Check if entity is standing on a ledge

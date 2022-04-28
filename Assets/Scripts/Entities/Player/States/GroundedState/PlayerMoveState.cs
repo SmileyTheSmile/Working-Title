@@ -11,7 +11,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        core.movement.SetVelocityX(playerData.movementVelocity * inputX);
+        movement?.SetVelocityX(playerData.movementVelocity * inputX);
 
         if (inputX == 0f)
         {

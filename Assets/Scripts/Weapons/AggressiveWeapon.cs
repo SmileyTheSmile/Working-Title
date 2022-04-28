@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class AggressiveWeapon : Weapon
 {
+    protected Movement movement
+    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+
+    private Movement _movement;
+
     private List<IDamageable> detectedDamageables = new List<IDamageable>();
     private List<IKnockbackable> detectedKnockbackables = new List<IKnockbackable>();
     protected AggressiveWeaponData agressiveWeaponData;
@@ -68,7 +73,7 @@ public class AggressiveWeapon : Weapon
 
         foreach (IKnockbackable item in detectedKnockbackables.ToList())
         {
-            item.Knockback(details.knockbackAngle, details.knockbackStrength, core.movement.facingDirection);
+            item.Knockback(details.knockbackAngle, details.knockbackStrength, movement.facingDirection);
         }
     }
 

@@ -11,7 +11,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
 
         crouchInput = player.inputHandler.crouchInput;
 
-        core.movement.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
 
     public override void Exit()
@@ -20,7 +20,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
 
         crouchInput = player.inputHandler.crouchInput;
 
-        core.movement.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
 
     public override void LogicUpdate()

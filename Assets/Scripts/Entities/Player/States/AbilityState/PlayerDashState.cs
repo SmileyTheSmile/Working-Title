@@ -22,7 +22,7 @@ public class PlayerDashState : PlayerAbilityState
         canDash = false;
 
         player.inputHandler.UseDashInput();
-        dashDirection = Vector2.right * core.movement.facingDirection;
+        dashDirection = Vector2.right * movement.facingDirection;
 
         Time.timeScale = playerData.holdTimeScale;
         startTime = Time.unscaledTime;
@@ -33,9 +33,9 @@ public class PlayerDashState : PlayerAbilityState
         base.Exit();
 
 
-        if (core.movement.currentVelocity.y > 0)
+        if (movement.currentVelocity.y > 0)
         {
-            core.movement.SetVelocityY(core.movement.currentVelocity.y * playerData.dashEndYMultiplier);
+            movement?.SetVelocityY(movement.currentVelocity.y * playerData.dashEndYMultiplier);
         }
     }
 
@@ -48,8 +48,8 @@ public class PlayerDashState : PlayerAbilityState
             return;
         }
 
-        player.animator.SetFloat("velocityY", core.movement.currentVelocity.y);
-        player.animator.SetFloat("velocityX", Mathf.Abs(core.movement.currentVelocity.x));
+        player.animator.SetFloat("velocityY", movement.currentVelocity.y);
+        player.animator.SetFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
 
         if (isHolding)
         {
@@ -70,18 +70,19 @@ public class PlayerDashState : PlayerAbilityState
                 Time.timeScale = 1f;
                 startTime = Time.time;
 
-                core.movement.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
-                core.movement.rigidBody.drag = playerData.drag;
-                core.movement.SetVelocity(playerData.dashVelocity, dashDirection);
+                movement?.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
+                movement?.SetVelocity(playerData.dashVelocity, dashDirection);
+
+                movement.rigidBody.drag = playerData.drag;
             }
         }
         else
         {
-            core.movement.SetVelocity(playerData.dashVelocity, dashDirection);
+            movement?.SetVelocity(playerData.dashVelocity, dashDirection);
 
             if (Time.time >= startTime + playerData.dashTime)
             {
-                core.movement.rigidBody.drag = 0f;
+                movement.rigidBody.drag = 0f;
                 isAbilityDone = true;
                 lastDashTime = Time.time;
                 Debug.Log("sdfsd");

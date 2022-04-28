@@ -2,21 +2,10 @@ using UnityEngine;
 
 public class PlayerWallGrabState : PlayerTouchingWallState
 {
-    #region Utility Variables
-
     private Vector2 holdPosition;
-
-    #endregion
-
-    #region State Functions
 
     public PlayerWallGrabState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, animBoolName, playerData) { }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
 
     public override void Enter()
     {
@@ -25,11 +14,6 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         holdPosition = player.transform.position;
 
         HoldPosition();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 
     public override void LogicUpdate()
@@ -53,21 +37,10 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         }
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
-    #endregion
-
-    #region Wall Grab Functions
-
     private void HoldPosition()
     {
         player.transform.position = holdPosition;
 
-        core.movement.SetVelocityZero();
+        movement?.SetVelocityZero();
     }
-
-    #endregion
 }

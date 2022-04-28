@@ -2,6 +2,14 @@ using UnityEngine;
 
 public class Movement : CoreComponent
 {
+    private CollisionSenses collisionSenses
+    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+    private Combat combat
+    { get => _combat ?? core.GetCoreComponent(ref _combat); }
+
+    private CollisionSenses _collisionSenses;
+    private Combat _combat;
+
     public Rigidbody2D rigidBody
     {
         get
@@ -37,6 +45,7 @@ public class Movement : CoreComponent
     public Vector2 currentVelocity { get; private set; }
     public Vector2 defaultSize { get; private set; }
     public int facingDirection { get; private set; }
+    public bool canSetVelocity;
 
     private Vector2 workspace;
 
@@ -53,9 +62,10 @@ public class Movement : CoreComponent
         crouchingForm = PlayerCrouchingForm.normal;
 
         facingDirection = 1;
+        canSetVelocity = true;
     }
 
-    public void LogicUpdate() //What to do in the Update() function
+    public override void LogicUpdate() //What to do in the Update() function
     {
         currentVelocity = _rigidBody.velocity;
     }
@@ -65,7 +75,7 @@ public class Movement : CoreComponent
         facingDirection *= -1;
 
         facingDirectionIndicator.Rotate(0f, 180f * facingDirection, 0f);
-        core.weaponHandler.FlipCurrentWeapon(facingDirection);
+        combat?.FlipCurrentWeapon(facingDirection);
     }
 
     public void CheckIfShouldFlip(int inputX) //Check if the entity should be flipped
@@ -85,7 +95,7 @@ public class Movement : CoreComponent
         else if (Mathf.Sign(mousePosX) != facingDirection && inputX == facingDirection)
         {
             facingDirectionIndicator.Rotate(0f, 180f * facingDirection, 0f);
-            core.weaponHandler.currentWeapon.Rotate(180f * facingDirection, 0f, 0f);
+            combat?.currentWeapon.Rotate(180f * facingDirection, 0f, 0f);
         }
     }
 
@@ -100,7 +110,7 @@ public class Movement : CoreComponent
     public void UnCrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
     {
         if (((crouchingForm == PlayerCrouchingForm.crouchingDown && !crouchInput)
-        || (!core.collisionSenses.WallFront)) && !core.collisionSenses.Ceiling)
+        || (!collisionSenses.WallFront)) && !collisionSenses.Ceiling)
         {
             ResetColliderHeight(biggerHeight, smallerHeight);
         }
@@ -113,7 +123,7 @@ public class Movement : CoreComponent
         _boxCollider.size = defaultSize;
         _boxCollider.offset = Vector2.zero;
 
-        core.collisionSenses.MoveCeilingCheck(biggerHeight, smallerHeight, defaultSize.y);
+        collisionSenses.MoveCeilingCheck(biggerHeight, smallerHeight, defaultSize.y);
     }
 
     public void SquashColliderDown(float biggerHeight, float smallerHeight)
@@ -125,7 +135,7 @@ public class Movement : CoreComponent
         SetColliderOffsetY((height - _boxCollider.size.y) / 2);
         SetColliderSize(_boxCollider.size.x, height);
 
-        core.collisionSenses.MoveCeilingCheck(smallerHeight, biggerHeight, defaultSize.y);
+        collisionSenses.MoveCeilingCheck(smallerHeight, biggerHeight, defaultSize.y);
     }
 
     public void SquashColliderUp(float heightFraction)
@@ -147,15 +157,13 @@ public class Movement : CoreComponent
     public void SetVelocityX(float velocity) //Change the X velocity of an entity
     {
         workspace.Set(velocity, currentVelocity.y);
-        _rigidBody.velocity = workspace;
-        currentVelocity = workspace;
+        SetFinalVelocity();
     }
 
     public void SetVelocityY(float velocity) //Change the Y velocity of an entity
     {
         workspace.Set(currentVelocity.x, velocity);
-        _rigidBody.velocity = workspace;
-        currentVelocity = workspace;
+        SetFinalVelocity();
     }
 
     public void SetVelocity(float velocity, Vector2 angle, int direction) //Change the velocity of an entity at an angle
@@ -163,21 +171,28 @@ public class Movement : CoreComponent
         angle.Normalize();
 
         workspace.Set(angle.x * velocity * direction, angle.y * velocity);
-        _rigidBody.velocity = workspace;
-        currentVelocity = workspace;
+        SetFinalVelocity();
     }
 
     public void SetVelocity(float velocity, Vector2 direction) //Change the velocity of an entity 
     {
         workspace = velocity * direction;
-        _rigidBody.velocity = workspace;
-        currentVelocity = workspace;
+        SetFinalVelocity();
     }
 
     public void SetVelocityZero() //Set the velocity of an entity to 0
     {
-        _rigidBody.velocity = Vector2.zero;
-        currentVelocity = Vector2.zero;
+        workspace = Vector2.zero;
+        SetFinalVelocity();
+    }
+
+    public void SetFinalVelocity()
+    {
+        if (canSetVelocity)
+        {
+            _rigidBody.velocity = workspace;
+            currentVelocity = workspace;
+        }
     }
 
     public void AddForceAtAngle(float force, float angle)

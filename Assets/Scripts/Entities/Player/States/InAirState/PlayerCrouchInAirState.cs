@@ -18,7 +18,7 @@ public class PlayerCrouchInAirState : PlayerInAirState
 
         DecreaseAmountOfCrouchesLeft();
 
-        core.movement.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
 
     public override void Exit()
@@ -27,7 +27,7 @@ public class PlayerCrouchInAirState : PlayerInAirState
 
         crouchInput = player.inputHandler.crouchInput;
 
-        core.movement.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
 
     public override void LogicUpdate()

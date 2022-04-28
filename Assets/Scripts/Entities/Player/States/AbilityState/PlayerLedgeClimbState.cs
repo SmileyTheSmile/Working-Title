@@ -9,7 +9,7 @@ public class PlayerLedgeClimbState : PlayerAbilityState
     {
         base.Enter();
 
-        core.movement.SetVelocityY(playerData.ledgeClimbVelocity);
+        movement?.SetVelocityY(playerData.ledgeClimbVelocity);
         isAbilityDone = true;
     }
 }
