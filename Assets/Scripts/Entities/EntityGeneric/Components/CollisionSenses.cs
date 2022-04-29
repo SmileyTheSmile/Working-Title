@@ -16,22 +16,23 @@ public class CollisionSenses : CoreComponent
 
     [SerializeField] private float groundCheckHeight = 0.2f;
     [SerializeField] private float groundCheckWidth = 0.5f;
-    [SerializeField] private float groundWidthOffset = 0f;
+    [SerializeField] private float groundWidthOffset = 0.05f;
     [SerializeField] private float ceilingCheckHeight = 0.2f;
     [SerializeField] private float ceilingCheckWidth = 0.5f;
-    [SerializeField] private float ceilingWidthOffset = 0.01f;
-    [SerializeField] private float wallCheckDistance = 0.5f;
+    [SerializeField] private float ceilingWidthOffset = 0.5f;
+    [SerializeField] private float wallCheckDistance = 0.6f;
 
     private float halfCeilingCheckWidth;
     private float halfCeilingCheckHeight;
     private float halfGroundCheckWidth;
     private float halfGroundCheckHeight;
 
+    //Unity Awake
     protected override void Awake()
     {
         base.Awake();
 
-        SetupSupportVariables();
+        SetupSupportValues();
     }
 
     //Check if entity is grounded
@@ -71,7 +72,7 @@ public class CollisionSenses : CoreComponent
     }
     
     //Setup support variables so that they don't have to be recalculated constantly
-    private void SetupSupportVariables()
+    private void SetupSupportValues()
     {
         groundCheckWidth = movement.defaultSize.x - groundWidthOffset;
         ceilingCheckWidth = movement.defaultSize.y - ceilingWidthOffset;
@@ -92,7 +93,7 @@ public class CollisionSenses : CoreComponent
     }
 
     //Debug all check values
-    public void LogCurrentCollisions()
+    public override void LogComponentInfo()
     {
         Debug.Log($"Ground = {Ground.ToString()}\nCeiling = {Ceiling.ToString()}\nLedge Horisontal = {LedgeHorizontal.ToString()}\nWall Front = {WallFront.ToString()}\nWall Back = {WallBack.ToString()}");
     }

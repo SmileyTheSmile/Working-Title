@@ -11,18 +11,20 @@ public abstract class PlayerState : GenericState
 
         core = player.core;
     }
-
-    public override void Enter() //What to do when entering the state
+    
+    //What to do when entering the state
+    public override void Enter()
     {
         base.Enter();
 
-        player.animator.SetBool(animBoolName, true);
+        visualController.SetAnimationBool(animBoolName, true);
     }
 
-    public override void Exit() //What to do when exiting the state
+    //What to do when exiting the state
+    public override void Exit()
     {
         base.Exit();
 
-        player.animator.SetBool(animBoolName, false);
+        visualController.SetAnimationBool(animBoolName, false);
     }
 }

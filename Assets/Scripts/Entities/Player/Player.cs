@@ -39,22 +39,14 @@ public class Player : EntityGeneric
         inventory = GetComponent<PlayerInventory>();
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         //Time.timeScale = playerData.holdTimeScale;
 
         //primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
         secondaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
 
         stateMachine.Initialize(idleState);
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        LogImportantInfo();
     }
 
     //Create all the player states
@@ -83,16 +75,8 @@ public class Player : EntityGeneric
         secondaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
     }
 
-    //Log the current info about player
-    private void LogImportantInfo()
-    {
-        //core.collisionSenses.LogCurrentCollisions();
-        //inputHandler.LogAllInputs();
-        //stateMachine.LogCurrentState();
-    }
-
     //Draw gizmos
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         UnityEditor.Handles.DrawWireDisc(this.transform.position, Vector3.forward, 0.4f);
     }

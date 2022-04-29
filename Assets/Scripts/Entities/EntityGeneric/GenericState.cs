@@ -4,7 +4,14 @@ using UnityEngine;
 
 public abstract class GenericState
 {
-    protected FiniteStateMachine stateMachine;
+    protected VisualController visualController
+    { get => _visualController ?? core.GetCoreComponent(ref _visualController); }
+    private VisualController _visualController;
+
+    protected FiniteStateMachine stateMachine
+    { get => _stateMachine ?? core.GetCoreComponent(ref _stateMachine); }
+    private FiniteStateMachine _stateMachine;
+
     protected Core core;
 
     public float startTime;
@@ -14,7 +21,7 @@ public abstract class GenericState
 
     public GenericState(FiniteStateMachine stateMachine, string animBoolName)
     {
-        this.stateMachine = stateMachine;
+        this._stateMachine = stateMachine;
         this.animBoolName = animBoolName;
     }
 

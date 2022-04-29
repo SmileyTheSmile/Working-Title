@@ -13,10 +13,9 @@ public class Enemy1 : EntityGeneric
 
         moveState = new Enemy1_MoveState(this, stateMachine, enemyData, "move");
         idleState = new Enemy1_IdleState(this, stateMachine, enemyData, "idle");
-
     }
 
-    protected override void Start()
+    private void Start()
     {
         stateMachine.Initialize(moveState);
     }

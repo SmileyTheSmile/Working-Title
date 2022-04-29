@@ -9,36 +9,22 @@ public class EntityGeneric : MonoBehaviour
     }
     private Core _core;
 
-    public Animator animator
-    {
-        get => GenericNotImplementedError<Animator>.TryGet(_animator, "animator");
-        private set => _animator = value;
-    }
-    private Animator _animator;
-
-    protected FiniteStateMachine stateMachine;
+    protected FiniteStateMachine stateMachine
+    { get => _stateMachine ?? core.GetCoreComponent(ref _stateMachine); }
+    private FiniteStateMachine _stateMachine;
 
     protected virtual void Awake()
     {
-        _animator = GetComponent<Animator>();
         _core = GetComponentInChildren<Core>();
-
-        stateMachine = new FiniteStateMachine();
     }
 
-    protected virtual void Start() { }
-
-    protected virtual void Update()
+    public virtual void Update()
     {
         core.LogicUpdate();
-        stateMachine.LogicUpdate();
     }
 
-    protected virtual void FixedUpdate()
+    public virtual void FixedUpdate()
     {
-        stateMachine.PhysicsUpdate();
+        core.PhysicsUpdate();
     }
-
-    protected virtual void AnimationTrigger() => stateMachine.AnimationTrigger();
-    protected virtual void AnimationFinishedTrigger() => stateMachine.AnimationFinishedTrigger();
 }

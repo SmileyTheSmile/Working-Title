@@ -13,97 +13,109 @@ public class Movement : CoreComponent
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider;
 
-    public PlayerCrouchingForm crouchingForm;
-    public Transform facingDirectionIndicator { get; private set; }
+    public int facingDirection { get; private set; }
     public Vector2 currentVelocity { get; private set; }
     public Vector2 defaultSize { get; private set; }
-    
-    public int facingDirection { get; private set; }
-    public bool canSetVelocity;
 
+    private bool canSetVelocity;
     private Vector2 workspace;
+    private PlayerCrouchingForm crouchingForm;
 
+    //Unity Awake
     protected override void Awake()
     {
         base.Awake();
 
-        rigidBody = GetComponentInParent<Rigidbody2D>();
-        boxCollider = GetComponentInParent<BoxCollider2D>();
-
-        facingDirectionIndicator = transform.Find("FacingDirectionIndicator");
-
-        defaultSize = boxCollider.size;
-        crouchingForm = PlayerCrouchingForm.normal;
-
-        facingDirection = 1;
-        canSetVelocity = true;
+        SetupElements();
+        SetupSupportValues();
     }
-
-    public override void LogicUpdate() //What to do in the Update() function
+    
+    //What to do in the Update() function
+    public override void LogicUpdate()
     {
+        base.LogicUpdate();
+
         currentVelocity = rigidBody.velocity;
     }
 
-    public void Flip() //Flip the entity in the other direction
+    //Setup support values
+    private void SetupSupportValues()
+    {
+        facingDirection = 1;
+        canSetVelocity = true;
+        defaultSize = boxCollider.size;
+        crouchingForm = PlayerCrouchingForm.notCrouching;
+    }
+
+    //Setup component elements
+    private void SetupElements()
+    {
+        rigidBody = GetComponentInParent<Rigidbody2D>();
+        boxCollider = GetComponentInParent<BoxCollider2D>();
+    }
+
+    //Flip the entity in the other direction
+    public void Flip()
     {
         facingDirection *= -1;
 
-        facingDirectionIndicator.Rotate(0f, 180f * facingDirection, 0f);
         combat?.FlipCurrentWeapon(facingDirection);
     }
-
-    public void CheckIfShouldFlip(int inputX) //Check if the entity should be flipped
+    
+    //Check if the entity should be flipped
+    public void CheckIfShouldFlip(int inputX)
     {
         if (inputX != 0 && inputX != facingDirection)
         {
             Flip();
         }
     }
-
-    public void CheckIfShouldFlip(int inputX, float mousePosX) //Check if the entity should be flipped
+    
+    //Check if the entity should be flipped
+    public void CheckIfShouldFlip(int inputX, float mousePosX)
     {
-        if ((inputX != 0 && inputX != facingDirection) || (Mathf.Sign(mousePosX) != facingDirection && inputX == 0))
+        if ((inputX != 0 && inputX != facingDirection) || (Mathf.Sign(mousePosX) != facingDirection && inputX == 0)
+        || (Mathf.Sign(mousePosX) != facingDirection && inputX == facingDirection))
         {
             Flip();
         }
-        else if (Mathf.Sign(mousePosX) != facingDirection && inputX == facingDirection)
-        {
-            facingDirectionIndicator.Rotate(0f, 180f * facingDirection, 0f);
-            combat?.currentWeapon.Rotate(180f * facingDirection, 0f, 0f);
-        }
     }
 
+    //Set the entity crouching state to crouchingDown and squash the collider accordingly
     public void CrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
     {
-        if (crouchingForm == PlayerCrouchingForm.normal && crouchInput)
+        if (crouchingForm == PlayerCrouchingForm.notCrouching && crouchInput)
         {
+            crouchingForm = PlayerCrouchingForm.crouchingDown;
+
             SquashColliderDown(biggerHeight, smallerHeight);
         }
     }
 
+    //Set the entity crouching state to notCrouching and unsquash the collider accordingly
     public void UnCrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
     {
         if (((crouchingForm == PlayerCrouchingForm.crouchingDown && !crouchInput)
         || (!collisionSenses.WallFront)) && !collisionSenses.Ceiling)
         {
+            crouchingForm = PlayerCrouchingForm.notCrouching;
+
             ResetColliderHeight(biggerHeight, smallerHeight);
         }
     }
 
+    //Reset the size and offset of the collider
     public void ResetColliderHeight(float biggerHeight, float smallerHeight)
     {
-        crouchingForm = PlayerCrouchingForm.normal;
-
         boxCollider.size = defaultSize;
         boxCollider.offset = Vector2.zero;
 
         collisionSenses.MoveCeilingCheck(biggerHeight, smallerHeight, defaultSize.y);
     }
 
+    //Squash the collider downwards
     public void SquashColliderDown(float biggerHeight, float smallerHeight)
     {
-        crouchingForm = PlayerCrouchingForm.crouchingDown;
-
         float height = boxCollider.size.y * smallerHeight;
 
         SetColliderOffsetY((height - boxCollider.size.y) / 2);
@@ -112,60 +124,56 @@ public class Movement : CoreComponent
         collisionSenses.MoveCeilingCheck(smallerHeight, biggerHeight, defaultSize.y);
     }
 
-    public void SquashColliderUp(float heightFraction)
+    //Set the drag of the entity
+    public void SetDrag(float value)
     {
-        Vector2 center = boxCollider.offset;
-        float height = boxCollider.size.y * heightFraction;
-
-        workspace.x = boxCollider.size.x;
-        workspace.y = height;
-        center.y -= ((height - boxCollider.size.y) / 2);
-        //center.y -= (height - _boxCollider.size.y) / 2;
-
-        boxCollider.size = workspace;
-        boxCollider.offset = center;
-        //SetOffsetY(-(height - _boxCollider.size.y) / 2);
-        //SetColliderHeight(height);
+        rigidBody.drag = value;
     }
 
-    //Change the drag of the entity
-    public void SetDrag(float drag)
+    //Set wether you can set entity's velocity or not
+    public void SetCanChangeVelocity(bool value)
     {
-        rigidBody.drag = drag;
+        canSetVelocity = value;
     }
 
-    public void SetVelocityX(float velocity) //Change the X velocity of an entity
+    //Set the X velocity of the entity
+    public void SetVelocityX(float velocity) 
     {
         workspace.Set(velocity, currentVelocity.y);
         SetFinalVelocity();
     }
 
-    public void SetVelocityY(float velocity) //Change the Y velocity of an entity
+    //Set the Y velocity of the entity
+    public void SetVelocityY(float velocity)
     {
         workspace.Set(currentVelocity.x, velocity);
         SetFinalVelocity();
     }
 
-    public void SetVelocity(float velocity, Vector2 angle, int direction) //Change the velocity of an entity at an angle
+    //Set the velocity of the entity at an angle with and considering facingDirection
+    public void SetVelocity(float velocity, Vector2 angle, int facingDirection)
     {
         angle.Normalize();
 
-        workspace.Set(angle.x * velocity * direction, angle.y * velocity);
+        workspace.Set(angle.x * velocity * facingDirection, angle.y * velocity);
         SetFinalVelocity();
     }
 
-    public void SetVelocity(float velocity, Vector2 direction) //Change the velocity of an entity 
+    //Set the velocity of the entity considering facingDirection
+    public void SetVelocity(float velocity, Vector2 facingDirection)
     {
-        workspace = velocity * direction;
+        workspace = velocity * facingDirection;
         SetFinalVelocity();
     }
 
-    public void SetVelocityZero() //Set the velocity of an entity to 0
+    //Set the velocity of the entity to 0
+    public void SetVelocityZero()
     {
         workspace = Vector2.zero;
         SetFinalVelocity();
     }
 
+    //Set the velocity of the entity to workspace vector
     public void SetFinalVelocity()
     {
         if (canSetVelocity)
@@ -175,43 +183,40 @@ public class Movement : CoreComponent
         }
     }
 
+    //Set the size of the entity's collider
+    public void SetColliderSize(float width, float height)
+    {
+        workspace.Set(width, height);
+        boxCollider.size = workspace;
+    }
+
+    //Set the Y offset of the entity's collider
+    public void SetColliderOffsetY(float offsetY)
+    {
+        workspace = boxCollider.offset;
+        workspace.y += offsetY;
+        boxCollider.offset = workspace;
+    }
+
+    //Set the X, Y offset of the entity's collider
+    public void SetOffset(float offsetX, float offsetY)
+    {
+        workspace = boxCollider.offset;
+        workspace += new Vector2(offsetX, offsetY);
+        boxCollider.offset = workspace;
+    }
+
     public void AddForceAtAngle(float force, float angle)
     {
         Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
 
         rigidBody.AddForce(dir * force, ForceMode2D.Impulse);
     }
-
-    public void SetColliderSize(float width, float height)
-    {
-        workspace.Set(width, height);
-
-        boxCollider.size = workspace;
-    }
-
-    public void SetColliderOffsetY(float offsetY)
-    {
-        workspace = boxCollider.offset;
-
-        workspace.y += offsetY;
-
-        boxCollider.offset = workspace;
-    }
-
-    public void SetOffset(float offsetX, float offsetY)
-    {
-        workspace = boxCollider.offset;
-
-        workspace.x += offsetX;
-        workspace.y += offsetY;
-
-        boxCollider.offset = workspace;
-    }
 }
 
 public enum PlayerCrouchingForm
 {
-    normal,
+    notCrouching,
     crouchingDown,
     crouchingUp
 }

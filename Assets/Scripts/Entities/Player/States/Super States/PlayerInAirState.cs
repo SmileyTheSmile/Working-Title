@@ -95,32 +95,32 @@ public class PlayerInAirState : PlayerState
 
         if (player.inputHandler.attackInputs[(int)CombatInputs.primary])
         {
-            //stateMachine.ChangeState(player.primaryAttackState);
+            //stateMachine?.ChangeState(player.primaryAttackState);
         }
         else if (player.inputHandler.attackInputs[(int)CombatInputs.secondary])
         {
-            stateMachine.ChangeState(player.secondaryAttackState);
+            stateMachine?.ChangeState(player.secondaryAttackState);
         }
         else if (dashInput && player.dashState.CheckIfCanDash())
         {
-            stateMachine.ChangeState(player.dashState);
+            stateMachine?.ChangeState(player.dashState);
         }
         else if (jumpInput && player.jumpState.CanJump())
         {
             if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchJumpState);
+                stateMachine?.ChangeState(player.crouchJumpState);
             }
             else if (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime)
             {
                 StopWallJumpCoyoteTime();
                 isTouchingWall = collisionSenses.WallFront;
                 player.wallJumpState.DetermineWallJumpDirection(isTouchingWall);
-                stateMachine.ChangeState(player.wallJumpState);
+                stateMachine?.ChangeState(player.wallJumpState);
             }
             else
             {
-                stateMachine.ChangeState(player.jumpState);
+                stateMachine?.ChangeState(player.jumpState);
             }
         }
 
@@ -128,38 +128,38 @@ public class PlayerInAirState : PlayerState
         {
             if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchLandState);
+                stateMachine?.ChangeState(player.crouchLandState);
             }
             else
             {
-                stateMachine.ChangeState(player.landState);
+                stateMachine?.ChangeState(player.landState);
             }
         }
         else if (isTouchingWall && !crouchInput)
         {
             if (grabInput && isTouchingLedge)
             {
-                stateMachine.ChangeState(player.wallGrabState);
+                stateMachine?.ChangeState(player.wallGrabState);
             }
             else if (inputX == movement.facingDirection && movement.currentVelocity.y <= 0f)
             {
-                stateMachine.ChangeState(player.wallSlideState);
+                stateMachine?.ChangeState(player.wallSlideState);
             }
             else if (!isTouchingLedge && !isGrounded && !isTouchingCeiling)
             {
-                stateMachine.ChangeState(player.ledgeClimbState);
+                stateMachine?.ChangeState(player.ledgeClimbState);
             }
         }
         else if (crouchInput && player.crouchInAirState.CanCrouch() && !isGrounded)
         {
-            stateMachine.ChangeState(player.crouchInAirState);
+            stateMachine?.ChangeState(player.crouchInAirState);
         }
         else
         {
             movement?.SetVelocityX(playerData.movementVelocity * inputX * airControlPercentage);
 
-            player.animator.SetFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
-            player.animator.SetFloat("velocityY", movement.currentVelocity.y);
+            visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
+            visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);
         }
     }
 

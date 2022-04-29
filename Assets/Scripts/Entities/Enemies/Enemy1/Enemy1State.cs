@@ -16,13 +16,13 @@ public class Enemy1State : EnemyState
     {
         base.Enter();
 
-        enemy.animator.SetBool(animBoolName, true);
+        visualController.SetAnimationBool(animBoolName, true);
     }
 
     public override void Exit() //What to do when exiting the state
     {
         base.Exit();
 
-        enemy.animator.SetBool(animBoolName, false);
+        visualController.SetAnimationBool(animBoolName, false);
     }
 }

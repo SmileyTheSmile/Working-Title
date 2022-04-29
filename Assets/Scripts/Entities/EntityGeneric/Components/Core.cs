@@ -8,12 +8,22 @@ public class Core : MonoBehaviour
     //List of all core components
     private readonly List<CoreComponent> coreComponents = new List<CoreComponent>();
 
-    //Logic update of all core components
+    //Logic update of all core components (Update)
     public void LogicUpdate()
     {
         foreach (CoreComponent component in coreComponents)
         {
+            component.LogComponentInfo();
             component.LogicUpdate();
+        }
+    }
+
+    //Physics update of all core components (FixedUpdate)
+    public void PhysicsUpdate()
+    {
+        foreach (CoreComponent component in coreComponents)
+        {
+            component.PhysicsUpdate();
         }
     }
 

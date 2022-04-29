@@ -18,5 +18,10 @@ public class CoreComponent : MonoBehaviour
         core.AddComponent(this);
     }
 
-    public virtual void LogicUpdate() {}
+    //Log the component's important info
+    public virtual void LogComponentInfo() { }
+    //Update the component's logic (Update)
+    public virtual void LogicUpdate() { }
+    //Update the component's physics (FixedUpdate)
+    public virtual void PhysicsUpdate() { }
 }
