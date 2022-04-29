@@ -40,8 +40,6 @@ public class PlayerCrouchInAirState : PlayerInAirState
         }
     }
 
-    #region Utility Functions
-
     public bool CanCrouch()
     {
         if (amountOfCrouchesLeft > 0)
@@ -55,6 +53,4 @@ public class PlayerCrouchInAirState : PlayerInAirState
     public void ResetAmountOfCrouchesLeft() => amountOfCrouchesLeft = playerData.amountOfCrouches;
 
     public void DecreaseAmountOfCrouchesLeft() => amountOfCrouchesLeft--;
-
-    #endregion
 }

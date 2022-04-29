@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericState
+public abstract class GenericState
 {
     protected FiniteStateMachine stateMachine;
     protected Core core;

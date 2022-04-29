@@ -1,4 +1,4 @@
-public class PlayerState : GenericState
+public abstract class PlayerState : GenericState
 {
     protected Player player;
     protected PlayerData playerData;
