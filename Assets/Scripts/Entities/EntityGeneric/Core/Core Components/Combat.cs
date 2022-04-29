@@ -6,13 +6,14 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
     private CollisionSenses collisionSenses
     { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+    private CollisionSenses _collisionSenses;
+
     private Movement movement
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
+    private Movement _movement;
+
     private Stats stats
     { get => _stats ?? core.GetCoreComponent(ref _stats); }
-
-    private CollisionSenses _collisionSenses;
-    private Movement _movement;
     private Stats _stats;
 
     public Transform currentWeapon;

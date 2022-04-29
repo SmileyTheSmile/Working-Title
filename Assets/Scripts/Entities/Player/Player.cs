@@ -57,7 +57,8 @@ public class Player : EntityGeneric
         LogImportantInfo();
     }
 
-    private void SetupStates() //Create all the player states
+    //Create all the player states
+    private void SetupStates()
     {
         idleState = new PlayerIdleState(this, stateMachine, playerData, "idle");
         moveState = new PlayerMoveState(this, stateMachine, playerData, "move");
@@ -82,13 +83,15 @@ public class Player : EntityGeneric
         secondaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
     }
 
-    private void LogImportantInfo() //Log the current info about player
+    //Log the current info about player
+    private void LogImportantInfo()
     {
         //core.collisionSenses.LogCurrentCollisions();
         //inputHandler.LogAllInputs();
         //stateMachine.LogCurrentState();
     }
 
+    //Draw gizmos
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.DrawWireDisc(this.transform.position, Vector3.forward, 0.4f);

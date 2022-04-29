@@ -4,46 +4,20 @@ public class Movement : CoreComponent
 {
     private CollisionSenses collisionSenses
     { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+    private CollisionSenses _collisionSenses;
+
     private Combat combat
     { get => _combat ?? core.GetCoreComponent(ref _combat); }
-
-    private CollisionSenses _collisionSenses;
     private Combat _combat;
 
-    public Rigidbody2D rigidBody
-    {
-        get
-        {
-            if (_rigidBody)
-                return _rigidBody;
-
-            Debug.LogError("No RigidBody on " + core.transform.parent.name);
-            return null;
-        }
-
-        private set => _rigidBody = value;
-    }
-    public BoxCollider2D boxCollider
-    {
-        get
-        {
-            if (_boxCollider)
-                return _boxCollider;
-
-            Debug.LogError("No BoxCollider on " + core.transform.parent.name);
-            return null;
-        }
-
-        private set => _boxCollider = value;
-    }
-
-    private Rigidbody2D _rigidBody;
-    private BoxCollider2D _boxCollider;
+    private Rigidbody2D rigidBody;
+    private BoxCollider2D boxCollider;
 
     public PlayerCrouchingForm crouchingForm;
     public Transform facingDirectionIndicator { get; private set; }
     public Vector2 currentVelocity { get; private set; }
     public Vector2 defaultSize { get; private set; }
+    
     public int facingDirection { get; private set; }
     public bool canSetVelocity;
 
@@ -53,12 +27,12 @@ public class Movement : CoreComponent
     {
         base.Awake();
 
-        _rigidBody = GetComponentInParent<Rigidbody2D>();
-        _boxCollider = GetComponentInParent<BoxCollider2D>();
+        rigidBody = GetComponentInParent<Rigidbody2D>();
+        boxCollider = GetComponentInParent<BoxCollider2D>();
 
         facingDirectionIndicator = transform.Find("FacingDirectionIndicator");
 
-        defaultSize = _boxCollider.size;
+        defaultSize = boxCollider.size;
         crouchingForm = PlayerCrouchingForm.normal;
 
         facingDirection = 1;
@@ -67,7 +41,7 @@ public class Movement : CoreComponent
 
     public override void LogicUpdate() //What to do in the Update() function
     {
-        currentVelocity = _rigidBody.velocity;
+        currentVelocity = rigidBody.velocity;
     }
 
     public void Flip() //Flip the entity in the other direction
@@ -120,8 +94,8 @@ public class Movement : CoreComponent
     {
         crouchingForm = PlayerCrouchingForm.normal;
 
-        _boxCollider.size = defaultSize;
-        _boxCollider.offset = Vector2.zero;
+        boxCollider.size = defaultSize;
+        boxCollider.offset = Vector2.zero;
 
         collisionSenses.MoveCeilingCheck(biggerHeight, smallerHeight, defaultSize.y);
     }
@@ -130,28 +104,34 @@ public class Movement : CoreComponent
     {
         crouchingForm = PlayerCrouchingForm.crouchingDown;
 
-        float height = _boxCollider.size.y * smallerHeight;
+        float height = boxCollider.size.y * smallerHeight;
 
-        SetColliderOffsetY((height - _boxCollider.size.y) / 2);
-        SetColliderSize(_boxCollider.size.x, height);
+        SetColliderOffsetY((height - boxCollider.size.y) / 2);
+        SetColliderSize(boxCollider.size.x, height);
 
         collisionSenses.MoveCeilingCheck(smallerHeight, biggerHeight, defaultSize.y);
     }
 
     public void SquashColliderUp(float heightFraction)
     {
-        Vector2 center = _boxCollider.offset;
-        float height = _boxCollider.size.y * heightFraction;
+        Vector2 center = boxCollider.offset;
+        float height = boxCollider.size.y * heightFraction;
 
-        workspace.x = _boxCollider.size.x;
+        workspace.x = boxCollider.size.x;
         workspace.y = height;
-        center.y -= ((height - _boxCollider.size.y) / 2);
+        center.y -= ((height - boxCollider.size.y) / 2);
         //center.y -= (height - _boxCollider.size.y) / 2;
 
-        _boxCollider.size = workspace;
-        _boxCollider.offset = center;
+        boxCollider.size = workspace;
+        boxCollider.offset = center;
         //SetOffsetY(-(height - _boxCollider.size.y) / 2);
         //SetColliderHeight(height);
+    }
+
+    //Change the drag of the entity
+    public void SetDrag(float drag)
+    {
+        rigidBody.drag = drag;
     }
 
     public void SetVelocityX(float velocity) //Change the X velocity of an entity
@@ -190,7 +170,7 @@ public class Movement : CoreComponent
     {
         if (canSetVelocity)
         {
-            _rigidBody.velocity = workspace;
+            rigidBody.velocity = workspace;
             currentVelocity = workspace;
         }
     }
@@ -199,32 +179,33 @@ public class Movement : CoreComponent
     {
         Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
 
-        _rigidBody.AddForce(dir * force, ForceMode2D.Impulse);
+        rigidBody.AddForce(dir * force, ForceMode2D.Impulse);
     }
 
     public void SetColliderSize(float width, float height)
     {
         workspace.Set(width, height);
-        _boxCollider.size = workspace;
+
+        boxCollider.size = workspace;
     }
 
     public void SetColliderOffsetY(float offsetY)
     {
-        workspace = _boxCollider.offset;
+        workspace = boxCollider.offset;
 
         workspace.y += offsetY;
 
-        _boxCollider.offset = workspace;
+        boxCollider.offset = workspace;
     }
 
     public void SetOffset(float offsetX, float offsetY)
     {
-        workspace = _boxCollider.offset;
+        workspace = boxCollider.offset;
 
         workspace.x += offsetX;
         workspace.y += offsetY;
 
-        _boxCollider.offset = workspace;
+        boxCollider.offset = workspace;
     }
 }
 

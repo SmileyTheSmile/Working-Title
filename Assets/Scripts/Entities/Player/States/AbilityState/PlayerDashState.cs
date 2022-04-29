@@ -73,7 +73,7 @@ public class PlayerDashState : PlayerAbilityState
                 movement?.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
                 movement?.SetVelocity(playerData.dashVelocity, dashDirection);
 
-                movement.rigidBody.drag = playerData.drag;
+                movement?.SetDrag(playerData.drag);
             }
         }
         else
@@ -82,7 +82,7 @@ public class PlayerDashState : PlayerAbilityState
 
             if (Time.time >= startTime + playerData.dashTime)
             {
-                movement.rigidBody.drag = 0f;
+                movement?.SetDrag(0f);
                 isAbilityDone = true;
                 lastDashTime = Time.time;
                 Debug.Log("sdfsd");

@@ -2,42 +2,21 @@ using UnityEngine;
 
 public class EntityGeneric : MonoBehaviour
 {
-    public Animator animator
-    {
-        get
-        {
-            if (_animator)
-            {
-                return _animator;
-            }
-
-            Debug.Log("Missing Animator on " + transform.parent.name);
-
-            return null;
-        }
-        private set => _animator = value;
-    }
-
     public Core core
     {
-        get
-        {
-            if (_core)
-            {
-                return _core;
-            }
-
-            Debug.Log("Missing Core on " + transform.parent.name);
-
-            return null;
-        }
+        get => GenericNotImplementedError<Core>.TryGet(_core, "core");
         private set => _core = value;
     }
+    private Core _core;
 
-    public FiniteStateMachine stateMachine { get; private set; }
+    public Animator animator
+    {
+        get => GenericNotImplementedError<Animator>.TryGet(_animator, "animator");
+        private set => _animator = value;
+    }
+    private Animator _animator;
 
-    protected Animator _animator;
-    protected Core _core;
+    protected FiniteStateMachine stateMachine;
 
     protected virtual void Awake()
     {
@@ -51,15 +30,15 @@ public class EntityGeneric : MonoBehaviour
 
     protected virtual void Update()
     {
-        _core.LogicUpdate();
-
-        stateMachine.currentState.LogicUpdate();
+        core.LogicUpdate();
+        stateMachine.LogicUpdate();
     }
 
     protected virtual void FixedUpdate()
     {
-        stateMachine.currentState.PhysicsUpdate();
+        stateMachine.PhysicsUpdate();
     }
-    protected virtual void AnimationTrigger() => stateMachine.currentState.AnimationTrigger();
-    protected virtual void AnimationFinishedTrigger() => stateMachine.currentState.AnimationFinishedTrigger();
+
+    protected virtual void AnimationTrigger() => stateMachine.AnimationTrigger();
+    protected virtual void AnimationFinishedTrigger() => stateMachine.AnimationFinishedTrigger();
 }

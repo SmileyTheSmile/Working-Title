@@ -5,13 +5,10 @@ using UnityEngine;
 
 public class Core : MonoBehaviour
 {
+    //List of all core components
     private readonly List<CoreComponent> coreComponents = new List<CoreComponent>();
 
-    public void Awake()
-    {
-
-    }
-
+    //Logic update of all core components
     public void LogicUpdate()
     {
         foreach (CoreComponent component in coreComponents)
@@ -20,6 +17,7 @@ public class Core : MonoBehaviour
         }
     }
 
+    //Add a core component to the core
     public void AddComponent(CoreComponent component)
     {
         if (!coreComponents.Contains(component))
@@ -35,7 +33,7 @@ public class Core : MonoBehaviour
 
         if (component == null)
         {
-            Debug.LogWarning($"{typeof(T)} not found on {transform.parent.name}");
+            Debug.LogWarning($"{typeof(T)} component not found on {transform.parent.name}");
         }
 
         return component;
