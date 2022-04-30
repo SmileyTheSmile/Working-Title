@@ -25,7 +25,8 @@ public abstract class GenericState
         this.animBoolName = animBoolName;
     }
 
-    public virtual void Enter() //What to do when entering the state
+    //What to do when entering the state
+    public virtual void Enter() 
     {
         DoChecks();
 
@@ -34,27 +35,31 @@ public abstract class GenericState
         isAnimationFinished = false;
     }
 
-    public virtual void Exit() //What to do when exiting the state
+    //What to do when exiting the state
+    public virtual void Exit()
     {
         isExitingState = true;
     }
 
-    public virtual void LogicUpdate() //What to do in the Update() function
+    //What to do in the Update() function
+    public virtual void LogicUpdate()
     {
         if (isExitingState)
         {
             return;
         }
     }
-
-    public virtual void PhysicsUpdate() //What to do in the FixedUpdate() function
+    
+    //What to do in the FixedUpdate() function
+    public virtual void PhysicsUpdate()
     {
         DoChecks();
     }
 
-    public virtual void DoChecks() { } //Update all check variables
-
-    public virtual void AnimationTrigger() { } //What to do in animation events in Animator
-
-    public virtual void AnimationFinishedTrigger() => isAnimationFinished = true; //What to do on finished animation in Animator
+    //Update all check variables
+    public virtual void DoChecks() { }
+    //What to do in animation events in Animator
+    public virtual void AnimationTrigger() { }
+    //What to do on finished animation in Animator
+    public virtual void AnimationFinishedTrigger() => isAnimationFinished = true; 
 }

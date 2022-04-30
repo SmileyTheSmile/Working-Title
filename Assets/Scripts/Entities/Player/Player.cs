@@ -33,20 +33,18 @@ public class Player : EntityGeneric
     {
         base.Awake();
 
-        SetupStates();
-
         inputHandler = GetComponent<PlayerInputHandler>();
         inventory = GetComponent<PlayerInventory>();
     }
 
     private void Start()
     {
-        //Time.timeScale = playerData.holdTimeScale;
-
-        //primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
-        secondaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
-
+        SetupStates();
         stateMachine.Initialize(idleState);
+        
+        SetupWeapons();
+
+        //Time.timeScale = playerData.holdTimeScale;
     }
 
     //Create all the player states
@@ -73,6 +71,13 @@ public class Player : EntityGeneric
 
         primaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
         secondaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
+    }
+
+    //Create all the player states
+    private void SetupWeapons()
+    {
+        //primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
+        secondaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
     }
 
     //Draw gizmos

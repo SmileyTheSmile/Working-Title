@@ -15,7 +15,7 @@ public class EntityGeneric : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _core = GetComponentInChildren<Core>();
+        core = GetComponentInChildren<Core>();
     }
 
     public virtual void Update()

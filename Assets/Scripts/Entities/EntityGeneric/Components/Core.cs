@@ -6,14 +6,15 @@ using UnityEngine;
 public class Core : MonoBehaviour
 {
     //List of all core components
-    private readonly List<CoreComponent> coreComponents = new List<CoreComponent>();
+    //private readonly List<CoreComponent> coreComponents = new List<CoreComponent>();
+    [SerializeField] private List<CoreComponent> coreComponents = new List<CoreComponent>();
 
     //Logic update of all core components (Update)
     public void LogicUpdate()
     {
         foreach (CoreComponent component in coreComponents)
         {
-            component.LogComponentInfo();
+            //component.LogComponentInfo();
             component.LogicUpdate();
         }
     }
@@ -32,6 +33,7 @@ public class Core : MonoBehaviour
     {
         if (!coreComponents.Contains(component))
         {
+            Debug.Log(component);
             coreComponents.Add(component);
         }
     }
