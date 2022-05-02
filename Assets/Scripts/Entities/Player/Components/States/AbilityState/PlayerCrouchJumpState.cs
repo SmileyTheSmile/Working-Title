@@ -9,7 +9,7 @@ public class PlayerCrouchJumpState : PlayerJumpState
     {
         base.Enter();
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
 
         movement?.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
@@ -18,7 +18,7 @@ public class PlayerCrouchJumpState : PlayerJumpState
     {
         base.Exit();
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
         
         movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }

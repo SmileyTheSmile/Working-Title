@@ -79,25 +79,26 @@ public class PlayerInAirState : PlayerState
     {
         base.LogicUpdate();
 
-        inputX = player.inputHandler.normalizedInputX;
-        inputY = player.inputHandler.normalizedInputY;
-        dashInput = player.inputHandler.dashInput;
-        grabInput = player.inputHandler.grabInput;
-        crouchInput = player.inputHandler.crouchInput;
-        jumpInput = player.inputHandler.jumpInput;
-        jumpInputStop = player.inputHandler.jumpInputStop;
-        mousePositionInput = player.inputHandler.mousePositionInput;
+        inputX = inputHandler.normalizedInputX;
+        inputY = inputHandler.normalizedInputY;
+        dashInput = inputHandler.dashInput;
+        grabInput = inputHandler.grabInput;
+        crouchInput = inputHandler.crouchInput;
+        jumpInput = inputHandler.jumpInput;
+        jumpInputStop = inputHandler.jumpInputStop;
+        mousePositionInput = inputHandler.mousePositionInput;
 
         CheckJumpMultiplier();
         CheckCoyoteTime();
         CheckWallJumpCoyoteTime();
+        
         movement?.CheckIfShouldFlip(inputX, mousePositionInput.x);
 
-        if (player.inputHandler.attackInputs[(int)CombatInputs.primary])
+        if (inputHandler.attackInputs[(int)CombatInputs.primary])
         {
             //stateMachine?.ChangeState(player.primaryAttackState);
         }
-        else if (player.inputHandler.attackInputs[(int)CombatInputs.secondary])
+        else if (inputHandler.attackInputs[(int)CombatInputs.secondary])
         {
             stateMachine?.ChangeState(player.secondaryAttackState);
         }

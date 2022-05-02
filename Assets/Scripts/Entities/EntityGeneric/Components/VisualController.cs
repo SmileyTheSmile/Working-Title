@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VisualController : CoreComponent
@@ -12,22 +10,13 @@ public class VisualController : CoreComponent
     private Animator animator;
 
     //Unity Awake
-    protected override void Awake()
-    {
-        base.Awake();
-
-        SetupElements();
-    }
-
-    //Setup component elements
-    private void SetupElements()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
-
         facingDirectionIndicator = transform.Find("FacingDirectionIndicator");
     }
 
-    //Set the animation bool in the animator
+    //Flip the entity left or right
     public void FlipEntity(int facingDirection)
     {
         facingDirectionIndicator.Rotate(0f, 180f * facingDirection, 0f);

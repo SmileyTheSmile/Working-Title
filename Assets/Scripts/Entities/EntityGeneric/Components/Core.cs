@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,8 +5,23 @@ using UnityEngine;
 public class Core : MonoBehaviour
 {
     //List of all core components
-    //private readonly List<CoreComponent> coreComponents = new List<CoreComponent>();
-    [SerializeField] private List<CoreComponent> coreComponents = new List<CoreComponent>();
+    private readonly List<CoreComponent> coreComponents = new List<CoreComponent>();
+
+    //Unity Awake
+    private void Awake()
+    {
+        var components = GetComponentsInChildren<CoreComponent>();
+
+        foreach (CoreComponent component in components)
+        {
+            AddComponent(component);
+        }
+
+        foreach (CoreComponent component in coreComponents)
+        {
+            component.Initialize(this);
+        }
+    }
 
     //Logic update of all core components (Update)
     public void LogicUpdate()
@@ -33,7 +47,6 @@ public class Core : MonoBehaviour
     {
         if (!coreComponents.Contains(component))
         {
-            Debug.Log(component);
             coreComponents.Add(component);
         }
     }

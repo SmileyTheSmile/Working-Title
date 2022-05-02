@@ -7,6 +7,10 @@ public class TempShootScript : MonoBehaviour
     protected Movement movement
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
 
+    protected PlayerInputHandler inputHandler
+    { get => _inputHandler ?? core.GetCoreComponent(ref _inputHandler); }
+    private PlayerInputHandler _inputHandler;
+
     private Movement _movement;
 
     [SerializeField] private Transform gun;
@@ -15,21 +19,19 @@ public class TempShootScript : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Vector2 bulletSpread;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private ParticleSystem muzzleFlashParticles;
+    [SerializeField] private ParticleSystem impactEffect;
+    [SerializeField] private TrailRenderer bulletTrail;
     [SerializeField] private float screenShakeTime = 0.1f;
     [SerializeField] private float screenShakeIntensity = 1f;
     [SerializeField] private float shotDelay = 0.2f;
     [SerializeField] private int pelletNum = 5;
-
-    public ParticleSystem muzzleFlashParticles;
-    public ParticleSystem impactEffect;
-    public TrailRenderer bulletTrail;
 
     private Vector2 bulletDirection;
     private Vector2 gunDirection;
     private Vector3 mousePositionInput;
 
     private Core core;
-    private PlayerInputHandler inputHandler;
     private Animator animator;
     private bool addBulletSpread;
     private float lastShotTime;
@@ -38,7 +40,6 @@ public class TempShootScript : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        inputHandler = GetComponentInParent<PlayerInputHandler>();
         core = GetComponentInParent<Core>();
 
         addBulletSpread = (bulletSpread != Vector2.zero);

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerLandState : PlayerGroundedState
 {
-    #region State Functions
-
     public PlayerLandState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, playerData, animBoolName) { }
 
@@ -15,11 +13,11 @@ public class PlayerLandState : PlayerGroundedState
         {
             if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchMoveState);
+                stateMachine?.ChangeState(player.crouchMoveState);
             }
             else
             {
-                stateMachine.ChangeState(player.moveState);
+                stateMachine?.ChangeState(player.moveState);
             }
         }
         else
@@ -28,15 +26,13 @@ public class PlayerLandState : PlayerGroundedState
             {
                 if (crouchInput)
                 {
-                    stateMachine.ChangeState(player.crouchIdleState);
+                    stateMachine?.ChangeState(player.crouchIdleState);
                 }
                 else
                 {
-                    stateMachine.ChangeState(player.idleState);
+                    stateMachine?.ChangeState(player.idleState);
                 }
             }
         }
     }
-
-    #endregion
 }

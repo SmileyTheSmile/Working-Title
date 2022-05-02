@@ -21,7 +21,7 @@ public class PlayerDashState : PlayerAbilityState
         isHolding = true;
         canDash = false;
 
-        player.inputHandler.UseDashInput();
+        inputHandler?.UseDashInput();
         dashDirection = Vector2.right * movement.facingDirection;
 
         Time.timeScale = playerData.holdTimeScale;
@@ -48,13 +48,13 @@ public class PlayerDashState : PlayerAbilityState
             return;
         }
 
-        visualController.SetAnimationFloat("velocityY", movement.currentVelocity.y);
-        visualController.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
+        visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);
+        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
 
         if (isHolding)
         {
-            dashDirectionInput = player.inputHandler.mousePositionInput - player.transform.position;
-            dashInputStop = player.inputHandler.dashInputStop;
+            dashDirectionInput = inputHandler.mousePositionInput - player.transform.position;
+            dashInputStop = inputHandler.dashInputStop;
 
             if (dashDirectionInput != Vector2.zero)
             {
@@ -85,7 +85,6 @@ public class PlayerDashState : PlayerAbilityState
                 movement?.SetDrag(0f);
                 isAbilityDone = true;
                 lastDashTime = Time.time;
-                Debug.Log("sdfsd");
             }
         }
     }

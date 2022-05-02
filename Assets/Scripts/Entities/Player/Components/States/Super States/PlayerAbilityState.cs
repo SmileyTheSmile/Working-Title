@@ -42,28 +42,28 @@ public class PlayerAbilityState : PlayerState
             return;
         }
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
 
         if (isGrounded && movement.currentVelocity.y < 0.01)
         {
             if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchIdleState);
+                stateMachine?.ChangeState(player.crouchIdleState);
             }
             else
             {
-                stateMachine.ChangeState(player.idleState);
+                stateMachine?.ChangeState(player.idleState);
             }
         }
         else if (!isGrounded)
         {
             if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchInAirState);
+                stateMachine?.ChangeState(player.crouchInAirState);
             }
             else
             {
-                stateMachine.ChangeState(player.inAirState);
+                stateMachine?.ChangeState(player.inAirState);
             }
         }
     }

@@ -14,7 +14,7 @@ public class PlayerCrouchInAirState : PlayerInAirState
     {
         base.Enter();
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
 
         DecreaseAmountOfCrouchesLeft();
 
@@ -25,7 +25,7 @@ public class PlayerCrouchInAirState : PlayerInAirState
     {
         base.Exit();
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
 
         movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
@@ -36,7 +36,7 @@ public class PlayerCrouchInAirState : PlayerInAirState
 
         if (!crouchInput && !isGrounded)
         {
-            stateMachine.ChangeState(player.inAirState);
+            stateMachine?.ChangeState(player.inAirState);
         }
     }
 

@@ -2,17 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : CoreComponent
 {
-    public Vector2 rawMovementInput { get; private set; }
-    public Vector2 rawMouseInput { get; private set; }
     public Vector3 mousePositionInput { get; private set; }
-
-    public float rawWeaponSwitchInput { get; private set; }
-    public float mouseAngle { get; private set; }
-
-    private PlayerInput playerInput;
-
     public bool jumpInput { get; private set; }
     public bool jumpInputStop { get; private set; }
     public bool grabInput { get; private set; }
@@ -20,19 +12,23 @@ public class PlayerInputHandler : MonoBehaviour
     public bool dashInputStop { get; private set; }
     public bool crouchInput { get; private set; }
     public bool[] attackInputs { get; private set; }
-
     public int normalizedInputX { get; private set; }
     public int normalizedInputY { get; private set; }
     public int weaponSwitchInput { get; private set; }
 
     [SerializeField] private float inputHoldTime = 0.2f;
 
+
+    private PlayerInput playerInput;
     private Camera mainCamera;
 
+    private Vector2 rawMovementInput;
+    private Vector2 rawMouseInput;
+    private float rawWeaponSwitchInput;
     private float jumpInputStartTime;
     private float dashInputStartTime;
 
-    private void Start()
+    private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
 
@@ -42,14 +38,17 @@ public class PlayerInputHandler : MonoBehaviour
         attackInputs = new bool[count];
     }
 
-    private void Update()
+    public override void LogicUpdate()
     {
+        base.LogicUpdate();
+
         ProcessMouseInput();
         CheckJumpInputHoldTime();
         CheckDashInputHoldTime();
     }
-    
-    public void OnMoveInput(InputAction.CallbackContext context) //Process WASD input
+
+    //Process movement input
+    public void OnMoveInput(InputAction.CallbackContext context) 
     {
         rawMovementInput = context.ReadValue<Vector2>();
 
@@ -59,7 +58,8 @@ public class PlayerInputHandler : MonoBehaviour
         crouchInput = (normalizedInputY == -1);
     }
 
-    public void OnJumpInput(InputAction.CallbackContext context) //Process jump input
+    //Process jump input
+    public void OnJumpInput(InputAction.CallbackContext context) 
     {
         if (context.started)
         {
@@ -74,7 +74,8 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void OnDashInput(InputAction.CallbackContext context) //Process dash input
+    //Process dash input
+    public void OnDashInput(InputAction.CallbackContext context) 
     {
         if (context.started)
         {
@@ -88,13 +89,15 @@ public class PlayerInputHandler : MonoBehaviour
             dashInputStop = true;
         }
     }
-
-    public void OnMouseMovedInput(InputAction.CallbackContext context) //Get raw mouse position input
+    
+    //Get raw mouse position input
+    public void OnAimInput(InputAction.CallbackContext context) 
     {
         rawMouseInput = context.ReadValue<Vector2>();
     }
 
-    public void OnGrabInput(InputAction.CallbackContext context) //Process wall grab input
+    //Process wall grab input
+    public void OnGrabInput(InputAction.CallbackContext context) 
     {
         if (context.started)
         {
@@ -107,7 +110,8 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void OnCrouchInput(InputAction.CallbackContext context) //Process crouch input
+    //Process crouch input
+    public void OnCrouchInput(InputAction.CallbackContext context) 
     {
         if (context.started)
         {
@@ -120,20 +124,21 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void OnPrimaryAttackInput(InputAction.CallbackContext context) //Process primary attack input
+    //Process primary attack input
+    public void OnPrimaryAttackInput(InputAction.CallbackContext context) 
     {
         if (context.started)
         {
             attackInputs[(int)CombatInputs.primary] = true;
         }
-
-        if (context.canceled)
+        else if (context.canceled)
         {
             attackInputs[(int)CombatInputs.primary] = false;
         }
     }
 
-    public void OnSecondaryAttackInput(InputAction.CallbackContext context) //Process secondary attack input
+    //Process secondary attack input
+    public void OnSecondaryAttackInput(InputAction.CallbackContext context) 
     {
         if (context.started)
         {
@@ -146,14 +151,16 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void OnWeaponSwitchInput(InputAction.CallbackContext context) //Process weapon switch input
+    //Process weapon switch input
+    public void OnWeaponSwitchInput(InputAction.CallbackContext context) 
     {
         rawWeaponSwitchInput = context.ReadValue<Vector2>().y;
 
         weaponSwitchInput = Math.Sign(rawWeaponSwitchInput);
     }
-
-    public void CheckJumpInputHoldTime() //Check if jump button has been held for value in inputHoldTime
+    
+    //Check if jump button has been held for the value in inputHoldTime
+    private void CheckJumpInputHoldTime() 
     {
         if (Time.time >= jumpInputStartTime + inputHoldTime)
         {
@@ -161,15 +168,17 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void CheckDashInputHoldTime() //Check if dash button has been held for value in inputHoldTime
+    //Check if dash button has been held for value in inputHoldTime
+    private void CheckDashInputHoldTime() 
     {
         if (Time.time >= dashInputStartTime + inputHoldTime)
         {
             dashInput = false;
         }
     }
-
-    public void ProcessMouseInput() //Process mouse position input
+    
+    //Process mouse position input
+    private void ProcessMouseInput() 
     {
         mousePositionInput = new Vector3(rawMouseInput.x, rawMouseInput.y, 10);
 
@@ -177,11 +186,13 @@ public class PlayerInputHandler : MonoBehaviour
         //mouseAngle = Mathf.Atan2(mousePositionInput.y, mousePositionInput.x) * Mathf.Rad2Deg;
     }
 
-    public void UseJumpInput() => jumpInput = false; //Disable jump input
+    //Disable jump input
+    public void UseJumpInput() => jumpInput = false; 
+    //Disable dash input
+    public void UseDashInput() => dashInput = false; 
 
-    public void UseDashInput() => dashInput = false; //Disable dash input
-
-    public void LogAllInputs() //Process crouch input
+    //Log important info
+    public override void LogComponentInfo() 
     {
         Debug.Log($"Crouch = {crouchInput}, Jump = {jumpInput}, Weapon Switch = {weaponSwitchInput}");
     }

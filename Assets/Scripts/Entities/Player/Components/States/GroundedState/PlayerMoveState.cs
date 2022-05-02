@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
 {
-    #region State Functions
-
     public PlayerMoveState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, playerData, animBoolName) { }
 
@@ -17,18 +15,16 @@ public class PlayerMoveState : PlayerGroundedState
         {
             if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchIdleState);
+                stateMachine?.ChangeState(player.crouchIdleState);
             }
             else
             {
-                stateMachine.ChangeState(player.idleState);
+                stateMachine?.ChangeState(player.idleState);
             }
         }
         else if (crouchInput)
         {
-            stateMachine.ChangeState(player.crouchMoveState);
+            stateMachine?.ChangeState(player.crouchMoveState);
         }
     }
-
-    #endregion
 }

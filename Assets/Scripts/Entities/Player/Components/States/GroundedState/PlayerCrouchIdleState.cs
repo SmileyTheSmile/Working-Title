@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerCrouchIdleState : PlayerGroundedState
 {
-    #region State Functions
-
     public PlayerCrouchIdleState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
     : base(player, stateMachine, playerData, animBoolName) { }
 
@@ -13,7 +11,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
 
         movement?.SetVelocityZero();
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
 
         movement?.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
@@ -22,7 +20,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
     {
         base.Exit();
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
 
         movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
@@ -35,19 +33,17 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         {
             if (crouchInput || isTouchingCeiling)
             {
-                stateMachine.ChangeState(player.crouchMoveState);
+                stateMachine?.ChangeState(player.crouchMoveState);
             }
             else
             {
 
-                stateMachine.ChangeState(player.moveState);
+                stateMachine?.ChangeState(player.moveState);
             }
         }
         else if (!crouchInput && !isTouchingCeiling)
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine?.ChangeState(player.idleState);
         }
     }
-
-    #endregion
 }

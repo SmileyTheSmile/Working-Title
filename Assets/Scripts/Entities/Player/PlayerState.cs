@@ -1,5 +1,9 @@
 public abstract class PlayerState : GenericState
 {
+    protected PlayerInputHandler inputHandler
+    { get => _inputHandler ?? core.GetCoreComponent(ref _inputHandler); }
+    private PlayerInputHandler _inputHandler;
+
     protected Player player;
     protected PlayerData playerData;
 

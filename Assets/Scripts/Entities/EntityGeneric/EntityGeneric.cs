@@ -13,16 +13,19 @@ public class EntityGeneric : MonoBehaviour
     { get => _stateMachine ?? core.GetCoreComponent(ref _stateMachine); }
     private FiniteStateMachine _stateMachine;
 
+    //Unity Awake
     protected virtual void Awake()
     {
         core = GetComponentInChildren<Core>();
     }
 
+    //Unity Update
     public virtual void Update()
     {
         core.LogicUpdate();
     }
 
+    //Unity FixedUpdate
     public virtual void FixedUpdate()
     {
         core.PhysicsUpdate();

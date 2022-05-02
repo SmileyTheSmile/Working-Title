@@ -36,7 +36,7 @@ public class PlayerAttackState : PlayerAbilityState
 
         if (shouldCheckFlip)
         {
-            inputX = player.inputHandler.normalizedInputX;
+            inputX = inputHandler.normalizedInputX;
         }
 
         movement?.CheckIfShouldFlip(inputX);

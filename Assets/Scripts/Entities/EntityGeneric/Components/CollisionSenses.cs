@@ -11,7 +11,6 @@ public class CollisionSenses : CoreComponent
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform ledgeCheckHorizontal;
     [SerializeField] private Transform ledgeCheckVertical;
-
     [SerializeField] private LayerMask whatIsGround;
 
     [SerializeField] private float groundCheckHeight = 0.2f;
@@ -27,12 +26,16 @@ public class CollisionSenses : CoreComponent
     private float halfGroundCheckWidth;
     private float halfGroundCheckHeight;
 
-    //Unity Awake
-    protected override void Awake()
+    //Unity Start
+    private void Start()
     {
-        base.Awake();
+        groundCheckWidth = movement.defaultSize.x - groundWidthOffset;
+        ceilingCheckWidth = movement.defaultSize.y - ceilingWidthOffset;
 
-        SetupSupportValues();
+        halfCeilingCheckWidth = groundCheckWidth / 2;
+        halfCeilingCheckHeight = groundCheckHeight / 2;
+        halfGroundCheckWidth = groundCheckWidth / 2;
+        halfGroundCheckHeight = groundCheckHeight / 2;
     }
 
     //Check if entity is grounded
@@ -69,18 +72,6 @@ public class CollisionSenses : CoreComponent
     public bool LedgeVertical 
     {
         get => Physics2D.Raycast(ledgeCheckVertical.position, Vector2.down, wallCheckDistance, whatIsGround);
-    }
-    
-    //Setup support variables so that they don't have to be recalculated constantly
-    private void SetupSupportValues()
-    {
-        groundCheckWidth = movement.defaultSize.x - groundWidthOffset;
-        ceilingCheckWidth = movement.defaultSize.y - ceilingWidthOffset;
-
-        halfCeilingCheckWidth = groundCheckWidth / 2;
-        halfCeilingCheckHeight = groundCheckHeight / 2;
-        halfGroundCheckWidth = groundCheckWidth / 2;
-        halfGroundCheckHeight = groundCheckHeight / 2;
     }
 
     //Move the ceiling check point position

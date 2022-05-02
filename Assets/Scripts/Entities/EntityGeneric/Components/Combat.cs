@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IKnockbackable
@@ -12,32 +10,20 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    private Stats stats
-    { get => _stats ?? core.GetCoreComponent(ref _stats); }
-    private Stats _stats;
-
     [SerializeField] private float maxKnockbackTime = 0.2f;
-    [SerializeField] private Transform currentWeapon;
+    [SerializeField] private float maxHealth;
 
-    private bool isKnockbackActive;
+    private bool isKnockbackActive = false;
     private float knockbackStartTime;
-    private TempShootScript weapon;
+    private float currentHealth;
 
     //Unity Awake
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
-        SetupElements();
+        currentHealth = maxHealth;
     }
 
-    //Setup component elements
-    private void SetupElements()
-    {
-        weapon = GetComponentInChildren<TempShootScript>();
-    }
-
-    //What to do in the Update() function
+    //Update the component's logic (Update)
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -48,7 +34,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Deal damage to entity
     public void Damage(float amount)
     {
-        stats?.DecreaseHealth(amount);
+        DecreaseHealth(amount);
     }
 
     //Apply knockback to entity
@@ -61,7 +47,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
         knockbackStartTime = Time.time;
     }
 
-    //Check if knockback state should be stopped
+    //Check if knockback should be stopped
     private void CheckKnockback()
     {
         if ((isKnockbackActive && movement.currentVelocity.y <= 0.0f && collisionSenses.Ground) || (Time.time >= knockbackStartTime + maxKnockbackTime))
@@ -72,9 +58,21 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
         }
     }
 
-    //Flip the current weapon
-    public void FlipCurrentWeapon(int facingDirection)
+    //Decrease the health of entity
+    public void DecreaseHealth(float amount)
     {
-        currentWeapon.Rotate(0f, 180f * facingDirection, 0f);
+        currentHealth -= amount;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Debug.Log("Health is 0");
+        }
+    }
+
+    //Increase the health of entity
+    public void IncreaseHealth(float amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
     }
 }

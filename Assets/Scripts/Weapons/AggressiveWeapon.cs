@@ -7,12 +7,12 @@ public class AggressiveWeapon : Weapon
 {
     protected Movement movement
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
-
     private Movement _movement;
+
+    protected AggressiveWeaponData agressiveWeaponData;
 
     private List<IDamageable> detectedDamageables = new List<IDamageable>();
     private List<IKnockbackable> detectedKnockbackables = new List<IKnockbackable>();
-    protected AggressiveWeaponData agressiveWeaponData;
 
     protected override void Awake()
     {

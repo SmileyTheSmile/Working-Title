@@ -14,7 +14,7 @@ public abstract class GenericState
 
     protected Core core;
 
-    public float startTime;
+    protected float startTime;
     protected bool isAnimationFinished;
     protected bool isExitingState;
     protected string animBoolName;
@@ -41,7 +41,7 @@ public abstract class GenericState
         isExitingState = true;
     }
 
-    //What to do in the Update() function
+    //Update the component's logic (Update)
     public virtual void LogicUpdate()
     {
         if (isExitingState)
@@ -49,8 +49,8 @@ public abstract class GenericState
             return;
         }
     }
-    
-    //What to do in the FixedUpdate() function
+
+    //Update the component's physics (FixedUpdate)
     public virtual void PhysicsUpdate()
     {
         DoChecks();

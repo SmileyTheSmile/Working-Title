@@ -9,7 +9,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
     {
         base.Enter();
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
 
         movement?.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
@@ -18,7 +18,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
     {
         base.Exit();
 
-        crouchInput = player.inputHandler.crouchInput;
+        crouchInput = inputHandler.crouchInput;
 
         movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
     }
@@ -31,11 +31,11 @@ public class PlayerCrouchLandState : PlayerGroundedState
         {
             if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchMoveState);
+                stateMachine?.ChangeState(player.crouchMoveState);
             }
             else
             {
-                stateMachine.ChangeState(player.moveState);
+                stateMachine?.ChangeState(player.moveState);
             }
         }
         else
@@ -44,11 +44,11 @@ public class PlayerCrouchLandState : PlayerGroundedState
             {
                 if (crouchInput)
                 {
-                    stateMachine.ChangeState(player.crouchIdleState);
+                    stateMachine?.ChangeState(player.crouchIdleState);
                 }
                 else
                 {
-                    stateMachine.ChangeState(player.idleState);
+                    stateMachine?.ChangeState(player.idleState);
                 }
             }
         }

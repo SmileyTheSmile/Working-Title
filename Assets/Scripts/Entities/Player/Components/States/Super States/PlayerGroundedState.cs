@@ -55,40 +55,40 @@ public class PlayerGroundedState : PlayerState
     {
         base.LogicUpdate();
 
-        inputX = player.inputHandler.normalizedInputX;
-        inputY = player.inputHandler.normalizedInputY;
-        grabInput = player.inputHandler.grabInput;
-        dashInput = player.inputHandler.dashInput;
-        jumpInput = player.inputHandler.jumpInput;
-        jumpInputStop = player.inputHandler.jumpInputStop;
-        crouchInput = player.inputHandler.crouchInput;
-        mousePositionInput = player.inputHandler.mousePositionInput;
+        inputX = inputHandler.normalizedInputX;
+        inputY = inputHandler.normalizedInputY;
+        grabInput = inputHandler.grabInput;
+        dashInput = inputHandler.dashInput;
+        jumpInput = inputHandler.jumpInput;
+        jumpInputStop = inputHandler.jumpInputStop;
+        crouchInput = inputHandler.crouchInput;
+        mousePositionInput = inputHandler.mousePositionInput;
 
-        movement.CheckIfShouldFlip(inputX, mousePositionInput.x);
+        movement?.CheckIfShouldFlip(inputX, mousePositionInput.x);
 
         //Ability States
-        if (player.inputHandler.attackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
+        if (inputHandler.attackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
         {
-            //stateMachine.ChangeState(player.primaryAttackState);
+            //stateMachine?.ChangeState(player.primaryAttackState);
         }
-        else if (player.inputHandler.attackInputs[(int)CombatInputs.secondary] && !isTouchingCeiling)
+        else if (inputHandler.attackInputs[(int)CombatInputs.secondary] && !isTouchingCeiling)
         {
-            stateMachine.ChangeState(player.secondaryAttackState);
+            stateMachine?.ChangeState(player.secondaryAttackState);
         }
         else if ((jumpInput && player.jumpState.CanJump() && !isTouchingCeiling))
         {
             if (crouchInput && player.crouchInAirState.CanCrouch())
             {
-                stateMachine.ChangeState(player.crouchJumpState);
+                stateMachine?.ChangeState(player.crouchJumpState);
             }
             else
             {
-                stateMachine.ChangeState(player.jumpState);
+                stateMachine?.ChangeState(player.jumpState);
             }
         }
         else if (dashInput && player.dashState.CheckIfCanDash() && !isTouchingCeiling)
         {
-            stateMachine.ChangeState(player.dashState);
+            stateMachine?.ChangeState(player.dashState);
         }
 
         //Other States
@@ -96,16 +96,16 @@ public class PlayerGroundedState : PlayerState
         {
             if (crouchInput)
             {
-                stateMachine.ChangeState(player.crouchInAirState);
+                stateMachine?.ChangeState(player.crouchInAirState);
             }
             else
             {
-                stateMachine.ChangeState(player.inAirState);
+                stateMachine?.ChangeState(player.inAirState);
             }
         }
         else if (isTouchingWall && grabInput && isTouchingLedge && !isTouchingCeiling && !crouchInput)
         {
-            stateMachine.ChangeState(player.wallGrabState);
+            stateMachine?.ChangeState(player.wallGrabState);
         }
     }
 }

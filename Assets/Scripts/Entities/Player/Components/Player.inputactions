@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MouseMoved",
+                    "name": "Aim",
                     "type": "Value",
                     "id": "fff81bf1-e7a3-47bb-90ac-420d94bfbcab",
                     "expectedControlType": "Vector2",
@@ -78,7 +78,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "WeaponScroll",
+                    "name": "WeaponSwitch",
                     "type": "Value",
                     "id": "41c0dbdd-3629-4cd7-9709-8d2e2106557c",
                     "expectedControlType": "Vector2",
@@ -227,7 +227,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "WeaponScroll",
+                    "action": "WeaponSwitch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -238,7 +238,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "MouseMoved",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

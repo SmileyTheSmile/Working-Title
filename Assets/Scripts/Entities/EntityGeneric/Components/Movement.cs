@@ -6,9 +6,13 @@ public class Movement : CoreComponent
     { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
     private CollisionSenses _collisionSenses;
 
-    private Combat combat
-    { get => _combat ?? core.GetCoreComponent(ref _combat); }
-    private Combat _combat;
+    private WeaponHandler weaponHandler
+    { get => _weaponHandler ?? core.GetCoreComponent(ref _weaponHandler); }
+    private WeaponHandler _weaponHandler;
+
+    private VisualController visualController
+    { get => _visualController ?? core.GetCoreComponent(ref _visualController); }
+    private VisualController _visualController;
 
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider;
@@ -22,15 +26,18 @@ public class Movement : CoreComponent
     private PlayerCrouchingForm crouchingForm;
 
     //Unity Awake
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+        rigidBody = GetComponentInParent<Rigidbody2D>();
+        boxCollider = GetComponentInParent<BoxCollider2D>();
 
-        SetupElements();
-        SetupSupportValues();
+        facingDirection = 1;
+        canSetVelocity = true;
+        defaultSize = boxCollider.size;
+        crouchingForm = PlayerCrouchingForm.notCrouching;
     }
-    
-    //What to do in the Update() function
+
+    //Update the current state's logic (Update)
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -38,28 +45,13 @@ public class Movement : CoreComponent
         currentVelocity = rigidBody.velocity;
     }
 
-    //Setup support values
-    private void SetupSupportValues()
-    {
-        facingDirection = 1;
-        canSetVelocity = true;
-        defaultSize = boxCollider.size;
-        crouchingForm = PlayerCrouchingForm.notCrouching;
-    }
-
-    //Setup component elements
-    private void SetupElements()
-    {
-        rigidBody = GetComponentInParent<Rigidbody2D>();
-        boxCollider = GetComponentInParent<BoxCollider2D>();
-    }
-
     //Flip the entity in the other direction
     public void Flip()
     {
         facingDirection *= -1;
-
-        combat?.FlipCurrentWeapon(facingDirection);
+        
+        weaponHandler?.FlipCurrentWeapon(facingDirection);
+        visualController?.FlipEntity(facingDirection);
     }
     
     //Check if the entity should be flipped
@@ -154,7 +146,6 @@ public class Movement : CoreComponent
     public void SetVelocity(float velocity, Vector2 angle, int facingDirection)
     {
         angle.Normalize();
-
         workspace.Set(angle.x * velocity * facingDirection, angle.y * velocity);
         SetFinalVelocity();
     }

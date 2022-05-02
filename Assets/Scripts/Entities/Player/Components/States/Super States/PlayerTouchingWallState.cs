@@ -39,32 +39,32 @@ public class PlayerTouchingWallState : PlayerState
     {
         base.LogicUpdate();
 
-        inputX = player.inputHandler.normalizedInputX;
-        inputY = player.inputHandler.normalizedInputY;
-        grabInput = player.inputHandler.grabInput;
-        jumpInput = player.inputHandler.jumpInput;
-        crouchInput = player.inputHandler.crouchInput;
+        inputX = inputHandler.normalizedInputX;
+        inputY = inputHandler.normalizedInputY;
+        grabInput = inputHandler.grabInput;
+        jumpInput = inputHandler.jumpInput;
+        crouchInput = inputHandler.crouchInput;
 
         if (jumpInput)
         {
             player.wallJumpState.DetermineWallJumpDirection(isTouchingWall);
-            stateMachine.ChangeState(player.wallJumpState);
+            stateMachine?.ChangeState(player.wallJumpState);
         }
         else if (isGrounded && !grabInput)
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine?.ChangeState(player.idleState);
         }
         else if (isGrounded && crouchInput && !isTouchingCeiling)
         {
-            stateMachine.ChangeState(player.crouchIdleState);
+            stateMachine?.ChangeState(player.crouchIdleState);
         }
         else if (!isTouchingWall || (inputX != movement.facingDirection && !grabInput))
         {
-            stateMachine.ChangeState(player.inAirState);
+            stateMachine?.ChangeState(player.inAirState);
         }
         else if (isTouchingWall && !isTouchingLedge && !isTouchingCeiling)
         {
-            stateMachine.ChangeState(player.ledgeClimbState);
+            stateMachine?.ChangeState(player.ledgeClimbState);
         }
     }
 }
