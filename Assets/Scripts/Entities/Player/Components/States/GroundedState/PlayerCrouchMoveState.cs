@@ -27,7 +27,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        movement?.SetVelocityX(playerData.crouchMovementVelocity * movement.facingDirection);
+        movement?.SetVelocityX(playerData.crouchMovementVelocity * movement.movementDirection);
 
         if (inputX != 0f)
         {

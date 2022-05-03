@@ -22,7 +22,7 @@ public class PlayerDashState : PlayerAbilityState
         canDash = false;
 
         inputHandler?.UseDashInput();
-        dashDirection = Vector2.right * movement.facingDirection;
+        dashDirection = Vector2.right * movement.movementDirection;
 
         Time.timeScale = playerData.holdTimeScale;
         startTime = Time.unscaledTime;
@@ -70,7 +70,7 @@ public class PlayerDashState : PlayerAbilityState
                 Time.timeScale = 1f;
                 startTime = Time.time;
 
-                movement?.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
+                movement?.CheckMovementDirection(Mathf.RoundToInt(dashDirection.x));
                 movement?.SetVelocity(playerData.dashVelocity, dashDirection);
 
                 movement?.SetDrag(playerData.drag);

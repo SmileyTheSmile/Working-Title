@@ -34,7 +34,7 @@ public class Enemy1_IdleState : Enemy1State
 
         if (flipAfterIdle)
         {
-            movement?.Flip();
+            //movement?.Flip();
         }
     }
 

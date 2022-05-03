@@ -26,22 +26,11 @@ public class Player : EntityGeneric
 
     [SerializeField] private PlayerData playerData;
 
-    public PlayerInventory inventory { get; private set; }
-
-    protected override void Awake()
+    private void Start()
     {
         base.Awake();
 
-        inventory = GetComponent<PlayerInventory>();
-    }
-
-    private void Start()
-    {
         SetupStates();
-        
-        SetupWeapons();
-
-        //Time.timeScale = playerData.holdTimeScale;
     }
 
     //Create all the player states
@@ -70,13 +59,6 @@ public class Player : EntityGeneric
         secondaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
         
         stateMachine.Initialize(idleState);
-    }
-
-    //Create all the player states
-    private void SetupWeapons()
-    {
-        //primaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
-        secondaryAttackState.SetWeapon(inventory.weapons[(int)CombatInputs.primary]);
     }
 
     //Draw gizmos

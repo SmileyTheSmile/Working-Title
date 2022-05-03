@@ -53,19 +53,19 @@ public class CollisionSenses : CoreComponent
     //Check if entity is touching a wall in front of it
     public bool WallFront  
     {
-        get => Physics2D.Raycast(wallCheck.position, Vector2.right * movement.facingDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.Raycast(wallCheck.position, Vector2.right * movement.movementDirection, wallCheckDistance, whatIsGround);
     }
 
     //Check if entity is touching a wall at its back
     public bool WallBack 
     {
-        get => Physics2D.Raycast(wallCheck.position, Vector2.right * -movement.facingDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.Raycast(wallCheck.position, Vector2.right * -movement.movementDirection, wallCheckDistance, whatIsGround);
     }
 
     //Check if entity is nearing a ledge when wall climbing
     public bool LedgeHorizontal 
     {
-        get => Physics2D.Raycast(ledgeCheckHorizontal.position, Vector2.right * movement.facingDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.Raycast(ledgeCheckHorizontal.position, Vector2.right * movement.movementDirection, wallCheckDistance, whatIsGround);
     }
 
     //Check if entity is standing on a ledge

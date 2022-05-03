@@ -19,7 +19,7 @@ public class VisualController : CoreComponent
     //Flip the entity left or right
     public void FlipEntity(int facingDirection)
     {
-        facingDirectionIndicator.Rotate(0f, 180f * facingDirection, 0f);
+        facingDirectionIndicator.Rotate(0f, 180 * facingDirection, 0f);
     }
 
     //Set the animation bool in the animator

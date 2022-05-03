@@ -14,6 +14,7 @@ public class TempShootScript : MonoBehaviour
     private Movement _movement;
 
     [SerializeField] private Transform gun;
+    [SerializeField] private Transform primary;
     [SerializeField] private Transform cursor;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
@@ -58,8 +59,11 @@ public class TempShootScript : MonoBehaviour
         gunDirection = (mousePositionInput - gun.position).normalized;
         
         angle = Vector2.SignedAngle(Vector2.right, gunDirection);
-        gun.rotation = Quaternion.Euler(0f, 0f, angle);
+        movement.CheckFacingDirection(mousePositionInput, core.transform.position);
+        float flipAngle = (movement.facingDirection == -1) ? 180f : 0f;
 
+        gun.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
+        primary.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void ShootProjectile()

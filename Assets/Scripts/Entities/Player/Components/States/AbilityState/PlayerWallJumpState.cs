@@ -20,7 +20,7 @@ public class PlayerWallJumpState : PlayerAbilityState
         player.jumpState.DecreaseAmountOfJumpsLeft();
 
         movement?.SetVelocity(playerData.wallJumpVelocity, wallJumpAngle, wallJumpDirection);
-        movement?.CheckIfShouldFlip(wallJumpDirection);
+        movement?.CheckMovementDirection(wallJumpDirection);
 
         isAbilityDone = true;
     }
@@ -41,6 +41,6 @@ public class PlayerWallJumpState : PlayerAbilityState
 */
     public void DetermineWallJumpDirection(bool isTouchingWall)
     {
-        wallJumpDirection = (isTouchingWall ? -1 : 1) * movement.facingDirection;
+        wallJumpDirection = (isTouchingWall ? -1 : 1) * movement.movementDirection;
     }
 }

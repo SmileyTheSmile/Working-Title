@@ -64,7 +64,7 @@ public class PlayerGroundedState : PlayerState
         crouchInput = inputHandler.crouchInput;
         mousePositionInput = inputHandler.mousePositionInput;
 
-        movement?.CheckIfShouldFlip(inputX, mousePositionInput.x);
+        movement?.CheckMovementDirection(inputX);
 
         //Ability States
         if (inputHandler.attackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)

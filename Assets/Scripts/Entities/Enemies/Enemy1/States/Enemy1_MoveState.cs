@@ -23,7 +23,7 @@ public class Enemy1_MoveState : Enemy1State
     {
         base.Enter();
 
-        movement?.SetVelocityX(enemyData.movementVelocity * movement.facingDirection);
+        movement?.SetVelocityX(enemyData.movementVelocity * movement.movementDirection);
 
         isDetectingLedge = collisionSenses.LedgeVertical;
         isDetectingWall = collisionSenses.WallFront;

@@ -8,7 +8,6 @@ public class CoreComponent : MonoBehaviour
     public virtual void Initialize(Core core)
     {
         this.core = core;
-        Debug.Log(this);
     }
     
     

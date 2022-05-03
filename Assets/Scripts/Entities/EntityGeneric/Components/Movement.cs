@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Movement : CoreComponent
@@ -17,6 +18,7 @@ public class Movement : CoreComponent
     private Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider;
 
+    public int movementDirection { get; private set; }
     public int facingDirection { get; private set; }
     public Vector2 currentVelocity { get; private set; }
     public Vector2 defaultSize { get; private set; }
@@ -31,6 +33,7 @@ public class Movement : CoreComponent
         rigidBody = GetComponentInParent<Rigidbody2D>();
         boxCollider = GetComponentInParent<BoxCollider2D>();
 
+        movementDirection = 1;
         facingDirection = 1;
         canSetVelocity = true;
         defaultSize = boxCollider.size;
@@ -49,25 +52,30 @@ public class Movement : CoreComponent
     public void Flip()
     {
         facingDirection *= -1;
-        
-        weaponHandler?.FlipCurrentWeapon(facingDirection);
+
+        //weaponHandler?.FlipCurrentWeapon(facingDirection);
         visualController?.FlipEntity(facingDirection);
     }
     
-    //Check if the entity should be flipped
-    public void CheckIfShouldFlip(int inputX)
+    //Change the movement direction of the entity based on the x input
+    public void CheckMovementDirection(int inputX)
     {
-        if (inputX != 0 && inputX != facingDirection)
+        if (inputX != 0 && inputX != movementDirection)
         {
-            Flip();
+            movementDirection *= -1;
         }
     }
-    
-    //Check if the entity should be flipped
-    public void CheckIfShouldFlip(int inputX, float mousePosX)
+
+    //Change the facing direction of the entity based on the mouse position
+    public void CheckFacingDirection(Vector2 mousePos, Vector2 playerPos)
     {
-        if ((inputX != 0 && inputX != facingDirection) || (Mathf.Sign(mousePosX) != facingDirection && inputX == 0)
-        || (Mathf.Sign(mousePosX) != facingDirection && inputX == facingDirection))
+        Vector2 mouseDirection = (mousePos - playerPos).normalized;
+
+        float angle = Vector2.SignedAngle(Vector2.right, mouseDirection);
+        angle = (angle > 90) ? angle - 270 : angle + 90;
+        Debug.Log(angle);
+
+        if (Math.Sign(angle) != facingDirection) //(angle > 90 || angle < -90) -left
         {
             Flip();
         }

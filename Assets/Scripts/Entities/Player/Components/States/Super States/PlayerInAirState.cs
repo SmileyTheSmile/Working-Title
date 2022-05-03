@@ -92,7 +92,7 @@ public class PlayerInAirState : PlayerState
         CheckCoyoteTime();
         CheckWallJumpCoyoteTime();
         
-        movement?.CheckIfShouldFlip(inputX, mousePositionInput.x);
+        movement?.CheckMovementDirection(inputX);
 
         if (inputHandler.attackInputs[(int)CombatInputs.primary])
         {
@@ -142,7 +142,7 @@ public class PlayerInAirState : PlayerState
             {
                 stateMachine?.ChangeState(player.wallGrabState);
             }
-            else if (inputX == movement.facingDirection && movement.currentVelocity.y <= 0f)
+            else if (inputX == movement.movementDirection && movement.currentVelocity.y <= 0f)
             {
                 stateMachine?.ChangeState(player.wallSlideState);
             }
