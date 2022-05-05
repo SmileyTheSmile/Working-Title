@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Events;
 using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : CoreComponent
@@ -18,6 +19,7 @@ public class PlayerInputHandler : CoreComponent
 
     [SerializeField] private float inputHoldTime = 0.2f;
 
+    [SerializeField] private EventListener _updateEventListener;
 
     private PlayerInput playerInput;
     private Camera mainCamera;
@@ -36,6 +38,16 @@ public class PlayerInputHandler : CoreComponent
 
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
         attackInputs = new bool[count];
+    }
+
+    private void OnEnable()
+    {
+        _updateEventListener.OnEventHappened += LogicUpdate;
+    }
+
+    private void OnDisable()
+    {
+        _updateEventListener.OnEventHappened -= LogicUpdate;
     }
 
     public override void LogicUpdate()
