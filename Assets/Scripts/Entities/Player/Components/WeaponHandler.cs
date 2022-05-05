@@ -11,8 +11,6 @@ public class WeaponHandler : CoreComponent
     
     private TempShootScript weapon;
 
-    private PlayerInventory inventory;
-
     //Unity Awake
     private void Awake()
     {
