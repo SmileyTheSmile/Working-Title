@@ -225,7 +225,7 @@
                     "id": "b9e19e0d-1ba3-4b46-9806-3af69a0b1905",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "groups": "Keyboard",
                     "action": "WeaponSwitch",
                     "isComposite": false,

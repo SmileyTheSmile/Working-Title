@@ -56,14 +56,15 @@ public class TempShootScript : MonoBehaviour
 
     private void HandleAiming()
     {
-        gunDirection = (mousePositionInput - gun.position).normalized;
+        gunDirection = (mousePositionInput - primary.position).normalized;
         
         angle = Vector2.SignedAngle(Vector2.right, gunDirection);
         movement.CheckFacingDirection(mousePositionInput, core.transform.position);
         float flipAngle = (movement.facingDirection == -1) ? 180f : 0f;
 
         gun.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
-        primary.localRotation = Quaternion.Euler(0f, 0f, angle);
+        primary.right = gunDirection;
+        //primary.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void ShootProjectile()

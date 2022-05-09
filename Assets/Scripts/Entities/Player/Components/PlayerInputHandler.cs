@@ -19,8 +19,6 @@ public class PlayerInputHandler : CoreComponent
 
     [SerializeField] private float inputHoldTime = 0.2f;
 
-    [SerializeField] private EventListener _updateEventListener;
-
     private PlayerInput playerInput;
     private Camera mainCamera;
 
@@ -40,17 +38,7 @@ public class PlayerInputHandler : CoreComponent
         attackInputs = new bool[count];
     }
 
-    private void OnEnable()
-    {
-        _updateEventListener.OnEventHappened += LogicUpdate;
-    }
-
-    private void OnDisable()
-    {
-        _updateEventListener.OnEventHappened -= LogicUpdate;
-    }
-
-    public override void LogicUpdate()
+    private void Update()
     {
         base.LogicUpdate();
 
@@ -168,7 +156,8 @@ public class PlayerInputHandler : CoreComponent
     {
         rawWeaponSwitchInput = context.ReadValue<Vector2>().y;
 
-        weaponSwitchInput = Math.Sign(rawWeaponSwitchInput);
+        weaponSwitchInput = (int)rawWeaponSwitchInput;
+        Debug.Log(weaponSwitchInput);
     }
     
     //Check if jump button has been held for the value in inputHoldTime

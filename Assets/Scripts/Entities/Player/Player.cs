@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : EntityGeneric
+public partial class Player : EntityGeneric
 {
     public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState { get; private set; }

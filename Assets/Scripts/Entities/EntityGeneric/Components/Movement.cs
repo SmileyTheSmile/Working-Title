@@ -73,7 +73,6 @@ public class Movement : CoreComponent
 
         float angle = Vector2.SignedAngle(Vector2.right, mouseDirection);
         angle = (angle > 90) ? angle - 270 : angle + 90;
-        Debug.Log(angle);
 
         if (Math.Sign(angle) != facingDirection) //(angle > 90 || angle < -90) -left
         {
