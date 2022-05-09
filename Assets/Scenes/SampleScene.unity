@@ -12997,8 +12997,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc080c8c784a5f649920ceca0ff69c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxKnockbackTime: 0.2
-  maxHealth: 0
+  _maxKnockbackTime: 0.2
+  _maxHealth: 0
 --- !u!61 &165142410
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13403,21 +13403,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98054dcf220f61e4d89d5e37ebfb9864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheck: {fileID: 150496759}
-  ceilingCheck: {fileID: 218465561}
-  wallCheck: {fileID: 2047956560}
-  ledgeCheckHorizontal: {fileID: 1541864964}
-  ledgeCheckVertical: {fileID: 0}
-  whatIsGround:
+  _groundCheck: {fileID: 150496759}
+  _ceilingCheck: {fileID: 218465561}
+  _wallCheck: {fileID: 2047956560}
+  _ledgeCheckHorizontal: {fileID: 1541864964}
+  _ledgeCheckVertical: {fileID: 0}
+  _whatIsGround:
     serializedVersion: 2
-    m_Bits: 136
-  groundCheckHeight: 0.2
-  groundCheckWidth: 0.5
-  groundWidthOffset: 0.05
-  ceilingCheckHeight: 0.2
-  ceilingCheckWidth: 0.5
-  ceilingWidthOffset: 0.05
-  wallCheckDistance: 0.6
+    m_Bits: 8
+  _groundCheckHeight: 0.2
+  _groundWidthOffset: 0.05
+  _ceilingCheckHeight: 0.2
+  _ceilingWidthOffset: 0.5
+  _wallCheckDistance: 0.6
 --- !u!1 &381208190
 GameObject:
   m_ObjectHideFlags: 3
@@ -13787,7 +13785,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1487311952}
-  - {fileID: 1566983278}
   m_Father: {fileID: 1300811251}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14213,8 +14210,8 @@ Transform:
   m_Children:
   - {fileID: 1321339110}
   - {fileID: 826608070}
-  m_Father: {fileID: 1566983278}
-  m_RootOrder: 0
+  m_Father: {fileID: 1487311952}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &870148616
 MonoBehaviour:
@@ -103480,8 +103477,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc080c8c784a5f649920ceca0ff69c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxKnockbackTime: 0.2
-  maxHealth: 0
+  _maxKnockbackTime: 0.2
+  _maxHealth: 0
 --- !u!61 &1212055986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -103865,7 +103862,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1487311952}
   m_Layer: 6
-  m_Name: Primary
+  m_Name: WeaponHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103884,6 +103881,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1018350866}
+  - {fileID: 870148615}
   m_Father: {fileID: 724419621}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103951,38 +103949,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 274567565}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1566983277
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1566983278}
-  m_Layer: 6
-  m_Name: Secondary
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1566983278
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1566983277}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 870148615}
-  m_Father: {fileID: 724419621}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1690227111
 GameObject:
@@ -104416,21 +104382,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98054dcf220f61e4d89d5e37ebfb9864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheck: {fileID: 0}
-  ceilingCheck: {fileID: 0}
-  wallCheck: {fileID: 0}
-  ledgeCheckHorizontal: {fileID: 0}
-  ledgeCheckVertical: {fileID: 0}
-  whatIsGround:
+  _groundCheck: {fileID: 0}
+  _ceilingCheck: {fileID: 0}
+  _wallCheck: {fileID: 0}
+  _ledgeCheckHorizontal: {fileID: 0}
+  _ledgeCheckVertical: {fileID: 0}
+  _whatIsGround:
     serializedVersion: 2
     m_Bits: 0
-  groundCheckHeight: 0.2
-  groundCheckWidth: 0.5
-  groundWidthOffset: 0
-  ceilingCheckHeight: 0.2
-  ceilingCheckWidth: 0.5
-  ceilingWidthOffset: 0.01
-  wallCheckDistance: 0.5
+  _groundCheckHeight: 0.2
+  _groundWidthOffset: 0.05
+  _ceilingCheckHeight: 0.2
+  _ceilingWidthOffset: 0.5
+  _wallCheckDistance: 0.6
 --- !u!1 &1919490865
 GameObject:
   m_ObjectHideFlags: 0
@@ -104478,7 +104442,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.7172859, y: 1}
+    m_SensorSize: {x: 3.7205172, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

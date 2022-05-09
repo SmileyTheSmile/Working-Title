@@ -42,7 +42,7 @@ public class Enemy1_IdleState : Enemy1State
     {
         base.LogicUpdate();
 
-        if (Time.time >= startTime + idleTime)
+        if (Time.time >= _startTime + idleTime)
         {
             isIdleTimeOver = true;
             stateMachine.ChangeState(enemy.moveState);

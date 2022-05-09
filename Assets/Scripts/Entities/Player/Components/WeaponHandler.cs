@@ -7,8 +7,8 @@ public class WeaponHandler : CoreComponent
     private Player player;
 
     [SerializeField] private Transform currentWeapon;
-    [SerializeField] private Weapon[] weapons;
-    
+    [SerializeField] private Weapon[] primaryWeapons;
+    [SerializeField] private Weapon[] secondaryWeapons;
     private TempShootScript weapon;
 
     //Unity Awake
@@ -25,15 +25,16 @@ public class WeaponHandler : CoreComponent
     }
 
     //Flip the current weapon
-    public void FlipCurrentWeapon(int facingDirection)
+    public void FlipWeapon(int facingDirection)
     {
         float flipAngle = (facingDirection == -1) ? 180f : 0f;
-        currentWeapon.rotation = Quaternion.Euler(currentWeapon.rotation.x, flipAngle, currentWeapon.rotation.z);
+
+        currentWeapon.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
     }
 
     private void SetupWeapons()
     {
-        //primaryAttackState.SetWeapon(weapons[(int)CombatInputs.primary]);
-        player.secondaryAttackState.SetWeapon(weapons[(int)CombatInputs.primary]);
+        player.primaryAttackState.SetWeapon(primaryWeapons[0]);
+        player.secondaryAttackState.SetWeapon(secondaryWeapons[0]);
     }
 }

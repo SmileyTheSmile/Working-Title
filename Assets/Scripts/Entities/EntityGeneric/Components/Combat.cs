@@ -3,24 +3,24 @@ using UnityEngine;
 public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
     private CollisionSenses collisionSenses
-    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+    { get => _collisionSenses ?? _core.GetCoreComponent(ref _collisionSenses); }
     private CollisionSenses _collisionSenses;
 
     private Movement movement
-    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    [SerializeField] private float maxKnockbackTime = 0.2f;
-    [SerializeField] private float maxHealth;
+    [SerializeField] private float _maxKnockbackTime = 0.2f;
+    [SerializeField] private float _maxHealth;
 
-    private bool isKnockbackActive = false;
-    private float knockbackStartTime;
-    private float currentHealth;
+    private bool _isKnockbackActive = false;
+    private float _knockbackStartTime;
+    private float _currentHealth;
 
     //Unity Awake
     private void Awake()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
 
     //Update the component's logic (Update)
@@ -43,29 +43,29 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
         movement?.SetVelocity(strength, angle, direction);
         movement?.SetCanChangeVelocity(false);
 
-        isKnockbackActive = true;
-        knockbackStartTime = Time.time;
+        _isKnockbackActive = true;
+        _knockbackStartTime = Time.time;
     }
 
     //Check if knockback should be stopped
     private void CheckKnockback()
     {
-        if ((isKnockbackActive && movement.currentVelocity.y <= 0.0f && collisionSenses.Ground) || (Time.time >= knockbackStartTime + maxKnockbackTime))
+        if ((_isKnockbackActive && movement.currentVelocity.y <= 0.0f && collisionSenses.Ground) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
         {
             movement?.SetCanChangeVelocity(true);
 
-            isKnockbackActive = false;
+            _isKnockbackActive = false;
         }
     }
 
     //Decrease the health of entity
     public void DecreaseHealth(float amount)
     {
-        currentHealth -= amount;
+        _currentHealth -= amount;
 
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
-            currentHealth = 0;
+            _currentHealth = 0;
             Debug.Log("Health is 0");
         }
     }
@@ -73,6 +73,6 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Increase the health of entity
     public void IncreaseHealth(float amount)
     {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
     }
 }

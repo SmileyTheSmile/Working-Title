@@ -166,7 +166,7 @@ public class PlayerInAirState : PlayerState
 
     private void CheckCoyoteTime()
     {
-        if (coyoteTime && Time.time > startTime + playerData.coyoteTime)
+        if (coyoteTime && Time.time > _startTime + playerData.coyoteTime)
         {
             coyoteTime = false;
             player.jumpState.DecreaseAmountOfJumpsLeft();

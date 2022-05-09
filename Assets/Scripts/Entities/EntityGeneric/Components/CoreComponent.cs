@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class CoreComponent : MonoBehaviour
 {
-    protected Core core;
+    protected Core _core;
 
     //Initialize the component
     public virtual void Initialize(Core core)
     {
-        this.core = core;
+        this._core = core;
     }
     
     

@@ -4,15 +4,15 @@ using UnityEngine;
 public class Movement : CoreComponent
 {
     private CollisionSenses collisionSenses
-    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+    { get => _collisionSenses ?? _core.GetCoreComponent(ref _collisionSenses); }
     private CollisionSenses _collisionSenses;
 
     private WeaponHandler weaponHandler
-    { get => _weaponHandler ?? core.GetCoreComponent(ref _weaponHandler); }
+    { get => _weaponHandler ?? _core.GetCoreComponent(ref _weaponHandler); }
     private WeaponHandler _weaponHandler;
 
     private VisualController visualController
-    { get => _visualController ?? core.GetCoreComponent(ref _visualController); }
+    { get => _visualController ?? _core.GetCoreComponent(ref _visualController); }
     private VisualController _visualController;
 
     private Rigidbody2D rigidBody;
@@ -23,9 +23,9 @@ public class Movement : CoreComponent
     public Vector2 currentVelocity { get; private set; }
     public Vector2 defaultSize { get; private set; }
 
-    private bool canSetVelocity;
-    private Vector2 workspace;
-    private PlayerCrouchingForm crouchingForm;
+    private bool _canSetVelocity;
+    private Vector2 _workspace;
+    private PlayerCrouchingForm _crouchingForm;
 
     //Unity Awake
     private void Awake()
@@ -35,9 +35,9 @@ public class Movement : CoreComponent
 
         movementDirection = 1;
         facingDirection = 1;
-        canSetVelocity = true;
+        _canSetVelocity = true;
         defaultSize = boxCollider.size;
-        crouchingForm = PlayerCrouchingForm.notCrouching;
+        _crouchingForm = PlayerCrouchingForm.notCrouching;
     }
 
     //Update the current state's logic (Update)
@@ -53,7 +53,7 @@ public class Movement : CoreComponent
     {
         facingDirection *= -1;
 
-        //weaponHandler?.FlipCurrentWeapon(facingDirection);
+        weaponHandler?.FlipWeapon(facingDirection);
         visualController?.FlipEntity(facingDirection);
     }
     
@@ -83,9 +83,9 @@ public class Movement : CoreComponent
     //Set the entity crouching state to crouchingDown and squash the collider accordingly
     public void CrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
     {
-        if (crouchingForm == PlayerCrouchingForm.notCrouching && crouchInput)
+        if (_crouchingForm == PlayerCrouchingForm.notCrouching && crouchInput)
         {
-            crouchingForm = PlayerCrouchingForm.crouchingDown;
+            _crouchingForm = PlayerCrouchingForm.crouchingDown;
 
             SquashColliderDown(biggerHeight, smallerHeight);
         }
@@ -94,10 +94,10 @@ public class Movement : CoreComponent
     //Set the entity crouching state to notCrouching and unsquash the collider accordingly
     public void UnCrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
     {
-        if (((crouchingForm == PlayerCrouchingForm.crouchingDown && !crouchInput)
+        if (((_crouchingForm == PlayerCrouchingForm.crouchingDown && !crouchInput)
         || (!collisionSenses.WallFront)) && !collisionSenses.Ceiling)
         {
-            crouchingForm = PlayerCrouchingForm.notCrouching;
+            _crouchingForm = PlayerCrouchingForm.notCrouching;
 
             ResetColliderHeight(biggerHeight, smallerHeight);
         }
@@ -132,20 +132,20 @@ public class Movement : CoreComponent
     //Set wether you can set entity's velocity or not
     public void SetCanChangeVelocity(bool value)
     {
-        canSetVelocity = value;
+        _canSetVelocity = value;
     }
 
     //Set the X velocity of the entity
     public void SetVelocityX(float velocity) 
     {
-        workspace.Set(velocity, currentVelocity.y);
+        _workspace.Set(velocity, currentVelocity.y);
         SetFinalVelocity();
     }
 
     //Set the Y velocity of the entity
     public void SetVelocityY(float velocity)
     {
-        workspace.Set(currentVelocity.x, velocity);
+        _workspace.Set(currentVelocity.x, velocity);
         SetFinalVelocity();
     }
 
@@ -153,55 +153,55 @@ public class Movement : CoreComponent
     public void SetVelocity(float velocity, Vector2 angle, int facingDirection)
     {
         angle.Normalize();
-        workspace.Set(angle.x * velocity * facingDirection, angle.y * velocity);
+        _workspace.Set(angle.x * velocity * facingDirection, angle.y * velocity);
         SetFinalVelocity();
     }
 
     //Set the velocity of the entity considering facingDirection
     public void SetVelocity(float velocity, Vector2 facingDirection)
     {
-        workspace = velocity * facingDirection;
+        _workspace = velocity * facingDirection;
         SetFinalVelocity();
     }
 
     //Set the velocity of the entity to 0
     public void SetVelocityZero()
     {
-        workspace = Vector2.zero;
+        _workspace = Vector2.zero;
         SetFinalVelocity();
     }
 
     //Set the velocity of the entity to workspace vector
     public void SetFinalVelocity()
     {
-        if (canSetVelocity)
+        if (_canSetVelocity)
         {
-            rigidBody.velocity = workspace;
-            currentVelocity = workspace;
+            rigidBody.velocity = _workspace;
+            currentVelocity = _workspace;
         }
     }
 
     //Set the size of the entity's collider
     public void SetColliderSize(float width, float height)
     {
-        workspace.Set(width, height);
-        boxCollider.size = workspace;
+        _workspace.Set(width, height);
+        boxCollider.size = _workspace;
     }
 
     //Set the Y offset of the entity's collider
     public void SetColliderOffsetY(float offsetY)
     {
-        workspace = boxCollider.offset;
-        workspace.y += offsetY;
-        boxCollider.offset = workspace;
+        _workspace = boxCollider.offset;
+        _workspace.y += offsetY;
+        boxCollider.offset = _workspace;
     }
 
     //Set the X, Y offset of the entity's collider
     public void SetOffset(float offsetX, float offsetY)
     {
-        workspace = boxCollider.offset;
-        workspace += new Vector2(offsetX, offsetY);
-        boxCollider.offset = workspace;
+        _workspace = boxCollider.offset;
+        _workspace += new Vector2(offsetX, offsetY);
+        boxCollider.offset = _workspace;
     }
 
     public void AddForceAtAngle(float force, float angle)

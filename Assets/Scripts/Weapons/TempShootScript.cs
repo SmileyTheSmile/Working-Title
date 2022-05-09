@@ -6,12 +6,11 @@ public class TempShootScript : MonoBehaviour
 {
     protected Movement movement
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
+    private Movement _movement;
 
     protected PlayerInputHandler inputHandler
     { get => _inputHandler ?? core.GetCoreComponent(ref _inputHandler); }
     private PlayerInputHandler _inputHandler;
-
-    private Movement _movement;
 
     [SerializeField] private Transform gun;
     [SerializeField] private Transform primary;
@@ -60,11 +59,7 @@ public class TempShootScript : MonoBehaviour
         
         angle = Vector2.SignedAngle(Vector2.right, gunDirection);
         movement.CheckFacingDirection(mousePositionInput, core.transform.position);
-        float flipAngle = (movement.facingDirection == -1) ? 180f : 0f;
-
-        gun.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
-        primary.right = gunDirection;
-        //primary.localRotation = Quaternion.Euler(0f, 0f, angle);
+        primary.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void ShootProjectile()

@@ -22,7 +22,7 @@ public class PlayerLandState : PlayerGroundedState
         }
         else
         {
-            if (isAnimationFinished)
+            if (_isAnimationFinished)
             {
                 if (crouchInput)
                 {

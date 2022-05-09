@@ -47,6 +47,12 @@ public class Weapon : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void InitializeWeapon(PlayerAttackState state, Core core)
+    {
+        this.state = state;
+        this.core = core;
+    }
+
     public virtual void AnimationTurnOffFlipTrigger()
     {
         state.SetFlipCheck(false);
@@ -70,12 +76,6 @@ public class Weapon : MonoBehaviour
     public virtual void AnimationStopMovementTrigger()
     {
         state.SetPlayerVelocity(0f);
-    }
-
-    public void InitializeWeapon(PlayerAttackState state, Core core)
-    {
-        this.state = state;
-        this.core = core;
     }
 
     public virtual void AnimationActionTrigger() { }

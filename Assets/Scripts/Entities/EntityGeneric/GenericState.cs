@@ -14,15 +14,15 @@ public abstract class GenericState
 
     protected Core core;
 
-    protected float startTime;
-    protected bool isAnimationFinished;
-    protected bool isExitingState;
-    protected string animBoolName;
+    protected float _startTime;
+    protected bool _isAnimationFinished;
+    protected bool _isExitingState;
+    protected string _animBoolName;
 
     public GenericState(FiniteStateMachine stateMachine, string animBoolName)
     {
         this._stateMachine = stateMachine;
-        this.animBoolName = animBoolName;
+        this._animBoolName = animBoolName;
     }
 
     //What to do when entering the state
@@ -30,21 +30,21 @@ public abstract class GenericState
     {
         DoChecks();
 
-        startTime = Time.time;
-        isExitingState = false;
-        isAnimationFinished = false;
+        _startTime = Time.time;
+        _isExitingState = false;
+        _isAnimationFinished = false;
     }
 
     //What to do when exiting the state
     public virtual void Exit()
     {
-        isExitingState = true;
+        _isExitingState = true;
     }
 
     //Update the component's logic (Update)
     public virtual void LogicUpdate()
     {
-        if (isExitingState)
+        if (_isExitingState)
         {
             return;
         }
@@ -61,5 +61,5 @@ public abstract class GenericState
     //What to do in animation events in Animator
     public virtual void AnimationTrigger() { }
     //What to do on finished animation in Animator
-    public virtual void AnimationFinishedTrigger() => isAnimationFinished = true; 
+    public virtual void AnimationFinishedTrigger() => _isAnimationFinished = true; 
 }

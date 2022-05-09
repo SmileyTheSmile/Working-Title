@@ -10,7 +10,7 @@ public class EntityGeneric : MonoBehaviour
     }
     private Core _core;
 
-    protected FiniteStateMachine stateMachine
+    public FiniteStateMachine stateMachine
     { get => _stateMachine ?? core.GetCoreComponent(ref _stateMachine); }
     private FiniteStateMachine _stateMachine;
 

@@ -40,7 +40,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
         }
         else
         {
-            if (isAnimationFinished)
+            if (_isAnimationFinished)
             {
                 if (crouchInput)
                 {

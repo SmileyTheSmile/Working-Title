@@ -1,85 +1,74 @@
+using System.ComponentModel.Design;
 using UnityEngine;
 
 public class CollisionSenses : CoreComponent
 {
-    private Movement movement
-    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+    public Movement movement
+    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform ceilingCheck;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private Transform ledgeCheckHorizontal;
-    [SerializeField] private Transform ledgeCheckVertical;
-    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private Transform _ceilingCheck;
+    [SerializeField] private Transform _wallCheck;
+    [SerializeField] private Transform _ledgeCheckHorizontal;
+    [SerializeField] private Transform _ledgeCheckVertical;
+    [SerializeField] private LayerMask _whatIsGround;
 
-    [SerializeField] private float groundCheckHeight = 0.2f;
-    [SerializeField] private float groundCheckWidth = 0.5f;
-    [SerializeField] private float groundWidthOffset = 0.05f;
-    [SerializeField] private float ceilingCheckHeight = 0.2f;
-    [SerializeField] private float ceilingCheckWidth = 0.5f;
-    [SerializeField] private float ceilingWidthOffset = 0.5f;
-    [SerializeField] private float wallCheckDistance = 0.6f;
+    [SerializeField] private float _groundCheckHeight = 0.2f;
+    [SerializeField] private float _groundWidthOffset = 0.05f;
+    [SerializeField] private float _ceilingCheckHeight = 0.2f;
+    [SerializeField] private float _ceilingWidthOffset = 0.5f;
+    [SerializeField] private float _wallCheckDistance = 0.6f;
 
-    private float halfCeilingCheckWidth;
-    private float halfCeilingCheckHeight;
-    private float halfGroundCheckWidth;
-    private float halfGroundCheckHeight;
-
-    //Unity Start
-    private void Start()
-    {
-        groundCheckWidth = movement.defaultSize.x - groundWidthOffset;
-        ceilingCheckWidth = movement.defaultSize.y - ceilingWidthOffset;
-
-        halfCeilingCheckWidth = groundCheckWidth / 2;
-        halfCeilingCheckHeight = groundCheckHeight / 2;
-        halfGroundCheckWidth = groundCheckWidth / 2;
-        halfGroundCheckHeight = groundCheckHeight / 2;
-    }
+    private float _groundCheckWidth => movement.defaultSize.x - _groundWidthOffset;
+    private float _ceilingCheckWidth => movement.defaultSize.y - _ceilingWidthOffset;
+    private float _halfCeilingCheckWidth => _groundCheckWidth / 2;
+    private float _halfCeilingCheckHeight => _groundCheckHeight / 2;
+    private float _halfGroundCheckWidth => _groundCheckWidth / 2;
+    private float _halfGroundCheckHeight => _groundCheckHeight / 2;
 
     //Check if entity is grounded
     public bool Ground 
     {
-        get => (Physics2D.OverlapBox(groundCheck.position, new Vector2(groundCheckWidth, groundCheckHeight), 0f, whatIsGround));
+        get => (Physics2D.OverlapBox(_groundCheck.position, new Vector2(_groundCheckWidth, _groundCheckHeight), 0f, _whatIsGround));
     }
 
     //Check if entity is touching ceiling
     public bool Ceiling 
     {
-        get => Physics2D.OverlapBox(ceilingCheck.position, new Vector2(ceilingCheckWidth, ceilingCheckHeight), 0f, whatIsGround);
+        get => Physics2D.OverlapBox(_ceilingCheck.position, new Vector2(_ceilingCheckWidth, _ceilingCheckHeight), 0f, _whatIsGround);
     }
 
     //Check if entity is touching a wall in front of it
     public bool WallFront  
     {
-        get => Physics2D.Raycast(wallCheck.position, Vector2.right * movement.movementDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.Raycast(_wallCheck.position, Vector2.right * movement.movementDirection, _wallCheckDistance, _whatIsGround);
     }
 
     //Check if entity is touching a wall at its back
     public bool WallBack 
     {
-        get => Physics2D.Raycast(wallCheck.position, Vector2.right * -movement.movementDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.Raycast(_wallCheck.position, Vector2.right * -movement.movementDirection, _wallCheckDistance, _whatIsGround);
     }
 
     //Check if entity is nearing a ledge when wall climbing
     public bool LedgeHorizontal 
     {
-        get => Physics2D.Raycast(ledgeCheckHorizontal.position, Vector2.right * movement.movementDirection, wallCheckDistance, whatIsGround);
+        get => Physics2D.Raycast(_ledgeCheckHorizontal.position, Vector2.right * movement.movementDirection, _wallCheckDistance, _whatIsGround);
     }
 
     //Check if entity is standing on a ledge
     public bool LedgeVertical 
     {
-        get => Physics2D.Raycast(ledgeCheckVertical.position, Vector2.down, wallCheckDistance, whatIsGround);
+        get => Physics2D.Raycast(_ledgeCheckVertical.position, Vector2.down, _wallCheckDistance, _whatIsGround);
     }
 
     //Move the ceiling check point position
     public void MoveCeilingCheck(float oldHeight, float newHeight, float defaultColliderHeight)
     {
-        if (ceilingCheck)
+        if (_ceilingCheck)
         {
-            ceilingCheck.transform.position += Vector3.up * ((oldHeight - newHeight) * defaultColliderHeight);
+            _ceilingCheck.transform.position += Vector3.up * ((oldHeight - newHeight) * defaultColliderHeight);
         }
     }
 
@@ -92,30 +81,30 @@ public class CollisionSenses : CoreComponent
     //Draw gizmos
     void OnDrawGizmos() 
     {
-        if (groundCheck)
+        if (_groundCheck)
         {
             if (Ground)
                 UnityEditor.Handles.color = Color.green;
             else
                 UnityEditor.Handles.color = Color.blue;
 
-            UnityEditor.Handles.DrawLine(new Vector2(groundCheck.position.x - halfGroundCheckWidth, groundCheck.position.y + halfGroundCheckHeight), new Vector2(groundCheck.position.x + halfGroundCheckWidth, groundCheck.position.y + halfGroundCheckHeight));
-            UnityEditor.Handles.DrawLine(new Vector2(groundCheck.position.x - halfGroundCheckWidth, groundCheck.position.y + halfGroundCheckHeight), new Vector2(groundCheck.position.x - halfGroundCheckWidth, groundCheck.position.y - halfGroundCheckHeight));
-            UnityEditor.Handles.DrawLine(new Vector2(groundCheck.position.x + halfGroundCheckWidth, groundCheck.position.y - halfGroundCheckHeight), new Vector2(groundCheck.position.x + halfGroundCheckWidth, groundCheck.position.y + halfGroundCheckHeight));
-            UnityEditor.Handles.DrawLine(new Vector2(groundCheck.position.x + halfGroundCheckWidth, groundCheck.position.y - halfGroundCheckHeight), new Vector2(groundCheck.position.x - halfGroundCheckWidth, groundCheck.position.y - halfGroundCheckHeight));
+            UnityEditor.Handles.DrawLine(new Vector2(_groundCheck.position.x - _halfGroundCheckWidth, _groundCheck.position.y + _halfGroundCheckHeight), new Vector2(_groundCheck.position.x + _halfGroundCheckWidth, _groundCheck.position.y + _halfGroundCheckHeight));
+            UnityEditor.Handles.DrawLine(new Vector2(_groundCheck.position.x - _halfGroundCheckWidth, _groundCheck.position.y + _halfGroundCheckHeight), new Vector2(_groundCheck.position.x - _halfGroundCheckWidth, _groundCheck.position.y - _halfGroundCheckHeight));
+            UnityEditor.Handles.DrawLine(new Vector2(_groundCheck.position.x + _halfGroundCheckWidth, _groundCheck.position.y - _halfGroundCheckHeight), new Vector2(_groundCheck.position.x + _halfGroundCheckWidth, _groundCheck.position.y + _halfGroundCheckHeight));
+            UnityEditor.Handles.DrawLine(new Vector2(_groundCheck.position.x + _halfGroundCheckWidth, _groundCheck.position.y - _halfGroundCheckHeight), new Vector2(_groundCheck.position.x - _halfGroundCheckWidth, _groundCheck.position.y - _halfGroundCheckHeight));
         }
 
-        if (ceilingCheck)
+        if (_ceilingCheck)
         {
             if (Ceiling)
                 UnityEditor.Handles.color = Color.green;
             else
                 UnityEditor.Handles.color = Color.blue;
 
-            UnityEditor.Handles.DrawLine(new Vector2(ceilingCheck.position.x - halfCeilingCheckWidth, ceilingCheck.position.y + halfCeilingCheckHeight), new Vector2(ceilingCheck.position.x + halfCeilingCheckWidth, ceilingCheck.position.y + halfCeilingCheckHeight));
-            UnityEditor.Handles.DrawLine(new Vector2(ceilingCheck.position.x - halfCeilingCheckWidth, ceilingCheck.position.y + halfCeilingCheckHeight), new Vector2(ceilingCheck.position.x - halfCeilingCheckWidth, ceilingCheck.position.y - halfCeilingCheckHeight));
-            UnityEditor.Handles.DrawLine(new Vector2(ceilingCheck.position.x + halfCeilingCheckWidth, ceilingCheck.position.y - halfCeilingCheckHeight), new Vector2(ceilingCheck.position.x + halfCeilingCheckWidth, ceilingCheck.position.y + halfCeilingCheckHeight));
-            UnityEditor.Handles.DrawLine(new Vector2(ceilingCheck.position.x + halfCeilingCheckWidth, ceilingCheck.position.y - halfCeilingCheckHeight), new Vector2(ceilingCheck.position.x - halfCeilingCheckWidth, ceilingCheck.position.y - halfCeilingCheckHeight));
+            UnityEditor.Handles.DrawLine(new Vector2(_ceilingCheck.position.x - _halfCeilingCheckWidth, _ceilingCheck.position.y + _halfCeilingCheckHeight), new Vector2(_ceilingCheck.position.x + _halfCeilingCheckWidth, _ceilingCheck.position.y + _halfCeilingCheckHeight));
+            UnityEditor.Handles.DrawLine(new Vector2(_ceilingCheck.position.x - _halfCeilingCheckWidth, _ceilingCheck.position.y + _halfCeilingCheckHeight), new Vector2(_ceilingCheck.position.x - _halfCeilingCheckWidth, _ceilingCheck.position.y - _halfCeilingCheckHeight));
+            UnityEditor.Handles.DrawLine(new Vector2(_ceilingCheck.position.x + _halfCeilingCheckWidth, _ceilingCheck.position.y - _halfCeilingCheckHeight), new Vector2(_ceilingCheck.position.x + _halfCeilingCheckWidth, _ceilingCheck.position.y + _halfCeilingCheckHeight));
+            UnityEditor.Handles.DrawLine(new Vector2(_ceilingCheck.position.x + _halfCeilingCheckWidth, _ceilingCheck.position.y - _halfCeilingCheckHeight), new Vector2(_ceilingCheck.position.x - _halfCeilingCheckWidth, _ceilingCheck.position.y - _halfCeilingCheckHeight));
         }
 
         /*if (_ledgeCheckHorizontal)

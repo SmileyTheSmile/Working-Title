@@ -21,7 +21,7 @@ public abstract class PlayerState : GenericState
     {
         base.Enter();
 
-        visualController.SetAnimationBool(animBoolName, true);
+        visualController.SetAnimationBool(_animBoolName, true);
     }
 
     //What to do when exiting the state
@@ -29,6 +29,6 @@ public abstract class PlayerState : GenericState
     {
         base.Exit();
 
-        visualController.SetAnimationBool(animBoolName, false);
+        visualController.SetAnimationBool(_animBoolName, false);
     }
 }

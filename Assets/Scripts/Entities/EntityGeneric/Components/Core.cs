@@ -5,7 +5,7 @@ using UnityEngine;
 public class Core : MonoBehaviour
 {
     //List of all core components
-    private readonly List<CoreComponent> coreComponents = new List<CoreComponent>();
+    private readonly List<CoreComponent> _coreComponents = new List<CoreComponent>();
 
     //Unity Awake
     private void Awake()
@@ -17,7 +17,7 @@ public class Core : MonoBehaviour
             AddComponent(component);
         }
 
-        foreach (CoreComponent component in coreComponents)
+        foreach (CoreComponent component in _coreComponents)
         {
             component.Initialize(this);
         }
@@ -26,7 +26,7 @@ public class Core : MonoBehaviour
     //Logic update of all core components (Update)
     public void LogicUpdate()
     {
-        foreach (CoreComponent component in coreComponents)
+        foreach (CoreComponent component in _coreComponents)
         {
             //component.LogComponentInfo();
             component.LogicUpdate();
@@ -36,7 +36,7 @@ public class Core : MonoBehaviour
     //Physics update of all core components (FixedUpdate)
     public void PhysicsUpdate()
     {
-        foreach (CoreComponent component in coreComponents)
+        foreach (CoreComponent component in _coreComponents)
         {
             component.PhysicsUpdate();
         }
@@ -45,16 +45,16 @@ public class Core : MonoBehaviour
     //Add a core component to the core
     public void AddComponent(CoreComponent component)
     {
-        if (!coreComponents.Contains(component))
+        if (!_coreComponents.Contains(component))
         {
-            coreComponents.Add(component);
+            _coreComponents.Add(component);
         }
     }
 
     //Returns the first element of generic type T in coreComponents list
     public T GetCoreComponent<T>() where T:CoreComponent
     {
-        var component = coreComponents.OfType<T>().FirstOrDefault();
+        var component = _coreComponents.OfType<T>().FirstOrDefault();
 
         if (component == null)
         {

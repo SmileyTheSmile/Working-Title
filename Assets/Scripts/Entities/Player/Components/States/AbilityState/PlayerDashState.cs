@@ -25,7 +25,7 @@ public class PlayerDashState : PlayerAbilityState
         dashDirection = Vector2.right * movement.movementDirection;
 
         Time.timeScale = playerData.holdTimeScale;
-        startTime = Time.unscaledTime;
+        _startTime = Time.unscaledTime;
     }
 
     public override void Exit()
@@ -43,7 +43,7 @@ public class PlayerDashState : PlayerAbilityState
     {
         base.LogicUpdate();
 
-        if (isExitingState)
+        if (_isExitingState)
         {
             return;
         }
@@ -64,11 +64,11 @@ public class PlayerDashState : PlayerAbilityState
 
             float angle = Vector2.SignedAngle(Vector2.right, dashDirection);
 
-            if (dashInputStop || Time.unscaledTime >= startTime + playerData.maxHoldTime)
+            if (dashInputStop || Time.unscaledTime >= _startTime + playerData.maxHoldTime)
             {
                 isHolding = false;
                 Time.timeScale = 1f;
-                startTime = Time.time;
+                _startTime = Time.time;
 
                 movement?.CheckMovementDirection(Mathf.RoundToInt(dashDirection.x));
                 movement?.SetVelocity(playerData.dashVelocity, dashDirection);
@@ -80,7 +80,7 @@ public class PlayerDashState : PlayerAbilityState
         {
             movement?.SetVelocity(playerData.dashVelocity, dashDirection);
 
-            if (Time.time >= startTime + playerData.dashTime)
+            if (Time.time >= _startTime + playerData.dashTime)
             {
                 movement?.SetDrag(0f);
                 isAbilityDone = true;

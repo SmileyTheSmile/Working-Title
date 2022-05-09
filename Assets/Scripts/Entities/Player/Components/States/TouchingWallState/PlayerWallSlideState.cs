@@ -9,7 +9,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
     {
         base.LogicUpdate();
 
-        if (isExitingState)
+        if (_isExitingState)
         {
             return;
         }
