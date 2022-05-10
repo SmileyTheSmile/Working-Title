@@ -1,54 +1,56 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Crouch Land State", menuName = "States/Player/Grounded/Crouch Land State")]
+
 public class PlayerCrouchLandState : PlayerGroundedState
 {
-    public PlayerCrouchLandState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName) { }
+    public PlayerCrouchLandState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, playerData, animBoolName) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        crouchInput = inputHandler.crouchInput;
+        _crouchInput = inputHandler.crouchInput;
 
-        movement?.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        crouchInput = inputHandler.crouchInput;
+        _crouchInput = inputHandler.crouchInput;
 
-        movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
     }
 
-    public override void LogicUpdate()
+    public override void DoTransitions()
     {
-        base.LogicUpdate();
+        base.DoTransitions();
 
-        if (inputX != 0)
+        if (_inputX != 0)
         {
-            if (crouchInput)
+            if (_crouchInput)
             {
-                stateMachine?.ChangeState(player.crouchMoveState);
+                stateMachine?.ChangeState(_player.crouchMoveState);
             }
             else
             {
-                stateMachine?.ChangeState(player.moveState);
+                stateMachine?.ChangeState(_player.moveState);
             }
         }
         else
         {
             if (_isAnimationFinished)
             {
-                if (crouchInput)
+                if (_crouchInput)
                 {
-                    stateMachine?.ChangeState(player.crouchIdleState);
+                    stateMachine?.ChangeState(_player.crouchIdleState);
                 }
                 else
                 {
-                    stateMachine?.ChangeState(player.idleState);
+                    stateMachine?.ChangeState(_player.idleState);
                 }
             }
         }

@@ -1,45 +1,47 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Wall Grab State", menuName = "States/Player/Touching Wall/Wall Grab State")]
+
 public class PlayerWallGrabState : PlayerTouchingWallState
 {
-    private Vector2 holdPosition;
+    private Vector2 _holdPosition;
 
-    public PlayerWallGrabState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, animBoolName, playerData) { }
+    public PlayerWallGrabState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, animBoolName, playerData) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        holdPosition = player.transform.position;
+        _holdPosition = _player.transform.position;
 
         HoldPosition();
     }
 
-    public override void LogicUpdate()
+    public override void DoActions()
     {
-        base.LogicUpdate();
-
-        if (_isExitingState)
-        {
-            return;
-        }
+        base.DoActions();
 
         HoldPosition();
+    }
 
-        if (inputY > 0)
+    public override void DoTransitions()
+    {
+        base.DoTransitions();
+
+        if (_inputY > 0)
         {
-            stateMachine.ChangeState(player.wallClimbState);
+            stateMachine.ChangeState(_player.wallClimbState);
         }
-        else if (inputY < 0 || !grabInput)
+        else if (_inputY < 0 || !_grabInput)
         {
-            stateMachine.ChangeState(player.wallSlideState);
+            stateMachine.ChangeState(_player.wallSlideState);
         }
     }
 
     private void HoldPosition()
     {
-        player.transform.position = holdPosition;
+        _player.transform.position = _holdPosition;
 
         movement?.SetVelocityZero();
     }

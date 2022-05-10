@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerTouchingWallState : PlayerState
+public abstract class PlayerTouchingWallState : PlayerState
 {
     private CollisionSenses collisionSenses
     { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
@@ -11,60 +11,65 @@ public class PlayerTouchingWallState : PlayerState
     private CollisionSenses _collisionSenses;
     private Movement _movement;
 
-    protected int inputX;
-    protected int inputY;
-    protected bool grabInput;
-    protected bool jumpInput;
-    protected bool crouchInput;
+    protected int _inputX;
+    protected int _inputY;
+    protected bool _grabInput;
+    protected bool _jumpInput;
+    protected bool _crouchInput;
 
-    protected bool isGrounded;
-    protected bool isTouchingWall;
-    protected bool isTouchingLedge;
-    protected bool isTouchingCeiling;
+    protected bool _isGrounded;
+    protected bool _isTouchingWall;
+    protected bool _isTouchingLedge;
+    protected bool _isTouchingCeiling;
 
-    public PlayerTouchingWallState(Player player, FiniteStateMachine stateMachine, string animBoolName, PlayerData playerData)
-    : base(player, stateMachine, animBoolName, playerData) { }
+    public PlayerTouchingWallState(Player player, string animBoolName, PlayerData playerData)
+    : base(player, animBoolName, playerData) { }
 
     public override void DoChecks()
     {
         base.DoChecks();
 
-        isGrounded = collisionSenses.Ground;
-        isTouchingWall = collisionSenses.WallFront;
-        isTouchingLedge = collisionSenses.LedgeHorizontal;
-        isTouchingCeiling = collisionSenses.Ceiling;
+        _isGrounded = collisionSenses.Ground;
+        _isTouchingWall = collisionSenses.WallFront;
+        _isTouchingLedge = collisionSenses.LedgeHorizontal;
+        _isTouchingCeiling = collisionSenses.Ceiling;
     }
 
-    public override void LogicUpdate()
+    public override void DoActions()
     {
-        base.LogicUpdate();
+        base.DoActions();
 
-        inputX = inputHandler.normalizedInputX;
-        inputY = inputHandler.normalizedInputY;
-        grabInput = inputHandler.grabInput;
-        jumpInput = inputHandler.jumpInput;
-        crouchInput = inputHandler.crouchInput;
+        _inputX = inputHandler.normalizedInputX;
+        _inputY = inputHandler.normalizedInputY;
+        _grabInput = inputHandler.grabInput;
+        _jumpInput = inputHandler.jumpInput;
+        _crouchInput = inputHandler.crouchInput;
+    }
+    
+    public override void DoTransitions()
+    {
+        base.DoTransitions();
 
-        if (jumpInput)
+        if (_jumpInput)
         {
-            player.wallJumpState.DetermineWallJumpDirection(isTouchingWall);
-            stateMachine?.ChangeState(player.wallJumpState);
+            _player.wallJumpState.DetermineWallJumpDirection(_isTouchingWall);
+            stateMachine?.ChangeState(_player.wallJumpState);
         }
-        else if (isGrounded && !grabInput)
+        else if (_isGrounded && !_grabInput)
         {
-            stateMachine?.ChangeState(player.idleState);
+            stateMachine?.ChangeState(_player.idleState);
         }
-        else if (isGrounded && crouchInput && !isTouchingCeiling)
+        else if (_isGrounded && _crouchInput && !_isTouchingCeiling)
         {
-            stateMachine?.ChangeState(player.crouchIdleState);
+            stateMachine?.ChangeState(_player.crouchIdleState);
         }
-        else if (!isTouchingWall || (inputX != movement.movementDirection && !grabInput))
+        else if (!_isTouchingWall || (_inputX != movement.movementDirection && !_grabInput))
         {
-            stateMachine?.ChangeState(player.inAirState);
+            stateMachine?.ChangeState(_player.inAirState);
         }
-        else if (isTouchingWall && !isTouchingLedge && !isTouchingCeiling)
+        else if (_isTouchingWall && !_isTouchingLedge && !_isTouchingCeiling)
         {
-            stateMachine?.ChangeState(player.ledgeClimbState);
+            stateMachine?.ChangeState(_player.ledgeClimbState);
         }
     }
 }

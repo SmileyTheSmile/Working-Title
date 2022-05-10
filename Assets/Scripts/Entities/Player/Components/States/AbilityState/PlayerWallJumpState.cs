@@ -1,46 +1,48 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Wall Jump State", menuName = "States/Player/Ability/Wall Jump State")]
+
 public class PlayerWallJumpState : PlayerAbilityState
 {
-    public Vector2 wallJumpAngle;
-    private int wallJumpDirection;
+    private Vector2 _wallJumpDirection;
+    private int _wallJumpMovementDirection;
 
-    public PlayerWallJumpState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, animBoolName, playerData) { }
+    public PlayerWallJumpState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, animBoolName, playerData) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        wallJumpAngle = (Vector2)(Quaternion.Euler(0, 0, playerData.wallJumpAngle) * Vector2.right); //Temporary
+        _wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
 
         inputHandler?.UseJumpInput();
 
-        player.jumpState.ResetAmountOfJumpsLeft();
-        player.jumpState.DecreaseAmountOfJumpsLeft();
+        _player.jumpState.ResetAmountOfJumpsLeft();
+        _player.jumpState.DecreaseAmountOfJumpsLeft();
 
-        movement?.SetVelocity(playerData.wallJumpVelocity, wallJumpAngle, wallJumpDirection);
-        movement?.CheckMovementDirection(wallJumpDirection);
+        movement?.SetVelocity(_playerData.wallJumpVelocity, _wallJumpDirection, _wallJumpMovementDirection);
+        movement?.CheckMovementDirection(_wallJumpMovementDirection);
 
-        isAbilityDone = true;
+        _isAbilityDone = true;
     }
 
-/*
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-
-        player.animator.SetFloat("velocityX", core.movement.currentVelocity.y);
-        player.animator.SetFloat("velocityY", Mathf.Abs(core.movement.currentVelocity.x));
-
-        if (Time.time >= startTime + playerData.wallJumpTime)
+    /*
+        public override void DoActions()
         {
-            isAbilityDone = true;
+            base.DoActions();
+
+            player.animator.SetFloat("velocityX", core.movement.currentVelocity.y);
+            player.animator.SetFloat("velocityY", Mathf.Abs(core.movement.currentVelocity.x));
+
+            if (Time.time >= startTime + playerData.wallJumpTime)
+            {
+                isAbilityDone = true;
+            }
         }
-    }
-*/
+    */
     public void DetermineWallJumpDirection(bool isTouchingWall)
     {
-        wallJumpDirection = (isTouchingWall ? -1 : 1) * movement.movementDirection;
+        _wallJumpMovementDirection = (isTouchingWall ? -1 : 1) * movement.movementDirection;
     }
 }

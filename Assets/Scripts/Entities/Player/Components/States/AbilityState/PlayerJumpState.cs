@@ -1,13 +1,15 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Jump State", menuName = "States/Player/Ability/Jump State")]
+
 public class PlayerJumpState : PlayerAbilityState
 {
-    private int amountOfJumpsLeft;
+    private int _amountOfJumpsLeft;
 
-    public PlayerJumpState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, animBoolName, playerData)
+    public PlayerJumpState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, animBoolName, playerData)
     {
-        amountOfJumpsLeft = playerData.amountOfJumps;
+        _amountOfJumpsLeft = playerData.amountOfJumps;
     }
 
     public override void Enter()
@@ -15,18 +17,18 @@ public class PlayerJumpState : PlayerAbilityState
         base.Enter();
 
         inputHandler?.UseJumpInput();
-        movement?.SetVelocityY(playerData.jumpVelocity);
+        movement?.SetVelocityY(_playerData.jumpVelocity);
 
-        player.inAirState.SetIsJumping();
-        player.crouchInAirState.SetIsJumping();
+        _player.inAirState.SetIsJumping();
+        _player.crouchInAirState.SetIsJumping();
 
         DecreaseAmountOfJumpsLeft();
-        isAbilityDone = true;
+        _isAbilityDone = true;
     }
 
     public bool CanJump()
     {
-        if (amountOfJumpsLeft > 0)
+        if (_amountOfJumpsLeft > 0)
         {
             return true;
         }
@@ -34,7 +36,7 @@ public class PlayerJumpState : PlayerAbilityState
         return false;
     }
 
-    public void ResetAmountOfJumpsLeft() => amountOfJumpsLeft = playerData.amountOfJumps;
+    public void ResetAmountOfJumpsLeft() => _amountOfJumpsLeft = _playerData.amountOfJumps;
 
-    public void DecreaseAmountOfJumpsLeft() => amountOfJumpsLeft--;
+    public void DecreaseAmountOfJumpsLeft() => _amountOfJumpsLeft--;
 }

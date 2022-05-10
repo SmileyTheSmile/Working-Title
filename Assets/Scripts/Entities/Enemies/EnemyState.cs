@@ -4,8 +4,8 @@ public class EnemyState : GenericState
 {
     protected EnemyData enemyData;
 
-    public EnemyState(FiniteStateMachine stateMachine, EnemyData enemyData, string animBoolName)
-    : base(stateMachine, animBoolName)
+    public EnemyState(EnemyData enemyData, string animBoolName)
+    : base(animBoolName)
     {
         this.enemyData = enemyData;
     }

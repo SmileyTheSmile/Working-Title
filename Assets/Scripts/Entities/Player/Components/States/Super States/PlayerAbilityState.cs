@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAbilityState : PlayerState
+public abstract class PlayerAbilityState : PlayerState
 {
     private CollisionSenses collisionSenses
     { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
@@ -11,59 +11,74 @@ public class PlayerAbilityState : PlayerState
     private CollisionSenses _collisionSenses;
     private Movement _movement;
 
-    private bool isGrounded;
+    private bool _isGrounded;
 
-    protected bool isAbilityDone;
-    protected bool crouchInput;
+    protected bool _isAbilityDone;
+    protected bool _crouchInput;
 
-    public PlayerAbilityState(Player player, FiniteStateMachine stateMachine, string animBoolName, PlayerData playerData)
-    : base(player, stateMachine, animBoolName, playerData) { }
+    public PlayerAbilityState(Player player, string animBoolName, PlayerData playerData)
+    : base(player, animBoolName, playerData) { }
 
     public override void DoChecks()
     {
         base.DoChecks();
 
-        isGrounded = collisionSenses.Ground;
+        _isGrounded = collisionSenses.Ground;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        isAbilityDone = false;
+        _isAbilityDone = false;
     }
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();
-
-        if (!isAbilityDone)
+        if (_isExitingState)
+        {
+            return;
+        }
+        if (!_isAbilityDone)
         {
             return;
         }
 
-        crouchInput = inputHandler.crouchInput;
+        DoActions();
+        DoTransitions();
+    }
 
-        if (isGrounded && movement.currentVelocity.y < 0.01)
+    public override void DoActions()
+    {
+        base.DoActions();
+
+        _crouchInput = inputHandler.crouchInput;
+    }
+    
+    public override void DoTransitions()
+    {
+        base.DoTransitions();
+
+        if (_isGrounded && movement.currentVelocity.y < 0.01)
         {
-            if (crouchInput)
+            if (_crouchInput)
             {
-                stateMachine?.ChangeState(player.crouchIdleState);
+                stateMachine?.ChangeState(_player.crouchIdleState);
             }
             else
             {
-                stateMachine?.ChangeState(player.idleState);
+                stateMachine?.ChangeState(_player.idleState);
             }
         }
-        else if (!isGrounded)
+        else if (!_isGrounded)
         {
-            if (crouchInput)
+            if (_crouchInput)
             {
-                stateMachine?.ChangeState(player.crouchInAirState);
+                stateMachine?.ChangeState(_player.crouchInAirState);
             }
             else
             {
-                stateMachine?.ChangeState(player.inAirState);
+                stateMachine?.ChangeState(_player.inAirState);
             }
         }
     }

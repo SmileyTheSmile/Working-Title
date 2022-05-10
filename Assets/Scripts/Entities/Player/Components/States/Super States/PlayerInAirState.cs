@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player In Air State", menuName = "States/Player/In Air/In Air State")]
+
 public class PlayerInAirState : PlayerState
 {
     private CollisionSenses collisionSenses
@@ -11,48 +13,48 @@ public class PlayerInAirState : PlayerState
     private CollisionSenses _collisionSenses;
     private Movement _movement;
 
-    protected int inputX;
-    protected int inputY;
-    protected bool dashInput;
-    protected bool grabInput;
-    protected bool crouchInput;
-    protected bool jumpInput;
-    protected bool jumpInputStop;
-    protected Vector2 mousePositionInput;
+    protected int _inputX;
+    protected int _inputY;
+    protected bool _dashInput;
+    protected bool _grabInput;
+    protected bool _crouchInput;
+    protected bool _jumpInput;
+    protected bool _jumpInputStop;
+    protected Vector2 _mousePositionInput;
 
-    protected bool isGrounded;
-    protected bool isTouchingWall;
-    protected bool oldIsTouchingWall;
-    protected bool isTouchingWallBack;
-    protected bool oldIsTouchingWallBack;
-    protected bool isTouchingLedge;
-    protected bool isTouchingCeiling;
-    protected bool isJumping;
+    protected bool _isGrounded;
+    protected bool _isTouchingWall;
+    protected bool _oldIsTouchingWall;
+    protected bool _isTouchingWallBack;
+    protected bool _oldIsTouchingWallBack;
+    protected bool _isTouchingLedge;
+    protected bool _isTouchingCeiling;
+    protected bool _isJumping;
 
-    private float wallJumpCoyoteTimeStart;
-    private float airControlPercentage = 1f;
-    private bool coyoteTime;
-    private bool wallJumpCoyoteTime;
+    private float _wallJumpCoyoteTimeStart;
+    private float _airControlPercentage = 1f;
+    private bool _coyoteTime;
+    private bool _wallJumpCoyoteTime;
 
-    public PlayerInAirState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, animBoolName, playerData)
+    public PlayerInAirState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, animBoolName, playerData)
     {
-        airControlPercentage = playerData.defaultAirControlPercentage;
+        _airControlPercentage = playerData.defaultAirControlPercentage;
     }
 
     public override void DoChecks()
     {
         base.DoChecks();
 
-        oldIsTouchingWall = isTouchingWall;
-        oldIsTouchingWallBack = isTouchingWallBack;
+        _oldIsTouchingWall = _isTouchingWall;
+        _oldIsTouchingWallBack = _isTouchingWallBack;
 
-        isGrounded = collisionSenses.Ground;
-        isTouchingWall = collisionSenses.WallFront;
-        isTouchingWallBack = collisionSenses.WallBack;
-        isTouchingLedge = collisionSenses.LedgeHorizontal;
+        _isGrounded = collisionSenses.Ground;
+        _isTouchingWall = collisionSenses.WallFront;
+        _isTouchingWallBack = collisionSenses.WallBack;
+        _isTouchingLedge = collisionSenses.LedgeHorizontal;
 
-        if (!wallJumpCoyoteTime && !isTouchingWall && !isTouchingWallBack && (oldIsTouchingWall && oldIsTouchingWallBack))
+        if (!_wallJumpCoyoteTime && !_isTouchingWall && !_isTouchingWallBack && (_oldIsTouchingWall && _oldIsTouchingWallBack))
         {
             StartWallJumpCoyoteTime();
         }
@@ -69,30 +71,35 @@ public class PlayerInAirState : PlayerState
     {
         base.Exit();
 
-        oldIsTouchingWall = false;
-        oldIsTouchingWallBack = false;
-        isTouchingWall = false;
-        isTouchingWallBack = false;
+        _oldIsTouchingWall = false;
+        _oldIsTouchingWallBack = false;
+        _isTouchingWall = false;
+        _isTouchingWallBack = false;
     }
 
-    public override void LogicUpdate()
+    public override void DoActions()
     {
-        base.LogicUpdate();
+        base.DoActions();
 
-        inputX = inputHandler.normalizedInputX;
-        inputY = inputHandler.normalizedInputY;
-        dashInput = inputHandler.dashInput;
-        grabInput = inputHandler.grabInput;
-        crouchInput = inputHandler.crouchInput;
-        jumpInput = inputHandler.jumpInput;
-        jumpInputStop = inputHandler.jumpInputStop;
-        mousePositionInput = inputHandler.mousePositionInput;
+        _inputX = inputHandler.normalizedInputX;
+        _inputY = inputHandler.normalizedInputY;
+        _dashInput = inputHandler.dashInput;
+        _grabInput = inputHandler.grabInput;
+        _crouchInput = inputHandler.crouchInput;
+        _jumpInput = inputHandler.jumpInput;
+        _jumpInputStop = inputHandler.jumpInputStop;
+        _mousePositionInput = inputHandler.mousePositionInput;
 
         CheckJumpMultiplier();
         CheckCoyoteTime();
         CheckWallJumpCoyoteTime();
-        
-        movement?.CheckMovementDirection(inputX);
+
+        movement?.CheckMovementDirection(_inputX);
+    }
+    
+    public override void DoTransitions()
+    {
+        base.DoTransitions();
 
         if (inputHandler.attackInputs[(int)CombatInputs.primary])
         {
@@ -100,64 +107,64 @@ public class PlayerInAirState : PlayerState
         }
         else if (inputHandler.attackInputs[(int)CombatInputs.secondary])
         {
-            stateMachine?.ChangeState(player.secondaryAttackState);
+            stateMachine?.ChangeState(_player.secondaryAttackState);
         }
-        else if (dashInput && player.dashState.CheckIfCanDash())
+        else if (_dashInput && _player.dashState.CheckIfCanDash())
         {
-            stateMachine?.ChangeState(player.dashState);
+            stateMachine?.ChangeState(_player.dashState);
         }
-        else if (jumpInput && player.jumpState.CanJump())
+        else if (_jumpInput && _player.jumpState.CanJump())
         {
-            if (crouchInput)
+            if (_crouchInput)
             {
-                stateMachine?.ChangeState(player.crouchJumpState);
+                stateMachine?.ChangeState(_player.crouchJumpState);
             }
-            else if (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime)
+            else if (_isTouchingWall || _isTouchingWallBack || _wallJumpCoyoteTime)
             {
                 StopWallJumpCoyoteTime();
-                isTouchingWall = collisionSenses.WallFront;
-                player.wallJumpState.DetermineWallJumpDirection(isTouchingWall);
-                stateMachine?.ChangeState(player.wallJumpState);
+                _isTouchingWall = collisionSenses.WallFront;
+                _player.wallJumpState.DetermineWallJumpDirection(_isTouchingWall);
+                stateMachine?.ChangeState(_player.wallJumpState);
             }
             else
             {
-                stateMachine?.ChangeState(player.jumpState);
+                stateMachine?.ChangeState(_player.jumpState);
             }
         }
 
-        if (isGrounded && movement.currentVelocity.y < 0.01)
+        if (_isGrounded && movement.currentVelocity.y < 0.01)
         {
-            if (crouchInput)
+            if (_crouchInput)
             {
-                stateMachine?.ChangeState(player.crouchLandState);
+                stateMachine?.ChangeState(_player.crouchLandState);
             }
             else
             {
-                stateMachine?.ChangeState(player.landState);
+                stateMachine?.ChangeState(_player.landState);
             }
         }
-        else if (isTouchingWall && !crouchInput)
+        else if (_isTouchingWall && !_crouchInput)
         {
-            if (grabInput && isTouchingLedge)
+            if (_grabInput && _isTouchingLedge)
             {
-                stateMachine?.ChangeState(player.wallGrabState);
+                stateMachine?.ChangeState(_player.wallGrabState);
             }
-            else if (inputX == movement.movementDirection && movement.currentVelocity.y <= 0f)
+            else if (_inputX == movement.movementDirection && movement.currentVelocity.y <= 0f)
             {
-                stateMachine?.ChangeState(player.wallSlideState);
+                stateMachine?.ChangeState(_player.wallSlideState);
             }
-            else if (!isTouchingLedge && !isGrounded && !isTouchingCeiling)
+            else if (!_isTouchingLedge && !_isGrounded && !_isTouchingCeiling)
             {
-                stateMachine?.ChangeState(player.ledgeClimbState);
+                stateMachine?.ChangeState(_player.ledgeClimbState);
             }
         }
-        else if (crouchInput && player.crouchInAirState.CanCrouch() && !isGrounded)
+        else if (_crouchInput && _player.crouchInAirState.CanCrouch() && !_isGrounded)
         {
-            stateMachine?.ChangeState(player.crouchInAirState);
+            stateMachine?.ChangeState(_player.crouchInAirState);
         }
         else
         {
-            movement?.SetVelocityX(playerData.movementVelocity * inputX * airControlPercentage);
+            movement?.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
 
             visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
             visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);
@@ -166,47 +173,47 @@ public class PlayerInAirState : PlayerState
 
     private void CheckCoyoteTime()
     {
-        if (coyoteTime && Time.time > _startTime + playerData.coyoteTime)
+        if (_coyoteTime && Time.time > _startTime + _playerData.coyoteTime)
         {
-            coyoteTime = false;
-            player.jumpState.DecreaseAmountOfJumpsLeft();
+            _coyoteTime = false;
+            _player.jumpState.DecreaseAmountOfJumpsLeft();
         }
     }
 
     private void CheckWallJumpCoyoteTime()
     {
-        if (wallJumpCoyoteTime && Time.time > wallJumpCoyoteTimeStart + playerData.coyoteTime)
+        if (_wallJumpCoyoteTime && Time.time > _wallJumpCoyoteTimeStart + _playerData.coyoteTime)
         {
-            wallJumpCoyoteTime = false;
-            wallJumpCoyoteTimeStart = Time.time;
+            _wallJumpCoyoteTime = false;
+            _wallJumpCoyoteTimeStart = Time.time;
         }
     }
 
     public void StartWallJumpCoyoteTime()
     {
-        wallJumpCoyoteTime = true;
-        wallJumpCoyoteTimeStart = Time.time;
+        _wallJumpCoyoteTime = true;
+        _wallJumpCoyoteTimeStart = Time.time;
     }
 
     private void CheckJumpMultiplier()
     {
-        if (!isJumping)
+        if (!_isJumping)
         {
             return;
         }
 
-        if (jumpInputStop)
+        if (_jumpInputStop)
         {
-            movement?.SetVelocityY(movement.currentVelocity.y * playerData.variableJumpHeightMultiplier);
-            isJumping = false;
+            movement?.SetVelocityY(movement.currentVelocity.y * _playerData.variableJumpHeightMultiplier);
+            _isJumping = false;
         }
         else if (movement.currentVelocity.y <= 0f)
         {
-            isJumping = false;
+            _isJumping = false;
         }
     }
 
-    public void StopWallJumpCoyoteTime() => wallJumpCoyoteTime = false;
-    public void StartCoyoteTime() => coyoteTime = true;
-    public void SetIsJumping() => isJumping = true;
+    public void StopWallJumpCoyoteTime() => _wallJumpCoyoteTime = false;
+    public void StartCoyoteTime() => _coyoteTime = true;
+    public void SetIsJumping() => _isJumping = true;
 }

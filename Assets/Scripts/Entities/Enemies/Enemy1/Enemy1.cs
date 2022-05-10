@@ -11,8 +11,8 @@ public class Enemy1 : EntityGeneric
     {
         base.Awake();
 
-        moveState = new Enemy1_MoveState(this, stateMachine, enemyData, "move");
-        idleState = new Enemy1_IdleState(this, stateMachine, enemyData, "idle");
+        moveState = new Enemy1_MoveState(this, enemyData, "move");
+        idleState = new Enemy1_IdleState(this, enemyData, "idle");
     }
 
     private void Start()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GenericState
+public abstract class GenericState : ScriptableObject
 {
     protected VisualController visualController
     { get => _visualController ?? core.GetCoreComponent(ref _visualController); }
@@ -19,9 +19,8 @@ public abstract class GenericState
     protected bool _isExitingState;
     protected string _animBoolName;
 
-    public GenericState(FiniteStateMachine stateMachine, string animBoolName)
+    public GenericState(string animBoolName)
     {
-        this._stateMachine = stateMachine;
         this._animBoolName = animBoolName;
     }
 
@@ -48,6 +47,9 @@ public abstract class GenericState
         {
             return;
         }
+
+        DoActions();
+        DoTransitions();
     }
 
     //Update the component's physics (FixedUpdate)
@@ -56,6 +58,10 @@ public abstract class GenericState
         DoChecks();
     }
 
+    //Do all the checks if the state should transition into another state
+    public virtual void DoTransitions() { }
+    //Execute all the actions the state must do every Update
+    public virtual void DoActions() { }
     //Update all check variables
     public virtual void DoChecks() { }
     //What to do in animation events in Animator

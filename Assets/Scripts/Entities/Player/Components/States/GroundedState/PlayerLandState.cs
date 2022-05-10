@@ -1,36 +1,38 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Land State", menuName = "States/Player/Grounded/Land State")]
+
 public class PlayerLandState : PlayerGroundedState
 {
-    public PlayerLandState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName) { }
+    public PlayerLandState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, playerData, animBoolName) { }
 
-    public override void LogicUpdate()
+    public override void DoTransitions()
     {
-        base.LogicUpdate();
+        base.DoTransitions();
 
-        if (inputX != 0)
+        if (_inputX != 0)
         {
-            if (crouchInput)
+            if (_crouchInput)
             {
-                stateMachine?.ChangeState(player.crouchMoveState);
+                stateMachine?.ChangeState(_player.crouchMoveState);
             }
             else
             {
-                stateMachine?.ChangeState(player.moveState);
+                stateMachine?.ChangeState(_player.moveState);
             }
         }
         else
         {
             if (_isAnimationFinished)
             {
-                if (crouchInput)
+                if (_crouchInput)
                 {
-                    stateMachine?.ChangeState(player.crouchIdleState);
+                    stateMachine?.ChangeState(_player.crouchIdleState);
                 }
                 else
                 {
-                    stateMachine?.ChangeState(player.idleState);
+                    stateMachine?.ChangeState(_player.idleState);
                 }
             }
         }

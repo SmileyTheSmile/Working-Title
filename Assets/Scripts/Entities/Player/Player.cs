@@ -28,35 +28,33 @@ public partial class Player : EntityGeneric
 
     private void Start()
     {
-        base.Awake();
-
         SetupStates();
     }
 
     //Create all the player states
     private void SetupStates()
     {
-        idleState = new PlayerIdleState(this, stateMachine, playerData, "idle");
-        moveState = new PlayerMoveState(this, stateMachine, playerData, "move");
-        jumpState = new PlayerJumpState(this, stateMachine, playerData, "inAir");
-        inAirState = new PlayerInAirState(this, stateMachine, playerData, "inAir");
-        dashState = new PlayerDashState(this, stateMachine, playerData, "inAir");
-        landState = new PlayerLandState(this, stateMachine, playerData, "land");
+        idleState = new PlayerIdleState(this, playerData, "idle");
+        moveState = new PlayerMoveState(this, playerData, "move");
+        jumpState = new PlayerJumpState(this, playerData, "inAir");
+        inAirState = new PlayerInAirState(this, playerData, "inAir");
+        dashState = new PlayerDashState(this, playerData, "inAir");
+        landState = new PlayerLandState(this, playerData, "land");
 
-        wallSlideState = new PlayerWallSlideState(this, stateMachine, playerData, "wallSlide");
-        wallClimbState = new PlayerWallClimbState(this, stateMachine, playerData, "wallClimb");
-        wallGrabState = new PlayerWallGrabState(this, stateMachine, playerData, "wallGrab");
-        wallJumpState = new PlayerWallJumpState(this, stateMachine, playerData, "inAir");
-        ledgeClimbState = new PlayerLedgeClimbState(this, stateMachine, playerData, "ledgeClimb");
+        wallSlideState = new PlayerWallSlideState(this, playerData, "wallSlide");
+        wallClimbState = new PlayerWallClimbState(this, playerData, "wallClimb");
+        wallGrabState = new PlayerWallGrabState(this, playerData, "wallGrab");
+        wallJumpState = new PlayerWallJumpState(this, playerData, "inAir");
+        ledgeClimbState = new PlayerLedgeClimbState(this, playerData, "ledgeClimb");
 
-        crouchIdleState = new PlayerCrouchIdleState(this, stateMachine, playerData, "crouchIdle");
-        crouchMoveState = new PlayerCrouchMoveState(this, stateMachine, playerData, "crouchMove");
-        crouchJumpState = new PlayerCrouchJumpState(this, stateMachine, playerData, "crouchInAir");
-        crouchInAirState = new PlayerCrouchInAirState(this, stateMachine, playerData, "crouchInAir");
-        crouchLandState = new PlayerCrouchLandState(this, stateMachine, playerData, "crouchLand");
+        crouchIdleState = new PlayerCrouchIdleState(this, playerData, "crouchIdle");
+        crouchMoveState = new PlayerCrouchMoveState(this, playerData, "crouchMove");
+        crouchJumpState = new PlayerCrouchJumpState(this, playerData, "crouchInAir");
+        crouchInAirState = new PlayerCrouchInAirState(this, playerData, "crouchInAir");
+        crouchLandState = new PlayerCrouchLandState(this, playerData, "crouchLand");
 
-        primaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
-        secondaryAttackState = new PlayerAttackState(this, stateMachine, playerData, "attack");
+        primaryAttackState = new PlayerAttackState(this, playerData, "attack");
+        secondaryAttackState = new PlayerAttackState(this, playerData, "attack");
         
         stateMachine.Initialize(idleState);
     }

@@ -1,9 +1,11 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Idle State", menuName = "States/Player/Grounded/Idle State")]
+
 public class PlayerIdleState : PlayerGroundedState
 {
-    public PlayerIdleState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName) { }
+    public PlayerIdleState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, playerData, animBoolName) { }
 
     public override void Enter()
     {
@@ -12,24 +14,24 @@ public class PlayerIdleState : PlayerGroundedState
         movement?.SetVelocityX(0f);
     }
 
-    public override void LogicUpdate()
+    public override void DoTransitions()
     {
-        base.LogicUpdate();
+        base.DoTransitions();
 
-        if (inputX != 0f)
+        if (_inputX != 0f)
         {
-            if (crouchInput)
+            if (_crouchInput)
             {
-                stateMachine?.ChangeState(player.crouchMoveState);
+                stateMachine?.ChangeState(_player.crouchMoveState);
             }
             else
             {
-                stateMachine?.ChangeState(player.moveState);
+                stateMachine?.ChangeState(_player.moveState);
             }
         }
-        else if (crouchInput)
+        else if (_crouchInput)
         {
-            stateMachine?.ChangeState(player.crouchIdleState);
+            stateMachine?.ChangeState(_player.crouchIdleState);
         }
     }
 }

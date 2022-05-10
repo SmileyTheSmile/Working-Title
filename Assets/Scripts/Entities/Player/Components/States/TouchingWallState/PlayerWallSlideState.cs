@@ -1,24 +1,26 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Wall Slide State", menuName = "States/Player/Touching Wall/Wall Slide State")]
+
 public class PlayerWallSlideState : PlayerTouchingWallState
 {
-    public PlayerWallSlideState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, animBoolName, playerData) { }
+    public PlayerWallSlideState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, animBoolName, playerData) { }
 
-    public override void LogicUpdate()
+    public override void DoActions()
     {
-        base.LogicUpdate();
+        base.DoActions();
 
-        if (_isExitingState)
+        movement?.SetVelocityY(-_playerData.wallSlideVelocity);
+    }
+
+    public override void DoTransitions()
+    {
+        base.DoTransitions();
+
+        if (_grabInput && _inputY == 0)
         {
-            return;
-        }
-
-        movement?.SetVelocityY(-playerData.wallSlideVelocity);
-
-        if (grabInput && inputY == 0)
-        {
-            stateMachine.ChangeState(player.wallGrabState);
+            stateMachine.ChangeState(_player.wallGrabState);
         }
     }
 }

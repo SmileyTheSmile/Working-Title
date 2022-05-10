@@ -4,8 +4,8 @@ public class Enemy1State : EnemyState
 {
     protected Enemy1 enemy;
 
-    public Enemy1State(Enemy1 enemy, FiniteStateMachine stateMachine, EnemyData enemyData, string animBoolName)
-    : base(stateMachine, enemyData, animBoolName)
+    public Enemy1State(Enemy1 enemy, EnemyData enemyData, string animBoolName)
+    : base(enemyData, animBoolName)
     {
         this.enemy = enemy;
 

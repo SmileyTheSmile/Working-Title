@@ -1,30 +1,32 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Dash State", menuName = "States/Player/Ability/Dash State")]
+
 public class PlayerDashState : PlayerAbilityState
 {
-    private Vector2 dashDirectionInput;
-    private Vector2 dashDirection;
+    private Vector2 _dashDirectionInput;
+    private Vector2 _dashDirection;
 
-    private float lastDashTime;
+    private float _lastDashTime;
 
-    private bool dashInputStop;
-    private bool canDash;
-    private bool isHolding;
+    private bool _dashInputStop;
+    private bool _canDash;
+    private bool _isHolding;
 
-    public PlayerDashState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, animBoolName, playerData) { }
+    public PlayerDashState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, animBoolName, playerData) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        isHolding = true;
-        canDash = false;
+        _isHolding = true;
+        _canDash = false;
 
         inputHandler?.UseDashInput();
-        dashDirection = Vector2.right * movement.movementDirection;
+        _dashDirection = Vector2.right * movement.movementDirection;
 
-        Time.timeScale = playerData.holdTimeScale;
+        Time.timeScale = _playerData.holdTimeScale;
         _startTime = Time.unscaledTime;
     }
 
@@ -35,64 +37,59 @@ public class PlayerDashState : PlayerAbilityState
 
         if (movement.currentVelocity.y > 0)
         {
-            movement?.SetVelocityY(movement.currentVelocity.y * playerData.dashEndYMultiplier);
+            movement?.SetVelocityY(movement.currentVelocity.y * _playerData.dashEndYMultiplier);
         }
     }
 
-    public override void LogicUpdate()
+    public override void DoActions()
     {
-        base.LogicUpdate();
-
-        if (_isExitingState)
-        {
-            return;
-        }
+        base.DoActions();
 
         visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);
         visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
 
-        if (isHolding)
+        if (!_isHolding)
         {
-            dashDirectionInput = inputHandler.mousePositionInput - player.transform.position;
-            dashInputStop = inputHandler.dashInputStop;
+            movement?.SetVelocity(_playerData.dashVelocity, _dashDirection);
 
-            if (dashDirectionInput != Vector2.zero)
-            {
-                dashDirection = dashDirectionInput;
-                dashDirection.Normalize();
-            }
-
-            float angle = Vector2.SignedAngle(Vector2.right, dashDirection);
-
-            if (dashInputStop || Time.unscaledTime >= _startTime + playerData.maxHoldTime)
-            {
-                isHolding = false;
-                Time.timeScale = 1f;
-                _startTime = Time.time;
-
-                movement?.CheckMovementDirection(Mathf.RoundToInt(dashDirection.x));
-                movement?.SetVelocity(playerData.dashVelocity, dashDirection);
-
-                movement?.SetDrag(playerData.drag);
-            }
-        }
-        else
-        {
-            movement?.SetVelocity(playerData.dashVelocity, dashDirection);
-
-            if (Time.time >= _startTime + playerData.dashTime)
+            if (Time.time >= _startTime + _playerData.dashTime)
             {
                 movement?.SetDrag(0f);
-                isAbilityDone = true;
-                lastDashTime = Time.time;
+                _isAbilityDone = true;
+                _lastDashTime = Time.time;
             }
+
+            return;
+        }
+
+        _dashDirectionInput = inputHandler.mousePositionInput - _player.transform.position;
+        _dashInputStop = inputHandler.dashInputStop;
+
+        if (_dashDirectionInput != Vector2.zero)
+        {
+            _dashDirection = _dashDirectionInput;
+            _dashDirection.Normalize();
+        }
+
+        float angle = Vector2.SignedAngle(Vector2.right, _dashDirection);
+
+        if (_dashInputStop || Time.unscaledTime >= _startTime + _playerData.maxHoldTime)
+        {
+            _isHolding = false;
+            Time.timeScale = 1f;
+            _startTime = Time.time;
+
+            movement?.CheckMovementDirection(Mathf.RoundToInt(_dashDirection.x));
+            movement?.SetVelocity(_playerData.dashVelocity, _dashDirection);
+
+            movement?.SetDrag(_playerData.drag);
         }
     }
 
     public bool CheckIfCanDash()
     {
-        return canDash && Time.time >= lastDashTime + playerData.dashCooldown;
+        return _canDash && Time.time >= _lastDashTime + _playerData.dashCooldown;
     }
 
-    public void ResetCanDash() => canDash = true;
+    public void ResetCanDash() => _canDash = true;
 }

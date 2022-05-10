@@ -1,49 +1,51 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Attack State", menuName = "States/Player/Ability/Attack State")]
+
 public class PlayerAttackState : PlayerAbilityState
 {
-    private Weapon weapon;
+    private Weapon _weapon;
 
-    private int inputX;
+    private int _inputX;
 
-    private float velocityToSet;
+    private float _velocityToSet;
 
-    private bool setVelocity;
-    private bool shouldCheckFlip;
+    private bool _setVelocity;
+    private bool _shouldCheckFlip;
 
-    public PlayerAttackState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, animBoolName, playerData) { }
+    public PlayerAttackState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, animBoolName, playerData) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        setVelocity = false;
+        _setVelocity = false;
 
-        weapon.EnterWeapon();
+        _weapon.EnterWeapon();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        weapon.ExitWeapon();
+        _weapon.ExitWeapon();
     }
 
-    public override void LogicUpdate()
+    public override void DoActions()
     {
-        base.LogicUpdate();
+        base.DoActions();
 
-        if (shouldCheckFlip)
+        if (_shouldCheckFlip)
         {
-            inputX = inputHandler.normalizedInputX;
+            _inputX = inputHandler.normalizedInputX;
         }
 
-        movement?.CheckMovementDirection(inputX);
+        movement?.CheckMovementDirection(_inputX);
 
-        if (setVelocity)
+        if (_setVelocity)
         {
-            movement?.SetVelocityX(velocityToSet * movement.movementDirection);
+            movement?.SetVelocityX(_velocityToSet * movement.movementDirection);
         }
     }
 
@@ -51,25 +53,25 @@ public class PlayerAttackState : PlayerAbilityState
     {
         base.AnimationFinishedTrigger();
 
-        isAbilityDone = true;
+        _isAbilityDone = true;
     }
 
     public void SetWeapon(Weapon weapon)
     {
-        this.weapon = weapon;
-        weapon.InitializeWeapon(this, core);
+        _weapon = weapon;
+        _weapon.InitializeWeapon(this, core);
     }
 
     public void SetPlayerVelocity(float velocity)
     {
         movement?.SetVelocityX(velocity * movement.movementDirection);
 
-        velocityToSet = velocity;
-        setVelocity = true;
+        _velocityToSet = velocity;
+        _setVelocity = true;
     }
 
     public void SetFlipCheck(bool value)
     {
-        shouldCheckFlip = value;
+        _shouldCheckFlip = value;
     }
 }

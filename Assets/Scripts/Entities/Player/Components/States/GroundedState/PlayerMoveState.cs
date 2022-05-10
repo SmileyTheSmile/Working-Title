@@ -1,30 +1,37 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Move State", menuName = "States/Player/Grounded/Move State")]
+
 public class PlayerMoveState : PlayerGroundedState
 {
-    public PlayerMoveState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName) { }
+    public PlayerMoveState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, playerData, animBoolName) { }
 
-    public override void LogicUpdate()
+    public override void DoActions()
     {
-        base.LogicUpdate();
+        base.DoActions();
 
-        movement?.SetVelocityX(playerData.movementVelocity * inputX);
+        movement?.SetVelocityX(_playerData.movementVelocity * _inputX);
+    }
 
-        if (inputX == 0f)
+    public override void DoTransitions()
+    {
+        base.DoTransitions();
+
+        if (_inputX == 0f)
         {
-            if (crouchInput)
+            if (_crouchInput)
             {
-                stateMachine?.ChangeState(player.crouchIdleState);
+                stateMachine?.ChangeState(_player.crouchIdleState);
             }
             else
             {
-                stateMachine?.ChangeState(player.idleState);
+                stateMachine?.ChangeState(_player.idleState);
             }
         }
-        else if (crouchInput)
+        else if (_crouchInput)
         {
-            stateMachine?.ChangeState(player.crouchMoveState);
+            stateMachine?.ChangeState(_player.crouchMoveState);
         }
     }
 }

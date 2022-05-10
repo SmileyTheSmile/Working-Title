@@ -1,48 +1,50 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Crouch In Air State", menuName = "States/Player/In Air/Crouch In Air State")]
+
 public class PlayerCrouchInAirState : PlayerInAirState
 {
-    private int amountOfCrouchesLeft;
+    private int _amountOfCrouchesLeft;
 
-    public PlayerCrouchInAirState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName)
+    public PlayerCrouchInAirState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, playerData, animBoolName)
     {
-        amountOfCrouchesLeft = playerData.amountOfCrouches;
+        _amountOfCrouchesLeft = playerData.amountOfCrouches;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        crouchInput = inputHandler.crouchInput;
+        _crouchInput = inputHandler.crouchInput;
 
         DecreaseAmountOfCrouchesLeft();
 
-        movement?.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        crouchInput = inputHandler.crouchInput;
+        _crouchInput = inputHandler.crouchInput;
 
-        movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
     }
 
-    public override void LogicUpdate()
+    public override void DoTransitions()
     {
-        base.LogicUpdate();
+        base.DoTransitions();
 
-        if (!crouchInput && !isGrounded)
+        if (!_crouchInput && !_isGrounded)
         {
-            stateMachine?.ChangeState(player.inAirState);
+            stateMachine?.ChangeState(_player.inAirState);
         }
     }
 
     public bool CanCrouch()
     {
-        if (amountOfCrouchesLeft > 0)
+        if (_amountOfCrouchesLeft > 0)
         {
             return true;
         }
@@ -50,7 +52,7 @@ public class PlayerCrouchInAirState : PlayerInAirState
         return false;
     }
 
-    public void ResetAmountOfCrouchesLeft() => amountOfCrouchesLeft = playerData.amountOfCrouches;
+    public void ResetAmountOfCrouchesLeft() => _amountOfCrouchesLeft = _playerData.amountOfCrouches;
 
-    public void DecreaseAmountOfCrouchesLeft() => amountOfCrouchesLeft--;
+    public void DecreaseAmountOfCrouchesLeft() => _amountOfCrouchesLeft--;
 }

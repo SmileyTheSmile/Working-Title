@@ -1,9 +1,11 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Player Crouch Idle State", menuName = "States/Player/Grounded/Crouch Idle State")]
+
 public class PlayerCrouchIdleState : PlayerGroundedState
 {
-    public PlayerCrouchIdleState(Player player, FiniteStateMachine stateMachine, PlayerData playerData, string animBoolName)
-    : base(player, stateMachine, playerData, animBoolName) { }
+    public PlayerCrouchIdleState(Player player, PlayerData playerData, string animBoolName)
+    : base(player, playerData, animBoolName) { }
 
     public override void Enter()
     {
@@ -11,39 +13,39 @@ public class PlayerCrouchIdleState : PlayerGroundedState
 
         movement?.SetVelocityZero();
 
-        crouchInput = inputHandler.crouchInput;
+        _crouchInput = inputHandler.crouchInput;
 
-        movement?.CrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        crouchInput = inputHandler.crouchInput;
+        _crouchInput = inputHandler.crouchInput;
 
-        movement?.UnCrouchDown(playerData.standColliderHeight, playerData.crouchColliderHeight, crouchInput);
+        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
     }
 
-    public override void LogicUpdate()
+    public override void DoTransitions()
     {
-        base.LogicUpdate();
+        base.DoTransitions();
 
-        if (inputX != 0)
+        if (_inputX != 0)
         {
-            if (crouchInput || isTouchingCeiling)
+            if (_crouchInput || _isTouchingCeiling)
             {
-                stateMachine?.ChangeState(player.crouchMoveState);
+                stateMachine?.ChangeState(_player.crouchMoveState);
             }
             else
             {
 
-                stateMachine?.ChangeState(player.moveState);
+                stateMachine?.ChangeState(_player.moveState);
             }
         }
-        else if (!crouchInput && !isTouchingCeiling)
+        else if (!_crouchInput && !_isTouchingCeiling)
         {
-            stateMachine?.ChangeState(player.idleState);
+            stateMachine?.ChangeState(_player.idleState);
         }
     }
 }

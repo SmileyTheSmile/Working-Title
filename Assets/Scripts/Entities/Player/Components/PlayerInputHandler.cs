@@ -18,20 +18,20 @@ public class PlayerInputHandler : CoreComponent
 
     [SerializeField] private float inputHoldTime = 0.2f;
 
-    private PlayerInput playerInput;
-    private Camera mainCamera;
+    private PlayerInput _playerInput;
+    private Camera _mainCamera;
 
-    private Vector2 rawMovementInput;
-    private Vector2 rawMouseInput;
-    private float rawWeaponSwitchInput;
-    private float jumpInputStartTime;
-    private float dashInputStartTime;
+    private Vector2 _rawMovementInput;
+    private Vector2 _rawMouseInput;
+    private float _rawWeaponSwitchInput;
+    private float _jumpInputStartTime;
+    private float _dashInputStartTime;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
+        _playerInput = GetComponent<PlayerInput>();
 
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
 
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
         attackInputs = new bool[count];
@@ -49,10 +49,10 @@ public class PlayerInputHandler : CoreComponent
     //Process movement input
     public void OnMoveInput(InputAction.CallbackContext context) 
     {
-        rawMovementInput = context.ReadValue<Vector2>();
+        _rawMovementInput = context.ReadValue<Vector2>();
 
-        normalizedInputX = Mathf.RoundToInt(rawMovementInput.x);
-        normalizedInputY = Mathf.RoundToInt(rawMovementInput.y);
+        normalizedInputX = Mathf.RoundToInt(_rawMovementInput.x);
+        normalizedInputY = Mathf.RoundToInt(_rawMovementInput.y);
 
         crouchInput = (normalizedInputY == -1);
     }
@@ -64,7 +64,7 @@ public class PlayerInputHandler : CoreComponent
         {
             jumpInput = true;
             jumpInputStop = false;
-            jumpInputStartTime = Time.time;
+            _jumpInputStartTime = Time.time;
         }
 
         if (context.canceled)
@@ -80,7 +80,7 @@ public class PlayerInputHandler : CoreComponent
         {
             dashInput = true;
             dashInputStop = false;
-            dashInputStartTime = Time.time;
+            _dashInputStartTime = Time.time;
         }
 
         if (context.canceled)
@@ -92,7 +92,7 @@ public class PlayerInputHandler : CoreComponent
     //Get raw mouse position input
     public void OnAimInput(InputAction.CallbackContext context) 
     {
-        rawMouseInput = context.ReadValue<Vector2>();
+        _rawMouseInput = context.ReadValue<Vector2>();
     }
 
     //Process wall grab input
@@ -153,16 +153,16 @@ public class PlayerInputHandler : CoreComponent
     //Process weapon switch input
     public void OnWeaponSwitchInput(InputAction.CallbackContext context) 
     {
-        rawWeaponSwitchInput = context.ReadValue<Vector2>().y;
+        _rawWeaponSwitchInput = context.ReadValue<Vector2>().y;
 
-        weaponSwitchInput = (int)rawWeaponSwitchInput;
+        weaponSwitchInput = (int)_rawWeaponSwitchInput;
         Debug.Log(weaponSwitchInput);
     }
     
     //Check if jump button has been held for the value in inputHoldTime
     private void CheckJumpInputHoldTime() 
     {
-        if (Time.time >= jumpInputStartTime + inputHoldTime)
+        if (Time.time >= _jumpInputStartTime + inputHoldTime)
         {
             jumpInput = false;
         }
@@ -171,7 +171,7 @@ public class PlayerInputHandler : CoreComponent
     //Check if dash button has been held for value in inputHoldTime
     private void CheckDashInputHoldTime() 
     {
-        if (Time.time >= dashInputStartTime + inputHoldTime)
+        if (Time.time >= _dashInputStartTime + inputHoldTime)
         {
             dashInput = false;
         }
@@ -180,9 +180,9 @@ public class PlayerInputHandler : CoreComponent
     //Process mouse position input
     private void ProcessMouseInput() 
     {
-        mousePositionInput = new Vector3(rawMouseInput.x, rawMouseInput.y, 10);
+        mousePositionInput = new Vector3(_rawMouseInput.x, _rawMouseInput.y, 10);
 
-        mousePositionInput = mainCamera.ScreenToWorldPoint(mousePositionInput);
+        mousePositionInput = _mainCamera.ScreenToWorldPoint(mousePositionInput);
         //mouseAngle = Mathf.Atan2(mousePositionInput.y, mousePositionInput.x) * Mathf.Rad2Deg;
     }
 

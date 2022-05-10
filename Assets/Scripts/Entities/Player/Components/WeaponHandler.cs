@@ -9,6 +9,7 @@ public class WeaponHandler : CoreComponent
     [SerializeField] private Transform currentWeapon;
     [SerializeField] private Weapon[] primaryWeapons;
     [SerializeField] private Weapon[] secondaryWeapons;
+    
     private TempShootScript weapon;
 
     //Unity Awake
