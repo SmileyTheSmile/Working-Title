@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Events;
 using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : CoreComponent

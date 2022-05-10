@@ -34,7 +34,7 @@ public class WeaponHandler : CoreComponent
 
     private void SetupWeapons()
     {
-        player.primaryAttackState.SetWeapon(primaryWeapons[0]);
+        //player.primaryAttackState.SetWeapon(primaryWeapons[0]);
         player.secondaryAttackState.SetWeapon(secondaryWeapons[0]);
     }
 }

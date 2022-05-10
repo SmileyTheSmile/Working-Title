@@ -13801,7 +13801,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 1018350866}
-  weapons:
+  primaryWeapons: []
+  secondaryWeapons:
   - {fileID: 870148616}
 --- !u!1 &739177438
 GameObject:
@@ -104442,7 +104443,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.7205172, y: 1}
+    m_SensorSize: {x: 3.7137096, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
