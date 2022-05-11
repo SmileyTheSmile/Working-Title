@@ -132,7 +132,7 @@ public class PlayerInAirState : PlayerState
             }
         }
 
-        if (_isGrounded && movement.currentVelocity.y < 0.01)
+        if (_isGrounded && movement._currentVelocity.y < 0.01)
         {
             if (_crouchInput)
             {
@@ -149,7 +149,7 @@ public class PlayerInAirState : PlayerState
             {
                 stateMachine?.ChangeState(_player.wallGrabState);
             }
-            else if (_inputX == movement.movementDirection && movement.currentVelocity.y <= 0f)
+            else if (_inputX == movement._movementDir && movement._currentVelocity.y <= 0f)
             {
                 stateMachine?.ChangeState(_player.wallSlideState);
             }
@@ -166,8 +166,8 @@ public class PlayerInAirState : PlayerState
         {
             movement?.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
 
-            visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
-            visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);
+            visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement._currentVelocity.x));
+            visualController?.SetAnimationFloat("velocityY", movement._currentVelocity.y);
         }
     }
 
@@ -204,10 +204,10 @@ public class PlayerInAirState : PlayerState
 
         if (_jumpInputStop)
         {
-            movement?.SetVelocityY(movement.currentVelocity.y * _playerData.variableJumpHeightMultiplier);
+            movement?.SetVelocityY(movement._currentVelocity.y * _playerData.variableJumpHeightMultiplier);
             _isJumping = false;
         }
-        else if (movement.currentVelocity.y <= 0f)
+        else if (movement._currentVelocity.y <= 0f)
         {
             _isJumping = false;
         }

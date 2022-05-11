@@ -24,7 +24,7 @@ public class PlayerDashState : PlayerAbilityState
         _canDash = false;
 
         inputHandler?.UseDashInput();
-        _dashDirection = Vector2.right * movement.movementDirection;
+        _dashDirection = Vector2.right * movement._movementDir;
 
         Time.timeScale = _playerData.holdTimeScale;
         _startTime = Time.unscaledTime;
@@ -35,9 +35,9 @@ public class PlayerDashState : PlayerAbilityState
         base.Exit();
 
 
-        if (movement.currentVelocity.y > 0)
+        if (movement._currentVelocity.y > 0)
         {
-            movement?.SetVelocityY(movement.currentVelocity.y * _playerData.dashEndYMultiplier);
+            movement?.SetVelocityY(movement._currentVelocity.y * _playerData.dashEndYMultiplier);
         }
     }
 
@@ -45,8 +45,8 @@ public class PlayerDashState : PlayerAbilityState
     {
         base.DoActions();
 
-        visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);
-        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
+        visualController?.SetAnimationFloat("velocityY", movement._currentVelocity.y);
+        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement._currentVelocity.x));
 
         if (!_isHolding)
         {

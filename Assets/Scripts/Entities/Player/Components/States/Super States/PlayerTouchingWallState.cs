@@ -63,7 +63,7 @@ public abstract class PlayerTouchingWallState : PlayerState
         {
             stateMachine?.ChangeState(_player.crouchIdleState);
         }
-        else if (!_isTouchingWall || (_inputX != movement.movementDirection && !_grabInput))
+        else if (!_isTouchingWall || (_inputX != movement._movementDir && !_grabInput))
         {
             stateMachine?.ChangeState(_player.inAirState);
         }

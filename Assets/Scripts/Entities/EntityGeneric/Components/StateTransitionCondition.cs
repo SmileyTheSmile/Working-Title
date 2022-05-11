@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StateTransitionCondition : MonoBehaviour
+[CreateAssetMenu(fileName = "New Condition", menuName = "State Conditions/Generic")]
+
+public class StateTransitionCondition : ScriptableObject
 {
-    public abstract bool IsMet();
+    public bool value;
+    public bool IsMet() => value;
 }

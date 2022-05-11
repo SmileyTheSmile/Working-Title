@@ -43,6 +43,6 @@ public class PlayerWallJumpState : PlayerAbilityState
     */
     public void DetermineWallJumpDirection(bool isTouchingWall)
     {
-        _wallJumpMovementDirection = (isTouchingWall ? -1 : 1) * movement.movementDirection;
+        _wallJumpMovementDirection = (isTouchingWall ? -1 : 1) * movement._movementDir;
     }
 }

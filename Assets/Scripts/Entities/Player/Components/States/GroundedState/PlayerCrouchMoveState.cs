@@ -29,7 +29,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     {
         base.DoActions();
 
-        movement?.SetVelocityX(_playerData.crouchMovementVelocity * movement.movementDirection);
+        movement?.SetVelocityX(_playerData.crouchMovementVelocity * movement._movementDir);
     }
 
     public override void DoTransitions()

@@ -59,7 +59,7 @@ public abstract class PlayerAbilityState : PlayerState
     {
         base.DoTransitions();
 
-        if (_isGrounded && movement.currentVelocity.y < 0.01)
+        if (_isGrounded && movement._currentVelocity.y < 0.01)
         {
             if (_crouchInput)
             {

@@ -60,20 +60,6 @@ public abstract class GenericState : ScriptableObject
         DoChecks();
     }
 
-    public void ProcessTransitions()
-    {
-        // Loop over all of the possible transitions from this state
-        foreach (var transition in transitions)
-        {
-            // Check to see if the particular transition conditions are met
-            if (transition.ShouldTransition())
-            {
-                // Let the caller know which state we should transition to
-                stateMachine.ChangeState(transition.NextState);
-            }
-        }
-    }
-
     //Do all the checks if the state should transition into another state
     public virtual void DoTransitions() { }
     //Execute all the actions the state must do every Update
