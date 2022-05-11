@@ -12,8 +12,8 @@ public class Movement : CoreComponent
     private VisualController _visualController;
 
     [SerializeField] private Transform _ceilingCheckTransform;
-    [SerializeField] private StateTransitionCondition _ceilingCheck;
-    [SerializeField] private StateTransitionCondition _wallFront;
+    [SerializeField] private StateCollisionCheckCondition _ceilingCheck;
+    [SerializeField] private StateCollisionCheckCondition _wallFront;
     [SerializeField] private ScriptableInt _movementDirSO;
 
     private Rigidbody2D _rigidBody;

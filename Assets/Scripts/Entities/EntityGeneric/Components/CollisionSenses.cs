@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class CollisionSenses : CoreComponent
 {
-    [SerializeField] private StateTransitionCondition _groundCheck;
-    [SerializeField] private StateTransitionCondition _ceilingCheck;
-    [SerializeField] private StateTransitionCondition _wallFront;
-    [SerializeField] private StateTransitionCondition _wallBack;
-    [SerializeField] private StateTransitionCondition _ledgeCheckHorizontal;
-    [SerializeField] private StateTransitionCondition _ledgeCheckVertical;
+    [SerializeField] private StateCollisionCheckCondition _groundCheck;
+    [SerializeField] private StateCollisionCheckCondition _ceilingCheck;
+    [SerializeField] private StateCollisionCheckCondition _wallFront;
+    [SerializeField] private StateCollisionCheckCondition _wallBack;
+    [SerializeField] private StateCollisionCheckCondition _ledgeCheckHorizontal;
+    [SerializeField] private StateCollisionCheckCondition _ledgeCheckVertical;
 
     //Check if entity is grounded
     public bool Ground 

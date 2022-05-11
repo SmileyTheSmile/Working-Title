@@ -167,6 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39cd7c9ce9afb34a9c4d16b06e84e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ceilingCheckTransform: {fileID: 218465561}
+  _ceilingCheck: {fileID: 11400000, guid: c49019a78e6bcac4db27db0bb7a25c4e, type: 2}
+  _wallFront: {fileID: 11400000, guid: e051125bc532dff449e18e6a408ac509, type: 2}
+  _movementDirSO: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}
 --- !u!1 &101838357
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +204,7 @@ Transform:
   m_Children:
   - {fileID: 1818780598}
   m_Father: {fileID: 1300811251}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &101838359
 SpriteRenderer:
@@ -241,7 +245,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 273467603
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 4575609688734004810, guid: a066db1799ae91f469e7caf6c5b04e3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -546,6 +550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 150496759}
+  - component: {fileID: 150496760}
   m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -568,6 +573,25 @@ Transform:
   m_Father: {fileID: 274567565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &150496760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150496758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366c0a2068df63a4b9175d7f8b5464f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 11400000, guid: 352a8c2cfb0f29b4ca57ca554eda59fc, type: 2}
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  _groundCheckHeight: 0.2
+  _groundWidthOffset: 0.05
+  defaultColliderSize: {x: 1, y: 1}
 --- !u!1 &156897900
 GameObject:
   m_ObjectHideFlags: 0
@@ -13034,6 +13058,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 218465561}
+  - component: {fileID: 218465562}
   m_Layer: 6
   m_Name: CeilingCheck
   m_TagString: Untagged
@@ -13056,6 +13081,25 @@ Transform:
   m_Father: {fileID: 274567565}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &218465562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218465560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd95f2926aea84f45acc86ace04fdb61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 11400000, guid: c49019a78e6bcac4db27db0bb7a25c4e, type: 2}
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  _ceilingCheckHeight: 0.2
+  _ceilingWidthOffset: 0.05
+  defaultColliderSize: {x: 1, y: 1}
 --- !u!1 &240887242
 GameObject:
   m_ObjectHideFlags: 0
@@ -13389,7 +13433,7 @@ Transform:
   - {fileID: 2047956560}
   - {fileID: 1541864964}
   m_Father: {fileID: 1300811251}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &274567566
 MonoBehaviour:
@@ -13403,19 +13447,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98054dcf220f61e4d89d5e37ebfb9864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundCheck: {fileID: 150496759}
-  _ceilingCheck: {fileID: 218465561}
-  _wallCheck: {fileID: 2047956560}
-  _ledgeCheckHorizontal: {fileID: 1541864964}
+  _groundCheck: {fileID: 11400000, guid: 352a8c2cfb0f29b4ca57ca554eda59fc, type: 2}
+  _ceilingCheck: {fileID: 11400000, guid: c49019a78e6bcac4db27db0bb7a25c4e, type: 2}
+  _wallFront: {fileID: 11400000, guid: e051125bc532dff449e18e6a408ac509, type: 2}
+  _wallBack: {fileID: 11400000, guid: 23faefe86b7511845bc45a893e477b01, type: 2}
+  _ledgeCheckHorizontal: {fileID: 11400000, guid: ce6cada7949a82445ba0e3bd53463008, type: 2}
   _ledgeCheckVertical: {fileID: 0}
-  _whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
-  _groundCheckHeight: 0.2
-  _groundWidthOffset: 0.05
-  _ceilingCheckHeight: 0.2
-  _ceilingWidthOffset: 0.5
-  _wallCheckDistance: 0.6
 --- !u!1 &381208190
 GameObject:
   m_ObjectHideFlags: 3
@@ -13786,7 +13823,7 @@ Transform:
   m_Children:
   - {fileID: 1487311952}
   m_Father: {fileID: 1300811251}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &724419622
 MonoBehaviour:
@@ -13853,6 +13890,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4ce727c0d74ed46a9289bbe2f92007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _core: {fileID: 0}
+  _stateMachine: {fileID: 0}
+  <idleState>k__BackingField: {fileID: 0}
+  <moveState>k__BackingField: {fileID: 0}
   enemyData: {fileID: 11400000, guid: cd938c7ba2468e84e87ff2cad66a7338, type: 2}
 --- !u!95 &739177441
 Animator:
@@ -13960,7 +14001,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2051590237
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1202638717, guid: 0aa702f607cde2e4e8774a59e25a5ff2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -14129,7 +14170,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 273467603
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -52075,7 +52116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2051590237
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -5638121381227867911, guid: 490d71ffadcf22344bc8ee2cb3ec920f, type: 3}
   m_Color: {r: 0.5529412, g: 0.5529412, b: 0.5529412, a: 1}
@@ -52224,7 +52265,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 273467603
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: -2796402845564706327, guid: e42e53d41f23dbe49a83176fda6411ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103536,9 +103577,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 241716523}
+  - {fileID: 274567565}
   - {fileID: 724419621}
   - {fileID: 101838358}
-  - {fileID: 274567565}
   - {fileID: 97833046}
   - {fileID: 1212055983}
   - {fileID: 1827246651}
@@ -103682,7 +103723,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 273467603
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103929,6 +103970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1541864964}
+  - component: {fileID: 1541864965}
   m_Layer: 6
   m_Name: LedgeCheck
   m_TagString: Untagged
@@ -103951,6 +103993,24 @@ Transform:
   m_Father: {fileID: 274567565}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541864965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541864963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a242ec904a91b445a972d1d356ab99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 11400000, guid: ce6cada7949a82445ba0e3bd53463008, type: 2}
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  _movementDirection: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}
+  _ledgeCheckDistance: 0.6
 --- !u!1 &1690227111
 GameObject:
   m_ObjectHideFlags: 0
@@ -104024,7 +104084,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1571117379
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -104049,6 +104109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbab09d7b102ba478ab31c97079853c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clampMode: 1
+  clampThreshold: {x: 2, y: 2}
+  clampRadius: 2.5
+  playerCenter: {fileID: 516718342}
+  target: {fileID: 760143955}
 --- !u!1 &1712463248
 GameObject:
   m_ObjectHideFlags: 0
@@ -104093,6 +104158,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39cd7c9ce9afb34a9c4d16b06e84e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ceilingCheckTransform: {fileID: 0}
+  _ceilingCheck: {fileID: 0}
+  _wallFront: {fileID: 0}
+  _movementDirSO: {fileID: 0}
 --- !u!1 &1715860418
 GameObject:
   m_ObjectHideFlags: 0
@@ -104220,7 +104289,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 273467603
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 6297110586619770468, guid: e938a10be98e780418700c71b48e6b96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -104382,17 +104451,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundCheck: {fileID: 0}
   _ceilingCheck: {fileID: 0}
-  _wallCheck: {fileID: 0}
+  _wallFront: {fileID: 0}
+  _wallBack: {fileID: 0}
   _ledgeCheckHorizontal: {fileID: 0}
   _ledgeCheckVertical: {fileID: 0}
-  _whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  _groundCheckHeight: 0.2
-  _groundWidthOffset: 0.05
-  _ceilingCheckHeight: 0.2
-  _ceilingWidthOffset: 0.5
-  _wallCheckDistance: 0.6
 --- !u!1 &1919490865
 GameObject:
   m_ObjectHideFlags: 0
@@ -104486,6 +104548,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2047956560}
+  - component: {fileID: 2047956562}
+  - component: {fileID: 2047956561}
   m_Layer: 6
   m_Name: WallCheck
   m_TagString: Untagged
@@ -104508,6 +104572,44 @@ Transform:
   m_Father: {fileID: 274567565}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047956561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047956559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2f26124095c4a43aa24bdf4a3ef906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 11400000, guid: 23faefe86b7511845bc45a893e477b01, type: 2}
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  _wallChecktype: -1
+  _movementDirection: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}
+  _wallCheckDistance: 0.6
+--- !u!114 &2047956562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047956559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2f26124095c4a43aa24bdf4a3ef906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 11400000, guid: e051125bc532dff449e18e6a408ac509, type: 2}
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  _wallChecktype: 1
+  _movementDirection: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}
+  _wallCheckDistance: 0.6
 --- !u!1 &2061871531
 GameObject:
   m_ObjectHideFlags: 0

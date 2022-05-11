@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: New Transition
   m_EditorClassIdentifier: 
   nextState: {fileID: 0}
-  conditions: []
+  conditions:
+  - {fileID: 0}
