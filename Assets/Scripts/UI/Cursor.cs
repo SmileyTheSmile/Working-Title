@@ -40,10 +40,12 @@ public class Cursor : MonoBehaviour
     {
         targetPosition = (playerCenter.position + mousePosition) / 2;
 
-        targetPosition.x = Mathf.Clamp(targetPosition.x, playerCenter.position.x - threshold.x, playerCenter.position.x + threshold.x);
-        targetPosition.y = Mathf.Clamp(targetPosition.y, playerCenter.position.y - threshold.y, playerCenter.position.y + threshold.y);
+        //targetPosition.x = Mathf.Clamp(targetPosition.x, playerCenter.position.x - threshold.x, playerCenter.position.x + threshold.x);
+        //targetPosition.y = Mathf.Clamp(targetPosition.y, playerCenter.position.y - threshold.y, playerCenter.position.y + threshold.y);
+        //target.position = targetPosition;
+        targetPosition = Vector3.ClampMagnitude(targetPosition, 2.0f);
 
-        target.position = targetPosition;
+        target.position = target.position + targetPosition;
     }
 
     void OnDrawGizmos()

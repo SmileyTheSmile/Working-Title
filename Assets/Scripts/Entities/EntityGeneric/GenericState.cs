@@ -12,6 +12,8 @@ public abstract class GenericState : ScriptableObject
     { get => _stateMachine ?? core.GetCoreComponent(ref _stateMachine); }
     private FiniteStateMachine _stateMachine;
 
+    [SerializeField] private List<StateTransition> transitions = new List<StateTransition>();
+
     protected Core core;
 
     protected float _startTime;
@@ -56,6 +58,20 @@ public abstract class GenericState : ScriptableObject
     public virtual void PhysicsUpdate()
     {
         DoChecks();
+    }
+
+    public void ProcessTransitions()
+    {
+        // Loop over all of the possible transitions from this state
+        foreach (var transition in transitions)
+        {
+            // Check to see if the particular transition conditions are met
+            if (transition.ShouldTransition())
+            {
+                // Let the caller know which state we should transition to
+                stateMachine.ChangeState(transition.NextState);
+            }
+        }
     }
 
     //Do all the checks if the state should transition into another state
