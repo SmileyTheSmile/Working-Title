@@ -4,27 +4,19 @@ public abstract class PlayerAbilityState : PlayerState
 {
     private CollisionSenses collisionSenses
     { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+    private CollisionSenses _collisionSenses;
 
     protected Movement movement
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
-
-    private CollisionSenses _collisionSenses;
     private Movement _movement;
 
-    private bool _isGrounded;
+    private bool _isGrounded => collisionSenses._groundCheck.value;
 
     protected bool _isAbilityDone;
     protected bool _crouchInput;
 
     public PlayerAbilityState(Player player, string animBoolName, PlayerData playerData)
     : base(player, animBoolName, playerData) { }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-
-        _isGrounded = collisionSenses.Ground;
-    }
 
     public override void Enter()
     {

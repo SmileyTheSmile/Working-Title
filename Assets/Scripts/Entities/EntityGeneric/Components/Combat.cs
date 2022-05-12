@@ -50,7 +50,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Check if knockback should be stopped
     private void CheckKnockback()
     {
-        if ((_isKnockbackActive && movement._currentVelocity.y <= 0.0f && collisionSenses.Ground) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
+        if ((_isKnockbackActive && movement._currentVelocity.y <= 0.0f && collisionSenses._groundCheck.value) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
         {
             movement?.SetCanChangeVelocity(true);
 

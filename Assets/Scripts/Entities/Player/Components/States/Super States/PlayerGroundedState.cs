@@ -20,27 +20,14 @@ public abstract class PlayerGroundedState : PlayerState
     protected bool _jumpInputStop;
     protected Vector2 _mousePositionInput;
 
-    protected bool _isGrounded;
+    protected bool _isGrounded => collisionSenses._groundCheck.value;
     protected bool _isCrouching;
-    protected bool _isTouchingCeiling;
-    protected bool _isTouchingWall;
-    protected bool _isTouchingLedge;
+    protected bool _isTouchingCeiling => collisionSenses._ceilingCheck.value;
+    protected bool _isTouchingWall => collisionSenses._wallFrontCheck.value;
+    protected bool _isTouchingLedge => collisionSenses._ledgeHorizontalCheck.value;
 
     public PlayerGroundedState(Player player, PlayerData playerData, string animBoolName)
     : base(player, animBoolName, playerData) { }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-
-        if (collisionSenses)
-        {
-            _isGrounded = collisionSenses.Ground;
-            _isTouchingCeiling = collisionSenses.Ceiling;
-            _isTouchingWall = collisionSenses.WallFront;
-            _isTouchingLedge = collisionSenses.LedgeHorizontal;
-        }
-    }
 
     public override void Enter()
     {

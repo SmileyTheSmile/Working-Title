@@ -22,13 +22,13 @@ public class PlayerInAirState : PlayerState
     protected bool _jumpInputStop;
     protected Vector2 _mousePositionInput;
 
-    protected bool _isGrounded;
-    protected bool _isTouchingWall;
+    protected bool _isGrounded => collisionSenses._groundCheck.value;
+    protected bool _isTouchingWall => collisionSenses._wallFrontCheck.value;
+    protected bool _isTouchingWallBack => collisionSenses._wallBackCheck.value;
+    protected bool _isTouchingLedge => collisionSenses._ledgeHorizontalCheck.value;
+    protected bool _isTouchingCeiling => collisionSenses._ceilingCheck.value;
     protected bool _oldIsTouchingWall;
-    protected bool _isTouchingWallBack;
     protected bool _oldIsTouchingWallBack;
-    protected bool _isTouchingLedge;
-    protected bool _isTouchingCeiling;
     protected bool _isJumping;
 
     private float _wallJumpCoyoteTimeStart;
@@ -49,11 +49,6 @@ public class PlayerInAirState : PlayerState
         _oldIsTouchingWall = _isTouchingWall;
         _oldIsTouchingWallBack = _isTouchingWallBack;
 
-        _isGrounded = collisionSenses.Ground;
-        _isTouchingWall = collisionSenses.WallFront;
-        _isTouchingWallBack = collisionSenses.WallBack;
-        _isTouchingLedge = collisionSenses.LedgeHorizontal;
-
         if (!_wallJumpCoyoteTime && !_isTouchingWall && !_isTouchingWallBack && (_oldIsTouchingWall && _oldIsTouchingWallBack))
         {
             StartWallJumpCoyoteTime();
@@ -73,8 +68,6 @@ public class PlayerInAirState : PlayerState
 
         _oldIsTouchingWall = false;
         _oldIsTouchingWallBack = false;
-        _isTouchingWall = false;
-        _isTouchingWallBack = false;
     }
 
     public override void DoActions()
@@ -117,7 +110,6 @@ public class PlayerInAirState : PlayerState
             else if (_isTouchingWall || _isTouchingWallBack || _wallJumpCoyoteTime)
             {
                 StopWallJumpCoyoteTime();
-                _isTouchingWall = collisionSenses.WallFront;
                 _player.wallJumpState.DetermineWallJumpDirection(_isTouchingWall);
                 stateMachine?.ChangeState(_player.wallJumpState);
             }

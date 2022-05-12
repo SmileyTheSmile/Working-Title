@@ -17,23 +17,13 @@ public abstract class PlayerTouchingWallState : PlayerState
     protected bool _jumpInput;
     protected bool _crouchInput;
 
-    protected bool _isGrounded;
-    protected bool _isTouchingWall;
-    protected bool _isTouchingLedge;
-    protected bool _isTouchingCeiling;
+    protected bool _isGrounded => collisionSenses._groundCheck.value;
+    protected bool _isTouchingWall => collisionSenses._wallFrontCheck.value;
+    protected bool _isTouchingLedge => collisionSenses._ledgeHorizontalCheck.value;
+    protected bool _isTouchingCeiling => collisionSenses._ceilingCheck.value;
 
     public PlayerTouchingWallState(Player player, string animBoolName, PlayerData playerData)
     : base(player, animBoolName, playerData) { }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-
-        _isGrounded = collisionSenses.Ground;
-        _isTouchingWall = collisionSenses.WallFront;
-        _isTouchingLedge = collisionSenses.LedgeHorizontal;
-        _isTouchingCeiling = collisionSenses.Ceiling;
-    }
 
     public override void DoActions()
     {

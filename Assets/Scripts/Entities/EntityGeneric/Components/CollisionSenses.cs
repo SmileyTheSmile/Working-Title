@@ -2,52 +2,23 @@ using UnityEngine;
 
 public class CollisionSenses : CoreComponent
 {
-    [SerializeField] private StateCollisionCheckCondition _groundCheck;
-    [SerializeField] private StateCollisionCheckCondition _ceilingCheck;
-    [SerializeField] private StateCollisionCheckCondition _wallFront;
-    [SerializeField] private StateCollisionCheckCondition _wallBack;
-    [SerializeField] private StateCollisionCheckCondition _ledgeCheckHorizontal;
-    [SerializeField] private StateCollisionCheckCondition _ledgeCheckVertical;
 
     //Check if entity is grounded
-    public bool Ground 
-    {
-        get => _groundCheck.value;
-    }
-
+    public StateCollisionCheckCondition _groundCheck;
     //Check if entity is touching ceiling
-    public bool Ceiling 
-    {
-        get => _ceilingCheck.value;
-    }
-
+    public StateCollisionCheckCondition _ceilingCheck;
     //Check if entity is touching a wall in front of it
-    public bool WallFront  
-    {
-        get => _wallFront.value;
-    }
-
+    public StateCollisionCheckCondition _wallFrontCheck;
     //Check if entity is touching a wall at its back
-    public bool WallBack 
-    {
-        get => _wallBack.value;
-    }
-
+    public StateCollisionCheckCondition _wallBackCheck;
     //Check if entity is nearing a ledge when wall climbing
-    public bool LedgeHorizontal 
-    {
-        get => _ledgeCheckHorizontal.value;
-    }
-
+    public StateCollisionCheckCondition _ledgeHorizontalCheck;
     //Check if entity is standing on a ledge
-    public bool LedgeVertical
-    {
-        get => _ledgeCheckVertical.value;
-    }
+    public StateCollisionCheckCondition _ledgeCheckVertical;
 
     //Debug all check values
     public override void LogComponentInfo()
     {
-        Debug.Log($"Ground = {Ground.ToString()}\nCeiling = {Ceiling.ToString()}\nLedge Horisontal = {LedgeHorizontal.ToString()}\nWall Front = {WallFront.ToString()}\nWall Back = {WallBack.ToString()}");
+        Debug.Log($"Ground = {_groundCheck.value}\nCeiling = {_ceilingCheck.value}\nWall Front = {_wallFrontCheck.value}\nWall Back = {_wallBackCheck.value}Ledge Horizontal = {_ledgeHorizontalCheck.value}\n");
     }
 }
