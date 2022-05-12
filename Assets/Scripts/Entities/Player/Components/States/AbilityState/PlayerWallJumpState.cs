@@ -17,9 +17,8 @@ public class PlayerWallJumpState : PlayerAbilityState
         _wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
 
         inputHandler?.UseJumpInput();
-
-        _player.jumpState.ResetAmountOfJumpsLeft();
-        _player.jumpState.DecreaseAmountOfJumpsLeft();
+        inputHandler?.ResetAmountOfJumpsLeft();
+        inputHandler?.DecreaseAmountOfJumpsLeft();
 
         movement?.SetVelocity(_playerData.wallJumpVelocity, _wallJumpDirection, _wallJumpMovementDirection);
         movement?.CheckMovementDirection(_wallJumpMovementDirection);

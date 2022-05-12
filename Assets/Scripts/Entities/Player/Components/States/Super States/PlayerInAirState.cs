@@ -83,7 +83,6 @@ public class PlayerInAirState : PlayerState
 
         _inputX = inputHandler.normalizedInputX;
         _inputY = inputHandler.normalizedInputY;
-        _dashInput = inputHandler.dashInput;
         _grabInput = inputHandler.grabInput;
         _crouchInput = inputHandler.crouchInput;
         _jumpInput = inputHandler.jumpInput;
@@ -101,19 +100,15 @@ public class PlayerInAirState : PlayerState
     {
         base.DoTransitions();
 
-        if (inputHandler.attackInputs[(int)CombatInputs.primary])
+        if (inputHandler._attackInputs[(int)CombatInputs.primary])
         {
             //stateMachine?.ChangeState(player.primaryAttackState);
         }
-        else if (inputHandler.attackInputs[(int)CombatInputs.secondary])
+        else if (inputHandler._attackInputs[(int)CombatInputs.secondary])
         {
             stateMachine?.ChangeState(_player.secondaryAttackState);
         }
-        else if (_dashInput && _player.dashState.CheckIfCanDash())
-        {
-            stateMachine?.ChangeState(_player.dashState);
-        }
-        else if (_jumpInput && _player.jumpState.CanJump())
+        else if (_jumpInput && inputHandler.CanJump())
         {
             if (_crouchInput)
             {
@@ -176,7 +171,7 @@ public class PlayerInAirState : PlayerState
         if (_coyoteTime && Time.time > _startTime + _playerData.coyoteTime)
         {
             _coyoteTime = false;
-            _player.jumpState.DecreaseAmountOfJumpsLeft();
+            inputHandler.DecreaseAmountOfJumpsLeft();
         }
     }
 

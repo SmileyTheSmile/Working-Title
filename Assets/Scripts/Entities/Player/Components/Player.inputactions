@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "7618b40a-14d0-4094-90d1-4f075e85b7e2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "PrimaryAttack",
                     "type": "Button",
                     "id": "257e5655-731d-4cd8-9805-6b4765c7fdcf",
@@ -173,17 +164,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Grab",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f3079f27-21af-4635-b1c5-ec3b4f1c9c83",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

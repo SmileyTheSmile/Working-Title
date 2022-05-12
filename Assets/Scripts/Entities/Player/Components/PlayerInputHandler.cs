@@ -8,15 +8,14 @@ public class PlayerInputHandler : CoreComponent
     public bool jumpInput { get; private set; }
     public bool jumpInputStop { get; private set; }
     public bool grabInput { get; private set; }
-    public bool dashInput { get; private set; }
-    public bool dashInputStop { get; private set; }
     public bool crouchInput { get; private set; }
-    public bool[] attackInputs { get; private set; }
+    public bool[] _attackInputs { get; private set; }
     public int normalizedInputX { get; private set; }
     public int normalizedInputY { get; private set; }
     public int weaponSwitchInput { get; private set; }
 
     [SerializeField] private float inputHoldTime = 0.2f;
+    [SerializeField] private PlayerData _playerData;
 
     private PlayerInput _playerInput;
     private Camera _mainCamera;
@@ -25,7 +24,8 @@ public class PlayerInputHandler : CoreComponent
     private Vector2 _rawMouseInput;
     private float _rawWeaponSwitchInput;
     private float _jumpInputStartTime;
-    private float _dashInputStartTime;
+    private int _amountOfJumpsLeft;
+
 
     private void Awake()
     {
@@ -34,7 +34,8 @@ public class PlayerInputHandler : CoreComponent
         _mainCamera = Camera.main;
 
         int count = Enum.GetValues(typeof(CombatInputs)).Length;
-        attackInputs = new bool[count];
+        _attackInputs = new bool[count];
+        _amountOfJumpsLeft = _playerData.amountOfJumps;
     }
 
     private void Update()
@@ -43,7 +44,6 @@ public class PlayerInputHandler : CoreComponent
 
         ProcessMouseInput();
         CheckJumpInputHoldTime();
-        CheckDashInputHoldTime();
     }
 
     //Process movement input
@@ -70,22 +70,6 @@ public class PlayerInputHandler : CoreComponent
         if (context.canceled)
         {
             jumpInputStop = true;
-        }
-    }
-
-    //Process dash input
-    public void OnDashInput(InputAction.CallbackContext context) 
-    {
-        if (context.started)
-        {
-            dashInput = true;
-            dashInputStop = false;
-            _dashInputStartTime = Time.time;
-        }
-
-        if (context.canceled)
-        {
-            dashInputStop = true;
         }
     }
     
@@ -128,11 +112,11 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
-            attackInputs[(int)CombatInputs.primary] = true;
+            _attackInputs[(int)CombatInputs.primary] = true;
         }
         else if (context.canceled)
         {
-            attackInputs[(int)CombatInputs.primary] = false;
+            _attackInputs[(int)CombatInputs.primary] = false;
         }
     }
 
@@ -141,12 +125,12 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
-            attackInputs[(int)CombatInputs.secondary] = true;
+            _attackInputs[(int)CombatInputs.secondary] = true;
         }
 
         if (context.canceled)
         {
-            attackInputs[(int)CombatInputs.secondary] = false;
+            _attackInputs[(int)CombatInputs.secondary] = false;
         }
     }
 
@@ -167,15 +151,6 @@ public class PlayerInputHandler : CoreComponent
             jumpInput = false;
         }
     }
-
-    //Check if dash button has been held for value in inputHoldTime
-    private void CheckDashInputHoldTime() 
-    {
-        if (Time.time >= _dashInputStartTime + inputHoldTime)
-        {
-            dashInput = false;
-        }
-    }
     
     //Process mouse position input
     private void ProcessMouseInput() 
@@ -186,10 +161,11 @@ public class PlayerInputHandler : CoreComponent
         //mouseAngle = Mathf.Atan2(mousePositionInput.y, mousePositionInput.x) * Mathf.Rad2Deg;
     }
 
+    public bool CanJump() => (_amountOfJumpsLeft > 0);
+    public void ResetAmountOfJumpsLeft() => _amountOfJumpsLeft = _playerData.amountOfJumps;
+    public void DecreaseAmountOfJumpsLeft() => _amountOfJumpsLeft--;
     //Disable jump input
     public void UseJumpInput() => jumpInput = false; 
-    //Disable dash input
-    public void UseDashInput() => dashInput = false; 
 
     //Log important info
     public override void LogComponentInfo() 

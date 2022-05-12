@@ -46,9 +46,9 @@ public abstract class PlayerGroundedState : PlayerState
     {
         base.Enter();
 
-        _player.jumpState.ResetAmountOfJumpsLeft();
+        inputHandler?.ResetAmountOfJumpsLeft();
+        
         _player.crouchInAirState.ResetAmountOfCrouchesLeft();
-        _player.dashState.ResetCanDash();
     }
 
     public override void DoActions()
@@ -58,7 +58,6 @@ public abstract class PlayerGroundedState : PlayerState
         _inputX = inputHandler.normalizedInputX;
         _inputY = inputHandler.normalizedInputY;
         _grabInput = inputHandler.grabInput;
-        _dashInput = inputHandler.dashInput;
         _jumpInput = inputHandler.jumpInput;
         _jumpInputStop = inputHandler.jumpInputStop;
         _crouchInput = inputHandler.crouchInput;
@@ -72,15 +71,15 @@ public abstract class PlayerGroundedState : PlayerState
         base.DoTransitions();
         
         //Ability States
-        if (inputHandler.attackInputs[(int)CombatInputs.primary] && !_isTouchingCeiling)
+        if (inputHandler._attackInputs[(int)CombatInputs.primary] && !_isTouchingCeiling)
         {
             //stateMachine?.ChangeState(player.primaryAttackState);
         }
-        else if (inputHandler.attackInputs[(int)CombatInputs.secondary] && !_isTouchingCeiling)
+        else if (inputHandler._attackInputs[(int)CombatInputs.secondary] && !_isTouchingCeiling)
         {
             stateMachine?.ChangeState(_player.secondaryAttackState);
         }
-        else if ((_jumpInput && _player.jumpState.CanJump() && !_isTouchingCeiling))
+        else if ((_jumpInput && inputHandler.CanJump() && !_isTouchingCeiling))
         {
             if (_crouchInput && _player.crouchInAirState.CanCrouch())
             {
@@ -90,10 +89,6 @@ public abstract class PlayerGroundedState : PlayerState
             {
                 stateMachine?.ChangeState(_player.jumpState);
             }
-        }
-        else if (_dashInput && _player.dashState.CheckIfCanDash() && !_isTouchingCeiling)
-        {
-            stateMachine?.ChangeState(_player.dashState);
         }
 
         //Other States

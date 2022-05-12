@@ -39,6 +39,7 @@ public abstract class PlayerAbilityState : PlayerState
         {
             return;
         }
+        
         if (!_isAbilityDone)
         {
             return;

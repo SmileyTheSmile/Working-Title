@@ -72,7 +72,7 @@ public class TempShootScript : MonoBehaviour
 
     private void ShootRaycast()
     {
-        if (!(inputHandler.attackInputs[(int)CombatInputs.primary]))
+        if (!(inputHandler._attackInputs[(int)CombatInputs.primary]))
             return;
 
         if (!(lastShotTime + shotDelay < Time.time))

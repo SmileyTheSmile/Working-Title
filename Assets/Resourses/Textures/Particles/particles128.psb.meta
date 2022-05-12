@@ -97,7 +97,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 140
+      x: 4
       y: 4
       width: 35
       height: 13
@@ -110,28 +110,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 94, y: -62}
-  - name: dashDirection
-    originalName: 
-    pivot: {x: 0.1, y: 0.5}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4
-      width: 128
-      height: 16
-    spriteID: 93e06363a895b3e4c9d6a8b3373c4d52
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: 4, y: -108}
+    uvTransform: {x: -42, y: -62}
   rigSpriteImportData:
   - name: arrow
     originalName: 
@@ -254,16 +233,6 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 36f477854a77a2c4bbe0a60857c4f670
     layerID: 4
-    mosaicPosition: {x: 140, y: 4}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: dashDirection
-    spriteName: dashDirection
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 93e06363a895b3e4c9d6a8b3373c4d52
-    layerID: 3
     mosaicPosition: {x: 4, y: 4}
     flatten: 0
     isImported: 1

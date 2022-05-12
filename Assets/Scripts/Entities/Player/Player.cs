@@ -6,7 +6,6 @@ public partial class Player : EntityGeneric
     public PlayerMoveState moveState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
     public PlayerInAirState inAirState { get; private set; }
-    public PlayerDashState dashState { get; private set; }
     public PlayerLandState landState { get; private set; }
 
     public PlayerWallSlideState wallSlideState { get; private set; }
@@ -38,7 +37,6 @@ public partial class Player : EntityGeneric
         moveState = new PlayerMoveState(this, playerData, "move");
         jumpState = new PlayerJumpState(this, playerData, "inAir");
         inAirState = new PlayerInAirState(this, playerData, "inAir");
-        dashState = new PlayerDashState(this, playerData, "inAir");
         landState = new PlayerLandState(this, playerData, "land");
 
         wallSlideState = new PlayerWallSlideState(this, playerData, "wallSlide");
