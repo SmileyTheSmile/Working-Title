@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 366c0a2068df63a4b9175d7f8b5464f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 11400000, guid: 352a8c2cfb0f29b4ca57ca554eda59fc, type: 2}
+  condition: {fileID: 11400000, guid: 12596c6aa15d67e469bea5a552d09a74, type: 2}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -13093,7 +13093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd95f2926aea84f45acc86ace04fdb61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 11400000, guid: c49019a78e6bcac4db27db0bb7a25c4e, type: 2}
+  condition: {fileID: 11400000, guid: a04e35ef07055d14d9bdd5a35405b6d2, type: 2}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -13179,7 +13179,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9681695badf2e6640b671c495d30f618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isJumpingSO: {fileID: 11400000, guid: 8cd304ebf69087f4ea701ec1caa76f0e, type: 2}
+  _isJumpCanceledSO: {fileID: 11400000, guid: c560239318ec7e24da5ee0da4e5c4a9e, type: 2}
+  _isGrabbingSO: {fileID: 11400000, guid: 685a940549da8d84e8424ad7cb4644ad, type: 2}
+  _isCrouchingSO: {fileID: 11400000, guid: 5c484b00522882c4ea99a376c1641e09, type: 2}
+  _isMovingSO: {fileID: 11400000, guid: 76b02d33cd7884e4d99974f0393431ea, type: 2}
+  _primaryAttackSO: {fileID: 11400000, guid: ea1f8b3e482ae544ba837695d0520f83, type: 2}
+  _secondaryAttackSO: {fileID: 11400000, guid: a7ff6e1e560060b4dbcd529813a7112f, type: 2}
   inputHoldTime: 0.2
+  _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
 --- !u!114 &241716525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13253,22 +13261,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 35ae0250-4e83-41e3-8bb0-39e19767d6f0
     m_ActionName: Gameplay/Grab[/Keyboard/ctrl]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 241716524}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnDashInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7618b40a-14d0-4094-90d1-4f075e85b7e2
-    m_ActionName: Gameplay/Dash
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 241716524}
@@ -13410,7 +13402,7 @@ GameObject:
   - component: {fileID: 274567565}
   - component: {fileID: 274567566}
   m_Layer: 6
-  m_Name: CollisionSenses
+  m_Name: ConditionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13447,12 +13439,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98054dcf220f61e4d89d5e37ebfb9864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundCheck: {fileID: 11400000, guid: 352a8c2cfb0f29b4ca57ca554eda59fc, type: 2}
-  _ceilingCheck: {fileID: 11400000, guid: c49019a78e6bcac4db27db0bb7a25c4e, type: 2}
-  _wallFront: {fileID: 11400000, guid: e051125bc532dff449e18e6a408ac509, type: 2}
-  _wallBack: {fileID: 11400000, guid: 23faefe86b7511845bc45a893e477b01, type: 2}
-  _ledgeCheckHorizontal: {fileID: 11400000, guid: ce6cada7949a82445ba0e3bd53463008, type: 2}
-  _ledgeCheckVertical: {fileID: 0}
+  IsGroundedSO: {fileID: 11400000, guid: 12596c6aa15d67e469bea5a552d09a74, type: 2}
+  IsTouchingCeilingSO: {fileID: 11400000, guid: a04e35ef07055d14d9bdd5a35405b6d2, type: 2}
+  IsTouchingWallFrontSO: {fileID: 11400000, guid: 1c35970494ec4564092e80e3679a04bc, type: 2}
+  IsTouchingWallBackSO: {fileID: 11400000, guid: 2a7b34b0b3bff944a945f02de1e96b7d, type: 2}
+  IsTouchingLedgeHorizontalSO: {fileID: 11400000, guid: 395434da307c2fb43b82935c28e04b38, type: 2}
+  IsTouchingLedgeVerticalSO: {fileID: 0}
+  IsPressingJumpSO: {fileID: 11400000, guid: 8cd304ebf69087f4ea701ec1caa76f0e, type: 2}
+  IsJumpCanceledSO: {fileID: 11400000, guid: c560239318ec7e24da5ee0da4e5c4a9e, type: 2}
+  IsPressingGrabSO: {fileID: 11400000, guid: 685a940549da8d84e8424ad7cb4644ad, type: 2}
+  IsPressingCrouchSO: {fileID: 11400000, guid: 5c484b00522882c4ea99a376c1641e09, type: 2}
+  IsPressingPrimaryAttackSO: {fileID: 11400000, guid: ea1f8b3e482ae544ba837695d0520f83, type: 2}
+  IsPressingSecondaryAttackSO: {fileID: 11400000, guid: a7ff6e1e560060b4dbcd529813a7112f, type: 2}
+  IsMovingSO: {fileID: 11400000, guid: 76b02d33cd7884e4d99974f0393431ea, type: 2}
 --- !u!1 &381208190
 GameObject:
   m_ObjectHideFlags: 3
@@ -13890,11 +13889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4ce727c0d74ed46a9289bbe2f92007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _core: {fileID: 0}
-  _stateMachine: {fileID: 0}
-  <idleState>k__BackingField: {fileID: 0}
-  <moveState>k__BackingField: {fileID: 0}
-  enemyData: {fileID: 11400000, guid: cd938c7ba2468e84e87ff2cad66a7338, type: 2}
 --- !u!95 &739177441
 Animator:
   serializedVersion: 4
@@ -104005,7 +103999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a242ec904a91b445a972d1d356ab99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 11400000, guid: ce6cada7949a82445ba0e3bd53463008, type: 2}
+  condition: {fileID: 11400000, guid: 395434da307c2fb43b82935c28e04b38, type: 2}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -104449,12 +104443,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98054dcf220f61e4d89d5e37ebfb9864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundCheck: {fileID: 0}
-  _ceilingCheck: {fileID: 0}
-  _wallFront: {fileID: 0}
-  _wallBack: {fileID: 0}
-  _ledgeCheckHorizontal: {fileID: 0}
-  _ledgeCheckVertical: {fileID: 0}
+  IsGroundedSO: {fileID: 0}
+  IsTouchingCeilingSO: {fileID: 0}
+  IsTouchingWallFrontSO: {fileID: 0}
+  IsTouchingWallBackSO: {fileID: 0}
+  IsTouchingLedgeHorizontalSO: {fileID: 0}
+  IsTouchingLedgeVerticalSO: {fileID: 0}
+  IsPressingJumpSO: {fileID: 0}
+  IsJumpCanceledSO: {fileID: 0}
+  IsPressingGrabSO: {fileID: 0}
+  IsPressingCrouchSO: {fileID: 0}
+  IsPressingPrimaryAttackSO: {fileID: 0}
+  IsPressingSecondaryAttackSO: {fileID: 0}
+  IsMovingSO: {fileID: 0}
 --- !u!1 &1919490865
 GameObject:
   m_ObjectHideFlags: 0
@@ -104502,7 +104503,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.7137096, y: 1}
+    m_SensorSize: {x: 3.7153227, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -104584,7 +104585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2f26124095c4a43aa24bdf4a3ef906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 11400000, guid: 23faefe86b7511845bc45a893e477b01, type: 2}
+  condition: {fileID: 11400000, guid: 2a7b34b0b3bff944a945f02de1e96b7d, type: 2}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -104603,7 +104604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2f26124095c4a43aa24bdf4a3ef906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: {fileID: 11400000, guid: e051125bc532dff449e18e6a408ac509, type: 2}
+  condition: {fileID: 11400000, guid: 1c35970494ec4564092e80e3679a04bc, type: 2}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 8

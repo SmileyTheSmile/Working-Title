@@ -18,7 +18,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
     {
         base.DoTransitions();
 
-        if (_grabInput && _inputY == 0)
+        if (_isPressingGrab && _inputY == 0)
         {
             stateMachine.ChangeState(_player.wallGrabState);
         }

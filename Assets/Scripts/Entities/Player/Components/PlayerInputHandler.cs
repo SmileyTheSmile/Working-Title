@@ -4,15 +4,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : CoreComponent
 {
-    public Vector3 mousePositionInput { get; private set; }
+    [SerializeField] private InputTransitionCondition _isJumpingSO;
+    [SerializeField] private InputTransitionCondition _isJumpCanceledSO;
+    [SerializeField] private InputTransitionCondition _isGrabbingSO;
+    [SerializeField] private InputTransitionCondition _isCrouchingSO;
+    [SerializeField] private InputTransitionCondition _isMovingSO;
+    [SerializeField] private InputTransitionCondition _primaryAttackSO;
+    [SerializeField] private InputTransitionCondition _secondaryAttackSO;
+
     public bool jumpInput { get; private set; }
     public bool jumpInputStop { get; private set; }
     public bool grabInput { get; private set; }
     public bool crouchInput { get; private set; }
-    public bool[] _attackInputs { get; private set; }
+    public bool primaryAttackInput { get; private set; }
+    public bool secondaryAttackInput { get; private set; }
     public int normalizedInputX { get; private set; }
     public int normalizedInputY { get; private set; }
     public int weaponSwitchInput { get; private set; }
+    public Vector3 mousePositionInput { get; private set; }
 
     [SerializeField] private float inputHoldTime = 0.2f;
     [SerializeField] private PlayerData _playerData;
@@ -25,7 +34,7 @@ public class PlayerInputHandler : CoreComponent
     private float _rawWeaponSwitchInput;
     private float _jumpInputStartTime;
     private int _amountOfJumpsLeft;
-
+    private int _amountOfCrouchesLeft;
 
     private void Awake()
     {
@@ -33,9 +42,8 @@ public class PlayerInputHandler : CoreComponent
 
         _mainCamera = Camera.main;
 
-        int count = Enum.GetValues(typeof(CombatInputs)).Length;
-        _attackInputs = new bool[count];
-        _amountOfJumpsLeft = _playerData.amountOfJumps;
+        ResetAmountOfJumpsLeft();
+        ResetAmountOfCrouchesLeft();
     }
 
     private void Update()
@@ -54,7 +62,8 @@ public class PlayerInputHandler : CoreComponent
         normalizedInputX = Mathf.RoundToInt(_rawMovementInput.x);
         normalizedInputY = Mathf.RoundToInt(_rawMovementInput.y);
 
-        crouchInput = (normalizedInputY == -1);
+        if (normalizedInputX != 0)
+            _isMovingSO.value = true;
     }
 
     //Process jump input
@@ -62,21 +71,22 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
+            _isJumpingSO.value = true;
+            _isJumpCanceledSO.value = false;
+
             jumpInput = true;
             jumpInputStop = false;
+
             _jumpInputStartTime = Time.time;
         }
-
-        if (context.canceled)
+        else if (context.canceled)
         {
+            _isJumpingSO.value = false;
+            _isJumpCanceledSO.value = true;
+
+            jumpInput = false;
             jumpInputStop = true;
         }
-    }
-    
-    //Get raw mouse position input
-    public void OnAimInput(InputAction.CallbackContext context) 
-    {
-        _rawMouseInput = context.ReadValue<Vector2>();
     }
 
     //Process wall grab input
@@ -84,11 +94,12 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
+            _isGrabbingSO.value = true;
             grabInput = true;
         }
-
-        if (context.canceled)
+        else if (context.canceled)
         {
+            _isGrabbingSO.value = false;
             grabInput = false;
         }
     }
@@ -98,11 +109,12 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
+            _isCrouchingSO.value = true;
             crouchInput = true;
         }
-
-        if (context.canceled)
+        else if (context.canceled)
         {
+            _isCrouchingSO.value = false;
             crouchInput = false;
         }
     }
@@ -112,11 +124,13 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
-            _attackInputs[(int)CombatInputs.primary] = true;
+            _primaryAttackSO.value = true;
+            primaryAttackInput = true;
         }
         else if (context.canceled)
         {
-            _attackInputs[(int)CombatInputs.primary] = false;
+            _primaryAttackSO.value = false;
+            primaryAttackInput = false;
         }
     }
 
@@ -125,13 +139,20 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
-            _attackInputs[(int)CombatInputs.secondary] = true;
+            _secondaryAttackSO.value = true;
+            secondaryAttackInput = true;
         }
-
-        if (context.canceled)
+        else if (context.canceled)
         {
-            _attackInputs[(int)CombatInputs.secondary] = false;
+            _secondaryAttackSO.value = false;
+            secondaryAttackInput = false;
         }
+    }
+
+    //Get raw mouse position input
+    public void OnAimInput(InputAction.CallbackContext context)
+    {
+        _rawMouseInput = context.ReadValue<Vector2>();
     }
 
     //Process weapon switch input
@@ -140,7 +161,6 @@ public class PlayerInputHandler : CoreComponent
         _rawWeaponSwitchInput = context.ReadValue<Vector2>().y;
 
         weaponSwitchInput = (int)_rawWeaponSwitchInput;
-        Debug.Log(weaponSwitchInput);
     }
     
     //Check if jump button has been held for the value in inputHoldTime
@@ -161,6 +181,10 @@ public class PlayerInputHandler : CoreComponent
         //mouseAngle = Mathf.Atan2(mousePositionInput.y, mousePositionInput.x) * Mathf.Rad2Deg;
     }
 
+    public bool CanCrouch() => (_amountOfCrouchesLeft > 0);
+    public void ResetAmountOfCrouchesLeft() => _amountOfCrouchesLeft = _playerData.amountOfCrouches;
+    public void DecreaseAmountOfCrouchesLeft() => _amountOfCrouchesLeft--;
+
     public bool CanJump() => (_amountOfJumpsLeft > 0);
     public void ResetAmountOfJumpsLeft() => _amountOfJumpsLeft = _playerData.amountOfJumps;
     public void DecreaseAmountOfJumpsLeft() => _amountOfJumpsLeft--;
@@ -172,10 +196,4 @@ public class PlayerInputHandler : CoreComponent
     {
         Debug.Log($"Crouch = {crouchInput}, Jump = {jumpInput}, Weapon Switch = {weaponSwitchInput}");
     }
-}
-
-public enum CombatInputs
-{
-    primary,
-    secondary
 }

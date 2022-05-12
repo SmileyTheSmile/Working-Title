@@ -72,11 +72,15 @@ public class TempShootScript : MonoBehaviour
 
     private void ShootRaycast()
     {
-        if (!(inputHandler._attackInputs[(int)CombatInputs.primary]))
+        if (!(inputHandler.primaryAttackInput))
+        {
             return;
+        }
 
         if (!(lastShotTime + shotDelay < Time.time))
+        {
             return;
+        }
 
         movement?.AddForceAtAngle(10f, angle - 180);
 

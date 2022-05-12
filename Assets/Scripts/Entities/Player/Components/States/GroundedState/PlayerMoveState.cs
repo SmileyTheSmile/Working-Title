@@ -20,7 +20,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         if (_inputX == 0f)
         {
-            if (_crouchInput)
+            if (_isPressingCrouch)
             {
                 stateMachine?.ChangeState(_player.crouchIdleState);
             }
@@ -29,7 +29,7 @@ public class PlayerMoveState : PlayerGroundedState
                 stateMachine?.ChangeState(_player.idleState);
             }
         }
-        else if (_crouchInput)
+        else if (_isPressingCrouch)
         {
             stateMachine?.ChangeState(_player.crouchMoveState);
         }

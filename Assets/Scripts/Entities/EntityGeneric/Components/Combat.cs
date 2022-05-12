@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
-    private CollisionSenses collisionSenses
-    { get => _collisionSenses ?? _core.GetCoreComponent(ref _collisionSenses); }
-    private CollisionSenses _collisionSenses;
+    private ConditionManager conditionManager
+    { get => _conditionManager ?? _core.GetCoreComponent(ref _conditionManager); }
+    private ConditionManager _conditionManager;
 
     private Movement movement
     { get => _movement ?? _core.GetCoreComponent(ref _movement); }
@@ -50,7 +50,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Check if knockback should be stopped
     private void CheckKnockback()
     {
-        if ((_isKnockbackActive && movement._currentVelocity.y <= 0.0f && collisionSenses._groundCheck.value) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
+        if ((_isKnockbackActive && movement._currentVelocity.y <= 0.0f && conditionManager.IsGroundedSO.value) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
         {
             movement?.SetCanChangeVelocity(true);
 

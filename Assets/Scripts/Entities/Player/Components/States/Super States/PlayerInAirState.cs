@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    private CollisionSenses collisionSenses
-    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
+    private ConditionManager conditionManager
+    { get => _conditionManager ?? core.GetCoreComponent(ref _conditionManager); }
+    private ConditionManager _conditionManager;
 
     protected Movement movement
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
-
-    private CollisionSenses _collisionSenses;
     private Movement _movement;
 
-    protected int _inputX;
-    protected int _inputY;
-    protected bool _dashInput;
-    protected bool _grabInput;
-    protected bool _crouchInput;
-    protected bool _jumpInput;
-    protected bool _jumpInputStop;
-    protected Vector2 _mousePositionInput;
+    protected int _inputX => inputHandler.normalizedInputX;
+    protected int _inputY => inputHandler.normalizedInputY;
+    protected Vector2 _mousePositionInput => inputHandler.mousePositionInput;
+    
+    protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;
+    protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
+    protected bool _isPressingJump => conditionManager.IsPressingJumpSO.value;
+    protected bool _isJumpCanceled => conditionManager.IsJumpCanceledSO.value;
+    protected bool _isPressingPrimaryAttack => conditionManager.IsPressingPrimaryAttackSO.value;
+    protected bool _isPressingSecondaryAttack => conditionManager.IsPressingSecondaryAttackSO.value;
 
-    protected bool _isGrounded => collisionSenses._groundCheck.value;
-    protected bool _isTouchingWall => collisionSenses._wallFrontCheck.value;
-    protected bool _isTouchingWallBack => collisionSenses._wallBackCheck.value;
-    protected bool _isTouchingLedge => collisionSenses._ledgeHorizontalCheck.value;
-    protected bool _isTouchingCeiling => collisionSenses._ceilingCheck.value;
+    protected bool _isGrounded => conditionManager.IsGroundedSO.value;
+    protected bool _isTouchingWall => conditionManager.IsTouchingWallFrontSO.value;
+    protected bool _isTouchingWallBack => conditionManager.IsTouchingWallBackSO.value;
+    protected bool _isTouchingLedge => conditionManager.IsTouchingLedgeHorizontalSO.value;
+    protected bool _isTouchingCeiling => conditionManager.IsTouchingCeilingSO.value;
     protected bool _oldIsTouchingWall;
     protected bool _oldIsTouchingWallBack;
     protected bool _isJumping;
@@ -74,43 +75,37 @@ public class PlayerInAirState : PlayerState
     {
         base.DoActions();
 
-        _inputX = inputHandler.normalizedInputX;
-        _inputY = inputHandler.normalizedInputY;
-        _grabInput = inputHandler.grabInput;
-        _crouchInput = inputHandler.crouchInput;
-        _jumpInput = inputHandler.jumpInput;
-        _jumpInputStop = inputHandler.jumpInputStop;
-        _mousePositionInput = inputHandler.mousePositionInput;
-
         CheckJumpMultiplier();
         CheckCoyoteTime();
         CheckWallJumpCoyoteTime();
 
         movement?.CheckMovementDirection(_inputX);
+        movement?.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
+
+        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement._currentVelocity.x));
+        visualController?.SetAnimationFloat("velocityY", movement._currentVelocity.y);
     }
     
     public override void DoTransitions()
     {
         base.DoTransitions();
 
-        if (inputHandler._attackInputs[(int)CombatInputs.primary])
+        if (_isPressingPrimaryAttack)
         {
             //stateMachine?.ChangeState(player.primaryAttackState);
         }
-        else if (inputHandler._attackInputs[(int)CombatInputs.secondary])
+        else if (_isPressingSecondaryAttack)
         {
             stateMachine?.ChangeState(_player.secondaryAttackState);
         }
-        else if (_jumpInput && inputHandler.CanJump())
+        else if (_isPressingJump && inputHandler.CanJump())
         {
-            if (_crouchInput)
+            if (_isPressingCrouch)
             {
                 stateMachine?.ChangeState(_player.crouchJumpState);
             }
             else if (_isTouchingWall || _isTouchingWallBack || _wallJumpCoyoteTime)
             {
-                StopWallJumpCoyoteTime();
-                _player.wallJumpState.DetermineWallJumpDirection(_isTouchingWall);
                 stateMachine?.ChangeState(_player.wallJumpState);
             }
             else
@@ -118,10 +113,9 @@ public class PlayerInAirState : PlayerState
                 stateMachine?.ChangeState(_player.jumpState);
             }
         }
-
-        if (_isGrounded && movement._currentVelocity.y < 0.01)
+        else if (_isGrounded && movement._currentVelocity.y < 0.01)
         {
-            if (_crouchInput)
+            if (_isPressingCrouch)
             {
                 stateMachine?.ChangeState(_player.crouchLandState);
             }
@@ -130,9 +124,9 @@ public class PlayerInAirState : PlayerState
                 stateMachine?.ChangeState(_player.landState);
             }
         }
-        else if (_isTouchingWall && !_crouchInput)
+        else if (_isTouchingWall && !_isPressingCrouch)
         {
-            if (_grabInput && _isTouchingLedge)
+            if (_isPressingGrab && _isTouchingLedge)
             {
                 stateMachine?.ChangeState(_player.wallGrabState);
             }
@@ -145,16 +139,9 @@ public class PlayerInAirState : PlayerState
                 stateMachine?.ChangeState(_player.ledgeClimbState);
             }
         }
-        else if (_crouchInput && _player.crouchInAirState.CanCrouch() && !_isGrounded)
+        else if (_isPressingCrouch && inputHandler.CanCrouch() && !_isGrounded)
         {
             stateMachine?.ChangeState(_player.crouchInAirState);
-        }
-        else
-        {
-            movement?.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
-
-            visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement._currentVelocity.x));
-            visualController?.SetAnimationFloat("velocityY", movement._currentVelocity.y);
         }
     }
 
@@ -189,7 +176,7 @@ public class PlayerInAirState : PlayerState
             return;
         }
 
-        if (_jumpInputStop)
+        if (_isJumpCanceled)
         {
             movement?.SetVelocityY(movement._currentVelocity.y * _playerData.variableJumpHeightMultiplier);
             _isJumping = false;

@@ -11,18 +11,14 @@ public class PlayerCrouchLandState : PlayerGroundedState
     {
         base.Enter();
 
-        _crouchInput = inputHandler.crouchInput;
-
-        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
+        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _crouchInput = inputHandler.crouchInput;
-
-        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
+        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void DoTransitions()
@@ -31,7 +27,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
 
         if (_inputX != 0)
         {
-            if (_crouchInput)
+            if (_isPressingCrouch)
             {
                 stateMachine?.ChangeState(_player.crouchMoveState);
             }
@@ -44,7 +40,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
         {
             if (_isAnimationFinished)
             {
-                if (_crouchInput)
+                if (_isPressingCrouch)
                 {
                     stateMachine?.ChangeState(_player.crouchIdleState);
                 }

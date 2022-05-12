@@ -2,18 +2,18 @@ using UnityEngine;
 
 public abstract class PlayerAbilityState : PlayerState
 {
-    private CollisionSenses collisionSenses
-    { get => _collisionSenses ?? core.GetCoreComponent(ref _collisionSenses); }
-    private CollisionSenses _collisionSenses;
+    protected ConditionManager conditionManager
+    { get => _conditionManager ?? core.GetCoreComponent(ref _conditionManager); }
+    private ConditionManager _conditionManager;
 
     protected Movement movement
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    private bool _isGrounded => collisionSenses._groundCheck.value;
+    private bool _isGrounded => conditionManager.IsGroundedSO.value;
+    protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
 
     protected bool _isAbilityDone;
-    protected bool _crouchInput;
 
     public PlayerAbilityState(Player player, string animBoolName, PlayerData playerData)
     : base(player, animBoolName, playerData) { }
@@ -40,13 +40,6 @@ public abstract class PlayerAbilityState : PlayerState
         DoActions();
         DoTransitions();
     }
-
-    public override void DoActions()
-    {
-        base.DoActions();
-
-        _crouchInput = inputHandler.crouchInput;
-    }
     
     public override void DoTransitions()
     {
@@ -54,7 +47,7 @@ public abstract class PlayerAbilityState : PlayerState
 
         if (_isGrounded && movement._currentVelocity.y < 0.01)
         {
-            if (_crouchInput)
+            if (_isPressingCrouch)
             {
                 stateMachine?.ChangeState(_player.crouchIdleState);
             }
@@ -65,7 +58,7 @@ public abstract class PlayerAbilityState : PlayerState
         }
         else if (!_isGrounded)
         {
-            if (_crouchInput)
+            if (_isPressingCrouch)
             {
                 stateMachine?.ChangeState(_player.crouchInAirState);
             }

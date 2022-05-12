@@ -33,7 +33,7 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         {
             stateMachine.ChangeState(_player.wallClimbState);
         }
-        else if (_inputY < 0 || !_grabInput)
+        else if (_inputY < 0 || !_isPressingGrab)
         {
             stateMachine.ChangeState(_player.wallSlideState);
         }

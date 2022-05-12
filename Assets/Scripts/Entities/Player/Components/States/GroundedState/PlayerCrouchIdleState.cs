@@ -13,18 +13,14 @@ public class PlayerCrouchIdleState : PlayerGroundedState
 
         movement?.SetVelocityZero();
 
-        _crouchInput = inputHandler.crouchInput;
-
-        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
+        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _crouchInput = inputHandler.crouchInput;
-
-        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
+        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void DoTransitions()
@@ -33,7 +29,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
 
         if (_inputX != 0)
         {
-            if (_crouchInput || _isTouchingCeiling)
+            if (_isPressingCrouch || _isTouchingCeiling)
             {
                 stateMachine?.ChangeState(_player.crouchMoveState);
             }
@@ -43,7 +39,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
                 stateMachine?.ChangeState(_player.moveState);
             }
         }
-        else if (!_crouchInput && !_isTouchingCeiling)
+        else if (!_isPressingCrouch && !_isTouchingCeiling)
         {
             stateMachine?.ChangeState(_player.idleState);
         }

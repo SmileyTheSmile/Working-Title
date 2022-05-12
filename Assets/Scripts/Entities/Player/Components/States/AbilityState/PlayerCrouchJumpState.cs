@@ -11,17 +11,13 @@ public class PlayerCrouchJumpState : PlayerJumpState
     {
         base.Enter();
 
-        _crouchInput = inputHandler.crouchInput;
-
-        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
+        movement?.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void Exit()
     {
         base.Exit();
-
-        _crouchInput = inputHandler.crouchInput;
         
-        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _crouchInput);
+        movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 }

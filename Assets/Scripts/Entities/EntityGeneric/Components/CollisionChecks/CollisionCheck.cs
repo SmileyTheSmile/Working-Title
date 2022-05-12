@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollisionCheck : MonoBehaviour
 {
-    public StateCollisionCheckCondition condition;
+    public CollisionCheckTransitionCondition condition;
     
     [SerializeField] protected LayerMask _whatIsGround;
 

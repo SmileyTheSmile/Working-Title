@@ -7,6 +7,8 @@ public class PlayerWallJumpState : PlayerAbilityState
     private Vector2 _wallJumpDirection;
     private int _wallJumpMovementDirection;
 
+    private bool _isTouchingWall => conditionManager.IsTouchingWallFrontSO.value;
+
     public PlayerWallJumpState(Player player, PlayerData playerData, string animBoolName)
     : base(player, animBoolName, playerData) { }
 
@@ -14,11 +16,14 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        _wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
+        _player.inAirState.StopWallJumpCoyoteTime();
 
         inputHandler?.UseJumpInput();
         inputHandler?.ResetAmountOfJumpsLeft();
         inputHandler?.DecreaseAmountOfJumpsLeft();
+
+        _wallJumpMovementDirection = (_isTouchingWall ? -1 : 1) * movement._movementDir;
+        _wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
 
         movement?.SetVelocity(_playerData.wallJumpVelocity, _wallJumpDirection, _wallJumpMovementDirection);
         movement?.CheckMovementDirection(_wallJumpMovementDirection);
@@ -40,8 +45,4 @@ public class PlayerWallJumpState : PlayerAbilityState
             }
         }
     */
-    public void DetermineWallJumpDirection(bool isTouchingWall)
-    {
-        _wallJumpMovementDirection = (isTouchingWall ? -1 : 1) * movement._movementDir;
-    }
 }
