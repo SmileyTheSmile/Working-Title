@@ -10,8 +10,8 @@ public abstract class PlayerTouchingWallState : PlayerState
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    protected int _inputX => inputHandler.normalizedInputX;
-    protected int _inputY => inputHandler.normalizedInputY;
+    protected int _inputX => inputHandler._normalizedInputXSO.value;
+    protected int _inputY => inputHandler._normalizedInputYSO.value;
 
     protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;
     protected bool _isPressingJump => conditionManager.IsPressingJumpSO.value;

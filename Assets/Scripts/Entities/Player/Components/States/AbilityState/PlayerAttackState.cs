@@ -6,7 +6,7 @@ public class PlayerAttackState : PlayerAbilityState
 {
     private Weapon _weapon;
 
-    private int _inputX;
+    private int _inputX => inputHandler._normalizedInputXSO.value;
 
     private float _velocityToSet;
 
@@ -35,11 +35,6 @@ public class PlayerAttackState : PlayerAbilityState
     public override void DoActions()
     {
         base.DoActions();
-
-        if (_shouldCheckFlip)
-        {
-            _inputX = inputHandler.normalizedInputX;
-        }
 
         movement?.CheckMovementDirection(_inputX);
 

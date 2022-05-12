@@ -12,9 +12,9 @@ public class PlayerInAirState : PlayerState
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    protected int _inputX => inputHandler.normalizedInputX;
-    protected int _inputY => inputHandler.normalizedInputY;
-    protected Vector2 _mousePositionInput => inputHandler.mousePositionInput;
+    protected int _inputX => inputHandler._normalizedInputXSO.value;
+    protected int _inputY => inputHandler._normalizedInputYSO.value;
+    protected Vector2 _mousePositionInput => inputHandler._mousePositionInputSO.value;
     
     protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;
     protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
@@ -32,16 +32,13 @@ public class PlayerInAirState : PlayerState
     protected bool _oldIsTouchingWallBack;
     protected bool _isJumping;
 
+    private float _airControlPercentage => _playerData.defaultAirControlPercentage;
     private float _wallJumpCoyoteTimeStart;
-    private float _airControlPercentage = 1f;
     private bool _coyoteTime;
     private bool _wallJumpCoyoteTime;
 
     public PlayerInAirState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, animBoolName, playerData)
-    {
-        _airControlPercentage = playerData.defaultAirControlPercentage;
-    }
+    : base(player, animBoolName, playerData) { }
 
     public override void DoChecks()
     {

@@ -11,9 +11,9 @@ public abstract class PlayerGroundedState : PlayerState
     private ConditionManager _conditionManager;
     private Movement _movement;
 
-    protected int _inputX => inputHandler.normalizedInputX;
-    protected int _inputY => inputHandler.normalizedInputY;
-    protected Vector2 _mousePositionInput => inputHandler.mousePositionInput;
+    protected int _inputX => inputHandler._normalizedInputXSO.value;
+    protected int _inputY => inputHandler._normalizedInputYSO.value;
+    protected Vector2 _mousePositionInput => inputHandler._mousePositionInputSO.value;
 
     protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;
     protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;

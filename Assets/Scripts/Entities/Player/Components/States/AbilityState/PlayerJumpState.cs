@@ -12,12 +12,13 @@ public class PlayerJumpState : PlayerAbilityState
         base.Enter();
 
         inputHandler?.UseJumpInput();
+        inputHandler?.DecreaseAmountOfJumpsLeft();
+        
         movement?.SetVelocityY(_playerData.jumpVelocity);
 
         _player.inAirState.SetIsJumping();
         _player.crouchInAirState.SetIsJumping();
 
-        inputHandler?.DecreaseAmountOfJumpsLeft();
         _isAbilityDone = true;
     }
 }

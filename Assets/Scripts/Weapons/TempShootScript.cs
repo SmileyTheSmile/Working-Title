@@ -8,10 +8,6 @@ public class TempShootScript : MonoBehaviour
     { get => _movement ?? core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    protected PlayerInputHandler inputHandler
-    { get => _inputHandler ?? core.GetCoreComponent(ref _inputHandler); }
-    private PlayerInputHandler _inputHandler;
-
     [SerializeField] private Transform gun;
     [SerializeField] private Transform primary;
     [SerializeField] private Transform cursor;
@@ -26,10 +22,12 @@ public class TempShootScript : MonoBehaviour
     [SerializeField] private float screenShakeIntensity = 1f;
     [SerializeField] private float shotDelay = 0.2f;
     [SerializeField] private int pelletNum = 5;
+    [SerializeField] private InputTransitionCondition _isPressingPrimaryAttackSO;
+    [SerializeField] private ScriptableVector3 _mousePositionInputSO;
 
     private Vector2 bulletDirection;
     private Vector2 gunDirection;
-    private Vector3 mousePositionInput;
+    private Vector3 _mousePositionInput => _mousePositionInputSO.value;
 
     private Core core;
     private Animator animator;
@@ -47,18 +45,16 @@ public class TempShootScript : MonoBehaviour
 
     private void Update()
     {
-        mousePositionInput = inputHandler.mousePositionInput;
-
         HandleAiming();
         ShootRaycast();
     }
 
     private void HandleAiming()
     {
-        gunDirection = (mousePositionInput - primary.position).normalized;
+        gunDirection = (_mousePositionInput - primary.position).normalized;
         
         angle = Vector2.SignedAngle(Vector2.right, gunDirection);
-        movement.CheckFacingDirection(mousePositionInput, core.transform.position);
+        movement.CheckFacingDirection(_mousePositionInput, core.transform.position);
         primary.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 
@@ -72,7 +68,7 @@ public class TempShootScript : MonoBehaviour
 
     private void ShootRaycast()
     {
-        if (!(inputHandler.primaryAttackInput))
+        if (!(_isPressingPrimaryAttackSO.value))
         {
             return;
         }
@@ -115,7 +111,7 @@ public class TempShootScript : MonoBehaviour
 
     private Vector2 GetBulletDirection()
     {
-        bulletDirection = (mousePositionInput - firePoint.position).normalized;
+        bulletDirection = (_mousePositionInput - firePoint.position).normalized;
 
         if (addBulletSpread)
         {
