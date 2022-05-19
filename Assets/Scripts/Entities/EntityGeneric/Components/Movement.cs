@@ -34,6 +34,8 @@ public class Movement : CoreComponent
         _rigidBody = GetComponentInParent<Rigidbody2D>();
         _boxCollider = GetComponentInParent<BoxCollider2D>();
 
+        _rigidBody.velocity = Vector2.zero;
+
         _movementDir = 1;
         _movementDirSO.value = 1;
         _facingDir = 1;

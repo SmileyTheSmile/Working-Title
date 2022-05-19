@@ -8,7 +8,6 @@ public class FiniteStateMachine : CoreComponent
     [SerializeField] private GenericState _startingState;
     [SerializeField] private GenericState _currentState;
 
-    [SerializeField] private List<StateTransition> _transitions = new List<StateTransition>();
     [SerializeField] private List<GenericState> _states = new List<GenericState>();
 
     //Update the current state's logic (Update)
@@ -18,6 +17,7 @@ public class FiniteStateMachine : CoreComponent
         
         _currentState.DoActions();
         GenericState nextState = _currentState.DoTransitions();
+        LogComponentInfo();
 
         if (nextState != null)
         {
