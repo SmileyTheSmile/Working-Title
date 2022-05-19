@@ -6,5 +6,5 @@ public class InputTransitionCondition : StateTransitionCondition
 {
     public bool value;
 
-    public override bool IsMet() => value;
+    public override bool IsMet(bool desiredResult) => value == desiredResult;
 }

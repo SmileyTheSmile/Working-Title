@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerCrouchJumpState : PlayerJumpState
 {
-    public PlayerCrouchJumpState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, playerData, animBoolName) { }
-
     public override void Enter()
     {
         base.Enter();

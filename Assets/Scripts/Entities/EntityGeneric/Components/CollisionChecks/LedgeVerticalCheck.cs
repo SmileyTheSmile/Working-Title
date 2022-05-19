@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-//Check if entity is standing on a ledge
+/// <summary>
+/// Check if entity is standing on a ledge
+/// </summary>
 public class LedgeVerticalCheck : CollisionCheck
 {
     [SerializeField] private ScriptableInt _movementDirection;

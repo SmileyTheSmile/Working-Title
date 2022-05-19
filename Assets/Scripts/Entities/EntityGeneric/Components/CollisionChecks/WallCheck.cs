@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Check if entity is touching a wall in front of it or at its back
+/// </summary>
 public class WallCheck : CollisionCheck
 {
     [SerializeField] private WallCheckType _wallChecktype = WallCheckType.front;

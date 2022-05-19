@@ -20,12 +20,12 @@ public class Movement : CoreComponent
     private BoxCollider2D _boxCollider;
 
     public int _movementDir { get; private set; }
-    public int _facingDir { get; private set; }
     public Vector2 _currentVelocity { get; private set; }
-    public Vector2 _defaultSize { get; private set; }
 
+    private int _facingDir;
     private bool _canSetVelocity;
     private Vector2 _workspace;
+    private Vector2 _defaultSize;
     private PlayerCrouchingForm _crouchingForm;
 
     //Unity Awake
@@ -219,11 +219,11 @@ public class Movement : CoreComponent
 
         _rigidBody.AddForce(dir * force, ForceMode2D.Impulse);
     }
-}
-
-public enum PlayerCrouchingForm
-{
-    notCrouching,
-    crouchingDown,
-    crouchingUp
+    
+    private enum PlayerCrouchingForm
+    {
+        notCrouching,
+        crouchingDown,
+        crouchingUp
+    }
 }

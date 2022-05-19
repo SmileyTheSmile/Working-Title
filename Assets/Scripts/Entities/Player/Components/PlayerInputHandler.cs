@@ -8,7 +8,6 @@ public class PlayerInputHandler : CoreComponent
     [SerializeField] private InputTransitionCondition _isJumpCanceledSO;
     [SerializeField] private InputTransitionCondition _isPressingGrabSO;
     [SerializeField] private InputTransitionCondition _isCrouchingSO;
-    [SerializeField] private InputTransitionCondition _isMovingSO;
     [SerializeField] private InputTransitionCondition _isPressingPrimaryAttackSO;
     [SerializeField] private InputTransitionCondition _isPressingSecondaryAttackSO;
 
@@ -50,10 +49,8 @@ public class PlayerInputHandler : CoreComponent
         Vector2 rawMovementInput = context.ReadValue<Vector2>();
 
         _normalizedInputXSO.value = Mathf.RoundToInt(rawMovementInput.x);
-        _normalizedInputYSO.value = Mathf.RoundToInt(rawMovementInput.y);
 
-        if (rawMovementInput.x != 0)
-            _isMovingSO.value = true;
+        _normalizedInputYSO.value = Mathf.RoundToInt(rawMovementInput.y);
     }
 
     //Process jump input

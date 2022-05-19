@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,15 +9,16 @@ using UnityEngine;
 public class StateTransition : ScriptableObject
 {
     [SerializeField] private GenericState nextState = null;
-    [SerializeField] private List<StateTransitionCondition> conditions = new List<StateTransitionCondition>();
+    [SerializeField] private List<ConditionUsage> conditions = new List<ConditionUsage>();
 
     public GenericState NextState => nextState;
 
     public bool ShouldTransition()
     {
+        bool result;
         foreach (var condition in conditions)
         {
-            if (!condition.IsMet())
+            if (!condition.Condition.IsMet(condition.ExpectedResult))
             {
                 return false;
             }
@@ -24,4 +26,14 @@ public class StateTransition : ScriptableObject
 
         return true;
     }
+
+    [Serializable]
+    public struct ConditionUsage
+    {
+        public bool ExpectedResult;
+        public StateTransitionCondition Condition;
+        public Operator Operator;
+    }
+
+    public enum Operator { And, Or }
 }

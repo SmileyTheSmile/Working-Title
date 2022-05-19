@@ -2,12 +2,8 @@ using UnityEngine;
 
 public abstract class PlayerTouchingWallState : PlayerState
 {
-    private ConditionManager conditionManager
-    { get => _conditionManager ?? core.GetCoreComponent(ref _conditionManager); }
-    private ConditionManager _conditionManager;
-
     protected Movement movement
-    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     protected int _inputX => inputHandler._normalizedInputXSO.value;
@@ -22,32 +18,39 @@ public abstract class PlayerTouchingWallState : PlayerState
     protected bool _isTouchingLedge => conditionManager.IsTouchingLedgeHorizontalSO.value;
     protected bool _isTouchingCeiling => conditionManager.IsTouchingCeilingSO.value;
 
-    public PlayerTouchingWallState(Player player, string animBoolName, PlayerData playerData)
-    : base(player, animBoolName, playerData) { }
+    protected bool _isMovingUp => conditionManager.IsMovingUpSO.value;
+    protected bool _isMovingDown => conditionManager.IsMovingDownSO.value;
+    protected bool _isMovingInCorrectDir => conditionManager.IsMovingInCorrectDirSO.value;
     
-    public override void DoTransitions()
+    protected PlayerIdleState idleState => conditionManager.idleState;
+    protected PlayerInAirState inAirState => conditionManager.inAirState;
+    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
+    protected PlayerWallJumpState wallJumpState => conditionManager.wallJumpState;
+    protected PlayerLedgeClimbState ledgeClimbState => conditionManager.ledgeClimbState;
+    
+    public override GenericState DoTransitions()
     {
-        base.DoTransitions();
-
         if (_isPressingJump)
         {
-            stateMachine?.ChangeState(_player.wallJumpState);
+            return wallJumpState;
         }
         else if (_isGrounded && !_isPressingGrab)
         {
-            stateMachine?.ChangeState(_player.idleState);
+            return idleState;
         }
         else if (_isGrounded && _isPressingCrouch && !_isTouchingCeiling)
         {
-            stateMachine?.ChangeState(_player.crouchIdleState);
+            return crouchIdleState;
         }
-        else if (!_isTouchingWall || (_inputX != movement._movementDir && !_isPressingGrab))
+        else if (!_isTouchingWall || (!_isMovingInCorrectDir && !_isPressingGrab))
         {
-            stateMachine?.ChangeState(_player.inAirState);
+            return inAirState;
         }
         else if (_isTouchingWall && !_isTouchingLedge && !_isTouchingCeiling)
         {
-            stateMachine?.ChangeState(_player.ledgeClimbState);
+            return ledgeClimbState;
         }
+
+        return null;
     }
 }

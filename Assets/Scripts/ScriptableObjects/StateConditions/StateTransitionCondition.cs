@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StateTransitionCondition : ScriptableObject
+public abstract class StateTransitionCondition : ScriptableObject
 {
-    public virtual bool IsMet() => false;
+    public abstract bool IsMet(bool desiredResult);
 }

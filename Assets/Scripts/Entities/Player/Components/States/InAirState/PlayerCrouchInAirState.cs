@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerCrouchInAirState : PlayerInAirState
 {
-    public PlayerCrouchInAirState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, playerData, animBoolName) { }
+    protected PlayerInAirState inAirState => conditionManager.inAirState;
 
     public override void Enter()
     {
@@ -23,13 +22,20 @@ public class PlayerCrouchInAirState : PlayerInAirState
         movement?.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
-    public override void DoTransitions()
+    public override GenericState DoTransitions()
     {
-        base.DoTransitions();
+        var parentResult = base.DoTransitions();
+
+        if (parentResult != null)
+        {
+            return parentResult;
+        }
 
         if (!_isPressingCrouch && !_isGrounded)
         {
-            stateMachine?.ChangeState(_player.inAirState);
+            return inAirState;
         }
+
+        return null;
     }
 }

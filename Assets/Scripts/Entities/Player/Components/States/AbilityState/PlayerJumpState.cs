@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAbilityState
 {
-    public PlayerJumpState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, animBoolName, playerData) { }
-
     public override void Enter()
     {
         base.Enter();
@@ -16,8 +13,7 @@ public class PlayerJumpState : PlayerAbilityState
         
         movement?.SetVelocityY(_playerData.jumpVelocity);
 
-        _player.inAirState.SetIsJumping();
-        _player.crouchInAirState.SetIsJumping();
+        conditionManager.IsJumpingSO.value = true;
 
         _isAbilityDone = true;
     }

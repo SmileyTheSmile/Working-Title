@@ -10,7 +10,6 @@ public class CoreComponent : MonoBehaviour
         this._core = core;
     }
     
-    
     //Update the component's logic (Update)
     public virtual void LogicUpdate() { }
     //Update the component's physics (FixedUpdate)

@@ -1,17 +1,29 @@
+using System.Data.SqlTypes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class FiniteStateMachine : CoreComponent
 {
+    [SerializeField] private GenericState _startingState;
+
+    [SerializeField] private List<StateTransition> _transitions = new List<StateTransition>();
+    [SerializeField] private List<GenericState> _states = new List<GenericState>();
+
     private GenericState _currentState;
 
     //Update the current state's logic (Update)
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
+        _currentState.DoActions();
+        GenericState nextState = _currentState.DoTransitions();
 
-        _currentState.LogicUpdate();
+        if (nextState != null)
+        {
+            ChangeState(nextState);
+        }
     }
 
     //Update the current state's physics (FixedUpdate)
@@ -23,9 +35,16 @@ public class FiniteStateMachine : CoreComponent
     }
 
     //Start the state machine
-    public void Initialize(GenericState startingState)
+    public override void Initialize(Core core)
     {
-        _currentState = startingState;
+        base.Initialize(core);
+
+        foreach (var state in _states)
+        {
+            state.SetCore(core);
+        }
+
+        _currentState = _startingState;
         _currentState.Enter();
     }
 

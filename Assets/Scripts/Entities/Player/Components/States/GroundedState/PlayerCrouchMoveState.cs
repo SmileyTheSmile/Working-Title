@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerCrouchMoveState : PlayerGroundedState
 {
-    public PlayerCrouchMoveState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, playerData, animBoolName) { }
-
+    protected PlayerMoveState moveState => conditionManager.moveState;
+    protected PlayerIdleState idleState => conditionManager.idleState;
+    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
+    
     public override void Enter()
     {
         base.Enter();
@@ -28,27 +29,34 @@ public class PlayerCrouchMoveState : PlayerGroundedState
         movement?.SetVelocityX(_playerData.crouchMovementVelocity * movement._movementDir);
     }
 
-    public override void DoTransitions()
+    public override GenericState DoTransitions()
     {
-        base.DoTransitions();
+        var parentResult = base.DoTransitions();
 
-        if (_inputX != 0f)
+        if (parentResult != null)
+        {
+            return parentResult;
+        }
+
+        if (_isMovingX)
         {
             if (!_isPressingCrouch && !_isTouchingCeiling)
             {
-                stateMachine?.ChangeState(_player.moveState);
+                return moveState;
             }
         }
         else
         {
             if (!_isPressingCrouch && !_isTouchingCeiling)
             {
-                stateMachine?.ChangeState(_player.idleState);
+                return idleState;
             }
             else
             {
-                stateMachine?.ChangeState(_player.crouchIdleState);
+                return crouchIdleState;
             }
         }
+
+        return null;
     }
 }

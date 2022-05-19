@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class PlayerLandState : PlayerGroundedState
 {
-    public PlayerLandState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, playerData, animBoolName) { }
-
-    public override void DoTransitions()
+    protected PlayerCrouchMoveState crouchMoveState => conditionManager.crouchMoveState;
+    protected PlayerMoveState moveState => conditionManager.moveState;
+    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
+    protected PlayerIdleState idleState => conditionManager.idleState;
+    
+    public override GenericState DoTransitions()
     {
-        base.DoTransitions();
+        var parentResult = base.DoTransitions();
 
-        if (_inputX != 0)
+        if (parentResult != null)
+        {
+            return parentResult;
+        }
+
+        if (_isMovingX)
         {
             if (_isPressingCrouch)
             {
-                stateMachine?.ChangeState(_player.crouchMoveState);
+                return crouchMoveState;
             }
             else
             {
-                stateMachine?.ChangeState(_player.moveState);
+                return moveState;
             }
         }
         else
@@ -28,13 +35,15 @@ public class PlayerLandState : PlayerGroundedState
             {
                 if (_isPressingCrouch)
                 {
-                    stateMachine?.ChangeState(_player.crouchIdleState);
+                    return crouchIdleState;
                 }
                 else
                 {
-                    stateMachine?.ChangeState(_player.idleState);
+                    return idleState;
                 }
             }
         }
+
+        return null;
     }
 }

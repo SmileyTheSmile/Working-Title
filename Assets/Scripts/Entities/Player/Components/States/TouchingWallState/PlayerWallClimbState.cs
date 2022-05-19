@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerWallClimbState : PlayerTouchingWallState
 {
-    public PlayerWallClimbState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, animBoolName, playerData) { }
-
+    protected PlayerWallGrabState wallGrabState => conditionManager.wallGrabState;
+    
     public override void DoActions()
     {
         base.DoActions();
@@ -14,13 +13,20 @@ public class PlayerWallClimbState : PlayerTouchingWallState
         movement?.SetVelocityY(_playerData.wallClimbVelocity);
     }
 
-    public override void DoTransitions()
+    public override GenericState DoTransitions()
     {
-        base.DoTransitions();
+        var parentResult = base.DoTransitions();
 
-        if (_inputY != 1)
+        if (parentResult != null)
         {
-            stateMachine.ChangeState(_player.wallGrabState);
+            return parentResult;
         }
+
+        if (!_isMovingUp)
+        {
+            return wallGrabState;
+        }
+
+        return null;
     }
 }

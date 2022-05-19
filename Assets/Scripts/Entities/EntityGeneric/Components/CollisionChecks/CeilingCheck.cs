@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Check if entity is touching ceiling
+/// </summary>
 public class CeilingCheck : CollisionCheck
 {
     [SerializeField] private float _ceilingCheckHeight = 0.2f;

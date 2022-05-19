@@ -4,33 +4,18 @@ using UnityEngine;
 
 public abstract class GenericState : ScriptableObject
 {
-    protected VisualController visualController
-    { get => _visualController ?? core.GetCoreComponent(ref _visualController); }
-    private VisualController _visualController;
+    [SerializeField] private List<StateTransition> _transitions = new List<StateTransition>();
 
-    protected FiniteStateMachine stateMachine
-    { get => _stateMachine ?? core.GetCoreComponent(ref _stateMachine); }
-    private FiniteStateMachine _stateMachine;
+    [SerializeField] protected string _animBoolName;
 
-    [SerializeField] private List<StateTransition> transitions = new List<StateTransition>();
-
-    protected Core core;
-
+    protected Core _core;
     protected float _startTime;
     protected bool _isAnimationFinished;
     protected bool _isExitingState;
-    protected string _animBoolName;
-
-    public GenericState(string animBoolName)
-    {
-        this._animBoolName = animBoolName;
-    }
 
     //What to do when entering the state
     public virtual void Enter() 
     {
-        DoChecks();
-
         _startTime = Time.time;
         _isExitingState = false;
         _isAnimationFinished = false;
@@ -41,31 +26,18 @@ public abstract class GenericState : ScriptableObject
     {
         _isExitingState = true;
     }
-
-    //Update the component's logic (Update)
-    public virtual void LogicUpdate()
+    
+    public virtual void SetCore(Core core)
     {
-        if (_isExitingState)
-        {
-            return;
-        }
-
-        DoActions();
-        DoTransitions();
+        _core = core;
     }
-
+    
     //Update the component's physics (FixedUpdate)
-    public virtual void PhysicsUpdate()
-    {
-        DoChecks();
-    }
-
+    public virtual void PhysicsUpdate() { }
     //Do all the checks if the state should transition into another state
-    public virtual void DoTransitions() { }
+    public virtual void DoActions() { if (_isExitingState) return; }
     //Execute all the actions the state must do every Update
-    public virtual void DoActions() { }
-    //Update all check variables
-    public virtual void DoChecks() { }
+    public abstract GenericState DoTransitions();
     //What to do in animation events in Animator
     public virtual void AnimationTrigger() { }
     //What to do on finished animation in Animator

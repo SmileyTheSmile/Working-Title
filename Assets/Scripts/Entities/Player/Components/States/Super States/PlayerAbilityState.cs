@@ -2,21 +2,20 @@ using UnityEngine;
 
 public abstract class PlayerAbilityState : PlayerState
 {
-    protected ConditionManager conditionManager
-    { get => _conditionManager ?? core.GetCoreComponent(ref _conditionManager); }
-    private ConditionManager _conditionManager;
-
     protected Movement movement
-    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     private bool _isGrounded => conditionManager.IsGroundedSO.value;
     protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
+    protected bool _isNotMoving => conditionManager.HasStoppedFalling.value;
 
     protected bool _isAbilityDone;
 
-    public PlayerAbilityState(Player player, string animBoolName, PlayerData playerData)
-    : base(player, animBoolName, playerData) { }
+    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
+    protected PlayerIdleState idleState => conditionManager.idleState;
+    protected PlayerInAirState inAirState => conditionManager.inAirState;
+    protected PlayerCrouchInAirState crouchInAirState => conditionManager.crouchInAirState;
 
     public override void Enter()
     {
@@ -24,48 +23,37 @@ public abstract class PlayerAbilityState : PlayerState
 
         _isAbilityDone = false;
     }
-
-    public override void LogicUpdate()
+    
+    public override GenericState DoTransitions()
     {
-        if (_isExitingState)
-        {
-            return;
-        }
-        
         if (!_isAbilityDone)
         {
-            return;
+            return null;
         }
-
-        DoActions();
-        DoTransitions();
-    }
-    
-    public override void DoTransitions()
-    {
-        base.DoTransitions();
-
-        if (_isGrounded && movement._currentVelocity.y < 0.01)
+        
+        if (_isGrounded && _isNotMoving)
         {
             if (_isPressingCrouch)
             {
-                stateMachine?.ChangeState(_player.crouchIdleState);
+                return crouchIdleState;
             }
             else
             {
-                stateMachine?.ChangeState(_player.idleState);
+                return idleState;
             }
         }
         else if (!_isGrounded)
         {
             if (_isPressingCrouch)
             {
-                stateMachine?.ChangeState(_player.crouchInAirState);
+                return crouchInAirState;
             }
             else
             {
-                stateMachine?.ChangeState(_player.inAirState);
+                return inAirState;
             }
         }
+
+        return null;
     }
 }

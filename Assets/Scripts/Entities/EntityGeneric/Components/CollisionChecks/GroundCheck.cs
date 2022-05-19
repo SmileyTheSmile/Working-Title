@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Check if entity is grounded
+/// </summary>
 public class GroundCheck : CollisionCheck
 {
     [SerializeField] private float _groundCheckHeight = 0.2f;

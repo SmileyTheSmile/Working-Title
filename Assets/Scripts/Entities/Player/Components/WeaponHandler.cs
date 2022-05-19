@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class WeaponHandler : CoreComponent
 {
+    protected ConditionManager conditionManager
+    { get => _conditionManager ?? _core.GetCoreComponent(ref _conditionManager); }
+    private ConditionManager _conditionManager;
+
     private Player player;
 
     [SerializeField] private Transform currentWeapon;
@@ -21,8 +25,8 @@ public class WeaponHandler : CoreComponent
 
     private void Start()
     {
-        SetupWeapons();
         //Time.timeScale = playerData.holdTimeScale;
+        SetupWeapons();
     }
 
     //Flip the current weapon
@@ -35,7 +39,7 @@ public class WeaponHandler : CoreComponent
 
     private void SetupWeapons()
     {
-        //player.primaryAttackState.SetWeapon(primaryWeapons[0]);
-        player.secondaryAttackState.SetWeapon(secondaryWeapons[0]);
+        //_core.primaryAttackState.SetWeapon(primaryWeapons[0]);
+        conditionManager.secondaryAttackState.SetWeapon(secondaryWeapons[0]);
     }
 }

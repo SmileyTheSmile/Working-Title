@@ -2,17 +2,19 @@ using UnityEngine;
 
 public class ConditionManager : CoreComponent
 {
-    //Check if entity is grounded
+    protected Movement movement
+    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
+    private Movement _movement;
+
+    protected PlayerInputHandler inputHandler
+    { get => _inputHandler ?? _core.GetCoreComponent(ref _inputHandler); }
+    private PlayerInputHandler _inputHandler;
+
     public CollisionCheckTransitionCondition IsGroundedSO;
-    //Check if entity is touching ceiling
     public CollisionCheckTransitionCondition IsTouchingCeilingSO;
-    //Check if entity is touching a wall in front of it
     public CollisionCheckTransitionCondition IsTouchingWallFrontSO;
-    //Check if entity is touching a wall at its back
     public CollisionCheckTransitionCondition IsTouchingWallBackSO;
-    //Check if entity is nearing a ledge when wall climbing
     public CollisionCheckTransitionCondition IsTouchingLedgeHorizontalSO;
-    //Check if entity is standing on a ledge
     public CollisionCheckTransitionCondition IsTouchingLedgeVerticalSO;
 
     public InputTransitionCondition IsPressingJumpSO;
@@ -21,5 +23,73 @@ public class ConditionManager : CoreComponent
     public InputTransitionCondition IsPressingCrouchSO;
     public InputTransitionCondition IsPressingPrimaryAttackSO;
     public InputTransitionCondition IsPressingSecondaryAttackSO;
-    public InputTransitionCondition IsMovingSO;
+    public InputTransitionCondition IsMovingXSO;
+    public InputTransitionCondition IsMovingUpSO;
+    public InputTransitionCondition IsMovingDownSO;
+
+    public SupportTransitionCondition IsJumpingSO;
+    public SupportTransitionCondition HasStoppedFalling;
+    public SupportTransitionCondition CanCrouchSO;
+    public SupportTransitionCondition CanJumpSO;
+    public SupportTransitionCondition IsMovingInCorrectDirSO;
+
+    public ScriptableInt _normalizedInputXSO;
+    public ScriptableInt _normalizedInputYSO;
+
+    public PlayerIdleState idleState;
+    public PlayerMoveState moveState;
+    public PlayerJumpState jumpState;
+    public PlayerInAirState inAirState;
+    public PlayerLandState landState;
+
+    public PlayerWallSlideState wallSlideState;
+    public PlayerWallGrabState wallGrabState;
+    public PlayerWallClimbState wallClimbState;
+    public PlayerWallJumpState wallJumpState;
+    public PlayerLedgeClimbState ledgeClimbState;
+
+    public PlayerCrouchIdleState crouchIdleState;
+    public PlayerCrouchMoveState crouchMoveState;
+    public PlayerCrouchJumpState crouchJumpState;
+    public PlayerCrouchInAirState crouchInAirState;
+    public PlayerCrouchLandState crouchLandState;
+
+    public PlayerAttackState primaryAttackState;
+    public PlayerAttackState secondaryAttackState;
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        HasStoppedFalling.value = movement._currentVelocity.y < 0.01;
+        CanCrouchSO.value = inputHandler.CanCrouch();
+        CanJumpSO.value = inputHandler.CanJump();
+        IsMovingInCorrectDirSO.value = (_normalizedInputXSO.value == movement._movementDir);
+
+        switch (_normalizedInputXSO.value)
+        {
+            case 0:
+                IsMovingXSO.value = false;
+                break;
+            default:
+                IsMovingXSO.value = true;
+                break;
+        }
+
+        switch (_normalizedInputYSO.value)
+        {
+            case > 0:
+                IsMovingUpSO.value = true;
+                IsMovingDownSO.value = false;
+                break;
+            case < 0:
+                IsMovingUpSO.value = false;
+                IsMovingDownSO.value = true;
+                break;
+            default:
+                IsMovingUpSO.value = false;
+                IsMovingDownSO.value = false;
+                break;
+        }
+    }
 }

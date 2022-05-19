@@ -12,10 +12,7 @@ public class PlayerAttackState : PlayerAbilityState
 
     private bool _setVelocity;
     private bool _shouldCheckFlip;
-
-    public PlayerAttackState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, animBoolName, playerData) { }
-
+    
     public override void Enter()
     {
         base.Enter();
@@ -54,7 +51,7 @@ public class PlayerAttackState : PlayerAbilityState
     public void SetWeapon(Weapon weapon)
     {
         _weapon = weapon;
-        _weapon.InitializeWeapon(this, core);
+        _weapon.InitializeWeapon(this, _core);
     }
 
     public void SetPlayerVelocity(float velocity)

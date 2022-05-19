@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerWallSlideState : PlayerTouchingWallState
 {
-    public PlayerWallSlideState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, animBoolName, playerData) { }
-
+    protected PlayerWallGrabState wallGrabState => conditionManager.wallGrabState;
+    
     public override void DoActions()
     {
         base.DoActions();
@@ -14,13 +13,20 @@ public class PlayerWallSlideState : PlayerTouchingWallState
         movement?.SetVelocityY(-_playerData.wallSlideVelocity);
     }
 
-    public override void DoTransitions()
+    public override GenericState DoTransitions()
     {
-        base.DoTransitions();
+        var parentResult = base.DoTransitions();
 
-        if (_isPressingGrab && _inputY == 0)
+        if (parentResult != null)
         {
-            stateMachine.ChangeState(_player.wallGrabState);
+            return parentResult;
         }
+
+        if (_isPressingGrab && !_isMovingUp && !_isMovingDown)
+        {
+            return wallGrabState;
+        }
+
+        return null;
     }
 }

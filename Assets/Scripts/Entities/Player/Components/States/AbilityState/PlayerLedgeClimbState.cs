@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerLedgeClimbState : PlayerAbilityState
 {
-    public PlayerLedgeClimbState(Player player,  PlayerData playerData, string animBoolName)
-    : base(player, animBoolName, playerData) { }
-
     public override void Enter()
     {
         base.Enter();

@@ -9,15 +9,10 @@ public class PlayerWallJumpState : PlayerAbilityState
 
     private bool _isTouchingWall => conditionManager.IsTouchingWallFrontSO.value;
 
-    public PlayerWallJumpState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, animBoolName, playerData) { }
-
     public override void Enter()
     {
         base.Enter();
-
-        _player.inAirState.StopWallJumpCoyoteTime();
-
+        
         inputHandler?.UseJumpInput();
         inputHandler?.ResetAmountOfJumpsLeft();
         inputHandler?.DecreaseAmountOfJumpsLeft();

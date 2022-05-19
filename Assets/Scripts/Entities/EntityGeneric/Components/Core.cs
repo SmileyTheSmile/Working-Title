@@ -15,10 +15,6 @@ public class Core : MonoBehaviour
         foreach (CoreComponent component in components)
         {
             AddComponent(component);
-        }
-
-        foreach (CoreComponent component in _coreComponents)
-        {
             component.Initialize(this);
         }
     }
@@ -70,5 +66,31 @@ public class Core : MonoBehaviour
         value = GetCoreComponent<T>();
 
         return value;
+    }
+
+    private void SetupStates()
+    {
+        /*idleState = new PlayerIdleState(this, playerData, "idle");
+        moveState = new PlayerMoveState(this, playerData, "move");
+        jumpState = new PlayerJumpState(this, playerData, "inAir");
+        inAirState = new PlayerInAirState(this, playerData, "inAir");
+        landState = new PlayerLandState(this, playerData, "land");
+
+        wallSlideState = new PlayerWallSlideState(this, playerData, "wallSlide");
+        wallClimbState = new PlayerWallClimbState(this, playerData, "wallClimb");
+        wallGrabState = new PlayerWallGrabState(this, playerData, "wallGrab");
+        wallJumpState = new PlayerWallJumpState(this, playerData, "inAir");
+        ledgeClimbState = new PlayerLedgeClimbState(this, playerData, "ledgeClimb");
+
+        crouchIdleState = new PlayerCrouchIdleState(this, playerData, "crouchIdle");
+        crouchMoveState = new PlayerCrouchMoveState(this, playerData, "crouchMove");
+        crouchJumpState = new PlayerCrouchJumpState(this, playerData, "crouchInAir");
+        crouchInAirState = new PlayerCrouchInAirState(this, playerData, "crouchInAir");
+        crouchLandState = new PlayerCrouchLandState(this, playerData, "crouchLand");
+
+        primaryAttackState = new PlayerAttackState(this, playerData, "attack");
+        secondaryAttackState = new PlayerAttackState(this, playerData, "attack");*/
+
+        //GetCoreComponent<FiniteStateMachine>().Initialize();
     }
 }

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerWallGrabState : PlayerTouchingWallState
 {
+    protected PlayerWallSlideState wallSlideState => conditionManager.wallSlideState;
+    protected PlayerWallClimbState wallClimbState => conditionManager.wallClimbState;
+
     private Vector2 _holdPosition;
-
-    public PlayerWallGrabState(Player player, PlayerData playerData, string animBoolName)
-    : base(player, animBoolName, playerData) { }
-
+    
     public override void Enter()
     {
         base.Enter();
 
-        _holdPosition = _player.transform.position;
+        _holdPosition = _core.transform.position;
 
         HoldPosition();
     }
@@ -25,23 +25,30 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         HoldPosition();
     }
 
-    public override void DoTransitions()
+    public override GenericState DoTransitions()
     {
-        base.DoTransitions();
+        var parentResult = base.DoTransitions();
 
-        if (_inputY > 0)
+        if (parentResult != null)
         {
-            stateMachine.ChangeState(_player.wallClimbState);
+            return parentResult;
         }
-        else if (_inputY < 0 || !_isPressingGrab)
+
+        if (_isMovingUp)
         {
-            stateMachine.ChangeState(_player.wallSlideState);
+            return wallClimbState;
         }
+        else if (_isMovingDown || !_isPressingGrab)
+        {
+            return wallSlideState;
+        }
+
+        return null;
     }
 
     private void HoldPosition()
     {
-        _player.transform.position = _holdPosition;
+        _core.transform.position = _holdPosition;
 
         movement?.SetVelocityZero();
     }
