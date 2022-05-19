@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0081219323c3e694d8ee8811701d33ae, type: 3}
   m_Name: CanJumpPlayer
   m_EditorClassIdentifier: 
-  value: 0
+  value: 1

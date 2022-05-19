@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player Ledge Climb State
   m_EditorClassIdentifier: 
   _transitions: []
-  _animBoolName: 
-  _playerData: {fileID: 0}
+  _animBoolName: ledgeClimb
+  _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
