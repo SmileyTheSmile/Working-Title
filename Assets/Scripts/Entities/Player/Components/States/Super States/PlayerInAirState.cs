@@ -63,8 +63,8 @@ public class PlayerInAirState : PlayerState
         movement?.CheckMovementDirection(_inputX);
         movement?.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
 
-        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement._currentVelocity.x));
-        visualController?.SetAnimationFloat("velocityY", movement._currentVelocity.y);
+        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
+        visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);
     }
     
     public override GenericState DoTransitions()
@@ -144,10 +144,10 @@ public class PlayerInAirState : PlayerState
 
         if (_isJumpCanceled)
         {
-            movement?.SetVelocityY(movement._currentVelocity.y * _playerData.variableJumpHeightMultiplier);
+            movement?.SetVelocityY(movement.currentVelocity.y * _playerData.variableJumpHeightMultiplier);
             _isJumping = false;
         }
-        else if (movement._currentVelocity.y <= 0f)
+        else if (movement.currentVelocity.y <= 0f)
         {
             _isJumping = false;
         }

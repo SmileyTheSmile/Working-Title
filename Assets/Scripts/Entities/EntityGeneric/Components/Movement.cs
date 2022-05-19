@@ -20,11 +20,10 @@ public class Movement : CoreComponent
     private BoxCollider2D _boxCollider;
 
     public int _movementDir { get; private set; }
-    public Vector2 _currentVelocity { get; private set; }
+    public Vector2 currentVelocity { get => _rigidBody.velocity; } 
 
     private int _facingDir;
     private bool _canSetVelocity;
-    private Vector2 _workspace;
     private Vector2 _defaultSize;
     private PlayerCrouchingForm _crouchingForm;
 
@@ -42,14 +41,6 @@ public class Movement : CoreComponent
         _canSetVelocity = true;
         _defaultSize = _boxCollider.size;
         _crouchingForm = PlayerCrouchingForm.notCrouching;
-    }
-
-    //Update the current state's logic (Update)
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-
-        _currentVelocity = _rigidBody.velocity;
     }
 
     //Flip the entity in the other direction
@@ -149,70 +140,69 @@ public class Movement : CoreComponent
     //Set the X velocity of the entity
     public void SetVelocityX(float velocity) 
     {
-        _workspace.Set(velocity, _currentVelocity.y);
-        SetFinalVelocity();
+        Vector2 workspace = new Vector2(velocity, _rigidBody.velocity.y);
+        SetFinalVelocity(workspace);
     }
 
     //Set the Y velocity of the entity
     public void SetVelocityY(float velocity)
     {
-        _workspace.Set(_currentVelocity.x, velocity);
-        SetFinalVelocity();
+        Vector2 workspace = new Vector2(_rigidBody.velocity.x, velocity);
+        SetFinalVelocity(workspace);
     }
 
     //Set the velocity of the entity at an angle with and considering facingDirection
     public void SetVelocity(float velocity, Vector2 angle, int facingDirection)
     {
         angle.Normalize();
-        _workspace.Set(angle.x * velocity * facingDirection, angle.y * velocity);
-        SetFinalVelocity();
+        Vector2 workspace = new Vector2(angle.x * velocity * facingDirection, angle.y * velocity);
+        SetFinalVelocity(workspace);
     }
 
     //Set the velocity of the entity considering facingDirection
     public void SetVelocity(float velocity, Vector2 facingDirection)
     {
-        _workspace = velocity * facingDirection;
-        SetFinalVelocity();
+        Vector2 workspace = velocity * facingDirection;
+        SetFinalVelocity(workspace);
     }
 
     //Set the velocity of the entity to 0
     public void SetVelocityZero()
     {
-        _workspace = Vector2.zero;
-        SetFinalVelocity();
+        Vector2 workspace = Vector2.zero;
+        SetFinalVelocity(workspace);
     }
 
     //Set the velocity of the entity to workspace vector
-    public void SetFinalVelocity()
+    public void SetFinalVelocity(Vector2 workspace)
     {
         if (_canSetVelocity)
         {
-            _rigidBody.velocity = _workspace;
-            _currentVelocity = _workspace;
+            _rigidBody.velocity = workspace;
         }
     }
 
     //Set the size of the entity's collider
     public void SetColliderSize(float width, float height)
     {
-        _workspace.Set(width, height);
-        _boxCollider.size = _workspace;
+        Vector2 workspace = new Vector2(width, height);
+        _boxCollider.size = workspace;
     }
 
     //Set the Y offset of the entity's collider
     public void SetColliderOffsetY(float offsetY)
     {
-        _workspace = _boxCollider.offset;
-        _workspace.y += offsetY;
-        _boxCollider.offset = _workspace;
+        Vector2 workspace = _boxCollider.offset;
+        workspace.y += offsetY;
+        _boxCollider.offset = workspace;
     }
 
     //Set the X, Y offset of the entity's collider
     public void SetOffset(float offsetX, float offsetY)
     {
-        _workspace = _boxCollider.offset;
-        _workspace += new Vector2(offsetX, offsetY);
-        _boxCollider.offset = _workspace;
+        Vector2 workspace = _boxCollider.offset;
+        workspace += new Vector2(offsetX, offsetY);
+        _boxCollider.offset = workspace;
     }
 
     public void AddForceAtAngle(float force, float angle)

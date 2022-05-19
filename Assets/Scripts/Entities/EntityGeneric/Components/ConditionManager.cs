@@ -61,7 +61,7 @@ public class ConditionManager : CoreComponent
     {
         base.LogicUpdate();
 
-        HasStoppedFalling.value = movement._currentVelocity.y < 0.01;
+        HasStoppedFalling.value = movement.currentVelocity.y < 0.01;
         CanCrouchSO.value = inputHandler.CanCrouch();
         CanJumpSO.value = inputHandler.CanJump();
         IsMovingInCorrectDirSO.value = (_normalizedInputXSO.value == movement._movementDir);
