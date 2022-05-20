@@ -13357,6 +13357,7 @@ MonoBehaviour:
   IsMovingInCorrectDirSO: {fileID: 11400000, guid: 15579782449e93144b1f8bf7372077c6, type: 2}
   _normalizedInputXSO: {fileID: 11400000, guid: 3f4591f9c8a21094ebae2dc880972dd6, type: 2}
   _normalizedInputYSO: {fileID: 11400000, guid: 1a3cea031eca4a24b8765975f44f9d14, type: 2}
+  _movementDirSO: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}
   idleState: {fileID: 11400000, guid: b6b5da63f5281e9489b815bfc5c758b9, type: 2}
   moveState: {fileID: 11400000, guid: 8d637005230b4664d90c8c36d7167889, type: 2}
   jumpState: {fileID: 11400000, guid: 4d864d1e055f057489fc773ce82e4b91, type: 2}
@@ -13374,6 +13375,7 @@ MonoBehaviour:
   crouchLandState: {fileID: 11400000, guid: 3ca60ceaff3548a47af72968677f3f54, type: 2}
   primaryAttackState: {fileID: 11400000, guid: 206e1647564bf384cbf665670c931bfe, type: 2}
   secondaryAttackState: {fileID: 11400000, guid: 206e1647564bf384cbf665670c931bfe, type: 2}
+  _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
 --- !u!1 &381208190
 GameObject:
   m_ObjectHideFlags: 3
@@ -103973,7 +103975,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingState: {fileID: 11400000, guid: 3ef4a3247a9d6c343a2a0e218977d7bb, type: 2}
   _currentState: {fileID: 0}
-  _transitions: []
   _states:
   - {fileID: 11400000, guid: b6b5da63f5281e9489b815bfc5c758b9, type: 2}
   - {fileID: 11400000, guid: 206e1647564bf384cbf665670c931bfe, type: 2}
@@ -104094,7 +104095,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.4264705, y: 1}
+    m_SensorSize: {x: 3.4257352, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

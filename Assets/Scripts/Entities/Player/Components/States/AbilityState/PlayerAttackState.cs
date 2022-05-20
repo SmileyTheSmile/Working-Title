@@ -6,7 +6,8 @@ public class PlayerAttackState : PlayerAbilityState
 {
     private Weapon _weapon;
 
-    private int _inputX => inputHandler._normalizedInputXSO.value;
+    private int _inputX => conditionManager._normalizedInputXSO.value;
+    private int _movementDir => conditionManager._movementDirSO.value;
 
     private float _velocityToSet;
 
@@ -33,11 +34,11 @@ public class PlayerAttackState : PlayerAbilityState
     {
         base.DoActions();
 
-        movement?.CheckMovementDirection(_inputX);
+        movement.CheckMovementDirection(_inputX);
 
         if (_setVelocity)
         {
-            movement?.SetVelocityX(_velocityToSet * movement._movementDir);
+            movement.SetVelocityX(_velocityToSet * _movementDir);
         }
     }
 
@@ -56,7 +57,7 @@ public class PlayerAttackState : PlayerAbilityState
 
     public void SetPlayerVelocity(float velocity)
     {
-        movement?.SetVelocityX(velocity * movement._movementDir);
+        movement?.SetVelocityX(velocity * _movementDir);
 
         _velocityToSet = velocity;
         _setVelocity = true;

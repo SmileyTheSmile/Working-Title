@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034bcdb8a6439b44fb1908d42f476b1c, type: 3}
   m_Name: Player Attack State
   m_EditorClassIdentifier: 
-  _transitions: []
+  _transitions:
+  - nextState: {fileID: 0}
+    expression: (1^2)v(3v4)
+    conditions: []
   _animBoolName: attack
   _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}

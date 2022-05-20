@@ -17,6 +17,8 @@ public class FiniteStateMachine : CoreComponent
         
         _currentState.DoActions();
         GenericState nextState = _currentState.DoTransitions();
+        
+        //LogComponentInfo();
 
         if (nextState != null)
         {

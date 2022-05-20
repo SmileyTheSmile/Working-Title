@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
 
-        movement?.SetVelocityX(0f);
+        movement.SetVelocityX(0f);
     }
 
     public override GenericState DoTransitions()

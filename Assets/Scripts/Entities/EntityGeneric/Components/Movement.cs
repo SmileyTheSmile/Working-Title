@@ -16,14 +16,12 @@ public class Movement : CoreComponent
     [SerializeField] private CollisionCheckTransitionCondition _wallFront;
     [SerializeField] private ScriptableInt _movementDirSO;
 
-    private Rigidbody2D _rigidBody;
-    private BoxCollider2D _boxCollider;
-
-    public int _movementDir { get; private set; }
-    public Vector2 currentVelocity { get => _rigidBody.velocity; } 
+    public Vector2 currentVelocity { get => _rigidBody.velocity; }
 
     private int _facingDir;
     private bool _canSetVelocity;
+    private Rigidbody2D _rigidBody;
+    private BoxCollider2D _boxCollider;
     private Vector2 _defaultSize;
     private PlayerCrouchingForm _crouchingForm;
 
@@ -35,7 +33,6 @@ public class Movement : CoreComponent
 
         _rigidBody.velocity = Vector2.zero;
 
-        _movementDir = 1;
         _movementDirSO.value = 1;
         _facingDir = 1;
         _canSetVelocity = true;
@@ -55,9 +52,8 @@ public class Movement : CoreComponent
     //Change the movement direction of the entity based on the x input
     public void CheckMovementDirection(int inputX)
     {
-        if (inputX != 0 && inputX != _movementDir)
+        if (inputX != 0 && inputX != _movementDirSO.value)
         {
-            _movementDir *= -1;
             _movementDirSO.value *= -1;
         }
     }
@@ -140,37 +136,32 @@ public class Movement : CoreComponent
     //Set the X velocity of the entity
     public void SetVelocityX(float velocity) 
     {
-        Vector2 workspace = new Vector2(velocity, _rigidBody.velocity.y);
-        SetFinalVelocity(workspace);
+        SetFinalVelocity(new Vector2(velocity, _rigidBody.velocity.y));
     }
 
     //Set the Y velocity of the entity
     public void SetVelocityY(float velocity)
     {
-        Vector2 workspace = new Vector2(_rigidBody.velocity.x, velocity);
-        SetFinalVelocity(workspace);
+        SetFinalVelocity(new Vector2(_rigidBody.velocity.x, velocity));
     }
 
     //Set the velocity of the entity at an angle with and considering facingDirection
     public void SetVelocity(float velocity, Vector2 angle, int facingDirection)
     {
         angle.Normalize();
-        Vector2 workspace = new Vector2(angle.x * velocity * facingDirection, angle.y * velocity);
-        SetFinalVelocity(workspace);
+        SetFinalVelocity(new Vector2(angle.x * velocity * facingDirection, angle.y * velocity));
     }
 
     //Set the velocity of the entity considering facingDirection
     public void SetVelocity(float velocity, Vector2 facingDirection)
     {
-        Vector2 workspace = velocity * facingDirection;
-        SetFinalVelocity(workspace);
+        SetFinalVelocity(velocity * facingDirection);
     }
 
     //Set the velocity of the entity to 0
     public void SetVelocityZero()
     {
-        Vector2 workspace = Vector2.zero;
-        SetFinalVelocity(workspace);
+        SetFinalVelocity(Vector2.zero);
     }
 
     //Set the velocity of the entity to workspace vector

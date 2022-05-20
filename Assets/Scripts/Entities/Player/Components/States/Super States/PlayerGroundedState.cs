@@ -6,9 +6,7 @@ public abstract class PlayerGroundedState : PlayerState
     { get => _movement ?? _core.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    protected int _inputX => inputHandler._normalizedInputXSO.value;
-    protected int _inputY => inputHandler._normalizedInputYSO.value;
-    protected Vector2 _mousePositionInput => inputHandler._mousePositionInputSO.value;
+    protected int _inputX => conditionManager._normalizedInputXSO.value;
 
     protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;
     protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
@@ -38,15 +36,15 @@ public abstract class PlayerGroundedState : PlayerState
     {
         base.Enter();
 
-        inputHandler?.ResetAmountOfJumpsLeft();
-        inputHandler?.ResetAmountOfCrouchesLeft();
+        conditionManager.ResetAmountOfJumpsLeft();
+        conditionManager.ResetAmountOfCrouchesLeft();
     }
 
     public override void DoActions()
     {
         base.DoActions();
 
-        movement?.CheckMovementDirection(_inputX);
+        movement.CheckMovementDirection(_inputX);
     }
 
     public override GenericState DoTransitions()

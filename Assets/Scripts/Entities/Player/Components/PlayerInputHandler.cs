@@ -23,16 +23,11 @@ public class PlayerInputHandler : CoreComponent
 
     private Vector2 _rawMouseInput;
     private float _jumpInputStartTime;
-    private int _amountOfJumpsLeft;
-    private int _amountOfCrouchesLeft;
 
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
         _mainCamera = Camera.main;
-
-        ResetAmountOfJumpsLeft();
-        ResetAmountOfCrouchesLeft();
     }
 
     public override void LogicUpdate()
@@ -146,17 +141,10 @@ public class PlayerInputHandler : CoreComponent
     //Process mouse position input
     private void ProcessMouseInput() 
     {
-        _mousePositionInputSO.value = new Vector3(_rawMouseInput.x, _rawMouseInput.y, 10);
+        Vector3 shiftedMouseInput = new Vector3(_rawMouseInput.x, _rawMouseInput.y, 10);
 
-        _mousePositionInputSO.value = _mainCamera.ScreenToWorldPoint(_mousePositionInputSO.value);
+        _mousePositionInputSO.value = _mainCamera.ScreenToWorldPoint(shiftedMouseInput);
     }
 
-    public bool CanCrouch() => (_amountOfCrouchesLeft > 0);
-    public void ResetAmountOfCrouchesLeft() => _amountOfCrouchesLeft = _playerData.amountOfCrouches;
-    public void DecreaseAmountOfCrouchesLeft() => _amountOfCrouchesLeft--;
-
-    public bool CanJump() => (_amountOfJumpsLeft > 0);
-    public void ResetAmountOfJumpsLeft() => _amountOfJumpsLeft = _playerData.amountOfJumps;
-    public void DecreaseAmountOfJumpsLeft() => _amountOfJumpsLeft--;
     public void UseJumpInput() => _isPressingJumpSO.value = false; 
 }

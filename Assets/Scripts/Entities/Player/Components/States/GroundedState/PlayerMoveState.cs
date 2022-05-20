@@ -12,7 +12,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.DoActions();
 
-        movement?.SetVelocityX(_playerData.movementVelocity * _inputX);
+        movement.SetVelocityX(_playerData.movementVelocity * _inputX);
     }
 
     public override GenericState DoTransitions()

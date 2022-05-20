@@ -1,21 +1,20 @@
-using System.Linq.Expressions;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Transition", menuName = "States/Transition")]
+//[CreateAssetMenu(fileName = "New Transition", menuName = "States/Transition")]
 
 [Serializable]
-public class StateTransition : ScriptableObject
+public class StateTransition
 {
     [SerializeField] private GenericState nextState = null;
+    [SerializeField] private string expression;
     [SerializeField] private List<ConditionUsage> conditions = new List<ConditionUsage>();
 
     public GenericState NextState => nextState;
 
     public bool ShouldTransition()
     {
-        bool result;
         foreach (var condition in conditions)
         {
             if (!condition.Condition.IsMet(condition.ExpectedResult))
@@ -31,9 +30,8 @@ public class StateTransition : ScriptableObject
     public struct ConditionUsage
     {
         public bool ExpectedResult;
+        public int id;
         public StateTransitionCondition Condition;
-        public Operator Operator;
     }
-
-    public enum Operator { And, Or }
 }
+

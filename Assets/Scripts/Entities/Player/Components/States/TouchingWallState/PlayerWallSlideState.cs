@@ -10,7 +10,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
     {
         base.DoActions();
 
-        movement?.SetVelocityY(-_playerData.wallSlideVelocity);
+        movement.SetVelocityY(-_playerData.wallSlideVelocity);
     }
 
     public override GenericState DoTransitions()

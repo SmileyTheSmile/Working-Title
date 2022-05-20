@@ -35,6 +35,7 @@ public class ConditionManager : CoreComponent
 
     public ScriptableInt _normalizedInputXSO;
     public ScriptableInt _normalizedInputYSO;
+    public ScriptableInt _movementDirSO;
 
     public PlayerIdleState idleState;
     public PlayerMoveState moveState;
@@ -56,15 +57,26 @@ public class ConditionManager : CoreComponent
 
     public PlayerAttackState primaryAttackState;
     public PlayerAttackState secondaryAttackState;
+    
+    [SerializeField] private PlayerData _playerData;
+
+    private int _amountOfJumpsLeft;
+    private int _amountOfCrouchesLeft;
+
+    private void Awake()
+    {
+        ResetAmountOfJumpsLeft();
+        ResetAmountOfCrouchesLeft();
+    }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
         HasStoppedFalling.value = movement.currentVelocity.y < 0.01;
-        CanCrouchSO.value = inputHandler.CanCrouch();
-        CanJumpSO.value = inputHandler.CanJump();
-        IsMovingInCorrectDirSO.value = (_normalizedInputXSO.value == movement._movementDir);
+        CanCrouchSO.value = CanCrouch();
+        CanJumpSO.value = CanJump();
+        IsMovingInCorrectDirSO.value = (_normalizedInputXSO.value == _movementDirSO.value);
 
         switch (_normalizedInputXSO.value)
         {
@@ -92,4 +104,12 @@ public class ConditionManager : CoreComponent
                 break;
         }
     }
+
+    public bool CanCrouch() => (_amountOfCrouchesLeft > 0);
+    public void ResetAmountOfCrouchesLeft() => _amountOfCrouchesLeft = _playerData.amountOfCrouches;
+    public void DecreaseAmountOfCrouchesLeft() => _amountOfCrouchesLeft--;
+
+    public bool CanJump() => (_amountOfJumpsLeft > 0);
+    public void ResetAmountOfJumpsLeft() => _amountOfJumpsLeft = _playerData.amountOfJumps;
+    public void DecreaseAmountOfJumpsLeft() => _amountOfJumpsLeft--;
 }

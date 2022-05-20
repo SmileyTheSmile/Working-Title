@@ -15,7 +15,7 @@ E:/My Stuff/My Games/Working Title
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-57700
+55073
 Successfully changed project path to: E:/My Stuff/My Games/Working Title
 E:/My Stuff/My Games/Working Title
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ E:/My Stuff/My Games/Working Title
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 296.61 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 826.28 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.2.5f1 (4ec9a5e799f5)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/Resources/UnitySubsystems
@@ -63,89 +63,89 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56284
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56220
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.024244 seconds.
+Registered in 0.019613 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 220.28 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 204.74 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.779 seconds
+- Completed reload, in  1.442 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1780ms)
-		BeginReloadAssembly (291ms)
+	ReloadAssembly (1443ms)
+		BeginReloadAssembly (245ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (1233ms)
-			LoadAssemblies (288ms)
-			RebuildTransferFunctionScriptingTraits (1ms)
-			SetupTypeCache (366ms)
+			CreateAndSetChildDomain (2ms)
+		EndReloadAssembly (1005ms)
+			LoadAssemblies (240ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (231ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (49ms)
-			SetupLoadedEditorAssemblies (678ms)
+			RebuildScriptCaches (64ms)
+			SetupLoadedEditorAssemblies (572ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (28ms)
+				InitializePlatformSupportModulesInManaged (45ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (221ms)
-				BeforeProcessingInitializeOnLoad (3ms)
-				ProcessInitializeOnLoadAttributes (343ms)
-				ProcessInitializeOnLoadMethodAttributes (82ms)
+				RefreshPlugins (205ms)
+				BeforeProcessingInitializeOnLoad (4ms)
+				ProcessInitializeOnLoadAttributes (220ms)
+				ProcessInitializeOnLoadMethodAttributes (98ms)
 				AfterProcessingInitializeOnLoad (0ms)
-				EditorAssembliesLoaded (1ms)
+				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.024375 seconds.
+Registered in 0.030393 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 784.64 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 776.98 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  5.866 seconds
+- Completed reload, in  4.870 seconds
 Domain Reload Profiling:
-	ReloadAssembly (5871ms)
-		BeginReloadAssembly (465ms)
+	ReloadAssembly (4873ms)
+		BeginReloadAssembly (437ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (14ms)
+			DisableScriptedObjects (9ms)
 			BackupInstance (0ms)
-			ReleaseScriptingObjects (2ms)
+			ReleaseScriptingObjects (1ms)
 			CreateAndSetChildDomain (70ms)
-		EndReloadAssembly (5204ms)
-			LoadAssemblies (423ms)
-			RebuildTransferFunctionScriptingTraits (4ms)
-			SetupTypeCache (558ms)
-			ReleaseScriptCaches (20ms)
-			RebuildScriptCaches (171ms)
-			SetupLoadedEditorAssemblies (3804ms)
+		EndReloadAssembly (4241ms)
+			LoadAssemblies (391ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (497ms)
+			ReleaseScriptCaches (39ms)
+			RebuildScriptCaches (148ms)
+			SetupLoadedEditorAssemblies (3015ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (30ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (785ms)
-				BeforeProcessingInitializeOnLoad (220ms)
-				ProcessInitializeOnLoadAttributes (2592ms)
-				ProcessInitializeOnLoadMethodAttributes (142ms)
-				AfterProcessingInitializeOnLoad (34ms)
+				InitializePlatformSupportModulesInManaged (67ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (777ms)
+				BeforeProcessingInitializeOnLoad (178ms)
+				ProcessInitializeOnLoadAttributes (1864ms)
+				ProcessInitializeOnLoadMethodAttributes (102ms)
+				AfterProcessingInitializeOnLoad (25ms)
 				EditorAssembliesLoaded (1ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (24ms)
+			AwakeInstancesAfterBackupRestoration (18ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.41 seconds
-Refreshing native plugins compatible for Editor in 9.16 ms, found 8 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.28 seconds
+Refreshing native plugins compatible for Editor in 2.74 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5023 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 64 unused Assets / (0.6 MB). Loaded Objects now: 5478.
-Memory consumption went from 190.7 MB to 190.0 MB.
-Total: 22.141400 ms (FindLiveObjects: 1.905200 ms CreateObjectMapping: 1.268200 ms MarkObjects: 16.691400 ms  DeleteObjects: 2.267500 ms)
+Memory consumption went from 190.6 MB to 190.0 MB.
+Total: 42.583400 ms (FindLiveObjects: 12.514700 ms CreateObjectMapping: 1.647600 ms MarkObjects: 24.281500 ms  DeleteObjects: 4.129400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -159,55 +159,55 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 519254.890823 seconds.
-  path: Assets/Resourses/ScriptableObjects/StateConditions/Support/HasStoppedFallingPlayer.asset
-  artifactKey: Guid(4d50db7f8edc5d34d907179779b0560d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resourses/ScriptableObjects/StateConditions/Support/HasStoppedFallingPlayer.asset using Guid(4d50db7f8edc5d34d907179779b0560d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c921da520b7c80399d1c47f74e8121d6') in 0.242555 seconds 
+  Time since last request: 591069.487363 seconds.
+  path: Assets/Resourses/Textures
+  artifactKey: Guid(f5ac254faa2450048994fb83bf6eceb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resourses/Textures using Guid(f5ac254faa2450048994fb83bf6eceb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9af5f87d9cb5b205aae8ea2779cbdf42') in 0.146281 seconds 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.008216 seconds.
+Registered in 0.038581 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 3.47 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 73.32 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  4.196 seconds
+- Completed reload, in  7.224 seconds
 Domain Reload Profiling:
-	ReloadAssembly (4207ms)
-		BeginReloadAssembly (1792ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (92ms)
+	ReloadAssembly (7242ms)
+		BeginReloadAssembly (3448ms)
+			ExecutionOrderSort (1ms)
+			DisableScriptedObjects (155ms)
 			BackupInstance (0ms)
-			ReleaseScriptingObjects (1ms)
-			CreateAndSetChildDomain (749ms)
-		EndReloadAssembly (2005ms)
-			LoadAssemblies (653ms)
+			ReleaseScriptingObjects (3ms)
+			CreateAndSetChildDomain (1787ms)
+		EndReloadAssembly (3228ms)
+			LoadAssemblies (992ms)
 			RebuildTransferFunctionScriptingTraits (1ms)
-			SetupTypeCache (478ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (84ms)
-			SetupLoadedEditorAssemblies (962ms)
+			SetupTypeCache (789ms)
+			ReleaseScriptCaches (219ms)
+			RebuildScriptCaches (129ms)
+			SetupLoadedEditorAssemblies (1428ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (32ms)
-				SetLoadedEditorAssemblies (3ms)
-				RefreshPlugins (4ms)
-				BeforeProcessingInitializeOnLoad (137ms)
-				ProcessInitializeOnLoadAttributes (703ms)
-				ProcessInitializeOnLoadMethodAttributes (61ms)
-				AfterProcessingInitializeOnLoad (20ms)
-				EditorAssembliesLoaded (0ms)
+				InitializePlatformSupportModulesInManaged (51ms)
+				SetLoadedEditorAssemblies (8ms)
+				RefreshPlugins (74ms)
+				BeforeProcessingInitializeOnLoad (162ms)
+				ProcessInitializeOnLoadAttributes (1026ms)
+				ProcessInitializeOnLoadMethodAttributes (83ms)
+				AfterProcessingInitializeOnLoad (24ms)
+				EditorAssembliesLoaded (1ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (16ms)
+			AwakeInstancesAfterBackupRestoration (31ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.94 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 2.24 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5000 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5494.
 Memory consumption went from 189.3 MB to 188.7 MB.
-Total: 20.603100 ms (FindLiveObjects: 1.299000 ms CreateObjectMapping: 3.390800 ms MarkObjects: 14.546900 ms  DeleteObjects: 1.362100 ms)
+Total: 19.060000 ms (FindLiveObjects: 1.622600 ms CreateObjectMapping: 1.926500 ms MarkObjects: 13.723000 ms  DeleteObjects: 1.784100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -222,48 +222,48 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.093144 seconds.
+Registered in 0.025121 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 16.28 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 3.60 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  9.589 seconds
+- Completed reload, in  5.212 seconds
 Domain Reload Profiling:
-	ReloadAssembly (9630ms)
-		BeginReloadAssembly (4368ms)
+	ReloadAssembly (5227ms)
+		BeginReloadAssembly (2178ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (439ms)
+			DisableScriptedObjects (135ms)
 			BackupInstance (0ms)
-			ReleaseScriptingObjects (8ms)
-			CreateAndSetChildDomain (1030ms)
-		EndReloadAssembly (4364ms)
-			LoadAssemblies (731ms)
-			RebuildTransferFunctionScriptingTraits (5ms)
-			SetupTypeCache (1221ms)
-			ReleaseScriptCaches (71ms)
-			RebuildScriptCaches (125ms)
-			SetupLoadedEditorAssemblies (2041ms)
+			ReleaseScriptingObjects (3ms)
+			CreateAndSetChildDomain (1113ms)
+		EndReloadAssembly (2750ms)
+			LoadAssemblies (523ms)
+			RebuildTransferFunctionScriptingTraits (3ms)
+			SetupTypeCache (748ms)
+			ReleaseScriptCaches (27ms)
+			RebuildScriptCaches (121ms)
+			SetupLoadedEditorAssemblies (1142ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (41ms)
+				InitializePlatformSupportModulesInManaged (44ms)
 				SetLoadedEditorAssemblies (4ms)
-				RefreshPlugins (18ms)
-				BeforeProcessingInitializeOnLoad (201ms)
-				ProcessInitializeOnLoadAttributes (1608ms)
-				ProcessInitializeOnLoadMethodAttributes (135ms)
-				AfterProcessingInitializeOnLoad (31ms)
-				EditorAssembliesLoaded (2ms)
+				RefreshPlugins (4ms)
+				BeforeProcessingInitializeOnLoad (163ms)
+				ProcessInitializeOnLoadAttributes (834ms)
+				ProcessInitializeOnLoadMethodAttributes (73ms)
+				AfterProcessingInitializeOnLoad (21ms)
+				EditorAssembliesLoaded (1ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (37ms)
+			AwakeInstancesAfterBackupRestoration (22ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 5.33 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 3.00 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5509.
-Memory consumption went from 189.3 MB to 188.7 MB.
-Total: 24.293300 ms (FindLiveObjects: 1.847000 ms CreateObjectMapping: 4.750100 ms MarkObjects: 12.443400 ms  DeleteObjects: 5.250300 ms)
+Memory consumption went from 189.3 MB to 188.6 MB.
+Total: 16.925100 ms (FindLiveObjects: 1.093300 ms CreateObjectMapping: 1.969800 ms MarkObjects: 12.894600 ms  DeleteObjects: 0.960800 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -278,272 +278,48 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.010930 seconds.
+Registered in 0.037004 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 150.75 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 12.63 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  6.781 seconds
+- Completed reload, in  5.366 seconds
 Domain Reload Profiling:
-	ReloadAssembly (6788ms)
-		BeginReloadAssembly (1628ms)
+	ReloadAssembly (5376ms)
+		BeginReloadAssembly (1855ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (138ms)
+			DisableScriptedObjects (115ms)
 			BackupInstance (0ms)
-			ReleaseScriptingObjects (19ms)
-			CreateAndSetChildDomain (600ms)
-		EndReloadAssembly (4916ms)
-			LoadAssemblies (474ms)
-			RebuildTransferFunctionScriptingTraits (1ms)
-			SetupTypeCache (1349ms)
-			ReleaseScriptCaches (88ms)
-			RebuildScriptCaches (203ms)
-			SetupLoadedEditorAssemblies (2040ms)
+			ReleaseScriptingObjects (4ms)
+			CreateAndSetChildDomain (793ms)
+		EndReloadAssembly (3262ms)
+			LoadAssemblies (524ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (984ms)
+			ReleaseScriptCaches (90ms)
+			RebuildScriptCaches (145ms)
+			SetupLoadedEditorAssemblies (1251ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (54ms)
-				SetLoadedEditorAssemblies (7ms)
-				RefreshPlugins (151ms)
-				BeforeProcessingInitializeOnLoad (256ms)
-				ProcessInitializeOnLoadAttributes (1457ms)
-				ProcessInitializeOnLoadMethodAttributes (89ms)
-				AfterProcessingInitializeOnLoad (25ms)
-				EditorAssembliesLoaded (1ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (20ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 59.02 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5524.
-Memory consumption went from 189.3 MB to 188.7 MB.
-Total: 30.494700 ms (FindLiveObjects: 3.607500 ms CreateObjectMapping: 1.710200 ms MarkObjects: 24.114000 ms  DeleteObjects: 1.059700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.011876 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.62 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  9.229 seconds
-Domain Reload Profiling:
-	ReloadAssembly (9233ms)
-		BeginReloadAssembly (1268ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (40ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (1ms)
-			CreateAndSetChildDomain (810ms)
-		EndReloadAssembly (7723ms)
-			LoadAssemblies (1016ms)
-			RebuildTransferFunctionScriptingTraits (161ms)
-			SetupTypeCache (4147ms)
-			ReleaseScriptCaches (4ms)
-			RebuildScriptCaches (93ms)
-			SetupLoadedEditorAssemblies (2120ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (41ms)
+				InitializePlatformSupportModulesInManaged (30ms)
 				SetLoadedEditorAssemblies (3ms)
-				RefreshPlugins (3ms)
-				BeforeProcessingInitializeOnLoad (199ms)
-				ProcessInitializeOnLoadAttributes (1603ms)
-				ProcessInitializeOnLoadMethodAttributes (247ms)
-				AfterProcessingInitializeOnLoad (25ms)
-				EditorAssembliesLoaded (1ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (24ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 4.59 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.7 MB). Loaded Objects now: 5539.
-Memory consumption went from 189.4 MB to 188.7 MB.
-Total: 23.791900 ms (FindLiveObjects: 2.483900 ms CreateObjectMapping: 2.333300 ms MarkObjects: 16.919500 ms  DeleteObjects: 2.048600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.011919 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 86.34 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  8.399 seconds
-Domain Reload Profiling:
-	ReloadAssembly (8410ms)
-		BeginReloadAssembly (3022ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (408ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (3ms)
-			CreateAndSetChildDomain (1190ms)
-		EndReloadAssembly (5066ms)
-			LoadAssemblies (512ms)
-			RebuildTransferFunctionScriptingTraits (3ms)
-			SetupTypeCache (1678ms)
-			ReleaseScriptCaches (312ms)
-			RebuildScriptCaches (229ms)
-			SetupLoadedEditorAssemblies (1884ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (67ms)
-				SetLoadedEditorAssemblies (4ms)
-				RefreshPlugins (87ms)
-				BeforeProcessingInitializeOnLoad (317ms)
-				ProcessInitializeOnLoadAttributes (1121ms)
-				ProcessInitializeOnLoadMethodAttributes (247ms)
-				AfterProcessingInitializeOnLoad (38ms)
-				EditorAssembliesLoaded (4ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (59ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 6.94 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5554.
-Memory consumption went from 189.2 MB to 188.6 MB.
-Total: 65.031800 ms (FindLiveObjects: 5.209700 ms CreateObjectMapping: 4.541400 ms MarkObjects: 44.620200 ms  DeleteObjects: 10.648900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.009774 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 19.99 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in 10.966 seconds
-Domain Reload Profiling:
-	ReloadAssembly (10990ms)
-		BeginReloadAssembly (4012ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (92ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (6ms)
-			CreateAndSetChildDomain (2289ms)
-		EndReloadAssembly (6323ms)
-			LoadAssemblies (1145ms)
-			RebuildTransferFunctionScriptingTraits (2ms)
-			SetupTypeCache (1122ms)
-			ReleaseScriptCaches (110ms)
-			RebuildScriptCaches (119ms)
-			SetupLoadedEditorAssemblies (4193ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (47ms)
-				SetLoadedEditorAssemblies (2ms)
-				RefreshPlugins (20ms)
-				BeforeProcessingInitializeOnLoad (167ms)
-				ProcessInitializeOnLoadAttributes (3722ms)
-				ProcessInitializeOnLoadMethodAttributes (198ms)
-				AfterProcessingInitializeOnLoad (36ms)
-				EditorAssembliesLoaded (1ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (43ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 51.33 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5569.
-Memory consumption went from 189.4 MB to 188.8 MB.
-Total: 29.396100 ms (FindLiveObjects: 6.599500 ms CreateObjectMapping: 4.235800 ms MarkObjects: 15.743900 ms  DeleteObjects: 2.812300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.024916 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 9.37 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  7.574 seconds
-Domain Reload Profiling:
-	ReloadAssembly (7582ms)
-		BeginReloadAssembly (3382ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (80ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (2ms)
-			CreateAndSetChildDomain (2209ms)
-		EndReloadAssembly (3792ms)
-			LoadAssemblies (884ms)
-			RebuildTransferFunctionScriptingTraits (3ms)
-			SetupTypeCache (1687ms)
-			ReleaseScriptCaches (189ms)
-			RebuildScriptCaches (103ms)
-			SetupLoadedEditorAssemblies (1175ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (29ms)
-				SetLoadedEditorAssemblies (2ms)
-				RefreshPlugins (10ms)
-				BeforeProcessingInitializeOnLoad (131ms)
-				ProcessInitializeOnLoadAttributes (888ms)
-				ProcessInitializeOnLoadMethodAttributes (92ms)
-				AfterProcessingInitializeOnLoad (23ms)
+				RefreshPlugins (13ms)
+				BeforeProcessingInitializeOnLoad (158ms)
+				ProcessInitializeOnLoadAttributes (944ms)
+				ProcessInitializeOnLoadMethodAttributes (77ms)
+				AfterProcessingInitializeOnLoad (24ms)
 				EditorAssembliesLoaded (1ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (21ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 5.17 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 4.91 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5584.
-Memory consumption went from 189.4 MB to 188.8 MB.
-Total: 29.620600 ms (FindLiveObjects: 3.696200 ms CreateObjectMapping: 1.688800 ms MarkObjects: 21.486700 ms  DeleteObjects: 2.744600 ms)
+Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5524.
+Memory consumption went from 189.2 MB to 188.7 MB.
+Total: 15.657000 ms (FindLiveObjects: 1.269500 ms CreateObjectMapping: 2.143300 ms MarkObjects: 10.118800 ms  DeleteObjects: 2.120900 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -558,104 +334,104 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.020255 seconds.
+Registered in 0.006967 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 22.26 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 23.54 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  5.496 seconds
+- Completed reload, in  7.186 seconds
 Domain Reload Profiling:
-	ReloadAssembly (5505ms)
-		BeginReloadAssembly (2022ms)
+	ReloadAssembly (7196ms)
+		BeginReloadAssembly (3335ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (66ms)
+			DisableScriptedObjects (211ms)
 			BackupInstance (0ms)
-			ReleaseScriptingObjects (2ms)
-			CreateAndSetChildDomain (1014ms)
-		EndReloadAssembly (3101ms)
-			LoadAssemblies (683ms)
-			RebuildTransferFunctionScriptingTraits (4ms)
-			SetupTypeCache (866ms)
-			ReleaseScriptCaches (60ms)
-			RebuildScriptCaches (125ms)
-			SetupLoadedEditorAssemblies (1385ms)
+			ReleaseScriptingObjects (7ms)
+			CreateAndSetChildDomain (1794ms)
+		EndReloadAssembly (3514ms)
+			LoadAssemblies (547ms)
+			RebuildTransferFunctionScriptingTraits (2ms)
+			SetupTypeCache (937ms)
+			ReleaseScriptCaches (389ms)
+			RebuildScriptCaches (154ms)
+			SetupLoadedEditorAssemblies (1415ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (37ms)
-				SetLoadedEditorAssemblies (3ms)
-				RefreshPlugins (23ms)
-				BeforeProcessingInitializeOnLoad (222ms)
-				ProcessInitializeOnLoadAttributes (984ms)
-				ProcessInitializeOnLoadMethodAttributes (91ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (1ms)
-			ExecutionOrderSort2 (1ms)
-			AwakeInstancesAfterBackupRestoration (23ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 2.99 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.7 MB). Loaded Objects now: 5599.
-Memory consumption went from 189.5 MB to 188.8 MB.
-Total: 32.791700 ms (FindLiveObjects: 2.740200 ms CreateObjectMapping: 2.998900 ms MarkObjects: 25.284800 ms  DeleteObjects: 1.764100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.016264 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 37.55 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in 12.924 seconds
-Domain Reload Profiling:
-	ReloadAssembly (12945ms)
-		BeginReloadAssembly (4594ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (564ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (5ms)
-			CreateAndSetChildDomain (2142ms)
-		EndReloadAssembly (7970ms)
-			LoadAssemblies (1219ms)
-			RebuildTransferFunctionScriptingTraits (4ms)
-			SetupTypeCache (2492ms)
-			ReleaseScriptCaches (854ms)
-			RebuildScriptCaches (246ms)
-			SetupLoadedEditorAssemblies (3012ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (51ms)
-				SetLoadedEditorAssemblies (5ms)
-				RefreshPlugins (39ms)
-				BeforeProcessingInitializeOnLoad (942ms)
-				ProcessInitializeOnLoadAttributes (1843ms)
-				ProcessInitializeOnLoadMethodAttributes (107ms)
-				AfterProcessingInitializeOnLoad (24ms)
+				InitializePlatformSupportModulesInManaged (39ms)
+				SetLoadedEditorAssemblies (4ms)
+				RefreshPlugins (24ms)
+				BeforeProcessingInitializeOnLoad (160ms)
+				ProcessInitializeOnLoadAttributes (1032ms)
+				ProcessInitializeOnLoadMethodAttributes (133ms)
+				AfterProcessingInitializeOnLoad (22ms)
 				EditorAssembliesLoaded (1ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (25ms)
+			AwakeInstancesAfterBackupRestoration (28ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 12.68 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 8.06 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5614.
-Memory consumption went from 189.5 MB to 188.8 MB.
-Total: 212.105100 ms (FindLiveObjects: 8.830000 ms CreateObjectMapping: 6.011100 ms MarkObjects: 195.391900 ms  DeleteObjects: 1.867400 ms)
+Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5539.
+Memory consumption went from 189.3 MB to 188.7 MB.
+Total: 410.013000 ms (FindLiveObjects: 25.609000 ms CreateObjectMapping: 3.781300 ms MarkObjects: 374.571600 ms  DeleteObjects: 6.045900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.025752 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 7.71 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.057 seconds
+Domain Reload Profiling:
+	ReloadAssembly (4067ms)
+		BeginReloadAssembly (1598ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (144ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (2ms)
+			CreateAndSetChildDomain (631ms)
+		EndReloadAssembly (2246ms)
+			LoadAssemblies (514ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (735ms)
+			ReleaseScriptCaches (29ms)
+			RebuildScriptCaches (127ms)
+			SetupLoadedEditorAssemblies (838ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (25ms)
+				SetLoadedEditorAssemblies (3ms)
+				RefreshPlugins (8ms)
+				BeforeProcessingInitializeOnLoad (125ms)
+				ProcessInitializeOnLoadAttributes (597ms)
+				ProcessInitializeOnLoadMethodAttributes (64ms)
+				AfterProcessingInitializeOnLoad (16ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (18ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.57 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4999 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5554.
+Memory consumption went from 189.1 MB to 188.5 MB.
+Total: 33.488000 ms (FindLiveObjects: 1.215400 ms CreateObjectMapping: 4.341500 ms MarkObjects: 26.811700 ms  DeleteObjects: 1.115100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 

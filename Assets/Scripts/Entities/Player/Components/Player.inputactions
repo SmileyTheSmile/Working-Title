@@ -147,8 +147,8 @@
                 },
                 {
                     "name": "",
-                    "id": "03c9c8a8-a046-4dab-9abb-2a689a701afa",
-                    "path": "<Keyboard>/ctrl",
+                    "id": "0240e05d-3dcc-41cc-a2a5-19a73e25f377",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -175,17 +175,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "SecondaryAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0240e05d-3dcc-41cc-a2a5-19a73e25f377",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
