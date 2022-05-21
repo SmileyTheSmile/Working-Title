@@ -10,7 +10,7 @@ public class EntityGeneric : MonoBehaviour
     //Unity Awake
     private void Awake()
     {
-        var components = GetComponentsInChildren<CoreComponent>();
+        CoreComponent[] components = GetComponentsInChildren<CoreComponent>();
 
         foreach (CoreComponent component in components)
         {

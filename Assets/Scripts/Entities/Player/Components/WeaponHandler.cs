@@ -1,22 +1,51 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponHandler : CoreComponent
 {
-    protected ConditionManager conditionManager
-    { get => _conditionManager ?? _entity.GetCoreComponent(ref _conditionManager); }
-    private ConditionManager _conditionManager;
+    [SerializeField] private Weapon _startingWeapon;
+    [SerializeField] private List<Weapon> _weapons = new List<Weapon>();
 
-    [SerializeField] private Transform currentWeapon;
-    
-    private TempShootScript weapon;
+    private Weapon _currentWeapon;
+    private TempShootScript weaponTemp;
 
     //Unity Awake
     private void Awake()
     {
-        //Time.timeScale = playerData.holdTimeScale;
-        weapon = GetComponentInChildren<TempShootScript>();
+        Weapon[] foundWeapons = GetComponentsInChildren<Weapon>();
+
+        foreach (Weapon weapon in foundWeapons)
+        {
+            AddWeapon(weapon);
+        }
+
+        weaponTemp = GetComponentInChildren<TempShootScript>();
+    }
+
+    //Update the current weapon's logic (Update)
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        _currentWeapon.LogicUpdate();
+    }
+
+    //Initialize the weapon handler
+    public override void Initialize(EntityGeneric entity)
+    {
+        base.Initialize(entity);
+
+        _currentWeapon = _startingWeapon;
+    }
+
+    //Add a weapon to the weapon list
+    public void AddWeapon(Weapon weapon)
+    {
+        if (!_weapons.Contains(weapon))
+        {
+            _weapons.Add(weapon);
+        }
     }
 
     //Flip the current weapon
@@ -24,6 +53,6 @@ public class WeaponHandler : CoreComponent
     {
         float flipAngle = (facingDirection == -1) ? 180f : 0f;
 
-        currentWeapon.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
+        _currentWeapon.transform.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
     }
 }

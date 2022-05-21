@@ -8,9 +8,7 @@ public class TempShootScript : MonoBehaviour
     { get => _movement ?? entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    [SerializeField] private Transform gun;
     [SerializeField] private Transform primary;
-    [SerializeField] private Transform cursor;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Vector2 bulletSpread;
@@ -33,7 +31,7 @@ public class TempShootScript : MonoBehaviour
     private Animator animator;
     private bool addBulletSpread;
     private float lastShotTime;
-    private float angle;
+    private float _angle;
 
     private void Awake()
     {
@@ -53,9 +51,9 @@ public class TempShootScript : MonoBehaviour
     {
         gunDirection = (_mousePositionInput - primary.position).normalized;
         
-        angle = Vector2.SignedAngle(Vector2.right, gunDirection);
+        _angle = Vector2.SignedAngle(Vector2.right, gunDirection);
         movement.CheckFacingDirection(_mousePositionInput, entity.transform.position);
-        primary.localRotation = Quaternion.Euler(0f, 0f, angle);
+        primary.localRotation = Quaternion.Euler(0f, 0f, _angle);
     }
 
     private void ShootProjectile()
@@ -78,7 +76,7 @@ public class TempShootScript : MonoBehaviour
             return;
         }
 
-        movement?.AddForceAtAngle(10f, angle - 180);
+        movement?.AddForceAtAngle(10f, _angle - 180);
 
         animator.SetTrigger("Shoot");
 
