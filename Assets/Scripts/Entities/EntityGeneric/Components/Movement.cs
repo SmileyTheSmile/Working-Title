@@ -4,11 +4,11 @@ using UnityEngine;
 public class Movement : CoreComponent
 {
     private WeaponHandler weaponHandler
-    { get => _weaponHandler ?? _core.GetCoreComponent(ref _weaponHandler); }
+    { get => _weaponHandler ?? _entity.GetCoreComponent(ref _weaponHandler); }
     private WeaponHandler _weaponHandler;
 
     private VisualController visualController
-    { get => _visualController ?? _core.GetCoreComponent(ref _visualController); }
+    { get => _visualController ?? _entity.GetCoreComponent(ref _visualController); }
     private VisualController _visualController;
 
     [SerializeField] private Transform _ceilingCheckTransform;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInAirState : PlayerState
 {
     protected Movement movement
-    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     protected int _inputX => conditionManager._normalizedInputXSO.value;

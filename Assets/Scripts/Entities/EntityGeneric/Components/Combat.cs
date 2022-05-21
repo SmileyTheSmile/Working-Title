@@ -3,11 +3,11 @@ using UnityEngine;
 public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
     private ConditionManager conditionManager
-    { get => _conditionManager ?? _core.GetCoreComponent(ref _conditionManager); }
+    { get => _conditionManager ?? _entity.GetCoreComponent(ref _conditionManager); }
     private ConditionManager _conditionManager;
 
     private Movement movement
-    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     [SerializeField] private float _maxKnockbackTime = 0.2f;

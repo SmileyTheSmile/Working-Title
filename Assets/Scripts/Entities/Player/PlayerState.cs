@@ -3,15 +3,15 @@ using UnityEngine;
 public abstract class PlayerState : GenericState
 {
     protected ConditionManager conditionManager
-    { get => _conditionManager ?? _core.GetCoreComponent(ref _conditionManager); }
+    { get => _conditionManager ?? _entity.GetCoreComponent(ref _conditionManager); }
     private ConditionManager _conditionManager;
 
     protected VisualController visualController
-    { get => _visualController ?? _core.GetCoreComponent(ref _visualController); }
+    { get => _visualController ?? _entity.GetCoreComponent(ref _visualController); }
     private VisualController _visualController;
 
     protected PlayerInputHandler inputHandler
-    { get => _inputHandler ?? _core.GetCoreComponent(ref _inputHandler); }
+    { get => _inputHandler ?? _entity.GetCoreComponent(ref _inputHandler); }
     private PlayerInputHandler _inputHandler;
 
     [SerializeField] protected PlayerData _playerData;

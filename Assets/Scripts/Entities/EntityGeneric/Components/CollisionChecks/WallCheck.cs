@@ -11,7 +11,9 @@ public class WallCheck : CollisionCheck
 
     protected override void Update()
     {
-        condition.value = Physics2D.Raycast(transform.position, Vector2.right * (int)_wallChecktype * _movementDirection.value, _wallCheckDistance, _whatIsGround);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2.right * (int)_wallChecktype * _movementDirection.value), _wallCheckDistance, _whatIsGround);
+
+        Debug.Log(hit);
     }
 
     //Draw gizmos

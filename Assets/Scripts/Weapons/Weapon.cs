@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     protected Animator baseAnimator;
     protected Animator weaponAnimator;
 
-    protected Core core;
+    protected EntityGeneric entity;
 
     protected PlayerAttackState state;
 
@@ -47,10 +47,10 @@ public class Weapon : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void InitializeWeapon(PlayerAttackState state, Core core)
+    public void InitializeWeapon(PlayerAttackState state, EntityGeneric entity)
     {
         this.state = state;
-        this.core = core;
+        this.entity = entity;
     }
 
     public virtual void AnimationTurnOffFlipTrigger()

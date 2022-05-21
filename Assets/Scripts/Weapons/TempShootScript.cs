@@ -5,7 +5,7 @@ using UnityEngine;
 public class TempShootScript : MonoBehaviour
 {
     protected Movement movement
-    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     [SerializeField] private Transform gun;
@@ -29,7 +29,7 @@ public class TempShootScript : MonoBehaviour
     private Vector2 gunDirection;
     private Vector3 _mousePositionInput => _mousePositionInputSO.value;
 
-    private Core core;
+    private EntityGeneric entity;
     private Animator animator;
     private bool addBulletSpread;
     private float lastShotTime;
@@ -38,7 +38,7 @@ public class TempShootScript : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        core = GetComponentInParent<Core>();
+        entity = GetComponentInParent<EntityGeneric>();
 
         addBulletSpread = (bulletSpread != Vector2.zero);
     }
@@ -54,7 +54,7 @@ public class TempShootScript : MonoBehaviour
         gunDirection = (_mousePositionInput - primary.position).normalized;
         
         angle = Vector2.SignedAngle(Vector2.right, gunDirection);
-        movement.CheckFacingDirection(_mousePositionInput, core.transform.position);
+        movement.CheckFacingDirection(_mousePositionInput, entity.transform.position);
         primary.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 

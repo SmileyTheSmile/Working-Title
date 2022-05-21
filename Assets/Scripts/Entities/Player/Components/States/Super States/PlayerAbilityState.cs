@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class PlayerAbilityState : PlayerState
 {
     protected Movement movement
-    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     private bool _isGrounded => conditionManager.IsGroundedSO.value;

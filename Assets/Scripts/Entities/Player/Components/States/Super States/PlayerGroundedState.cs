@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class PlayerGroundedState : PlayerState
 {
     protected Movement movement
-    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     protected int _inputX => conditionManager._normalizedInputXSO.value;

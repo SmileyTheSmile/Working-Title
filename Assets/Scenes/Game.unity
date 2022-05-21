@@ -103335,8 +103335,7 @@ GameObject:
   - component: {fileID: 1300811251}
   - component: {fileID: 1300811255}
   - component: {fileID: 1300811254}
-  - component: {fileID: 1300811252}
-  - component: {fileID: 1300811253}
+  - component: {fileID: 1300811256}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -103368,30 +103367,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1300811252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300811250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1003cfb72a2a8494b936e11f2f5c30d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1300811253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300811250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4197d390fa3e05e48a01f9e9115d8c3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1300811254
 Rigidbody2D:
   serializedVersion: 4
@@ -103439,6 +103414,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.985, y: 0.985}
   m_EdgeRadius: 0
+--- !u!114 &1300811256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300811250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1003cfb72a2a8494b936e11f2f5c30d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1320943569
 GameObject:
   m_ObjectHideFlags: 0
@@ -104091,7 +104078,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.779087, y: 1}
+    m_SensorSize: {x: 1.7764705, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -104179,7 +104166,7 @@ MonoBehaviour:
     m_Bits: 8
   _wallChecktype: -1
   _movementDirection: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}
-  _wallCheckDistance: 0.6
+  _wallCheckDistance: 0.55
 --- !u!114 &2047956562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104198,4 +104185,4 @@ MonoBehaviour:
     m_Bits: 8
   _wallChecktype: 1
   _movementDirection: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}
-  _wallCheckDistance: 0.6
+  _wallCheckDistance: 0.55

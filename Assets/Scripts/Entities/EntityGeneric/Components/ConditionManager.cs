@@ -3,11 +3,11 @@ using UnityEngine;
 public class ConditionManager : CoreComponent
 {
     protected Movement movement
-    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     protected PlayerInputHandler inputHandler
-    { get => _inputHandler ?? _core.GetCoreComponent(ref _inputHandler); }
+    { get => _inputHandler ?? _entity.GetCoreComponent(ref _inputHandler); }
     private PlayerInputHandler _inputHandler;
 
     public CollisionCheckTransitionCondition IsGroundedSO;

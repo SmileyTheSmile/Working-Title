@@ -3,7 +3,7 @@ using UnityEngine;
 public class VisualController : CoreComponent
 {
     private FiniteStateMachine stateMachine
-    { get => _stateMachine ?? _core.GetCoreComponent(ref _stateMachine); }
+    { get => _stateMachine ?? _entity.GetCoreComponent(ref _stateMachine); }
     private FiniteStateMachine _stateMachine;
     
     private Transform _facingDirectionIndicator;

@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class PlayerTouchingWallState : PlayerState
 {
     protected Movement movement
-    { get => _movement ?? _core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;

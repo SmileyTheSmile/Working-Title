@@ -11,7 +11,7 @@ public abstract class GenericState : ScriptableObject
     [SerializeField] protected List<StateTransition> _transitions = new List<StateTransition>();
     [SerializeField] protected string _animBoolName;
 
-    protected Core _core;
+    protected EntityGeneric _entity;
     protected float _startTime;
     protected bool _isAnimationFinished;
     protected bool _isExitingState;
@@ -30,9 +30,9 @@ public abstract class GenericState : ScriptableObject
         _isExitingState = true;
     }
     
-    public virtual void SetCore(Core core)
+    public virtual void SetCore(EntityGeneric entity)
     {
-        _core = core;
+        _entity = entity;
     }
     
     //Update the component's physics (FixedUpdate)

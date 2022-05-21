@@ -6,7 +6,7 @@ using UnityEngine;
 public class AggressiveWeapon : Weapon
 {
     protected Movement movement
-    { get => _movement ?? core.GetCoreComponent(ref _movement); }
+    { get => _movement ?? entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     private ScriptableInt _movementDirSO;

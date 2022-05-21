@@ -5,10 +5,8 @@ using UnityEngine;
 public class WeaponHandler : CoreComponent
 {
     protected ConditionManager conditionManager
-    { get => _conditionManager ?? _core.GetCoreComponent(ref _conditionManager); }
+    { get => _conditionManager ?? _entity.GetCoreComponent(ref _conditionManager); }
     private ConditionManager _conditionManager;
-
-    private Player player;
 
     [SerializeField] private Transform currentWeapon;
     [SerializeField] private Weapon[] primaryWeapons;
@@ -19,7 +17,6 @@ public class WeaponHandler : CoreComponent
     //Unity Awake
     private void Awake()
     {
-        player = GetComponentInParent<Player>();
         weapon = GetComponentInChildren<TempShootScript>();
     }
 

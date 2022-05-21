@@ -35,13 +35,13 @@ public class FiniteStateMachine : CoreComponent
     }
 
     //Start the state machine
-    public override void Initialize(Core core)
+    public override void Initialize(EntityGeneric entity)
     {
-        base.Initialize(core);
+        base.Initialize(entity);
 
         foreach (var state in _states)
         {
-            state.SetCore(core);
+            state.SetCore(entity);
         }
 
         _currentState = _startingState;

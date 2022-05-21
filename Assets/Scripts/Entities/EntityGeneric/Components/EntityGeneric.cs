@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Core : MonoBehaviour
+public class EntityGeneric : MonoBehaviour
 {
     //List of all core components
     private readonly List<CoreComponent> _coreComponents = new List<CoreComponent>();
@@ -19,8 +19,8 @@ public class Core : MonoBehaviour
         }
     }
 
-    //Logic update of all core components (Update)
-    public void LogicUpdate()
+    //Logic update of all core components
+    public void Update()
     {
         foreach (CoreComponent component in _coreComponents)
         {
@@ -29,8 +29,8 @@ public class Core : MonoBehaviour
         }
     }
 
-    //Physics update of all core components (FixedUpdate)
-    public void PhysicsUpdate()
+    //Physics update of all core components
+    public void FixedUpdate()
     {
         foreach (CoreComponent component in _coreComponents)
         {
