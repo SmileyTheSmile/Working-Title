@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6ca276c471b3f4a9390d3dd4575362, type: 3}
   m_Name: Player Crouch Move State
   m_EditorClassIdentifier: 
-  _transitions: []
+  _transitions:
+  - nextState: {fileID: 0}
+    expression: 
+    conditions:
+    - ExpectedResult: 0
+      id: 0
+      Condition: {fileID: 0}
+    - ExpectedResult: 0
+      id: 0
+      Condition: {fileID: 0}
+  - nextState: {fileID: 0}
+    expression: 
+    conditions: []
   _animBoolName: crouchMove
   _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
