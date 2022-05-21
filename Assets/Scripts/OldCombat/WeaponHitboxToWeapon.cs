@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WeaponHitboxToWeapon : MonoBehaviour
 {
-    private AggressiveWeapon weapon;
+    private OldAggressiveWeapon weapon;
 
     private void Awake()
     {
-        weapon = GetComponentInParent<AggressiveWeapon>();
+        weapon = GetComponentInParent<OldAggressiveWeapon>();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

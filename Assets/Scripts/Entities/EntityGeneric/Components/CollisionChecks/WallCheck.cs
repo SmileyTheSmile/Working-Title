@@ -13,7 +13,7 @@ public class WallCheck : CollisionCheck
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2.right * (int)_wallChecktype * _movementDirection.value), _wallCheckDistance, _whatIsGround);
 
-        Debug.Log(hit);
+        condition.value = hit;
     }
 
     //Draw gizmos

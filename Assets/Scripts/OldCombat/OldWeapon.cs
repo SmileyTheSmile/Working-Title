@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class OldWeapon : MonoBehaviour
 {
     [SerializeField]
-    protected WeaponData weaponData;
+    protected OldWeaponData weaponData;
 
     protected Animator baseAnimator;
     protected Animator weaponAnimator;
 
     protected EntityGeneric entity;
 
-    protected PlayerAttackState state;
+    protected OldPlayerAttackState state;
 
     protected int attackCounter;
 
@@ -47,7 +47,7 @@ public class Weapon : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void InitializeWeapon(PlayerAttackState state, EntityGeneric entity)
+    public void InitializeWeapon(OldPlayerAttackState state, EntityGeneric entity)
     {
         this.state = state;
         this.entity = entity;

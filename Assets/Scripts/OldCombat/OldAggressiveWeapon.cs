@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AggressiveWeapon : Weapon
+public class OldAggressiveWeapon : OldWeapon
 {
     protected Movement movement
     { get => _movement ?? entity.GetCoreComponent(ref _movement); }
@@ -11,7 +11,7 @@ public class AggressiveWeapon : Weapon
 
     private ScriptableInt _movementDirSO;
 
-    protected AggressiveWeaponData agressiveWeaponData;
+    protected OldAggressiveWeaponData agressiveWeaponData;
 
     private List<IDamageable> detectedDamageables = new List<IDamageable>();
     private List<IKnockbackable> detectedKnockbackables = new List<IKnockbackable>();
@@ -20,9 +20,9 @@ public class AggressiveWeapon : Weapon
     {
         base.Awake();
 
-        if (weaponData.GetType() == typeof(AggressiveWeaponData))
+        if (weaponData.GetType() == typeof(OldAggressiveWeaponData))
         {
-            agressiveWeaponData = (AggressiveWeaponData)weaponData;
+            agressiveWeaponData = (OldAggressiveWeaponData)weaponData;
         }
         else
         {

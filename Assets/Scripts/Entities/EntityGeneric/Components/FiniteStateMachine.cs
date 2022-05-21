@@ -6,9 +6,9 @@ using UnityEngine;
 public class FiniteStateMachine : CoreComponent
 {
     [SerializeField] private GenericState _startingState;
-    [SerializeField] private GenericState _currentState;
-
     [SerializeField] private List<GenericState> _states = new List<GenericState>();
+    
+    private GenericState _currentState;
 
     //Update the current state's logic (Update)
     public override void LogicUpdate()

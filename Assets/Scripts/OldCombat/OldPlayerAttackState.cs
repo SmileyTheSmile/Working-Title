@@ -1,10 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player Attack State", menuName = "States/Player/Ability/Attack State")]
+[CreateAssetMenu(fileName = "Player Old Attack State", menuName = "States/Player/Ability/Old Attack State")]
 
-public class PlayerAttackState : PlayerAbilityState
+public class OldPlayerAttackState : PlayerAbilityState
 {
-    private Weapon _weapon;
+    private OldWeapon _weapon;
 
     private int _inputX => conditionManager._normalizedInputXSO.value;
     private int _movementDir => conditionManager._movementDirSO.value;
@@ -49,7 +49,7 @@ public class PlayerAttackState : PlayerAbilityState
         _isAbilityDone = true;
     }
 
-    public void SetWeapon(Weapon weapon)
+    public void SetWeapon(OldWeapon weapon)
     {
         _weapon = weapon;
         _weapon.InitializeWeapon(this, _entity);

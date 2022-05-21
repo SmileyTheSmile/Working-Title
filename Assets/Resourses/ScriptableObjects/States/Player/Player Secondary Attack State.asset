@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 034bcdb8a6439b44fb1908d42f476b1c, type: 3}
-  m_Name: Player Attack State
+  m_Script: {fileID: 11500000, guid: ac68c8039e3f16d4497bcd3beadc6d5d, type: 3}
+  m_Name: Player Secondary Attack State
   m_EditorClassIdentifier: 
   _transitions: []
-  _animBoolName: attack
-  _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
+  _animBoolName: 
+  _playerData: {fileID: 0}

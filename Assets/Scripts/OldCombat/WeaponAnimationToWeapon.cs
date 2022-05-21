@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WeaponAnimationToWeapon : MonoBehaviour
 {
-    private Weapon weapon;
+    private OldWeapon weapon;
 
     private void Start()
     {
-        weapon = GetComponentInParent<Weapon>();
+        weapon = GetComponentInParent<OldWeapon>();
     }
 
     private void AnimationFinishedTrigger()
