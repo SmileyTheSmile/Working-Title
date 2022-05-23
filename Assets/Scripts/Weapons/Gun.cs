@@ -14,8 +14,6 @@ public abstract class Gun : Weapon
 
     public override void Attack()
     {
-        Debug.Log("egr");
-        
         if (!(_lastShotTime + _shotDelay < Time.time))
             return;
 

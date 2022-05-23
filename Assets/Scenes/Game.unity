@@ -51946,7 +51946,6 @@ GameObject:
   - component: {fileID: 1018350866}
   - component: {fileID: 1018350867}
   - component: {fileID: 1018350868}
-  - component: {fileID: 1018350869}
   - component: {fileID: 1018350870}
   m_Layer: 8
   m_Name: Shotgun
@@ -52043,34 +52042,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1018350869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018350865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16c5d190903f3cd4192e0a548c7d2d85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  primary: {fileID: 724419621}
-  firePoint: {fileID: 1320943570}
-  bulletPrefab: {fileID: 7882909069421556714, guid: fb76ef205fdb41a43b9957fac051b152, type: 3}
-  bulletSpread: {x: 0.1, y: 0.1}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  muzzleFlashParticles: {fileID: 0}
-  impactEffect: {fileID: 0}
-  bulletTrail: {fileID: 1645464819707723283, guid: ba7ad3dfaa3a5ab4fbf876122aaa1afa, type: 3}
-  screenShakeTime: 0.2
-  screenShakeIntensity: 3
-  shotDelay: 0.2
-  pelletNum: 5
-  _isPressingPrimaryAttackSO: {fileID: 11400000, guid: ea1f8b3e482ae544ba837695d0520f83, type: 2}
-  _mousePositionInputSO: {fileID: 11400000, guid: 773e313404363ee47a9d6eb252e4e821, type: 2}
 --- !u!114 &1018350870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103582,7 +103553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1716122306
 Transform:
   m_ObjectHideFlags: 0
@@ -103885,7 +103856,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7764705, y: 1}
+    m_SensorSize: {x: 1.778852, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -7,25 +7,45 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button _optionsButton;
     [SerializeField] private Button _exitButton;
 
-    private void Awake()
+    private void OnEnable()
     {
-        _startButton.onClick.AddListener(OnPlayButtonClick);
-        _optionsButton.onClick.AddListener(OnSettingsButtonClick);
-        _exitButton.onClick.AddListener(OnExitButtonClick);
+        AddAllListeners();
+    }
+
+    private void OnDisable()
+    {
+        RemoveAllListeners();
     }
 
     private void OnPlayButtonClick()
     {
+        RemoveAllListeners();
         UIManager.Instance.LoadGame();
     }
 
-    private void OnSettingsButtonClick()
+    private void OnOptionsButtonClick()
     {
-        UIManager.Instance.ShowSettingsScreen();
+        RemoveAllListeners();
+        UIManager.Instance.ShowOptionsScreen();
     }
 
     private void OnExitButtonClick()
     {
+        RemoveAllListeners();
         Application.Quit();
+    }
+
+    private void RemoveAllListeners()
+    {
+        _startButton.onClick.RemoveAllListeners();
+        _optionsButton.onClick.RemoveAllListeners();
+        _exitButton.onClick.RemoveAllListeners();
+    }
+
+    private void AddAllListeners()
+    {
+        _startButton.onClick.AddListener(OnPlayButtonClick);
+        _optionsButton.onClick.AddListener(OnOptionsButtonClick);
+        _exitButton.onClick.AddListener(OnExitButtonClick);
     }
 }

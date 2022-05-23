@@ -37,8 +37,6 @@ public class GunHitscan : Gun
 
         if (hit)
         {
-            Debug.Log(hit.collider);
-            
             if (_impactEffect)
             {
                 Instantiate(_impactEffect, transform.position, transform.rotation);

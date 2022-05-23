@@ -8,8 +8,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Fader _fader;
     [SerializeField] private GameObject _menuScreen;
+    [SerializeField] private GameObject _optionsScreen;
     [SerializeField] private GameObject _gameScreen;
-    [SerializeField] private GameObject _settingsScreen;
+    [SerializeField] private MenuAudio _menuAudio;
 
     private void Awake()
     {
@@ -58,22 +59,22 @@ public class UIManager : MonoBehaviour
     {
         var asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
-        while (!asyncOperation.isDone) {
+        while (!asyncOperation.isDone)
             yield return null;
-        }
-        _fader.FadeIn();
-    }
 
-    public void ShowSettingsScreen()
-    {
-        HideAllScreens();
-        _settingsScreen.SetActive(true);
+        _fader.FadeIn();
     }
 
     public void ShowMenuScreen()
     {
         HideAllScreens();
         _menuScreen.SetActive(true);
+    }
+
+    public void ShowOptionsScreen()
+    {
+        HideAllScreens();
+        _optionsScreen.SetActive(true);
     }
 
     public void ShowGameScreen()
@@ -85,7 +86,7 @@ public class UIManager : MonoBehaviour
     public void HideAllScreens()
     {
         _menuScreen.SetActive(false);
+        _optionsScreen.SetActive(false);
         _gameScreen.SetActive(false);
-        _settingsScreen.SetActive(false);
     }
 }

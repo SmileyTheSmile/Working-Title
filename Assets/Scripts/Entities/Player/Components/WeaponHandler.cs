@@ -53,6 +53,6 @@ public class WeaponHandler : CoreComponent
     {
         float flipAngle = (facingDirection == -1) ? 180f : 0f;
 
-        _currentWeapon.transform.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
+        _currentWeapon.Flip(flipAngle);
     }
 }

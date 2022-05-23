@@ -38,6 +38,11 @@ public abstract class Weapon : MonoBehaviour
             Attack();
     }
 
+    public void Flip(float flipAngle)
+    {
+        transform.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
+    }
+
     private void HandleAiming()
     {
         Vector2 _aimDirection = (_mousePosition - weaponHandler.transform.position).normalized;
