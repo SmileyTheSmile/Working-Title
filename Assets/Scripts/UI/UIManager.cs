@@ -7,10 +7,11 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [SerializeField] private Fader _fader;
+    [SerializeField] private MenuAudio _menuAudio;
     [SerializeField] private GameObject _menuScreen;
     [SerializeField] private GameObject _optionsScreen;
     [SerializeField] private GameObject _gameScreen;
-    [SerializeField] private MenuAudio _menuAudio;
+    [SerializeField] private GameObject _pauseScreen;
 
     private void Awake()
     {
@@ -41,13 +42,6 @@ public class UIManager : MonoBehaviour
         _fader.FadeOut();
     }
 
-    private void LoadMenuScene()
-    {
-        _fader.OnFadeOut -= LoadMenuScene;
-        StartCoroutine(LoadSceneCoroutine("Menu"));
-        ShowMenuScreen();
-    }
-
     private void LoadGameScene()
     {
         _fader.OnFadeOut -= LoadGameScene;
@@ -63,6 +57,13 @@ public class UIManager : MonoBehaviour
             yield return null;
 
         _fader.FadeIn();
+    }
+
+    private void LoadMenuScene()
+    {
+        _fader.OnFadeOut -= LoadMenuScene;
+        StartCoroutine(LoadSceneCoroutine("Menu"));
+        ShowMenuScreen();
     }
 
     public void ShowMenuScreen()
@@ -83,10 +84,17 @@ public class UIManager : MonoBehaviour
         _gameScreen.SetActive(true);
     }
 
+    public void ShowPauseScreen()
+    {
+        HideAllScreens();
+        _pauseScreen.SetActive(true);
+    }
+
     public void HideAllScreens()
     {
         _menuScreen.SetActive(false);
         _optionsScreen.SetActive(false);
         _gameScreen.SetActive(false);
+        _pauseScreen.SetActive(false);
     }
 }

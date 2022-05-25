@@ -35,8 +35,6 @@ public abstract class GenericState : ScriptableObject
         _entity = entity;
     }
     
-    //Update the component's physics (FixedUpdate)
-    public virtual void PhysicsUpdate() { }
     //Do all the checks if the state should transition into another state
     public virtual void DoActions() { if (_isExitingState) return; }
     //Execute all the actions the state must do every Update

@@ -404,11 +404,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.6738925, y: 2.7736084, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1919490867}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &133161738
 GameObject:
@@ -13517,6 +13517,7 @@ MonoBehaviour:
   _isCrouchingSO: {fileID: 11400000, guid: 5c484b00522882c4ea99a376c1641e09, type: 2}
   _isPressingPrimaryAttackSO: {fileID: 11400000, guid: ea1f8b3e482ae544ba837695d0520f83, type: 2}
   _isPressingSecondaryAttackSO: {fileID: 11400000, guid: a7ff6e1e560060b4dbcd529813a7112f, type: 2}
+  _isPressingPauseSO: {fileID: 11400000, guid: a7fb99848f788404996a709f919f5c40, type: 2}
   _normalizedInputXSO: {fileID: 11400000, guid: 3f4591f9c8a21094ebae2dc880972dd6, type: 2}
   _normalizedInputYSO: {fileID: 11400000, guid: 1a3cea031eca4a24b8765975f44f9d14, type: 2}
   _weaponSwitchInputSO: {fileID: 11400000, guid: 62b7a5e24127a874bb6a5d50ff96781a, type: 2}
@@ -13675,6 +13676,62 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 41c0dbdd-3629-4cd7-9709-8d2e2106557c
     m_ActionName: Gameplay/WeaponScroll[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 241716524}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnPauseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a8563228-e3b5-4fff-acd6-a88dc0ee8a6f
+    m_ActionName: Gameplay/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4e317cff-ada8-407d-9d6f-4899f5497f0a
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0c4582f1-d044-4550-9094-d4be868c3873
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff6a2759-627b-43a6-984a-3ed7822770e8
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c1dbbb3-26ad-4437-a2fe-b5e6edd233df
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 88f01987-b7dd-4a8a-b5cb-d857cfaefa89
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8132ee52-414a-4124-b14d-ad389137d600
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a165ec42-2403-4b60-845b-7967c690c793
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2d65aa63-8b71-41cf-b910-88442f859fd3
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e66dfa19-f24c-4a3c-bf26-83b2268bdb82
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98506bd5-6369-4f98-b2cd-898fa775d36a
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Gameplay
@@ -51881,12 +51938,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993575460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.941447, y: 4.510584, z: 0}
+  m_LocalPosition: {x: -15.035927, y: 0.030267715, z: -0.428053}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1988768300}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &993575467
 BoxCollider2D:
@@ -51962,7 +52019,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018350865}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4000001, y: 0, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52061,12 +52118,16 @@ MonoBehaviour:
   _screenShakeTime: 0.2
   _screenShakeIntensity: 3
   _shotDelay: 0.2
+  _knockbackForce: 7
+  _reloadTime: 1
+  _maxClipSize: 2
   _layerMask:
     serializedVersion: 2
     m_Bits: 8
   _bulletTrail: {fileID: 1645464819707723283, guid: ba7ad3dfaa3a5ab4fbf876122aaa1afa, type: 3}
-  _impactEffect: {fileID: 0}
+  _impactEffect: {fileID: 7103887671607248045, guid: dc0d5c4d9a3ba1f4b9d112328733b3c2, type: 3}
   _bulletSpread: {x: 0.1, y: 0.1}
+  _range: 4
   _pelletNum: 5
 --- !u!1 &1087460063
 GameObject:
@@ -103529,7 +103590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbab09d7b102ba478ab31c97079853c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerOriginPoint: {fileID: 1424608652}
+  _playerOrigin: {fileID: 1424608652}
   _target: {fileID: 760143955}
   _mousePositionInputSO: {fileID: 11400000, guid: 773e313404363ee47a9d6eb252e4e821, type: 2}
   _clampMode: 1
@@ -103562,7 +103623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716122305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4000001, y: 0, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -103582,14 +103643,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28347993f4f2a7848a67ac911581f997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isPressingAttackButtonSO: {fileID: 11400000, guid: a7ff6e1e560060b4dbcd529813a7112f, type: 2}
+  _isPressingAttackButtonSO: {fileID: 11400000, guid: ea1f8b3e482ae544ba837695d0520f83, type: 2}
   _mousePositionSO: {fileID: 11400000, guid: 773e313404363ee47a9d6eb252e4e821, type: 2}
   _muzzleFlashParticles: {fileID: 0}
   _firePoint: {fileID: 1136288565}
   _screenShakeTime: 0.2
   _screenShakeIntensity: 3
   _shotDelay: 0.2
-  _bulletPrefab: {fileID: 7882909069421556714, guid: fb76ef205fdb41a43b9957fac051b152, type: 3}
+  _knockbackForce: 5
+  _reloadTime: 2
+  _maxClipSize: 4
+  _bulletPrefab: {fileID: 7882909069421556714, guid: 977f10638a1138f49b9fbaf07ac1adc0, type: 3}
 --- !u!95 &1716122308
 Animator:
   serializedVersion: 4
@@ -103856,7 +103920,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.778852, y: 1}
+    m_SensorSize: {x: 1.7768116, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -103875,7 +103939,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 381208191}
   m_Father: {fileID: 126029633}
@@ -103893,6 +103957,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d55912c278a0f44b52d3d7768325e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1988768299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1988768300}
+  m_Layer: 0
+  m_Name: Entities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1988768300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988768299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.094479, y: 4.480316, z: 0.428053}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 993575466}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2047956559
 GameObject:
   m_ObjectHideFlags: 0

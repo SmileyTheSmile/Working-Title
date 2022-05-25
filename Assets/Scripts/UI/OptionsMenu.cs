@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
-public class OptionsScreen : MonoBehaviour
+public class OptionsMenu : GenericMenu
 {
     [Serializable]
     public class Settings
@@ -27,21 +25,7 @@ public class OptionsScreen : MonoBehaviour
         LoadFromPlayerPrefs();
 
         UpdateSliderValues();
-        UpdateMenuVolume(_settings.menuVolume);
-    }
-
-    private void OnEnable()
-    {
-        _okButton.onClick.AddListener(OnOkButtonClick);
-        _backButton.onClick.AddListener(OnCancelButtonClick);
-        _menuVolumeSlider.onValueChanged.AddListener(UpdateMenuVolume);
-    }
-
-    private void OnDisable()
-    {
-        _okButton.onClick.RemoveAllListeners();
-        _backButton.onClick.RemoveAllListeners();
-        _menuVolumeSlider.onValueChanged.RemoveAllListeners();
+        SetVolume(_settings.menuVolume);
     }
 
     private void OnOkButtonClick()
@@ -92,8 +76,22 @@ public class OptionsScreen : MonoBehaviour
         _menuVolumeSlider.value = _settings.menuVolume;
     }
 
-    private void UpdateMenuVolume(float value)
+    private void SetVolume(float value)
     {
         _menuAudio.SetVolume(value);
+    }
+
+    protected override void AddAllListeners()
+    {
+        _okButton.onClick.AddListener(OnOkButtonClick);
+        _backButton.onClick.AddListener(OnCancelButtonClick);
+        _menuVolumeSlider.onValueChanged.AddListener(SetVolume);
+    }
+
+    protected override void RemoveAllListeners()
+    {
+        _okButton.onClick.RemoveAllListeners();
+        _backButton.onClick.RemoveAllListeners();
+        _menuVolumeSlider.onValueChanged.RemoveAllListeners();
     }
 }

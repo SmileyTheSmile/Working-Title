@@ -8,7 +8,6 @@ public class WeaponHandler : CoreComponent
     [SerializeField] private List<Weapon> _weapons = new List<Weapon>();
 
     private Weapon _currentWeapon;
-    private TempShootScript weaponTemp;
 
     //Unity Awake
     private void Awake()
@@ -19,8 +18,6 @@ public class WeaponHandler : CoreComponent
         {
             AddWeapon(weapon);
         }
-
-        weaponTemp = GetComponentInChildren<TempShootScript>();
     }
 
     //Update the current weapon's logic (Update)
@@ -49,9 +46,9 @@ public class WeaponHandler : CoreComponent
     }
 
     //Flip the current weapon
-    public void FlipWeapon(int facingDirection)
+    public void FlipWeapon(int facingDir)
     {
-        float flipAngle = (facingDirection == -1) ? 180f : 0f;
+        float flipAngle = (facingDir == -1) ? 180f : 0f;
 
         _currentWeapon.Flip(flipAngle);
     }

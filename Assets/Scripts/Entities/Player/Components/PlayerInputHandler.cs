@@ -10,6 +10,7 @@ public class PlayerInputHandler : CoreComponent
     [SerializeField] private InputTransitionCondition _isCrouchingSO;
     [SerializeField] private InputTransitionCondition _isPressingPrimaryAttackSO;
     [SerializeField] private InputTransitionCondition _isPressingSecondaryAttackSO;
+    [SerializeField] private InputTransitionCondition _isPressingPauseSO;
 
     public ScriptableInt _normalizedInputXSO;
     public ScriptableInt _normalizedInputYSO;
@@ -49,7 +50,7 @@ public class PlayerInputHandler : CoreComponent
     }
 
     //Process jump input
-    public void OnJumpInput(InputAction.CallbackContext context) 
+    public void OnJumpInput(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -66,7 +67,7 @@ public class PlayerInputHandler : CoreComponent
     }
 
     //Process wall grab input
-    public void OnGrabInput(InputAction.CallbackContext context) 
+    public void OnGrabInput(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -79,7 +80,7 @@ public class PlayerInputHandler : CoreComponent
     }
 
     //Process crouch input
-    public void OnCrouchInput(InputAction.CallbackContext context) 
+    public void OnCrouchInput(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -92,7 +93,7 @@ public class PlayerInputHandler : CoreComponent
     }
 
     //Process primary attack input
-    public void OnPrimaryAttackInput(InputAction.CallbackContext context) 
+    public void OnPrimaryAttackInput(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -105,7 +106,7 @@ public class PlayerInputHandler : CoreComponent
     }
 
     //Process secondary attack input
-    public void OnSecondaryAttackInput(InputAction.CallbackContext context) 
+    public void OnSecondaryAttackInput(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -124,9 +125,22 @@ public class PlayerInputHandler : CoreComponent
     }
 
     //Process weapon switch input
-    public void OnWeaponSwitchInput(InputAction.CallbackContext context) 
+    public void OnWeaponSwitchInput(InputAction.CallbackContext context)
     {
         _weaponSwitchInputSO.value = (int)context.ReadValue<Vector2>().y;
+    }
+
+    //Process pause input
+    public void OnPauseInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _isPressingPauseSO.value = true;
+        }
+        else if (context.canceled)
+        {
+            _isPressingPauseSO.value = false;
+        }
     }
     
     //Check if jump button has been held for the value in inputHoldTime

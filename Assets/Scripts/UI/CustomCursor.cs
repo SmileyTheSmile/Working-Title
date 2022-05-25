@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class CustomCursor : MonoBehaviour
 {
-    [SerializeField] private Transform _playerOriginPoint;
+    [SerializeField] private Transform _playerOrigin;
     [SerializeField] private Transform _target;
     [SerializeField] private ScriptableVector3 _mousePositionInputSO;
 
@@ -50,44 +50,44 @@ public class CustomCursor : MonoBehaviour
 
     private void ClampTargetInRect()
     {
-        Vector3 targetPosition = (_playerOriginPoint.position + _mousePosition) / 2;
+        Vector3 targetPosition = (_playerOrigin.position + _mousePosition) / 2;
 
-        targetPosition.x = Mathf.Clamp(targetPosition.x, _playerOriginPoint.position.x - _clampThreshold.x, _playerOriginPoint.position.x + _clampThreshold.x);
-        targetPosition.y = Mathf.Clamp(targetPosition.y, _playerOriginPoint.position.y - _clampThreshold.y, _playerOriginPoint.position.y + _clampThreshold.y);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, _playerOrigin.position.x - _clampThreshold.x, _playerOrigin.position.x + _clampThreshold.x);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, _playerOrigin.position.y - _clampThreshold.y, _playerOrigin.position.y + _clampThreshold.y);
 
         _target.position = targetPosition;
     }
 
     private void ClampTargetInCircle()
     {
-        Vector3 targetPosition = (_mousePosition - _playerOriginPoint.position) / 2;
+        Vector3 targetPosition = (_mousePosition - _playerOrigin.position) / 2;
 
         targetPosition = Vector3.ClampMagnitude(targetPosition, _clampRadius);
 
-        _target.position = _playerOriginPoint.position + targetPosition;
+        _target.position = _playerOrigin.position + targetPosition;
     }
 
     void OnDrawGizmos()
     {
-        UnityEditor.Handles.DrawDottedLine(_playerOriginPoint.position, transform.position, 1f);
+        UnityEditor.Handles.DrawDottedLine(_playerOrigin.position, transform.position, 1f);
 
         UnityEditor.Handles.DrawWireDisc(_target.position, Vector3.forward, 0.2f);
         UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, 0.2f);
-        UnityEditor.Handles.DrawWireDisc(_playerOriginPoint.position, Vector3.forward, 0.4f);
+        UnityEditor.Handles.DrawWireDisc(_playerOrigin.position, Vector3.forward, 0.4f);
 
         if (_clampMode == ClampModes.rectangle)
         {
             UnityEditor.Handles.DrawDottedLine(_target.position, transform.position, 1f);
-            UnityEditor.Handles.DrawDottedLine(_playerOriginPoint.position, _target.position, 1f);
+            UnityEditor.Handles.DrawDottedLine(_playerOrigin.position, _target.position, 1f);
 
-            UnityEditor.Handles.DrawLine(new Vector2(_playerOriginPoint.position.x - _clampThreshold.x, _playerOriginPoint.position.y + _clampThreshold.y), new Vector2(_playerOriginPoint.position.x + _clampThreshold.x, _playerOriginPoint.position.y + _clampThreshold.y));
-            UnityEditor.Handles.DrawLine(new Vector2(_playerOriginPoint.position.x - _clampThreshold.x, _playerOriginPoint.position.y + _clampThreshold.y), new Vector2(_playerOriginPoint.position.x - _clampThreshold.x, _playerOriginPoint.position.y - _clampThreshold.y));
-            UnityEditor.Handles.DrawLine(new Vector2(_playerOriginPoint.position.x + _clampThreshold.x, _playerOriginPoint.position.y + _clampThreshold.y), new Vector2(_playerOriginPoint.position.x + _clampThreshold.x, _playerOriginPoint.position.y - _clampThreshold.y));
-            UnityEditor.Handles.DrawLine(new Vector2(_playerOriginPoint.position.x + _clampThreshold.x, _playerOriginPoint.position.y - _clampThreshold.y), new Vector2(_playerOriginPoint.position.x - _clampThreshold.x, _playerOriginPoint.position.y - _clampThreshold.y));
+            UnityEditor.Handles.DrawLine(new Vector2(_playerOrigin.position.x - _clampThreshold.x, _playerOrigin.position.y + _clampThreshold.y), new Vector2(_playerOrigin.position.x + _clampThreshold.x, _playerOrigin.position.y + _clampThreshold.y));
+            UnityEditor.Handles.DrawLine(new Vector2(_playerOrigin.position.x - _clampThreshold.x, _playerOrigin.position.y + _clampThreshold.y), new Vector2(_playerOrigin.position.x - _clampThreshold.x, _playerOrigin.position.y - _clampThreshold.y));
+            UnityEditor.Handles.DrawLine(new Vector2(_playerOrigin.position.x + _clampThreshold.x, _playerOrigin.position.y + _clampThreshold.y), new Vector2(_playerOrigin.position.x + _clampThreshold.x, _playerOrigin.position.y - _clampThreshold.y));
+            UnityEditor.Handles.DrawLine(new Vector2(_playerOrigin.position.x + _clampThreshold.x, _playerOrigin.position.y - _clampThreshold.y), new Vector2(_playerOrigin.position.x - _clampThreshold.x, _playerOrigin.position.y - _clampThreshold.y));
         }
         else if (_clampMode == ClampModes.circle)
         {
-            UnityEditor.Handles.DrawWireDisc(_playerOriginPoint.position, Vector3.forward, _clampRadius);
+            UnityEditor.Handles.DrawWireDisc(_playerOrigin.position, Vector3.forward, _clampRadius);
         }
     }
 }
@@ -103,7 +103,7 @@ public enum ClampModes
 [CustomEditor(typeof(CustomCursor)), CanEditMultipleObjects]
 class CustomCursorEditor : Editor
 {
-    private SerializedProperty _playerOriginPoint;
+    private SerializedProperty _playerOrigin;
     private SerializedProperty _target;
     private SerializedProperty _mousePositionInputSO;
     private SerializedProperty _clampMode;
@@ -126,7 +126,7 @@ class CustomCursorEditor : Editor
 
     private void GetSerializedProperties()
     {
-        _playerOriginPoint = serializedObject.FindProperty("_playerOriginPoint");
+        _playerOrigin = serializedObject.FindProperty("_playerOrigin");
         _target = serializedObject.FindProperty("_target");
         _mousePositionInputSO = serializedObject.FindProperty("_mousePositionInputSO");
         _clampMode = serializedObject.FindProperty("_clampMode");
@@ -136,7 +136,7 @@ class CustomCursorEditor : Editor
 
     private void DrawGUI()
     {
-        EditorGUILayout.ObjectField(_playerOriginPoint, new GUIContent("Player Origin Point", "The center around which the cursor can move."));
+        EditorGUILayout.ObjectField(_playerOrigin, new GUIContent("Player Origin Point", "The center around which the cursor can move."));
         EditorGUILayout.ObjectField(_target, new GUIContent("Camera Target", "The point at which the camera is looking."));
         EditorGUILayout.ObjectField(_mousePositionInputSO, new GUIContent("Mouse Pos SO", "The scriptable object of the mouse's current position."));
 

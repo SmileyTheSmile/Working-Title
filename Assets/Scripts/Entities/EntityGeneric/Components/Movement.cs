@@ -66,7 +66,7 @@ public class Movement : CoreComponent
         float angle = Vector2.SignedAngle(Vector2.right, mouseDirection);
         angle = (angle > 90) ? angle - 270 : angle + 90;
 
-        if (Math.Sign(angle) != _facingDir) //(angle > 90 || angle < -90) -left
+        if (Math.Sign(angle) != _facingDir)
         {
             Flip();
         }
@@ -173,6 +173,13 @@ public class Movement : CoreComponent
         }
     }
 
+    public void AddForceAtAngle(float force, float angle)
+    {
+        Vector2 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+
+        _rigidBody.AddForce(dir * force, ForceMode2D.Impulse);
+    }
+
     //Set the size of the entity's collider
     public void SetColliderSize(float width, float height)
     {
@@ -194,13 +201,6 @@ public class Movement : CoreComponent
         Vector2 workspace = _boxCollider.offset;
         workspace += new Vector2(offsetX, offsetY);
         _boxCollider.offset = workspace;
-    }
-
-    public void AddForceAtAngle(float force, float angle)
-    {
-        Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-
-        _rigidBody.AddForce(dir * force, ForceMode2D.Impulse);
     }
     
     private enum PlayerCrouchingForm

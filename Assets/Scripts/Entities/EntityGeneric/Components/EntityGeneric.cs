@@ -24,7 +24,6 @@ public class EntityGeneric : MonoBehaviour
     {
         foreach (CoreComponent component in _coreComponents)
         {
-            //component.LogComponentInfo();
             component.LogicUpdate();
         }
     }

@@ -1,16 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenu : GenericMenu
+public class PauseMenu : GenericMenu
 {
-    [SerializeField] private Button _startButton;
+    [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _optionsButton;
-    [SerializeField] private Button _exitButton;
+    [SerializeField] private Button _menuButton;
 
-    private void OnPlayButtonClick()
+    private void OnResumeButtonClick()
     {
         RemoveAllListeners();
-        UIManager.Instance.LoadGame();
     }
 
     private void OnOptionsButtonClick()
@@ -19,23 +18,23 @@ public class MainMenu : GenericMenu
         UIManager.Instance.ShowOptionsScreen();
     }
 
-    private void OnExitButtonClick()
+    private void OnMenuButtonClick()
     {
         RemoveAllListeners();
-        Application.Quit();
+        UIManager.Instance.LoadMenu();
     }
 
     protected override void RemoveAllListeners()
     {
-        _startButton.onClick.RemoveAllListeners();
+        _resumeButton.onClick.RemoveAllListeners();
         _optionsButton.onClick.RemoveAllListeners();
-        _exitButton.onClick.RemoveAllListeners();
+        _menuButton.onClick.RemoveAllListeners();
     }
 
     protected override void AddAllListeners()
     {
-        _startButton.onClick.AddListener(OnPlayButtonClick);
+        _resumeButton.onClick.AddListener(OnResumeButtonClick);
         _optionsButton.onClick.AddListener(OnOptionsButtonClick);
-        _exitButton.onClick.AddListener(OnExitButtonClick);
+        _menuButton.onClick.AddListener(OnMenuButtonClick);
     }
 }

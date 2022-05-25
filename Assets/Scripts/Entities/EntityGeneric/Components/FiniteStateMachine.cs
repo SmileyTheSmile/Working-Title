@@ -17,8 +17,6 @@ public class FiniteStateMachine : CoreComponent
         
         _currentState.DoActions();
         GenericState nextState = _currentState.DoTransitions();
-        
-        //LogComponentInfo();
 
         if (nextState != null)
         {
@@ -26,18 +24,10 @@ public class FiniteStateMachine : CoreComponent
         }
     }
 
-    //Update the current state's physics (FixedUpdate)
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-
-        _currentState.PhysicsUpdate();
-    }
-
     //Start the state machine
     public override void Initialize(EntityGeneric entity)
     {
-        base.Initialize(entity);
+        base.Initialize(entity); 
 
         foreach (var state in _states)
         {

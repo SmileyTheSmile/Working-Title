@@ -26,7 +26,7 @@ public class ProjectileGeneric : MonoBehaviour
         Debug.Log(hitInfo.name);
         if (hitInfo.name != "Player")
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         if (impactEffect)

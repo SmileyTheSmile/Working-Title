@@ -9,40 +9,79 @@ public abstract class Gun : Weapon
     [SerializeField] protected float _screenShakeTime = 0.2f;
     [SerializeField] protected float _screenShakeIntensity = 3f;
     [SerializeField] protected float _shotDelay = 0.2f;
+    [SerializeField] protected float _knockbackForce = 5f;
+    [SerializeField] protected float _reloadTime = 2f;
+    [SerializeField] protected int _maxClipSize = 4;
 
+    protected float _reloadStartTime;
     protected float _lastShotTime;
+    protected int _currentClipSize;
+    protected bool _isReloading = false;
 
-    public override void Attack()
+    protected override void Awake()
     {
-        if (!(_lastShotTime + _shotDelay < Time.time))
-            return;
+        base.Awake();
 
-        AddRecoilToPlayer();
-        ShakeCamera();
+        _currentClipSize = _maxClipSize;
+    }
+    
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
 
-        PlayWeaponAnimation();
-        PlayMuzzleFlash();
-        Shoot();
+        if (_isReloading)
+            CheckReload();
+        else
+            if (_isPressingAttackButton && (_lastShotTime + _shotDelay < Time.time))
+                Shoot();
+    }
 
+    protected virtual void Shoot()
+    {
         _lastShotTime = Time.time;
+        _currentClipSize -= 1;
+
+        CreateBullets();
+        AddKnockbackToPlayer();
+        ShakeCamera();
+        PlayWeaponAnimation("Shoot");
+        PlayMuzzleFlash();
+
+        if (_currentClipSize == 0)
+            StartReload();
+    }
+
+    protected virtual void StartReload()
+    {
+        _isReloading = true;
+        _reloadStartTime = Time.time;
+
+        PlayWeaponAnimation("Reload");
+    }
+
+    protected virtual void CheckReload()
+    {
+        if (Time.time >= _reloadStartTime + _reloadTime)
+        {
+            _isReloading = false;
+            _currentClipSize = _maxClipSize;
+        }
     }
 
     protected virtual void PlayMuzzleFlash()
     {
         if (_muzzleFlashParticles)
-        {
             _muzzleFlashParticles.Play();
-        }
     }
 
-    protected virtual void AddRecoilToPlayer()
+    protected virtual void AddKnockbackToPlayer()
     {
-        movement.AddForceAtAngle(10f, _aimAngle - 180);
+        movement.AddForceAtAngle(_knockbackForce, _aimAngle - 180);
     }
 
-    protected virtual void PlayWeaponAnimation()
+    protected virtual void PlayWeaponAnimation(string animName)
     {
-        _weaponAnimator.SetTrigger("Shoot");
+        _weaponAnimator.SetTrigger(animName);
     }
 
     protected virtual void ShakeCamera()
@@ -50,5 +89,5 @@ public abstract class Gun : Weapon
         CinemachineCameraShake.Instance.ShakeCamera(_screenShakeIntensity, _screenShakeTime);
     }
 
-    protected abstract void Shoot();
+    protected abstract void CreateBullets();
 }

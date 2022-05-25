@@ -33,9 +33,6 @@ public abstract class Weapon : MonoBehaviour
     {
         HandleAiming();
         HandlePlayerFacingDirection();
-
-        if (_isPressingAttackButton)
-            Attack();
     }
 
     public void Flip(float flipAngle)
@@ -45,8 +42,8 @@ public abstract class Weapon : MonoBehaviour
 
     private void HandleAiming()
     {
-        Vector2 _aimDirection = (_mousePosition - weaponHandler.transform.position).normalized;
-        _aimAngle = Vector2.SignedAngle(Vector2.right, _aimDirection);
+        Vector2 aimDirection = (_mousePosition - weaponHandler.transform.position).normalized;
+        _aimAngle = Vector2.SignedAngle(Vector2.right, aimDirection);
         weaponHandler.transform.localRotation = Quaternion.Euler(0f, 0f, _aimAngle);
     }
 
@@ -54,6 +51,4 @@ public abstract class Weapon : MonoBehaviour
     {
         movement.CheckFacingDirection(_mousePosition, _player.transform.position);
     }
-
-    public abstract void Attack();
 }
