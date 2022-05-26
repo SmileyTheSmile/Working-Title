@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerCrouchLandState : PlayerGroundedState
 {
-    protected PlayerCrouchMoveState crouchMoveState => conditionManager.crouchMoveState;
-    protected PlayerMoveState moveState => conditionManager.moveState;
-    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
-    protected PlayerIdleState idleState => conditionManager.idleState;
+    [SerializeField] protected PlayerCrouchMoveState crouchMoveState;
+    [SerializeField] protected PlayerMoveState moveState;
+    [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
+    [SerializeField] protected PlayerIdleState idleState;
 
     protected AudioSourcePlayer _fallSound => conditionManager.fallSound;
 
@@ -15,15 +15,10 @@ public class PlayerCrouchLandState : PlayerGroundedState
     {
         base.Enter();
 
-        Step();
-
-        movement.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
-    }
-
-    protected virtual void Step()
-    {
         if (_fallSound)
             _fallSound.Play();
+
+        movement.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void Exit()

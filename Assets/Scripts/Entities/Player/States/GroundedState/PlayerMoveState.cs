@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
 {
-    protected PlayerCrouchMoveState crouchMoveState => conditionManager.crouchMoveState;
-    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
-    protected PlayerIdleState idleState => conditionManager.idleState;
+    [SerializeField] protected PlayerCrouchMoveState crouchMoveState;
+    [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
+    [SerializeField] protected PlayerIdleState idleState;
 
     protected AudioSourcePlayer _moveSound => conditionManager.moveSound;
     protected float _lastStepTime;

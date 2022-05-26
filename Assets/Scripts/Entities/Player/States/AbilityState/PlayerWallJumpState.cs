@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerWallJumpState : PlayerAbilityState
 {
-    private Vector2 _wallJumpDirection;
-    private int _wallJumpMovementDirection;
+    [SerializeField] private CollisionCheckTransitionCondition IsTouchingWallFrontSO;
+    [SerializeField] private ScriptableInt _movementDirSO;
 
-    private bool _isTouchingWall => conditionManager.IsTouchingWallFrontSO.value;
-    private int _movementDir => conditionManager._movementDirSO.value;
+    private bool _isTouchingWall => IsTouchingWallFrontSO.value;
+    private int _movementDir => _movementDirSO.value;
 
     public override void Enter()
     {
@@ -18,13 +18,11 @@ public class PlayerWallJumpState : PlayerAbilityState
         conditionManager.ResetAmountOfJumpsLeft();
         conditionManager.DecreaseAmountOfJumpsLeft();
 
-        _wallJumpMovementDirection = (_isTouchingWall ? -1 : 1) * _movementDir;
-        _wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
+        int wallJumpMovementDirection = (_isTouchingWall ? -1 : 1) * _movementDir;
+        Vector2 wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
 
-        movement.SetVelocity(_playerData.wallJumpVelocity, _wallJumpDirection, _wallJumpMovementDirection);
-        movement.CheckMovementDirection(_wallJumpMovementDirection);
-
-        _isAbilityDone = true;
+        movement.SetVelocity(_playerData.wallJumpVelocity, wallJumpDirection, wallJumpMovementDirection);
+        movement.CheckMovementDirection(wallJumpMovementDirection);
     }
 
     /*

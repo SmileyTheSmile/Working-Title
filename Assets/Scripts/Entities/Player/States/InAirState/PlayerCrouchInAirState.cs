@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCrouchInAirState : PlayerInAirState
 {
-    protected PlayerInAirState inAirState => conditionManager.inAirState;
+    [SerializeField] protected PlayerInAirState inAirState;
 
     public override void Enter()
     {

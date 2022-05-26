@@ -8,43 +8,63 @@ public class PlayerInAirState : PlayerState
     { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    protected int _inputX => conditionManager._normalizedInputXSO.value;
+    [SerializeField] protected PlayerAttackState primaryAttackState;
+    [SerializeField] protected PlayerAttackState secondaryAttackState;
+    [SerializeField] protected PlayerJumpState jumpState;
+    [SerializeField] protected PlayerCrouchJumpState crouchJumpState;
+    [SerializeField] protected PlayerCrouchInAirState crouchInAirState;
+    [SerializeField] protected PlayerWallGrabState wallGrabState;
+    [SerializeField] protected PlayerWallJumpState wallJumpState;
+    [SerializeField] protected PlayerWallSlideState wallSlideState;
+    [SerializeField] protected PlayerLandState landState;
+    [SerializeField] protected PlayerCrouchLandState crouchLandState;
+    [SerializeField] protected PlayerLedgeClimbState ledgeClimbState;
 
-    protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;
-    protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
-    protected bool _isPressingJump => conditionManager.IsPressingJumpSO.value;
-    protected bool _isJumpCanceled => conditionManager.IsJumpCanceledSO.value;
-    protected bool _isPressingPrimaryAttack => conditionManager.IsPressingPrimaryAttackSO.value;
-    protected bool _isPressingSecondaryAttack => conditionManager.IsPressingSecondaryAttackSO.value;
+    [SerializeField] protected ScriptableInt InputXSO;
 
-    protected bool _isGrounded => conditionManager.IsGroundedSO.value;
-    protected bool _isTouchingWall => conditionManager.IsTouchingWallFrontSO.value;
-    protected bool _isTouchingWallBack => conditionManager.IsTouchingWallBackSO.value;
-    protected bool _isTouchingLedge => conditionManager.IsTouchingLedgeHorizontalSO.value;
-    protected bool _isTouchingCeiling => conditionManager.IsTouchingCeilingSO.value;
+    [SerializeField] protected InputTransitionCondition IsPressingGrabSO;
+    [SerializeField] protected InputTransitionCondition IsPressingCrouchSO;
+    [SerializeField] protected InputTransitionCondition IsPressingJumpSO;
+    [SerializeField] protected InputTransitionCondition IsJumpCanceledSO;
+    [SerializeField] protected InputTransitionCondition IsPressingPrimaryAttackSO;
+    [SerializeField] protected InputTransitionCondition IsPressingSecondaryAttackSO;
 
-    protected bool _isJumping  { get => conditionManager.IsJumpingSO.value; set => conditionManager.IsJumpingSO.value = value;}
-    protected bool _canJump => conditionManager.CanJumpSO.value;
-    protected bool _canCrouch => conditionManager.CanCrouchSO.value;
-    protected bool _hasStoppedFalling => conditionManager.HasStoppedFalling.value;
-    protected bool _isMovingInCorrectDir => conditionManager.IsMovingInCorrectDirSO.value;
+    [SerializeField] protected CollisionCheckTransitionCondition IsGroundedSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingWallFrontSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingWallBackSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingLedgeHorizontalSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingCeilingSO;
+
+    [SerializeField] protected SupportTransitionCondition IsJumpingSO;
+    [SerializeField] protected SupportTransitionCondition CanJumpSO;
+    [SerializeField] protected SupportTransitionCondition CanCrouchSO;
+    [SerializeField] protected SupportTransitionCondition HasStoppedFalling;
+    [SerializeField] protected SupportTransitionCondition IsMovingInCorrectDirSO;
+
+    protected int _inputX => InputXSO.value;
+
+    protected bool _isPressingGrab => IsPressingGrabSO.value;
+    protected bool _isPressingCrouch => IsPressingCrouchSO.value;
+    protected bool _isPressingJump => IsPressingJumpSO.value;
+    protected bool _isJumpCanceled => IsJumpCanceledSO.value;
+    protected bool _isPressingPrimaryAttack => IsPressingPrimaryAttackSO.value;
+    protected bool _isPressingSecondaryAttack => IsPressingSecondaryAttackSO.value;
+
+    protected bool _isGrounded => IsGroundedSO.value;
+    protected bool _isTouchingWall => IsTouchingWallFrontSO.value;
+    protected bool _isTouchingWallBack => IsTouchingWallBackSO.value;
+    protected bool _isTouchingLedge => IsTouchingLedgeHorizontalSO.value;
+    protected bool _isTouchingCeiling => IsTouchingCeilingSO.value;
+
+    protected bool _canJump => CanJumpSO.value;
+    protected bool _canCrouch => CanCrouchSO.value;
+    protected bool _hasStoppedFalling => HasStoppedFalling.value;
+    protected bool _isMovingInCorrectDir => IsMovingInCorrectDirSO.value;
+
+    protected AudioSourcePlayer _jumpSound => conditionManager.jumpSound;
 
     private float _airControlPercentage => _playerData.defaultAirControlPercentage;
     private bool _coyoteTime;
-
-    protected PlayerAttackState primaryAttackState => conditionManager.primaryAttackState;
-    protected PlayerAttackState secondaryAttackState => conditionManager.secondaryAttackState;
-    protected PlayerJumpState jumpState => conditionManager.jumpState;
-    protected PlayerCrouchJumpState crouchJumpState => conditionManager.crouchJumpState;
-    protected PlayerCrouchInAirState crouchInAirState => conditionManager.crouchInAirState;
-    protected PlayerWallGrabState wallGrabState => conditionManager.wallGrabState;
-    protected PlayerWallJumpState wallJumpState => conditionManager.wallJumpState;
-    protected PlayerWallSlideState wallSlideState => conditionManager.wallSlideState;
-    protected PlayerLandState landState => conditionManager.landState;
-    protected PlayerCrouchLandState crouchLandState => conditionManager.crouchLandState;
-    protected PlayerLedgeClimbState ledgeClimbState => conditionManager.ledgeClimbState;
-
-    protected AudioSourcePlayer _jumpSound => conditionManager.jumpSound;
 
     public override void Enter()
     {
@@ -76,7 +96,7 @@ public class PlayerInAirState : PlayerState
     {
         if (_isPressingPrimaryAttack)
         {
-            //stateMachine?.ChangeState(player.primaryAttackState);
+            return primaryAttackState;
         }
         else if (_isPressingSecondaryAttack)
         {
@@ -142,19 +162,17 @@ public class PlayerInAirState : PlayerState
 
     private void CheckJumpMultiplier()
     {
-        if (!_isJumping)
-        {
+        if (!IsJumpingSO.value)
             return;
-        }
 
         if (_isJumpCanceled)
         {
             movement.SetVelocityY(movement.currentVelocity.y * _playerData.variableJumpHeightMultiplier);
-            _isJumping = false;
+            IsJumpingSO.value = false;
         }
         else if (movement.currentVelocity.y <= 0f)
         {
-            _isJumping = false;
+            IsJumpingSO.value = false;
         }
     }
 

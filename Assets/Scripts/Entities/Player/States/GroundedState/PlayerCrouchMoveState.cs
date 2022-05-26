@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerCrouchMoveState : PlayerGroundedState
 {
-    protected PlayerMoveState moveState => conditionManager.moveState;
-    protected PlayerIdleState idleState => conditionManager.idleState;
-    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
+    [SerializeField] protected PlayerMoveState moveState;
+    [SerializeField] protected PlayerIdleState idleState;
+    [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
+
+    [SerializeField] protected ScriptableInt MovementDirSO;
     
-    private int _movementDir => conditionManager._movementDirSO.value;
+    protected int _movementDir => MovementDirSO.value;
 
     protected AudioSourcePlayer _moveSound => conditionManager.moveSound;
-    protected float _lastStepTime;
     protected float _stepDelay => conditionManager.stepDelay;
+    protected float _lastStepTime;
 
     public override void Enter()
     {

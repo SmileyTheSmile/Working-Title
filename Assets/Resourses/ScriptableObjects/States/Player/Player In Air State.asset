@@ -15,3 +15,31 @@ MonoBehaviour:
   _transitions: []
   _animBoolName: inAir
   _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
+  primaryAttackState: {fileID: 11400000, guid: 206e1647564bf384cbf665670c931bfe, type: 2}
+  secondaryAttackState: {fileID: 11400000, guid: a7ae12ca019a1c24b9f1f9ce0ca20239, type: 2}
+  jumpState: {fileID: 11400000, guid: 4d864d1e055f057489fc773ce82e4b91, type: 2}
+  crouchJumpState: {fileID: 11400000, guid: 21343a2b2efa45849b117a39f071150c, type: 2}
+  crouchInAirState: {fileID: 11400000, guid: ea1a978daf95fc94bb8ce3c34e49fd48, type: 2}
+  wallGrabState: {fileID: 11400000, guid: 11581812d9b876941bd4fcea77766eb9, type: 2}
+  wallJumpState: {fileID: 11400000, guid: d2df0deaf2699a04594000b48aa711a0, type: 2}
+  wallSlideState: {fileID: 11400000, guid: 188290344c18dc743b7e19577f0584fe, type: 2}
+  landState: {fileID: 11400000, guid: ade5d37f627812741b5d3e065e3e6f9b, type: 2}
+  crouchLandState: {fileID: 11400000, guid: 3ca60ceaff3548a47af72968677f3f54, type: 2}
+  ledgeClimbState: {fileID: 11400000, guid: cd78ecc88eb92ad4fa0b352e0f6795e4, type: 2}
+  InputXSO: {fileID: 11400000, guid: 3f4591f9c8a21094ebae2dc880972dd6, type: 2}
+  IsPressingGrabSO: {fileID: 11400000, guid: 685a940549da8d84e8424ad7cb4644ad, type: 2}
+  IsPressingCrouchSO: {fileID: 11400000, guid: 5c484b00522882c4ea99a376c1641e09, type: 2}
+  IsPressingJumpSO: {fileID: 11400000, guid: 8cd304ebf69087f4ea701ec1caa76f0e, type: 2}
+  IsJumpCanceledSO: {fileID: 11400000, guid: c560239318ec7e24da5ee0da4e5c4a9e, type: 2}
+  IsPressingPrimaryAttackSO: {fileID: 11400000, guid: ea1f8b3e482ae544ba837695d0520f83, type: 2}
+  IsPressingSecondaryAttackSO: {fileID: 11400000, guid: a7ff6e1e560060b4dbcd529813a7112f, type: 2}
+  IsGroundedSO: {fileID: 11400000, guid: 12596c6aa15d67e469bea5a552d09a74, type: 2}
+  IsTouchingWallFrontSO: {fileID: 11400000, guid: 1c35970494ec4564092e80e3679a04bc, type: 2}
+  IsTouchingWallBackSO: {fileID: 11400000, guid: 2a7b34b0b3bff944a945f02de1e96b7d, type: 2}
+  IsTouchingLedgeHorizontalSO: {fileID: 11400000, guid: 395434da307c2fb43b82935c28e04b38, type: 2}
+  IsTouchingCeilingSO: {fileID: 11400000, guid: a04e35ef07055d14d9bdd5a35405b6d2, type: 2}
+  IsJumpingSO: {fileID: 11400000, guid: d2c5200be9f75654890a336cd5a83ee4, type: 2}
+  CanJumpSO: {fileID: 11400000, guid: 924e2287f532ba04295979c7c77e45e4, type: 2}
+  CanCrouchSO: {fileID: 11400000, guid: 6bb59c335d4772441a5ef353e77b62ae, type: 2}
+  HasStoppedFalling: {fileID: 11400000, guid: 4d50db7f8edc5d34d907179779b0560d, type: 2}
+  IsMovingInCorrectDirSO: {fileID: 11400000, guid: 15579782449e93144b1f8bf7372077c6, type: 2}

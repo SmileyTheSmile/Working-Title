@@ -12,10 +12,10 @@ public class PlayerInputHandler : CoreComponent
     [SerializeField] private InputTransitionCondition _isPressingSecondaryAttackSO;
     [SerializeField] private InputTransitionCondition _isPressingPauseSO;
 
-    public ScriptableInt _normalizedInputXSO;
-    public ScriptableInt _normalizedInputYSO;
-    public ScriptableInt _weaponSwitchInputSO;
-    public ScriptableVector3 _mousePositionInputSO;
+    [SerializeField] private ScriptableInt _normalizedInputXSO;
+    [SerializeField] private ScriptableInt _normalizedInputYSO;
+    [SerializeField] private ScriptableInt _weaponSwitchInputSO;
+    [SerializeField] private ScriptableVector3 _mousePositionInputSO;
 
     [SerializeField] private PlayerData _playerData;
 
@@ -135,7 +135,7 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
-            Application.Quit();
+            Application.Quit(); //TODO Make pause menu
             _isPressingPauseSO.value = true;
         }
         else if (context.canceled)

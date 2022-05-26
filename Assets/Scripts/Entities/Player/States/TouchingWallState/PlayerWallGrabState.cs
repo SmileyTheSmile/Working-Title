@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerWallGrabState : PlayerTouchingWallState
 {
-    protected PlayerWallSlideState wallSlideState => conditionManager.wallSlideState;
-    protected PlayerWallClimbState wallClimbState => conditionManager.wallClimbState;
+    [SerializeField] protected PlayerWallSlideState wallSlideState;
+    [SerializeField] protected PlayerWallClimbState wallClimbState;
 
     private Vector2 _holdPosition;
     

@@ -6,22 +6,26 @@ public abstract class PlayerAbilityState : PlayerState
     { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    private bool _isGrounded => conditionManager.IsGroundedSO.value;
-    protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
-    protected bool _isNotMoving => conditionManager.HasStoppedFalling.value;
+    [SerializeField] protected CollisionCheckTransitionCondition IsGroundedSO;
+    [SerializeField] protected InputTransitionCondition IsPressingCrouchSO;
+    [SerializeField] protected SupportTransitionCondition HasStoppedFallingSO;
+
+    [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
+    [SerializeField] protected PlayerIdleState idleState;
+    [SerializeField] protected PlayerInAirState inAirState;
+    [SerializeField] protected PlayerCrouchInAirState crouchInAirState;
+
+    protected bool _isGrounded => IsGroundedSO.value;
+    protected bool _isPressingCrouch => IsPressingCrouchSO.value;
+    protected bool _hasStoppedFalling => HasStoppedFallingSO.value;
 
     protected bool _isAbilityDone;
-
-    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
-    protected PlayerIdleState idleState => conditionManager.idleState;
-    protected PlayerInAirState inAirState => conditionManager.inAirState;
-    protected PlayerCrouchInAirState crouchInAirState => conditionManager.crouchInAirState;
 
     public override void Enter()
     {
         base.Enter();
 
-        _isAbilityDone = false;
+        _isAbilityDone = true;
     }
     
     public override GenericState DoTransitions()
@@ -31,7 +35,7 @@ public abstract class PlayerAbilityState : PlayerState
             return null;
         }
         
-        if (_isGrounded && _isNotMoving)
+        if (_isGrounded && _hasStoppedFalling)
         {
             if (_isPressingCrouch)
             {

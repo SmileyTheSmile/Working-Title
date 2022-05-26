@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class MeleeWeapon : MonoBehaviour
 {
-    
+    //TODO Create melee weapons
 }

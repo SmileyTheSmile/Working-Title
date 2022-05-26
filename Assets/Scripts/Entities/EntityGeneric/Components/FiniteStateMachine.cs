@@ -29,6 +29,7 @@ public class FiniteStateMachine : CoreComponent
     {
         base.Initialize(entity); 
 
+        //TODO Move core setup in a proper place and get rid on state list
         foreach (var state in _states)
         {
             state.SetCore(entity);
@@ -44,12 +45,6 @@ public class FiniteStateMachine : CoreComponent
         _currentState.Exit();
         _currentState = newState;
         _currentState.Enter();
-    }
-
-    //Write the current state's name in the console
-    public override void LogComponentInfo()
-    {
-        Debug.Log(_currentState.ToString());
     }
 
     //Do stuff in states on animation triggers

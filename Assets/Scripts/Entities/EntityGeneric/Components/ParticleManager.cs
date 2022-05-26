@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ParticleManager : CoreComponent
 {
-    
+    //TODO Move Particles here
 }

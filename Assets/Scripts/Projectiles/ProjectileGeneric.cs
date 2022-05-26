@@ -23,7 +23,6 @@ public class ProjectileGeneric : MonoBehaviour
             enemy.Hit(damage);
         }*/
 
-        Debug.Log(hitInfo.name);
         if (hitInfo.name != "Player")
         {
             //Destroy(gameObject);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWallSlideState : PlayerTouchingWallState
 {
-    protected PlayerWallGrabState wallGrabState => conditionManager.wallGrabState;
+    [SerializeField] protected PlayerWallGrabState wallGrabState;
 
     protected AudioSourcePlayer _moveSound => conditionManager.moveSound;
     protected float _lastStepTime;

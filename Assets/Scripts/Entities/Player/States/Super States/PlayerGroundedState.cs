@@ -6,31 +6,47 @@ public abstract class PlayerGroundedState : PlayerState
     { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    protected int _inputX => conditionManager._normalizedInputXSO.value;
+    [SerializeField] protected PlayerAttackState primaryAttackState;
+    [SerializeField] protected PlayerAttackState secondaryAttackState;
+    [SerializeField] protected PlayerJumpState jumpState;
+    [SerializeField] protected PlayerCrouchJumpState crouchJumpState;
+    [SerializeField] protected PlayerInAirState inAirState;
+    [SerializeField] protected PlayerCrouchInAirState crouchInAirState;
+    [SerializeField] protected PlayerWallGrabState wallGrabState;
 
-    protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;
-    protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
-    protected bool _isPressingJump => conditionManager.IsPressingJumpSO.value;
-    protected bool _isPressingPrimaryAttack => conditionManager.IsPressingPrimaryAttackSO.value;
-    protected bool _isPressingSecondaryAttack => conditionManager.IsPressingSecondaryAttackSO.value;
-    protected bool _isMovingX => conditionManager.IsMovingXSO.value;
+    [SerializeField] protected ScriptableInt InputXSO;
 
-    protected bool _isGrounded => conditionManager.IsGroundedSO.value;
-    protected bool _isTouchingCeiling => conditionManager.IsTouchingCeilingSO.value;
-    protected bool _isTouchingWall => conditionManager.IsTouchingWallFrontSO.value;
-    protected bool _isTouchingLedge => conditionManager.IsTouchingLedgeHorizontalSO.value;
+    [SerializeField] protected InputTransitionCondition IsPressingGrabSO;
+    [SerializeField] protected InputTransitionCondition IsPressingCrouchSO;
+    [SerializeField] protected InputTransitionCondition IsPressingJumpSO;
+    [SerializeField] protected InputTransitionCondition IsPressingPrimaryAttackSO;
+    [SerializeField] protected InputTransitionCondition IsPressingSecondaryAttackSO;
+    [SerializeField] protected InputTransitionCondition IsMovingXSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsGroundedSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingCeilingSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingWallFrontSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingLedgeHorizontalSO;
+    [SerializeField] protected SupportTransitionCondition CanCrouchSO;
+    [SerializeField] protected SupportTransitionCondition CanJumpSO;
+    [SerializeField] protected SupportTransitionCondition IsJumpingSO;
 
-    protected bool _canCrouch => conditionManager.CanCrouchSO.value;
-    protected bool _canJump => conditionManager.CanJumpSO.value;
-    protected bool _isJumping => conditionManager.IsJumpingSO.value;
+    protected int _inputX => InputXSO.value;
 
-    protected PlayerAttackState primaryAttackState => conditionManager.primaryAttackState;
-    protected PlayerAttackState secondaryAttackState => conditionManager.secondaryAttackState;
-    protected PlayerJumpState jumpState => conditionManager.jumpState;
-    protected PlayerCrouchJumpState crouchJumpState => conditionManager.crouchJumpState;
-    protected PlayerInAirState inAirState => conditionManager.inAirState;
-    protected PlayerCrouchInAirState crouchInAirState => conditionManager.crouchInAirState;
-    protected PlayerWallGrabState wallGrabState => conditionManager.wallGrabState;
+    protected bool _isPressingGrab => IsPressingGrabSO.value;
+    protected bool _isPressingCrouch => IsPressingCrouchSO.value;
+    protected bool _isPressingJump => IsPressingJumpSO.value;
+    protected bool _isPressingPrimaryAttack => IsPressingPrimaryAttackSO.value;
+    protected bool _isPressingSecondaryAttack => IsPressingSecondaryAttackSO.value;
+    protected bool _isMovingX => IsMovingXSO.value;
+
+    protected bool _isGrounded => IsGroundedSO.value;
+    protected bool _isTouchingCeiling => IsTouchingCeilingSO.value;
+    protected bool _isTouchingWall => IsTouchingWallFrontSO.value;
+    protected bool _isTouchingLedge => IsTouchingLedgeHorizontalSO.value;
+
+    protected bool _canCrouch => CanCrouchSO.value;
+    protected bool _canJump => CanJumpSO.value;
+    protected bool _isJumping => IsJumpingSO.value;
 
     public override void Enter()
     {
@@ -51,7 +67,7 @@ public abstract class PlayerGroundedState : PlayerState
     {
         if (_isPressingPrimaryAttack && !_isTouchingCeiling)
         {
-            //return primaryAttackState;
+            return primaryAttackState;
         }
         else if (_isPressingSecondaryAttack && !_isTouchingCeiling)
         {

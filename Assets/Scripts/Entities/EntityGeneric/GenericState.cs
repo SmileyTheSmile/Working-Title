@@ -38,7 +38,7 @@ public abstract class GenericState : ScriptableObject
     //Do all the checks if the state should transition into another state
     public virtual void DoActions() { if (_isExitingState) return; }
     //Execute all the actions the state must do every Update
-    public abstract GenericState DoTransitions();
+    public abstract GenericState DoTransitions(); //TODO Create a universal transition system with binary trees
     //What to do in animation events in Animator
     public virtual void AnimationTrigger() { }
     //What to do on finished animation in Animator
@@ -75,14 +75,14 @@ class CustomStateEditor : Editor
 
     protected virtual void DrawGUI()
     {
-        EditorGUILayout.PropertyField(_animBoolName, new GUIContent("Animation Bool", "Name of the state's animator bool."));
+        //EditorGUILayout.PropertyField(_animBoolName, new GUIContent("Animation Bool", "Name of the state's animator bool."));
 
         DrawTransitions();
     }
 
     protected virtual void DrawTransitions()
     {
-        EditorGUILayout.PropertyField(_transitions, new GUIContent("Transitions", "The list of states this state can transition to."));
+        //EditorGUILayout.PropertyField(_transitions, new GUIContent("Transitions", "The list of states this state can transition to."));
 
         EditorGUI.indentLevel += 1;
 
@@ -112,7 +112,9 @@ class CustomPlayerStateEditor : CustomStateEditor
 
     protected override void DrawGUI()
     {
-        EditorGUILayout.ObjectField(_playerData, new GUIContent("Player Data", "Stuff that's used in the classes."));
+        //EditorGUILayout.ObjectField(_playerData, new GUIContent("Player Data", "Stuff that's used in the classes."));
+
+        DrawDefaultInspector();
 
         base.DrawGUI();
     }

@@ -6,25 +6,37 @@ public abstract class PlayerTouchingWallState : PlayerState
     { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    protected bool _isPressingGrab => conditionManager.IsPressingGrabSO.value;
-    protected bool _isPressingJump => conditionManager.IsPressingJumpSO.value;
-    protected bool _isPressingCrouch => conditionManager.IsPressingCrouchSO.value;
+    [SerializeField] protected PlayerIdleState idleState;
+    [SerializeField] protected PlayerInAirState inAirState;
+    [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
+    [SerializeField] protected PlayerWallJumpState wallJumpState;
+    [SerializeField] protected PlayerLedgeClimbState ledgeClimbState;
 
-    protected bool _isGrounded => conditionManager.IsGroundedSO.value;
-    protected bool _isTouchingWall => conditionManager.IsTouchingWallFrontSO.value;
-    protected bool _isTouchingLedge => conditionManager.IsTouchingLedgeHorizontalSO.value;
-    protected bool _isTouchingCeiling => conditionManager.IsTouchingCeilingSO.value;
+    [SerializeField] protected InputTransitionCondition IsPressingGrabSO;
+    [SerializeField] protected InputTransitionCondition IsPressingCrouchSO;
+    [SerializeField] protected InputTransitionCondition IsPressingJumpSO;
+    [SerializeField] protected InputTransitionCondition IsMovingUpSO;
+    [SerializeField] protected InputTransitionCondition IsMovingDownSO;
 
-    protected bool _isMovingUp => conditionManager.IsMovingUpSO.value;
-    protected bool _isMovingDown => conditionManager.IsMovingDownSO.value;
-    protected bool _isMovingInCorrectDir => conditionManager.IsMovingInCorrectDirSO.value;
-    
-    protected PlayerIdleState idleState => conditionManager.idleState;
-    protected PlayerInAirState inAirState => conditionManager.inAirState;
-    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
-    protected PlayerWallJumpState wallJumpState => conditionManager.wallJumpState;
-    protected PlayerLedgeClimbState ledgeClimbState => conditionManager.ledgeClimbState;
-    
+    [SerializeField] protected CollisionCheckTransitionCondition IsGroundedSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingWallFrontSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingLedgeHorizontalSO;
+    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingCeilingSO;
+    [SerializeField] protected SupportTransitionCondition IsMovingInCorrectDirSO;
+
+    protected bool _isPressingGrab => IsPressingGrabSO.value;
+    protected bool _isPressingJump => IsPressingJumpSO.value;
+    protected bool _isPressingCrouch => IsPressingCrouchSO.value;
+
+    protected bool _isGrounded => IsGroundedSO.value;
+    protected bool _isTouchingWall => IsTouchingWallFrontSO.value;
+    protected bool _isTouchingLedge => IsTouchingLedgeHorizontalSO.value;
+    protected bool _isTouchingCeiling => IsTouchingCeilingSO.value;
+
+    protected bool _isMovingUp => IsMovingUpSO.value;
+    protected bool _isMovingDown => IsMovingDownSO.value;
+    protected bool _isMovingInCorrectDir => IsMovingInCorrectDirSO.value;
+
     public override GenericState DoTransitions()
     {
         if (_isPressingJump)

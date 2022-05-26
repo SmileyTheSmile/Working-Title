@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerGroundedState
 {
-    protected PlayerCrouchMoveState crouchMoveState => conditionManager.crouchMoveState;
-    protected PlayerMoveState moveState => conditionManager.moveState;
-    protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
-    
+    [SerializeField] protected PlayerCrouchMoveState crouchMoveState;
+    [SerializeField] protected PlayerMoveState moveState;
+    [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
+
     public override void Enter()
     {
         base.Enter();

@@ -1,33 +1,18 @@
 using UnityEngine;
 
+//TODO Get rid of this class and move everything in proper components
 public class ConditionManager : CoreComponent
 {
     protected Movement movement
     { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
-    protected PlayerInputHandler inputHandler
-    { get => _inputHandler ?? _entity.GetCoreComponent(ref _inputHandler); }
-    private PlayerInputHandler _inputHandler;
+    [SerializeField] private PlayerData _playerData;
 
     public CollisionCheckTransitionCondition IsGroundedSO;
-    public CollisionCheckTransitionCondition IsTouchingCeilingSO;
-    public CollisionCheckTransitionCondition IsTouchingWallFrontSO;
-    public CollisionCheckTransitionCondition IsTouchingWallBackSO;
-    public CollisionCheckTransitionCondition IsTouchingLedgeHorizontalSO;
-    public CollisionCheckTransitionCondition IsTouchingLedgeVerticalSO;
-
-    public InputTransitionCondition IsPressingJumpSO;
-    public InputTransitionCondition IsJumpCanceledSO;
-    public InputTransitionCondition IsPressingGrabSO;
-    public InputTransitionCondition IsPressingCrouchSO;
-    public InputTransitionCondition IsPressingPrimaryAttackSO;
-    public InputTransitionCondition IsPressingSecondaryAttackSO;
     public InputTransitionCondition IsMovingXSO;
     public InputTransitionCondition IsMovingUpSO;
     public InputTransitionCondition IsMovingDownSO;
-
-    public SupportTransitionCondition IsJumpingSO;
     public SupportTransitionCondition HasStoppedFalling;
     public SupportTransitionCondition CanCrouchSO;
     public SupportTransitionCondition CanJumpSO;
@@ -37,38 +22,17 @@ public class ConditionManager : CoreComponent
     public ScriptableInt _normalizedInputYSO;
     public ScriptableInt _movementDirSO;
 
-    public PlayerIdleState idleState;
-    public PlayerMoveState moveState;
-    public PlayerJumpState jumpState;
-    public PlayerInAirState inAirState;
-    public PlayerLandState landState;
-
-    public PlayerWallSlideState wallSlideState;
-    public PlayerWallGrabState wallGrabState;
-    public PlayerWallClimbState wallClimbState;
-    public PlayerWallJumpState wallJumpState;
-    public PlayerLedgeClimbState ledgeClimbState;
-
-    public PlayerCrouchIdleState crouchIdleState;
-    public PlayerCrouchMoveState crouchMoveState;
-    public PlayerCrouchJumpState crouchJumpState;
-    public PlayerCrouchInAirState crouchInAirState;
-    public PlayerCrouchLandState crouchLandState;
-
-    public PlayerAttackState primaryAttackState;
-    public PlayerAttackState secondaryAttackState;
     public AudioSourcePlayer fallSound;
     public AudioSourcePlayer moveSound;
     public AudioSourcePlayer jumpSound;
     public float stepDelay;
-
-    [SerializeField] private PlayerData _playerData;
 
     private int _amountOfJumpsLeft;
     private int _amountOfCrouchesLeft;
 
     private void Awake()
     {
+        //TODO Fix this not working after ScriptableObject references are made on second compile
         ResetAmountOfJumpsLeft();
         ResetAmountOfCrouchesLeft();
     }
