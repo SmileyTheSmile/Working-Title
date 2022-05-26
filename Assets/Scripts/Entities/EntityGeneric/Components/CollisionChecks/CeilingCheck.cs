@@ -18,7 +18,7 @@ public class CeilingCheck : CollisionCheck
         condition.value = Physics2D.OverlapBox(transform.position, new Vector2(_ceilingCheckWidth, _ceilingCheckHeight), 0f, _whatIsGround);
     }
 
-    //Draw gizmos
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if (condition.value)
@@ -31,4 +31,5 @@ public class CeilingCheck : CollisionCheck
         UnityEditor.Handles.DrawLine(new Vector2(transform.position.x + _halfCeilingCheckWidth, transform.position.y - _halfCeilingCheckHeight), new Vector2(transform.position.x + _halfCeilingCheckWidth, transform.position.y + _halfCeilingCheckHeight));
         UnityEditor.Handles.DrawLine(new Vector2(transform.position.x + _halfCeilingCheckWidth, transform.position.y - _halfCeilingCheckHeight), new Vector2(transform.position.x - _halfCeilingCheckWidth, transform.position.y - _halfCeilingCheckHeight));
     }
+#endif
 }

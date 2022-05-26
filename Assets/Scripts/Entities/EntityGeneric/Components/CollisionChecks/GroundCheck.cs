@@ -18,7 +18,7 @@ public class GroundCheck : CollisionCheck
         condition.value = Physics2D.OverlapBox(transform.position, new Vector2(_groundCheckWidth, _groundCheckHeight), 0f, _whatIsGround);
     }
 
-    //Draw gizmos
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if (condition.value)
@@ -31,4 +31,5 @@ public class GroundCheck : CollisionCheck
         UnityEditor.Handles.DrawLine(new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight), new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y + _halfGroundCheckHeight));
         UnityEditor.Handles.DrawLine(new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight), new Vector2(transform.position.x - _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight));
     }
+#endif
 }

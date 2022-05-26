@@ -16,7 +16,7 @@ public class WallCheck : CollisionCheck
         condition.value = hit;
     }
 
-    //Draw gizmos
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if (condition.value)
@@ -26,6 +26,7 @@ public class WallCheck : CollisionCheck
 
         UnityEditor.Handles.DrawLine(transform.position, new Vector2(transform.position.x + (int)_wallChecktype * _movementDirection.value * _wallCheckDistance, transform.position.y));
     }
+#endif
 
     private enum WallCheckType
     {

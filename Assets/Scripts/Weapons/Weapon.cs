@@ -17,6 +17,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected Animator _weaponAnimator;
     protected EntityGeneric _player;
+    protected Vector2 _aimDirection;
 
     protected bool _isPressingAttackButton => _isPressingAttackButtonSO.value;
     protected Vector3 _mousePosition => _mousePositionSO.value;
@@ -42,8 +43,8 @@ public abstract class Weapon : MonoBehaviour
 
     private void HandleAiming()
     {
-        Vector2 aimDirection = (_mousePosition - weaponHandler.transform.position).normalized;
-        _aimAngle = Vector2.SignedAngle(Vector2.right, aimDirection);
+        _aimDirection = (_mousePosition - weaponHandler.transform.position).normalized;
+        _aimAngle = Vector2.SignedAngle(Vector2.right, _aimDirection);
         weaponHandler.transform.localRotation = Quaternion.Euler(0f, 0f, _aimAngle);
     }
 

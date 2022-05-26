@@ -15,7 +15,8 @@ public class LedgeHorizontalCheck : CollisionCheck
         condition.value = Physics2D.Raycast(transform.position, Vector2.right * _movementDirection.value, _ledgeCheckDistance, _whatIsGround);
     }
 
-    //Draw gizmos
+
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if (condition.value)
@@ -25,4 +26,5 @@ public class LedgeHorizontalCheck : CollisionCheck
 
         UnityEditor.Handles.DrawLine(transform.position, new Vector2(transform.position.x + _ledgeCheckDistance * _movementDirection.value, transform.position.y));
     }
+#endif
 }

@@ -34,8 +34,6 @@ public class GunHitscan : Gun
 
         RaycastHit2D hit = Physics2D.Raycast(_firePoint.position, bulletDirection, _range, _layerMask);
 
-        Debug.Log(hit.collider);
-
         if (hit.collider != null)
         {
             StartCoroutine(SpawnTrail(Instantiate(

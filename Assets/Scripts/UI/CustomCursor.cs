@@ -67,6 +67,7 @@ public class CustomCursor : MonoBehaviour
         _target.position = _playerOrigin.position + targetPosition;
     }
 
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         UnityEditor.Handles.DrawDottedLine(_playerOrigin.position, transform.position, 1f);
@@ -90,6 +91,7 @@ public class CustomCursor : MonoBehaviour
             UnityEditor.Handles.DrawWireDisc(_playerOrigin.position, Vector3.forward, _clampRadius);
         }
     }
+#endif
 }
 
 public enum ClampModes

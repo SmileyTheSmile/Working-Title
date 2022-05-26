@@ -15,7 +15,7 @@ E:/My Stuff/My Games/Working Title
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50626
+58918
 Successfully changed project path to: E:/My Stuff/My Games/Working Title
 E:/My Stuff/My Games/Working Title
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ E:/My Stuff/My Games/Working Title
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 170.28 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 439.10 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.2.5f1 (4ec9a5e799f5)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/Resources/UnitySubsystems
@@ -58,94 +58,94 @@ Direct3D:
     Renderer: NVIDIA GeForce MX230 (ID=0x1d11)
     Vendor:   NVIDIA
     VRAM:     1984 MB
-    Driver:   30.0.15.1123
+    Driver:   30.0.15.1295
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56736
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56392
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.017014 seconds.
+Registered in 0.014448 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 171.36 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 218.63 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.250 seconds
+- Completed reload, in  1.668 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1251ms)
-		BeginReloadAssembly (196ms)
+	ReloadAssembly (1670ms)
+		BeginReloadAssembly (407ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (884ms)
-			LoadAssemblies (191ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (203ms)
+			CreateAndSetChildDomain (2ms)
+		EndReloadAssembly (1092ms)
+			LoadAssemblies (399ms)
+			RebuildTransferFunctionScriptingTraits (1ms)
+			SetupTypeCache (185ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (39ms)
-			SetupLoadedEditorAssemblies (543ms)
+			RebuildScriptCaches (66ms)
+			SetupLoadedEditorAssemblies (724ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (29ms)
+				InitializePlatformSupportModulesInManaged (44ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (171ms)
-				BeforeProcessingInitializeOnLoad (2ms)
-				ProcessInitializeOnLoadAttributes (249ms)
-				ProcessInitializeOnLoadMethodAttributes (91ms)
+				RefreshPlugins (219ms)
+				BeforeProcessingInitializeOnLoad (4ms)
+				ProcessInitializeOnLoadAttributes (327ms)
+				ProcessInitializeOnLoadMethodAttributes (130ms)
 				AfterProcessingInitializeOnLoad (0ms)
-				EditorAssembliesLoaded (0ms)
+				EditorAssembliesLoaded (1ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.008656 seconds.
+Registered in 0.038059 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 316.02 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 227.30 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  5.199 seconds
+- Completed reload, in  3.570 seconds
 Domain Reload Profiling:
-	ReloadAssembly (5202ms)
-		BeginReloadAssembly (436ms)
+	ReloadAssembly (3573ms)
+		BeginReloadAssembly (320ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (9ms)
+			DisableScriptedObjects (12ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (45ms)
-		EndReloadAssembly (4521ms)
-			LoadAssemblies (441ms)
-			RebuildTransferFunctionScriptingTraits (2ms)
-			SetupTypeCache (763ms)
-			ReleaseScriptCaches (28ms)
-			RebuildScriptCaches (192ms)
-			SetupLoadedEditorAssemblies (2938ms)
+			CreateAndSetChildDomain (29ms)
+		EndReloadAssembly (3088ms)
+			LoadAssemblies (314ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (440ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (123ms)
+			SetupLoadedEditorAssemblies (2067ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (28ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (316ms)
-				BeforeProcessingInitializeOnLoad (297ms)
-				ProcessInitializeOnLoadAttributes (2196ms)
-				ProcessInitializeOnLoadMethodAttributes (84ms)
-				AfterProcessingInitializeOnLoad (16ms)
+				RefreshPlugins (227ms)
+				BeforeProcessingInitializeOnLoad (155ms)
+				ProcessInitializeOnLoadAttributes (1563ms)
+				ProcessInitializeOnLoadMethodAttributes (76ms)
+				AfterProcessingInitializeOnLoad (17ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (15ms)
+			AwakeInstancesAfterBackupRestoration (12ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
-Refreshing native plugins compatible for Editor in 2.22 ms, found 8 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.21 seconds
+Refreshing native plugins compatible for Editor in 5.46 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5050 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 64 unused Assets / (0.6 MB). Loaded Objects now: 5507.
-Memory consumption went from 193.3 MB to 192.7 MB.
-Total: 79.316100 ms (FindLiveObjects: 15.282400 ms CreateObjectMapping: 0.658500 ms MarkObjects: 21.865400 ms  DeleteObjects: 41.499400 ms)
+Memory consumption went from 193.4 MB to 192.8 MB.
+Total: 16.709800 ms (FindLiveObjects: 1.687500 ms CreateObjectMapping: 1.542600 ms MarkObjects: 12.024000 ms  DeleteObjects: 1.451600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -159,341 +159,31 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 360752.226332 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9c3e0f9d7fc32fbd0a1b241a07323f1') in 0.319691 seconds 
+  Time since last request: 67316.282310 seconds.
+  path: Assets/Scenes/Game.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Game.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a81ff76bd6fd8da3779f14ea460b0a91') in 0.101201 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 11.017706 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b99ec68e23606717fe0840b65a9edeb') in 0.019820 seconds 
+  Time since last request: 328.220931 seconds.
+  path: Assets/Prefabs/Audio/Sound.prefab
+  artifactKey: Guid(84ac99d603f063d44b969bda0d7d2be8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Audio/Sound.prefab using Guid(84ac99d603f063d44b969bda0d7d2be8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b28385bb7900967f510ab65192411b08') in 0.118727 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.867877 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '257f86e988af1b689a8035768cd00c17') in 0.014873 seconds 
+  Time since last request: 1.262177 seconds.
+  path: Assets/Prefabs/Audio/Sound.prefab
+  artifactKey: Guid(84ac99d603f063d44b969bda0d7d2be8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Audio/Sound.prefab using Guid(84ac99d603f063d44b969bda0d7d2be8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e68d96e022d43c21d09b8c4de60296f') in 0.017209 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 5.308321 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '712a4dd11a4203d2087c965b74470655') in 0.013673 seconds 
+  Time since last request: 30.505654 seconds.
+  path: Assets/Scenes/Game.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Game.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9205cf5d6c4ef7a4c239a63a5a28328c') in 0.004351 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 12.525181 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aafb75a234a67bb84a6da4b6b7a9dda5') in 0.015145 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.152534 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aac8d9f9e6989c669910253a6d22b0b6') in 0.015189 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 36.162686 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b6462df94478aa8fe6c3f28aad8e9e5') in 0.015668 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 10.876235 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '266292d2b8117ea0da440dd67bb4baf1') in 0.013699 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.027702 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 387.23 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in 14.684 seconds
-Domain Reload Profiling:
-	ReloadAssembly (14741ms)
-		BeginReloadAssembly (4560ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (380ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (6ms)
-			CreateAndSetChildDomain (2117ms)
-		EndReloadAssembly (9012ms)
-			LoadAssemblies (1023ms)
-			RebuildTransferFunctionScriptingTraits (3ms)
-			SetupTypeCache (2627ms)
-			ReleaseScriptCaches (113ms)
-			RebuildScriptCaches (209ms)
-			SetupLoadedEditorAssemblies (4947ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (67ms)
-				SetLoadedEditorAssemblies (8ms)
-				RefreshPlugins (388ms)
-				BeforeProcessingInitializeOnLoad (842ms)
-				ProcessInitializeOnLoadAttributes (3232ms)
-				ProcessInitializeOnLoadMethodAttributes (235ms)
-				AfterProcessingInitializeOnLoad (173ms)
-				EditorAssembliesLoaded (2ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (156ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 16.22 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5014 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.6 MB). Loaded Objects now: 5529.
-Memory consumption went from 194.7 MB to 194.1 MB.
-Total: 551.099100 ms (FindLiveObjects: 144.762500 ms CreateObjectMapping: 4.201100 ms MarkObjects: 393.917100 ms  DeleteObjects: 8.202100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.012411 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image E:\My Stuff\My Games\Working Title\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 24.57 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in 10.573 seconds
-Domain Reload Profiling:
-	ReloadAssembly (10593ms)
-		BeginReloadAssembly (4626ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (138ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (3ms)
-			CreateAndSetChildDomain (2189ms)
-		EndReloadAssembly (5199ms)
-			LoadAssemblies (1304ms)
-			RebuildTransferFunctionScriptingTraits (1ms)
-			SetupTypeCache (1062ms)
-			ReleaseScriptCaches (171ms)
-			RebuildScriptCaches (398ms)
-			SetupLoadedEditorAssemblies (2480ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (44ms)
-				SetLoadedEditorAssemblies (4ms)
-				RefreshPlugins (25ms)
-				BeforeProcessingInitializeOnLoad (261ms)
-				ProcessInitializeOnLoadAttributes (1956ms)
-				ProcessInitializeOnLoadMethodAttributes (120ms)
-				AfterProcessingInitializeOnLoad (65ms)
-				EditorAssembliesLoaded (4ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (59ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 12.34 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5013 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 39 unused Assets / (0.7 MB). Loaded Objects now: 5544.
-Memory consumption went from 194.8 MB to 194.1 MB.
-Total: 188.034800 ms (FindLiveObjects: 14.395400 ms CreateObjectMapping: 5.774700 ms MarkObjects: 164.230200 ms  DeleteObjects: 3.629100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 296.134405 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f6dbf40da9db3771a998781b6cfdbfd') in 2.280310 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 8.941682 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '514df43949a4beab239e6a689563087a') in 0.018845 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 7.312135 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd471401fd26367cd1656f36872956eec') in 0.017230 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 90.446750 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b0c62507e7b7ac04eb831e747ae435f0') in 0.027830 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 40.344511 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4303cc2e429c89a073ba858424849336') in 0.017204 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 33.140201 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '085e72021c05283d9998384b4a3bafc3') in 0.015251 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 13.023953 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '525bddfe942c0a37ec4d0199a5861bd5') in 0.017660 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 5.654181 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6b5edab503275858472fa87a4f30f07') in 0.015712 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 156.404812 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20c5fb31815439320f4b69420095325e') in 0.078635 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 74.462170 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '087cdf1265aaffc647b0f3dc0adab258') in 0.026961 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 7.596620 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fc67d9da57feb44c77b6530b0bcea5a') in 0.025482 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 2.081676 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb0a76df98ed951d94488f076f8b0f09') in 0.017416 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 12.762633 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a28040bf82de402b9aee711b68472c3c') in 0.015574 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 14.164736 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17dea9ddae1d991af18ac703e0e72045') in 0.013068 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 97.109070 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f35b1f577d9673698c5395576719189b') in 0.017751 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 8.460246 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d86c263de9ed1ef9db37394f3045a36') in 0.016634 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 4.489557 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5edf75c426d55710184dad2c46296183') in 0.018075 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 2.620328 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7101ecbb3ee85b1b5494c47ac5fef1c9') in 0.015483 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 12.523559 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1857c824cbd28ed962b1ef45fadc997c') in 0.017945 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 16.647606 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5391edbaed9282d513a086d71b9d8ba9') in 0.017194 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 11.494744 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30ebf895ef8bac54204f2cf261b6f018') in 0.019633 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 17.269699 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1914b0540819ab1ec84de00f9915eb5') in 0.016165 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 11.130046 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b94a5d766ceb8dfad2901e9c0eac698') in 0.016819 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 22.291353 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6c3288f9aaf004d98bf928a4330d57e') in 0.017546 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 18.487627 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e20fd4aabb3aa461c8f52406818ad17e') in 0.016205 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 9.921156 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f16851d6c42aa61477bc71ec946433ad') in 0.016523 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 7.191690 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72d7bd053d845d3910accc1944b6de2b') in 0.015834 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 16.885452 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '508f91eed8290253678bca5f44301f8f') in 0.016802 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 23.327478 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ab8bf49b895c4f174d314f13a4b3c0a') in 0.017889 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 178.934455 seconds.
-  path: Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab
-  artifactKey: Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Particles/Weapons/ImpactParticles.prefab using Guid(dc0d5c4d9a3ba1f4b9d112328733b3c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16fb987e80d5e41193dfa34c203de934') in 0.017605 seconds 
+  Time since last request: 1965.014215 seconds.
+  path: Assets/Resourses/ScriptableObjects/ScriptableValues/New Support Condition.asset
+  artifactKey: Guid(627d6dd31b82d484898ec89458329d5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resourses/ScriptableObjects/ScriptableValues/New Support Condition.asset using Guid(627d6dd31b82d484898ec89458329d5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c53b2baec6787154035c6a0d41468d8a') in 0.100472 seconds 

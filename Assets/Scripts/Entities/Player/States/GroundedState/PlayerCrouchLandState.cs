@@ -9,11 +9,21 @@ public class PlayerCrouchLandState : PlayerGroundedState
     protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
     protected PlayerIdleState idleState => conditionManager.idleState;
 
+    protected AudioSourcePlayer _fallSound => conditionManager.fallSound;
+
     public override void Enter()
     {
         base.Enter();
 
+        Step();
+
         movement.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+    }
+
+    protected virtual void Step()
+    {
+        if (_fallSound)
+            _fallSound.Play();
     }
 
     public override void Exit()

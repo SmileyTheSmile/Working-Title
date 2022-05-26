@@ -6,6 +6,7 @@ public abstract class Gun : Weapon
 {
     [SerializeField] protected ParticleSystem _muzzleFlashParticles;
     [SerializeField] protected Transform _firePoint;
+    [SerializeField] protected AudioSourcePlayer _audioSourcePlayer;
     [SerializeField] protected float _screenShakeTime = 0.2f;
     [SerializeField] protected float _screenShakeIntensity = 3f;
     [SerializeField] protected float _shotDelay = 0.2f;
@@ -46,6 +47,7 @@ public abstract class Gun : Weapon
         ShakeCamera();
         PlayWeaponAnimation("Shoot");
         PlayMuzzleFlash();
+        PlaySound();
 
         if (_currentClipSize == 0)
             StartReload();
@@ -72,6 +74,12 @@ public abstract class Gun : Weapon
     {
         if (_muzzleFlashParticles)
             _muzzleFlashParticles.Play();
+    }
+
+    protected virtual void PlaySound()
+    {
+        if (_audioSourcePlayer)
+            _audioSourcePlayer.Play();
     }
 
     protected virtual void AddKnockbackToPlayer()

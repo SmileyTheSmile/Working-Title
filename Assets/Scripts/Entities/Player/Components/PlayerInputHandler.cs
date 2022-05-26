@@ -135,6 +135,7 @@ public class PlayerInputHandler : CoreComponent
     {
         if (context.started)
         {
+            Application.Quit();
             _isPressingPauseSO.value = true;
         }
         else if (context.canceled)

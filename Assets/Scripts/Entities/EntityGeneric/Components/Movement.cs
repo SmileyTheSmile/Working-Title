@@ -15,6 +15,7 @@ public class Movement : CoreComponent
     [SerializeField] private CollisionCheckTransitionCondition _ceilingCheck;
     [SerializeField] private CollisionCheckTransitionCondition _wallFront;
     [SerializeField] private ScriptableInt _movementDirSO;
+    [SerializeField] private PlayerData _playerData;
 
     public Vector2 currentVelocity { get => _rigidBody.velocity; }
 
@@ -25,7 +26,6 @@ public class Movement : CoreComponent
     private Vector2 _defaultSize;
     private PlayerCrouchingForm _crouchingForm;
 
-    //Unity Awake
     private void Awake()
     {
         _rigidBody = GetComponentInParent<Rigidbody2D>();
@@ -40,7 +40,6 @@ public class Movement : CoreComponent
         _crouchingForm = PlayerCrouchingForm.notCrouching;
     }
 
-    //Flip the entity in the other direction
     public void Flip()
     {
         _facingDir *= -1;
@@ -72,7 +71,6 @@ public class Movement : CoreComponent
         }
     }
 
-    //Set the entity crouching state to crouchingDown and squash the collider accordingly
     public void CrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
     {
         if (_crouchingForm == PlayerCrouchingForm.notCrouching && crouchInput)
@@ -83,7 +81,6 @@ public class Movement : CoreComponent
         }
     }
 
-    //Set the entity crouching state to notCrouching and unsquash the collider accordingly
     public void UnCrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
     {
         if (((_crouchingForm == PlayerCrouchingForm.crouchingDown && !crouchInput)
@@ -95,7 +92,6 @@ public class Movement : CoreComponent
         }
     }
 
-    //Reset the size and offset of the collider
     public void ResetColliderHeight(float biggerHeight, float smallerHeight)
     {
         _boxCollider.size = _defaultSize;
@@ -104,7 +100,6 @@ public class Movement : CoreComponent
         MoveCeilingCheck(biggerHeight, smallerHeight, _defaultSize.y);
     }
 
-    //Squash the collider downwards
     public void SquashColliderDown(float biggerHeight, float smallerHeight)
     {
         float height = _boxCollider.size.y * smallerHeight;
@@ -114,57 +109,46 @@ public class Movement : CoreComponent
 
         MoveCeilingCheck(smallerHeight, biggerHeight, _defaultSize.y);
     }
-
-    //Move the ceiling check point position
     public void MoveCeilingCheck(float oldHeight, float newHeight, float defaultColliderHeight)
     {
         _ceilingCheckTransform.position += Vector3.up * ((oldHeight - newHeight) * defaultColliderHeight);
     }
 
-    //Set the drag of the entity
     public void SetDrag(float value)
     {
         _rigidBody.drag = value;
     }
 
-    //Set wether you can set entity's velocity or not
     public void SetCanChangeVelocity(bool value)
     {
         _canSetVelocity = value;
     }
 
-    //Set the X velocity of the entity
-    public void SetVelocityX(float velocity) 
+    public void SetVelocityX(float velocity)
     {
         SetFinalVelocity(new Vector2(velocity, _rigidBody.velocity.y));
     }
 
-    //Set the Y velocity of the entity
     public void SetVelocityY(float velocity)
     {
         SetFinalVelocity(new Vector2(_rigidBody.velocity.x, velocity));
     }
 
-    //Set the velocity of the entity at an angle with and considering facingDirection
     public void SetVelocity(float velocity, Vector2 angle, int facingDirection)
     {
         angle.Normalize();
         SetFinalVelocity(new Vector2(angle.x * velocity * facingDirection, angle.y * velocity));
     }
 
-    //Set the velocity of the entity considering facingDirection
     public void SetVelocity(float velocity, Vector2 facingDirection)
     {
         SetFinalVelocity(velocity * facingDirection);
     }
 
-    //Set the velocity of the entity to 0
     public void SetVelocityZero()
     {
         SetFinalVelocity(Vector2.zero);
     }
-
-    //Set the velocity of the entity to workspace vector
     public void SetFinalVelocity(Vector2 workspace)
     {
         if (_canSetVelocity)
@@ -180,14 +164,27 @@ public class Movement : CoreComponent
         _rigidBody.AddForce(dir * force, ForceMode2D.Impulse);
     }
 
-    //Set the size of the entity's collider
+    public void AddForce(Vector2 direction, ForceMode2D forceMode)
+    {
+        _rigidBody.AddForce(direction, forceMode);
+    }
+
+    public void AddForceX(float velocity, ForceMode2D forceMode)
+    {
+        _rigidBody.AddForce(new Vector2(velocity, 0), forceMode);
+    }
+
+    public void AddForceY(float velocity, ForceMode2D forceMode)
+    {
+        _rigidBody.AddForce(new Vector2(0, velocity), forceMode);
+    }
+
     public void SetColliderSize(float width, float height)
     {
         Vector2 workspace = new Vector2(width, height);
         _boxCollider.size = workspace;
     }
 
-    //Set the Y offset of the entity's collider
     public void SetColliderOffsetY(float offsetY)
     {
         Vector2 workspace = _boxCollider.offset;
@@ -195,7 +192,6 @@ public class Movement : CoreComponent
         _boxCollider.offset = workspace;
     }
 
-    //Set the X, Y offset of the entity's collider
     public void SetOffset(float offsetX, float offsetY)
     {
         Vector2 workspace = _boxCollider.offset;

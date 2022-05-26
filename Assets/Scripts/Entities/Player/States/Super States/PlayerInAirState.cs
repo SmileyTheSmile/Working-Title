@@ -59,7 +59,9 @@ public class PlayerInAirState : PlayerState
         CheckCoyoteTime();
 
         movement.CheckMovementDirection(_inputX);
-        movement.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
+        
+        if (_inputX != 0)
+            movement.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
 
         visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
         visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);

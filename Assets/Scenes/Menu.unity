@@ -3072,6 +3072,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4516026808454292706, guid: 0722f0f3c992b5a438d5a33f7df93d3e, type: 3}
+      propertyPath: m_TagString
+      value: EditorOnly
+      objectReference: {fileID: 0}
     - target: {fileID: 4516026808559166730, guid: 0722f0f3c992b5a438d5a33f7df93d3e, type: 3}
       propertyPath: m_Rect.x
       value: 260

@@ -8,6 +8,23 @@ public class PlayerLandState : PlayerGroundedState
     protected PlayerMoveState moveState => conditionManager.moveState;
     protected PlayerCrouchIdleState crouchIdleState => conditionManager.crouchIdleState;
     protected PlayerIdleState idleState => conditionManager.idleState;
+
+    protected AudioSourcePlayer _fallSound => conditionManager.fallSound;
+    protected float _lastStepTime;
+    protected float _stepDelay => conditionManager.stepDelay;
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        Step();
+    }
+
+    protected virtual void Step()
+    {
+        if (_fallSound)
+            _fallSound.Play();
+    }
     
     public override GenericState DoTransitions()
     {
