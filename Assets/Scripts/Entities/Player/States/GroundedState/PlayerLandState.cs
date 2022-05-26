@@ -10,8 +10,6 @@ public class PlayerLandState : PlayerGroundedState
     protected PlayerIdleState idleState => conditionManager.idleState;
 
     protected AudioSourcePlayer _fallSound => conditionManager.fallSound;
-    protected float _lastStepTime;
-    protected float _stepDelay => conditionManager.stepDelay;
 
     public override void Enter()
     {

@@ -59,6 +59,7 @@ public class ConditionManager : CoreComponent
     public PlayerAttackState secondaryAttackState;
     public AudioSourcePlayer fallSound;
     public AudioSourcePlayer moveSound;
+    public AudioSourcePlayer jumpSound;
     public float stepDelay;
 
     [SerializeField] private PlayerData _playerData;

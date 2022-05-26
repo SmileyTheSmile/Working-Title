@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _optionsScreen;
     [SerializeField] private GameObject _gameScreen;
     [SerializeField] private GameObject _pauseScreen;
+    [SerializeField] private GameObject _victoryScreen;
 
     private void Awake()
     {
@@ -89,6 +90,11 @@ public class UIManager : MonoBehaviour
         HideAllScreens();
         _pauseScreen.SetActive(true);
     }
+    public void ShowVictoryScreen()
+    {
+        HideAllScreens();
+        _victoryScreen.SetActive(true);
+    }
 
     public void HideAllScreens()
     {
@@ -96,5 +102,6 @@ public class UIManager : MonoBehaviour
         _optionsScreen.SetActive(false);
         _gameScreen.SetActive(false);
         _pauseScreen.SetActive(false);
+        _victoryScreen.SetActive(false);
     }
 }

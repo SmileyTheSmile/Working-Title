@@ -44,9 +44,14 @@ public class PlayerInAirState : PlayerState
     protected PlayerCrouchLandState crouchLandState => conditionManager.crouchLandState;
     protected PlayerLedgeClimbState ledgeClimbState => conditionManager.ledgeClimbState;
 
+    protected AudioSourcePlayer _jumpSound => conditionManager.jumpSound;
+
     public override void Enter()
     {
         base.Enter();
+
+        if (_jumpSound)
+            _jumpSound.Play();
 
         StartCoyoteTime();
     }

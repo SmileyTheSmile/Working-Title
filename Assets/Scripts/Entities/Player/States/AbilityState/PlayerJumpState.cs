@@ -2,6 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Jump State", menuName = "States/Player/Ability/Jump State")]
 
+
 public class PlayerJumpState : PlayerAbilityState
 {
     public override void Enter()
@@ -17,4 +18,5 @@ public class PlayerJumpState : PlayerAbilityState
 
         _isAbilityDone = true;
     }
+
 }
