@@ -1373,10 +1373,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 143785929}
     m_Modifications:
+    - target: {fileID: 8759072195124013164, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759072195124013164, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.33277202
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759072195124013164, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.33277202
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759072195124013164, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 122.0748
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759072195124013164, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 41.7683
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759072195124013164, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759072195124013164, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8759072195124013165, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
       propertyPath: _menuAudio
       value: 
       objectReference: {fileID: 1689792828}
+    - target: {fileID: 8759072195571401993, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -0.000076294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759072195571401993, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00006484985
+      objectReference: {fileID: 0}
     - target: {fileID: 8759072195940051610, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
       propertyPath: _menuAudio
       value: 

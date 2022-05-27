@@ -71,7 +71,8 @@ public abstract class PlayerGroundedState : PlayerState
         }
         else if (_isPressingSecondaryAttack && !_isTouchingCeiling)
         {
-            return secondaryAttackState;
+            //return secondaryAttackState;
+            return null;
         }
         else if (((_isPressingJump || _isJumping) && _canJump && !_isTouchingCeiling))
         {

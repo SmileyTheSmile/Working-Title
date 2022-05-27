@@ -100,7 +100,8 @@ public class PlayerInAirState : PlayerState
         }
         else if (_isPressingSecondaryAttack)
         {
-            return secondaryAttackState;
+            return null;
+            //return secondaryAttackState;
         }
         else if (_isPressingJump && _canJump)
         {

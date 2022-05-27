@@ -1,10 +1,11 @@
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Jump State", menuName = "States/Player/Ability/Jump State")]
 
 public class PlayerJumpState : PlayerAbilityState
 {
-    protected SupportTransitionCondition IsJumpingSO;
+    [SerializeField] protected SupportTransitionCondition IsJumpingSO;
 
     public override void Enter()
     {
