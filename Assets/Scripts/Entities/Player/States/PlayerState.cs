@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class PlayerState : GenericState
 {
+    //TODO Fix CoreComponent references missing on second compile of the game
     protected ConditionManager conditionManager
     { get => _conditionManager ?? _entity.GetCoreComponent(ref _conditionManager); }
     private ConditionManager _conditionManager;

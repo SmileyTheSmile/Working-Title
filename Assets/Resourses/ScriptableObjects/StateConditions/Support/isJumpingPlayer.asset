@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0081219323c3e694d8ee8811701d33ae, type: 3}
-  m_Name: isJumpingPlayer
+  m_Name: IsJumpingPlayer
   m_EditorClassIdentifier: 
   value: 0

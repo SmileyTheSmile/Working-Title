@@ -7,6 +7,8 @@ public abstract class Gun : Weapon
     [SerializeField] protected ParticleSystem _muzzleFlashParticles;
     [SerializeField] protected Transform _firePoint;
     [SerializeField] protected AudioSourcePlayer _audioSourcePlayer;
+    [SerializeField] protected SupportTransitionCondition CanAttackSO;
+    [SerializeField] protected SupportTransitionCondition IsReloadingSO;
     [SerializeField] protected float _screenShakeTime = 0.2f;
     [SerializeField] protected float _screenShakeIntensity = 3f;
     [SerializeField] protected float _shotDelay = 0.2f;
@@ -17,23 +19,27 @@ public abstract class Gun : Weapon
     protected float _reloadStartTime;
     protected float _lastShotTime;
     protected int _currentClipSize;
-    protected bool _isReloading = false;
+    protected bool _isReloading => IsReloadingSO.value;
+    protected bool _canAttack => CanAttackSO.value;
 
     protected override void Awake()
     {
         base.Awake();
 
         _currentClipSize = _maxClipSize;
+        IsReloadingSO.value = false;
     }
     
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
+        CanAttackSO.value = (_lastShotTime + _shotDelay < Time.time);
+
         if (_isReloading)
             CheckReload();
         else
-            if (_isPressingAttackButton && (_lastShotTime + _shotDelay < Time.time))
+            if (_isPressingAttackButton && _canAttack)
                 Shoot();
     }
 
@@ -55,7 +61,7 @@ public abstract class Gun : Weapon
 
     protected virtual void StartReload()
     {
-        _isReloading = true;
+        IsReloadingSO.value = true;
         _reloadStartTime = Time.time;
 
         PlayWeaponAnimation("Reload");
@@ -65,7 +71,7 @@ public abstract class Gun : Weapon
     {
         if (Time.time >= _reloadStartTime + _reloadTime)
         {
-            _isReloading = false;
+            IsReloadingSO.value = false;
             _currentClipSize = _maxClipSize;
         }
     }

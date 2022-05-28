@@ -40,6 +40,8 @@ public class PlayerInAirState : PlayerState
     [SerializeField] protected SupportTransitionCondition CanCrouchSO;
     [SerializeField] protected SupportTransitionCondition HasStoppedFalling;
     [SerializeField] protected SupportTransitionCondition IsMovingInCorrectDirSO;
+    [SerializeField] protected SupportTransitionCondition CanAttackSO;
+    [SerializeField] protected SupportTransitionCondition IsReloadingSO;
 
     protected int _inputX => InputXSO.value;
 
@@ -60,6 +62,8 @@ public class PlayerInAirState : PlayerState
     protected bool _canCrouch => CanCrouchSO.value;
     protected bool _hasStoppedFalling => HasStoppedFalling.value;
     protected bool _isMovingInCorrectDir => IsMovingInCorrectDirSO.value;
+    protected bool _canAttack => CanAttackSO.value;
+    protected bool _isReloading => IsReloadingSO.value;
 
     protected AudioSourcePlayer _jumpSound => conditionManager.jumpSound;
 
@@ -94,7 +98,7 @@ public class PlayerInAirState : PlayerState
     
     public override GenericState DoTransitions()
     {
-        if (_isPressingPrimaryAttack)
+        if (_isPressingPrimaryAttack && _canAttack && !_isReloading)
         {
             return primaryAttackState;
         }

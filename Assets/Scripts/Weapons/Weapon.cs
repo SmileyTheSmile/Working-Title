@@ -38,7 +38,7 @@ public abstract class Weapon : MonoBehaviour
 
     public void Flip(float flipAngle)
     {
-        transform.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
+        _weaponAnimator.transform.localRotation = Quaternion.Euler(flipAngle, flipAngle, 0f);
     }
 
     private void HandleAiming()

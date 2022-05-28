@@ -29,6 +29,8 @@ public abstract class PlayerGroundedState : PlayerState
     [SerializeField] protected SupportTransitionCondition CanCrouchSO;
     [SerializeField] protected SupportTransitionCondition CanJumpSO;
     [SerializeField] protected SupportTransitionCondition IsJumpingSO;
+    [SerializeField] protected SupportTransitionCondition CanAttackSO;
+    [SerializeField] protected SupportTransitionCondition IsReloadingSO;
 
     protected int _inputX => InputXSO.value;
 
@@ -47,6 +49,8 @@ public abstract class PlayerGroundedState : PlayerState
     protected bool _canCrouch => CanCrouchSO.value;
     protected bool _canJump => CanJumpSO.value;
     protected bool _isJumping => IsJumpingSO.value;
+    protected bool _canAttack => CanAttackSO.value;
+    protected bool _isReloading => IsReloadingSO.value;
 
     public override void Enter()
     {
@@ -65,7 +69,7 @@ public abstract class PlayerGroundedState : PlayerState
 
     public override GenericState DoTransitions()
     {
-        if (_isPressingPrimaryAttack && !_isTouchingCeiling)
+        if (_isPressingPrimaryAttack && !_isTouchingCeiling && _canAttack && !_isReloading)
         {
             return primaryAttackState;
         }
