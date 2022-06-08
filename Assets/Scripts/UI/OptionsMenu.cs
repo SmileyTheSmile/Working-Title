@@ -23,7 +23,6 @@ public class OptionsMenu : GenericMenu
     private void Awake()
     {
         LoadFromPlayerPrefs();
-
         UpdateSliderValues();
         SetVolume(_settings.menuVolume);
     }

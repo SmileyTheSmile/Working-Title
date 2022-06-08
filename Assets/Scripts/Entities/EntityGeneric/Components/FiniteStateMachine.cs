@@ -18,8 +18,6 @@ public class FiniteStateMachine : CoreComponent
         _currentState.DoActions();
         GenericState nextState = _currentState.DoTransitions();
 
-        Debug.Log(_currentState);
-
         if (nextState != null)
         {
             ChangeState(nextState);
@@ -27,7 +25,7 @@ public class FiniteStateMachine : CoreComponent
     }
 
     //Start the state machine
-    public override void Initialize(EntityGeneric entity)
+    public override void Initialize(EntityCore entity)
     {
         base.Initialize(entity); 
 

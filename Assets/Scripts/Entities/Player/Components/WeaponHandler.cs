@@ -29,7 +29,7 @@ public class WeaponHandler : CoreComponent
     }
 
     //Initialize the weapon handler
-    public override void Initialize(EntityGeneric entity)
+    public override void Initialize(EntityCore entity)
     {
         base.Initialize(entity);
 

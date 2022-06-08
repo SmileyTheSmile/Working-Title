@@ -27,7 +27,7 @@ public class TempShootScript : MonoBehaviour
     private Vector2 gunDirection;
     private Vector3 _mousePositionInput => _mousePositionInputSO.value;
 
-    private EntityGeneric entity;
+    private EntityCore entity;
     private Animator animator;
     private bool addBulletSpread;
     private float lastShotTime;
@@ -36,7 +36,7 @@ public class TempShootScript : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        entity = GetComponentInParent<EntityGeneric>();
+        entity = GetComponentInParent<EntityCore>();
 
         addBulletSpread = (bulletSpread != Vector2.zero);
     }

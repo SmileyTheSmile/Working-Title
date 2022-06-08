@@ -7,6 +7,7 @@ using UnityEngine;
 [Serializable]
 public class StateTransition
 {
+    [SerializeField] private ConditionUsage condition;
     [SerializeField] private GenericState nextState = null;
     [SerializeField] private string expression;
     [SerializeField] private List<ConditionUsage> conditions = new List<ConditionUsage>();

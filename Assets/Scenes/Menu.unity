@@ -1058,6 +1058,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 3203214529702379126, guid: d3ca3e377aae89e43babba977718b0b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3203214529702379128, guid: d3ca3e377aae89e43babba977718b0b1, type: 3}
       propertyPath: _menuAudio
       value: 
@@ -1158,6 +1162,10 @@ PrefabInstance:
       propertyPath: _menuAudio
       value: 
       objectReference: {fileID: 1689792828}
+    - target: {fileID: 3203214530586043075, guid: d3ca3e377aae89e43babba977718b0b1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3ca3e377aae89e43babba977718b0b1, type: 3}
 --- !u!1001 &6538114731722904055
@@ -1255,6 +1263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6538114731879405663, guid: 806721b480ff80d40aaea500026ee4d3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 806721b480ff80d40aaea500026ee4d3, type: 3}
 --- !u!1001 &8445392336296177705
@@ -1267,6 +1279,10 @@ PrefabInstance:
     - target: {fileID: 8445392336384505589, guid: 40c51f95227b0a043a833eec4cd234c4, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445392336384505589, guid: 40c51f95227b0a043a833eec4cd234c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8445392336384505591, guid: 40c51f95227b0a043a833eec4cd234c4, type: 3}
       propertyPath: m_Pivot.x
@@ -1413,6 +1429,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.00006484985
       objectReference: {fileID: 0}
+    - target: {fileID: 8759072195842315461, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
+      propertyPath: m_text
+      value: 'The real platformer was inside you
+
+        all along.'
+      objectReference: {fileID: 0}
     - target: {fileID: 8759072195940051610, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
       propertyPath: _menuAudio
       value: 
@@ -1507,7 +1529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8759072196153114883, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afaca9894baf5bc4c9c1f17c1930f35f, type: 3}

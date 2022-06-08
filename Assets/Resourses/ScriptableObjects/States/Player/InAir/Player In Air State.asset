@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519dbb7b2b5bbf9469656406c51c1d63, type: 3}
   m_Name: Player In Air State
   m_EditorClassIdentifier: 
-  _transitions: []
+  _transitions:
+  - condition:
+      ExpectedResult: 0
+      id: 0
+      Condition: {fileID: 0}
+    nextState: {fileID: 0}
+    expression: 
+    conditions:
+    - ExpectedResult: 0
+      id: 0
+      Condition: {fileID: 0}
   _animBoolName: inAir
   _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
   primaryAttackState: {fileID: 11400000, guid: 206e1647564bf384cbf665670c931bfe, type: 2}

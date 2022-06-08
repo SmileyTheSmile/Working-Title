@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class CoreComponent : MonoBehaviour
 {
-    protected EntityGeneric _entity;
+    protected EntityCore _entity;
 
     //Initialize the component
-    public virtual void Initialize(EntityGeneric entity)
+    public virtual void Initialize(EntityCore entity)
     {
         this._entity = entity;
     }
