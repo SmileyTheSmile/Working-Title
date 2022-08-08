@@ -101,7 +101,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6686135661895811675}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6686135661340024212
 MonoBehaviour:
@@ -567,7 +567,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6686135661895811675}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6686135661820988954
 BoxCollider2D:
@@ -675,7 +675,6 @@ Transform:
   - {fileID: 6686135662754291237}
   - {fileID: 6686135662342179725}
   - {fileID: 6686135663060197822}
-  - {fileID: 6686135662925546115}
   - {fileID: 6686135663097749502}
   - {fileID: 6686135661820988935}
   - {fileID: 6686135661340024211}
@@ -1049,6 +1048,13 @@ MonoBehaviour:
   IsMovingXSO: {fileID: 11400000, guid: 76b02d33cd7884e4d99974f0393431ea, type: 2}
   IsMovingUpSO: {fileID: 11400000, guid: 8c7948718a9bfd74aa063fb5435e3dfd, type: 2}
   IsMovingDownSO: {fileID: 11400000, guid: f2dc36c0bc589164fb54f17bd92d4fab, type: 2}
+  _isPressingJumpSO: {fileID: 11400000, guid: 8cd304ebf69087f4ea701ec1caa76f0e, type: 2}
+  _isJumpCanceledSO: {fileID: 11400000, guid: c560239318ec7e24da5ee0da4e5c4a9e, type: 2}
+  _isPressingGrabSO: {fileID: 11400000, guid: 685a940549da8d84e8424ad7cb4644ad, type: 2}
+  _isCrouchingSO: {fileID: 11400000, guid: 5c484b00522882c4ea99a376c1641e09, type: 2}
+  _isPressingPrimaryAttackSO: {fileID: 11400000, guid: ea1f8b3e482ae544ba837695d0520f83, type: 2}
+  _isPressingSecondaryAttackSO: {fileID: 11400000, guid: a7ff6e1e560060b4dbcd529813a7112f, type: 2}
+  _isPressingPauseSO: {fileID: 11400000, guid: a7fb99848f788404996a709f919f5c40, type: 2}
   HasStoppedFalling: {fileID: 11400000, guid: 4d50db7f8edc5d34d907179779b0560d, type: 2}
   CanCrouchSO: {fileID: 11400000, guid: 6bb59c335d4772441a5ef353e77b62ae, type: 2}
   CanJumpSO: {fileID: 11400000, guid: 924e2287f532ba04295979c7c77e45e4, type: 2}
@@ -1056,9 +1062,12 @@ MonoBehaviour:
   _normalizedInputXSO: {fileID: 11400000, guid: 3f4591f9c8a21094ebae2dc880972dd6, type: 2}
   _normalizedInputYSO: {fileID: 11400000, guid: 1a3cea031eca4a24b8765975f44f9d14, type: 2}
   _movementDirSO: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}
+  _weaponSwitchInputSO: {fileID: 11400000, guid: 62b7a5e24127a874bb6a5d50ff96781a, type: 2}
   fallSound: {fileID: 6656610942664091291}
   moveSound: {fileID: 6656610941693184125}
   jumpSound: {fileID: 6656610941314066788}
+  _mousePositionInputSO: {fileID: 11400000, guid: 773e313404363ee47a9d6eb252e4e821, type: 2}
+  _playerInputHandler: {fileID: 11400000, guid: 7c0cc70d6c14d744aa8bc606acc13905, type: 2}
   stepDelay: 1.5
 --- !u!1 &6686135662882564702
 GameObject:
@@ -1111,277 +1120,6 @@ MonoBehaviour:
   _groundCheckHeight: 0.2
   _groundWidthOffset: 0.05
   defaultColliderSize: {x: 1, y: 1}
---- !u!1 &6686135662925546114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6686135662925546115}
-  - component: {fileID: 6686135662925546117}
-  - component: {fileID: 6686135662925546116}
-  m_Layer: 6
-  m_Name: InputHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6686135662925546115
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686135662925546114}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6686135661895811675}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6686135662925546117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686135662925546114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: d1c0cef9cedc89d4b972b28201276eef, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnMoveInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 657279ae-10b5-418e-8851-45fc51f01653
-    m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnJumpInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 1a74b396-b117-4392-968f-5533e3045d86
-    m_ActionName: Gameplay/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnGrabInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 35ae0250-4e83-41e3-8bb0-39e19767d6f0
-    m_ActionName: Gameplay/Grab[/Keyboard/ctrl]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnAimInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: fff81bf1-e7a3-47bb-90ac-420d94bfbcab
-    m_ActionName: Gameplay/DashDirection[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnPrimaryAttackInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 257e5655-731d-4cd8-9805-6b4765c7fdcf
-    m_ActionName: Gameplay/PrimaryAttack[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnSecondaryAttackInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5efbcc79-1ddd-42a2-a936-6d4d7bf061cb
-    m_ActionName: Gameplay/SecondaryAttack[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnCrouchInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: dbb3cb49-f01f-40f5-9244-8ac819ab1eb8
-    m_ActionName: Gameplay/Crouch[/Keyboard/shift]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnWeaponSwitchInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 41c0dbdd-3629-4cd7-9709-8d2e2106557c
-    m_ActionName: Gameplay/WeaponScroll[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6686135662925546116}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnPauseInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a8563228-e3b5-4fff-acd6-a88dc0ee8a6f
-    m_ActionName: Gameplay/Pause[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4e317cff-ada8-407d-9d6f-4899f5497f0a
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0c4582f1-d044-4550-9094-d4be868c3873
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ff6a2759-627b-43a6-984a-3ed7822770e8
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6c1dbbb3-26ad-4437-a2fe-b5e6edd233df
-    m_ActionName: UI/Point[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 88f01987-b7dd-4a8a-b5cb-d857cfaefa89
-    m_ActionName: UI/Click[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8132ee52-414a-4124-b14d-ad389137d600
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a165ec42-2403-4b60-845b-7967c690c793
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2d65aa63-8b71-41cf-b910-88442f859fd3
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e66dfa19-f24c-4a3c-bf26-83b2268bdb82
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 98506bd5-6369-4f98-b2cd-898fa775d36a
-    m_ActionName: UI/TrackedDeviceOrientation
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard
-  m_DefaultActionMap: Gameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &6686135662925546116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686135662925546114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9681695badf2e6640b671c495d30f618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isPressingJumpSO: {fileID: 11400000, guid: 8cd304ebf69087f4ea701ec1caa76f0e, type: 2}
-  _isJumpCanceledSO: {fileID: 11400000, guid: c560239318ec7e24da5ee0da4e5c4a9e, type: 2}
-  _isPressingGrabSO: {fileID: 11400000, guid: 685a940549da8d84e8424ad7cb4644ad, type: 2}
-  _isCrouchingSO: {fileID: 11400000, guid: 5c484b00522882c4ea99a376c1641e09, type: 2}
-  _isPressingPrimaryAttackSO: {fileID: 11400000, guid: ea1f8b3e482ae544ba837695d0520f83, type: 2}
-  _isPressingSecondaryAttackSO: {fileID: 11400000, guid: a7ff6e1e560060b4dbcd529813a7112f, type: 2}
-  _isPressingPauseSO: {fileID: 11400000, guid: a7fb99848f788404996a709f919f5c40, type: 2}
-  _normalizedInputXSO: {fileID: 11400000, guid: 3f4591f9c8a21094ebae2dc880972dd6, type: 2}
-  _normalizedInputYSO: {fileID: 11400000, guid: 1a3cea031eca4a24b8765975f44f9d14, type: 2}
-  _weaponSwitchInputSO: {fileID: 11400000, guid: 62b7a5e24127a874bb6a5d50ff96781a, type: 2}
-  _mousePositionInputSO: {fileID: 11400000, guid: 773e313404363ee47a9d6eb252e4e821, type: 2}
-  _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
 --- !u!1 &6686135662977108656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,7 +1320,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6686135661895811675}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6686135663067671716
 MonoBehaviour:
@@ -1626,7 +1364,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6686135661895811675}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6686135663097749503
 MonoBehaviour:

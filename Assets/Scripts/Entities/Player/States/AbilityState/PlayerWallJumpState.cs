@@ -13,8 +13,8 @@ public class PlayerWallJumpState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-        
-        inputHandler.UseJumpInput();
+
+        conditionManager.UseJumpInput();
         conditionManager.ResetAmountOfJumpsLeft();
         conditionManager.DecreaseAmountOfJumpsLeft();
 

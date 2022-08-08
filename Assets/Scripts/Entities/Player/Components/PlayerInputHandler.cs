@@ -1,165 +1,158 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
-public class PlayerInputHandler : CoreComponent
+/// <summary>
+/// Module that processes player input.
+/// </summary>>
+[CreateAssetMenu(fileName = "InputHandler", menuName = "ScriptableObjects/Input Handler")]
+public class PlayerInputHandler : ScriptableObject, PlayerInputActions.IGameplayActions, PlayerInputActions.IUIActions
 {
-    [SerializeField] private InputTransitionCondition _isPressingJumpSO;
-    [SerializeField] private InputTransitionCondition _isJumpCanceledSO;
-    [SerializeField] private InputTransitionCondition _isPressingGrabSO;
-    [SerializeField] private InputTransitionCondition _isCrouchingSO;
-    [SerializeField] private InputTransitionCondition _isPressingPrimaryAttackSO;
-    [SerializeField] private InputTransitionCondition _isPressingSecondaryAttackSO;
-    [SerializeField] private InputTransitionCondition _isPressingPauseSO;
+    private PlayerInputActions _playerInputActions = default;
 
-    [SerializeField] private ScriptableInt _normalizedInputXSO;
-    [SerializeField] private ScriptableInt _normalizedInputYSO;
-    [SerializeField] private ScriptableInt _weaponSwitchInputSO;
-    [SerializeField] private ScriptableVector3 _mousePositionInputSO;
+    public event UnityAction<Vector2> MoveEvent = delegate { };
+    public event UnityAction<Vector2> AimEvent = delegate { };
+    public event UnityAction<Vector2> WeaponSwitchEvent = delegate { };
+    public event UnityAction<bool> PauseEvent = delegate { };
+    public event UnityAction<bool> GrabEvent = delegate { };
+    public event UnityAction<bool> CrouchEvent = delegate { };
+    public event UnityAction<bool> PrimaryAttackEvent = delegate { };
+    public event UnityAction<bool> SecondaryAttackEvent = delegate { };
+    public event UnityAction JumpEvent = delegate { };
+    public event UnityAction JumpCanceledEvent = delegate { };
 
-    [SerializeField] private PlayerData _playerData;
-
-    private PlayerInput _playerInput;
-    private Camera _mainCamera;
-
-    private Vector2 _rawMouseInput;
-    private float _jumpInputStartTime;
-
-    private void Awake()
+    public void OnEnable()
     {
-        _playerInput = GetComponent<PlayerInput>();
-        _mainCamera = Camera.main;
+        if (_playerInputActions == default)
+        {
+            _playerInputActions = new PlayerInputActions();
+
+            _playerInputActions.Gameplay.SetCallbacks(this);
+            //_playerInputActions.UI.SetCallbacks(this);
+        }
+
+        _playerInputActions.Enable();
     }
 
-    public override void LogicUpdate()
+    public void OnDisable()
     {
-        base.LogicUpdate();
-
-        ProcessMouseInput();
-        CheckJumpInputHoldTime();
+        _playerInputActions.Gameplay.Disable();
+        _playerInputActions.UI.Disable();
     }
 
-    //Process movement input
-    public void OnMoveInput(InputAction.CallbackContext context) 
+    //Gameplay input
+    public void OnMovement(InputAction.CallbackContext context)
     {
-        Vector2 rawMovementInput = context.ReadValue<Vector2>();
-
-        _normalizedInputXSO.value = Mathf.RoundToInt(rawMovementInput.x);
-
-        _normalizedInputYSO.value = Mathf.RoundToInt(rawMovementInput.y);
+        MoveEvent.Invoke(context.ReadValue<Vector2>());
     }
 
-    //Process jump input
-    public void OnJumpInput(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
-            _isPressingJumpSO.value = true;
-            _isJumpCanceledSO.value = false;
-
-            _jumpInputStartTime = Time.time;
-        }
+            JumpEvent.Invoke();
         else if (context.canceled)
-        {
-            _isPressingJumpSO.value = false;
-            _isJumpCanceledSO.value = true;
-        }
+            JumpCanceledEvent.Invoke();
     }
 
-    //Process wall grab input
-    public void OnGrabInput(InputAction.CallbackContext context)
+    public void OnGrab(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
-            _isPressingGrabSO.value = true;
-        }
+            GrabEvent.Invoke(true);
         else if (context.canceled)
-        {
-            _isPressingGrabSO.value = false;
-        }
+            GrabEvent.Invoke(false);
     }
 
-    //Process crouch input
-    public void OnCrouchInput(InputAction.CallbackContext context)
+    public void OnPrimaryAttack(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
-            _isCrouchingSO.value = true;
-        }
+            PrimaryAttackEvent.Invoke(true);
         else if (context.canceled)
-        {
-            _isCrouchingSO.value = false;
-        }
+            PrimaryAttackEvent.Invoke(false);
     }
 
-    //Process primary attack input
-    public void OnPrimaryAttackInput(InputAction.CallbackContext context)
+    public void OnSecondaryAttack(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
-            _isPressingPrimaryAttackSO.value = true;
-        }
+            SecondaryAttackEvent.Invoke(true);
         else if (context.canceled)
-        {
-            _isPressingPrimaryAttackSO.value = false;
-        }
+            SecondaryAttackEvent.Invoke(false);
     }
 
-    //Process secondary attack input
-    public void OnSecondaryAttackInput(InputAction.CallbackContext context)
+    public void OnCrouch(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
-            _isPressingSecondaryAttackSO.value = true;
-        }
+            CrouchEvent.Invoke(true);
         else if (context.canceled)
-        {
-            _isPressingSecondaryAttackSO.value = false;
-        }
+            CrouchEvent.Invoke(false);
     }
 
-    //Get raw mouse position input
-    public void OnAimInput(InputAction.CallbackContext context)
+    public void OnAim(InputAction.CallbackContext context)
     {
-        _rawMouseInput = context.ReadValue<Vector2>();
+        AimEvent.Invoke(context.ReadValue<Vector2>());
     }
 
-    //Process weapon switch input
-    public void OnWeaponSwitchInput(InputAction.CallbackContext context)
+    public void OnWeaponSwitch(InputAction.CallbackContext context)
     {
-        _weaponSwitchInputSO.value = (int)context.ReadValue<Vector2>().y;
+        WeaponSwitchEvent.Invoke(context.ReadValue<Vector2>());
     }
 
-    //Process pause input
-    public void OnPauseInput(InputAction.CallbackContext context)
+    public void OnPause(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
-            Application.Quit(); //TODO Make pause menu
-            _isPressingPauseSO.value = true;
-        }
+            PauseEvent.Invoke(true);
         else if (context.canceled)
-        {
-            _isPressingPauseSO.value = false;
-        }
-    }
-    
-    //Check if jump button has been held for the value in inputHoldTime
-    private void CheckJumpInputHoldTime() 
-    {
-        if (Time.time >= _jumpInputStartTime + _playerData.jumpInputHoldTime)
-        {
-            _isPressingJumpSO.value = false;
-        }
-    }
-    
-    //Process mouse position input
-    private void ProcessMouseInput() 
-    {
-        Vector3 shiftedMouseInput = new Vector3(_rawMouseInput.x, _rawMouseInput.y, 10);
-
-        _mousePositionInputSO.value = _mainCamera.ScreenToWorldPoint(shiftedMouseInput);
+            PauseEvent.Invoke(false);
     }
 
-    public void UseJumpInput() => _isPressingJumpSO.value = false; 
+    //UI input
+    public void OnNavigate(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnSubmit(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnPoint(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnClick(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnScrollWheel(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnMiddleClick(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnRightClick(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnTrackedDevicePosition(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnTrackedDeviceOrientation(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
 }

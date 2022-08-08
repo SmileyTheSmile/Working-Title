@@ -11,7 +11,7 @@ public class PlayerJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        inputHandler.UseJumpInput();
+        conditionManager.UseJumpInput();
         conditionManager.DecreaseAmountOfJumpsLeft();
         
         movement.SetVelocityY(_playerData.jumpVelocity);

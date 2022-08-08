@@ -11,10 +11,6 @@ public abstract class PlayerState : GenericState
     { get => _visualController ?? _entity.GetCoreComponent(ref _visualController); }
     private VisualController _visualController;
 
-    protected PlayerInputHandler inputHandler
-    { get => _inputHandler ?? _entity.GetCoreComponent(ref _inputHandler); }
-    private PlayerInputHandler _inputHandler;
-
     [SerializeField] protected PlayerData _playerData;
     
     //What to do when entering the state
