@@ -22,7 +22,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
 
         Step();
 
-        movement.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        conditionManager.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     private void Step()
@@ -41,7 +41,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
 
         _moveSound.Stop();
 
-        movement.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        conditionManager.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void DoActions()

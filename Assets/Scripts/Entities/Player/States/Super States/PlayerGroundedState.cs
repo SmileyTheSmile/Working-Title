@@ -64,7 +64,7 @@ public abstract class PlayerGroundedState : PlayerState
     {
         base.DoActions();
 
-        movement.CheckMovementDirection(_inputX);
+        conditionManager.CheckMovementDirection(_inputX);
     }
 
     public override GenericState DoTransitions()

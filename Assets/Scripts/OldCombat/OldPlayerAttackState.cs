@@ -34,7 +34,7 @@ public class OldPlayerAttackState : PlayerAbilityState
     {
         base.DoActions();
 
-        movement.CheckMovementDirection(_inputX);
+        conditionManager.CheckMovementDirection(_inputX);
 
         if (_setVelocity)
         {

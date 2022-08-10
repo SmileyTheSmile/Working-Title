@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
-    private ConditionManager conditionManager
+    private TemporaryComponent conditionManager
     { get => _conditionManager ?? _entity.GetCoreComponent(ref _conditionManager); }
-    private ConditionManager _conditionManager;
+    private TemporaryComponent _conditionManager;
 
     private Movement movement
     { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
@@ -40,8 +40,8 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Apply knockback to entity
     public void Knockback(Vector2 angle, float strength, int direction)
     {
-        movement?.SetVelocity(strength, angle, direction);
-        movement?.SetCanChangeVelocity(false);
+        movement?.SetVelocityAtAngle(strength, angle, direction);
+        movement.CanSetVelocity = false;
 
         _isKnockbackActive = true;
         _knockbackStartTime = Time.time;
@@ -50,9 +50,9 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Check if knockback should be stopped
     private void CheckKnockback()
     {
-        if ((_isKnockbackActive && movement.currentVelocity.y <= 0.0f && conditionManager.IsGroundedSO.value) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
+        if ((_isKnockbackActive && movement.CurrentVelocity.y <= 0.0f && conditionManager.IsGroundedSO.value) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
         {
-            movement?.SetCanChangeVelocity(true);
+            movement.CanSetVelocity = true;
 
             _isKnockbackActive = false;
         }

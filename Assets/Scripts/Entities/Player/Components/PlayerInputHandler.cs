@@ -41,7 +41,8 @@ public class PlayerInputHandler : ScriptableObject, PlayerInputActions.IGameplay
         _playerInputActions.UI.Disable();
     }
 
-    //Gameplay input
+#region Gameplay input
+
     public void OnMovement(InputAction.CallbackContext context)
     {
         MoveEvent.Invoke(context.ReadValue<Vector2>());
@@ -105,7 +106,10 @@ public class PlayerInputHandler : ScriptableObject, PlayerInputActions.IGameplay
             PauseEvent.Invoke(false);
     }
 
-    //UI input
+    #endregion
+
+#region UI input
+
     public void OnNavigate(InputAction.CallbackContext context)
     {
         throw new NotImplementedException();
@@ -155,4 +159,6 @@ public class PlayerInputHandler : ScriptableObject, PlayerInputActions.IGameplay
     {
         throw new NotImplementedException();
     }
+
+#endregion
 }

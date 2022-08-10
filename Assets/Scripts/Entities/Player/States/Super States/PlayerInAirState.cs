@@ -87,13 +87,13 @@ public class PlayerInAirState : PlayerState
         CheckJumpMultiplier();
         CheckCoyoteTime();
 
-        movement.CheckMovementDirection(_inputX);
+        conditionManager.CheckMovementDirection(_inputX);
         
         if (_inputX != 0)
             movement.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
 
-        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.currentVelocity.x));
-        visualController?.SetAnimationFloat("velocityY", movement.currentVelocity.y);
+        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.CurrentVelocity.x));
+        visualController?.SetAnimationFloat("velocityY", movement.CurrentVelocity.y);
     }
     
     public override GenericState DoTransitions()
@@ -172,10 +172,10 @@ public class PlayerInAirState : PlayerState
 
         if (_isJumpCanceled)
         {
-            movement.SetVelocityY(movement.currentVelocity.y * _playerData.variableJumpHeightMultiplier);
+            movement.SetVelocityY(movement.CurrentVelocity.y * _playerData.variableJumpHeightMultiplier);
             IsJumpingSO.value = false;
         }
-        else if (movement.currentVelocity.y <= 0f)
+        else if (movement.CurrentVelocity.y <= 0f)
         {
             IsJumpingSO.value = false;
         }

@@ -7,6 +7,9 @@ public abstract class Weapon : MonoBehaviour
     protected Movement movement
     { get => _movement ?? _player.GetCoreComponent(ref _movement); }
     private Movement _movement;
+    protected TemporaryComponent conditionManager
+    { get => _conditionManager ?? _player.GetCoreComponent(ref _conditionManager); }
+    private TemporaryComponent _conditionManager;
 
     protected WeaponHandler weaponHandler
     { get => _weaponHandler ?? _player.GetCoreComponent(ref _weaponHandler); }
@@ -50,6 +53,6 @@ public abstract class Weapon : MonoBehaviour
 
     private void HandlePlayerFacingDirection()
     {
-        movement.CheckFacingDirection(_mousePosition, _player.transform.position);
+        conditionManager.CheckFacingDirection(_mousePosition, _player.transform.position);
     }
 }

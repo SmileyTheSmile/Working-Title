@@ -21,8 +21,8 @@ public class PlayerWallJumpState : PlayerAbilityState
         int wallJumpMovementDirection = (_isTouchingWall ? -1 : 1) * _movementDir;
         Vector2 wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
 
-        movement.SetVelocity(_playerData.wallJumpVelocity, wallJumpDirection, wallJumpMovementDirection);
-        movement.CheckMovementDirection(wallJumpMovementDirection);
+        movement.SetVelocityAtAngle(_playerData.wallJumpVelocity, wallJumpDirection, wallJumpMovementDirection);
+        conditionManager.CheckMovementDirection(wallJumpMovementDirection);
     }
 
     /*
