@@ -13,7 +13,7 @@ public class WeaponAnimationToWeapon : MonoBehaviour
 
     private void AnimationFinishedTrigger()
     {
-        weapon.AnimationFinishedTrigger();
+        //weapon.AnimationFinishedTrigger();
     }
 
     private void AnimationStartMovementTrigger()

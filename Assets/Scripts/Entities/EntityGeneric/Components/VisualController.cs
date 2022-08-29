@@ -1,17 +1,17 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class VisualController : CoreComponent
 {
-    private FiniteStateMachine stateMachine
-    { get => _stateMachine ?? _entity.GetCoreComponent(ref _stateMachine); }
-    private FiniteStateMachine _stateMachine;
-    
     private Transform _facingDirectionIndicator;
     private Animator _animator;
+    private SpriteRenderer _sprite;
 
-    //Unity Awake
-    private void Awake()
+    public override void Initialize(EntityCore entity)
     {
+        base.Initialize(entity);
+
         _animator = GetComponent<Animator>();
         _facingDirectionIndicator = transform.Find("FacingDirectionIndicator");
     }
@@ -20,6 +20,7 @@ public class VisualController : CoreComponent
     public void FlipEntity(int facingDirection)
     {
         _facingDirectionIndicator.Rotate(0f, 180 * facingDirection, 0f);
+        //_sprite.flipX = false;
     }
 
     //Set the animation bool in the animator
@@ -34,7 +35,6 @@ public class VisualController : CoreComponent
         _animator.SetFloat(animFloatName, value);
     }
 
-    //Do stuff in states on animation triggers
-    protected virtual void AnimationTrigger() => stateMachine.AnimationTrigger();
-    protected virtual void AnimationFinishedTrigger() => stateMachine.AnimationFinishedTrigger();
+    public void AnimationTrigger() { }
+    public void AnimationFinishedTrigger() { }
 }

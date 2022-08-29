@@ -6,9 +6,9 @@ public class PlayerWallClimbState : PlayerTouchingWallState
 {
     [SerializeField] protected PlayerWallGrabState wallGrabState;
 
-    protected AudioSourcePlayer _moveSound => conditionManager.moveSound;
+    protected AudioSourcePlayer _moveSound => _temporaryComponent.moveSound;
     protected float _lastStepTime;
-    protected float _stepDelay => conditionManager.stepDelay;
+    protected float _stepDelay => _temporaryComponent.stepDelay;
 
     public override void Enter()
     {
@@ -33,7 +33,7 @@ public class PlayerWallClimbState : PlayerTouchingWallState
             Step();
         }
 
-        movement.SetVelocityY(_playerData.wallClimbVelocity);
+        _movement.SetVelocityY(_playerData.wallClimbVelocity);
     }
 
     private void Step()

@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    protected Movement movement
-    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
-    private Movement _movement;
+    protected Movement _movement;
 
     [SerializeField] protected PlayerAttackState primaryAttackState;
     [SerializeField] protected PlayerAttackState secondaryAttackState;
@@ -65,10 +63,17 @@ public class PlayerInAirState : PlayerState
     protected bool _canAttack => CanAttackSO.value;
     protected bool _isReloading => IsReloadingSO.value;
 
-    protected AudioSourcePlayer _jumpSound => conditionManager.jumpSound;
+    protected AudioSourcePlayer _jumpSound => _temporaryComponent.jumpSound;
 
     private float _airControlPercentage => _playerData.defaultAirControlPercentage;
     private bool _coyoteTime;
+
+    public override void Initialize(EntityCore entity)
+    {
+        base.Initialize(entity);
+
+        _movement = _core.GetCoreComponent<Movement>();
+    }
 
     public override void Enter()
     {
@@ -87,13 +92,13 @@ public class PlayerInAirState : PlayerState
         CheckJumpMultiplier();
         CheckCoyoteTime();
 
-        conditionManager.CheckMovementDirection(_inputX);
+        _temporaryComponent.CheckMovementDirection(_inputX);
         
         if (_inputX != 0)
-            movement.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
+            _movement.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
 
-        visualController?.SetAnimationFloat("velocityX", Mathf.Abs(movement.CurrentVelocity.x));
-        visualController?.SetAnimationFloat("velocityY", movement.CurrentVelocity.y);
+        _visualController?.SetAnimationFloat("velocityX", Mathf.Abs(_movement.CurrentVelocity.x));
+        _visualController?.SetAnimationFloat("velocityY", _movement.CurrentVelocity.y);
     }
     
     public override GenericState DoTransitions()
@@ -161,7 +166,7 @@ public class PlayerInAirState : PlayerState
         if (_coyoteTime && Time.time > _startTime + _playerData.coyoteTime)
         {
             _coyoteTime = false;
-            conditionManager.DecreaseAmountOfJumpsLeft();
+            _temporaryComponent.DecreaseAmountOfJumpsLeft();
         }
     }
 
@@ -172,10 +177,10 @@ public class PlayerInAirState : PlayerState
 
         if (_isJumpCanceled)
         {
-            movement.SetVelocityY(movement.CurrentVelocity.y * _playerData.variableJumpHeightMultiplier);
+            _movement.SetVelocityY(_movement.CurrentVelocity.y * _playerData.variableJumpHeightMultiplier);
             IsJumpingSO.value = false;
         }
-        else if (movement.CurrentVelocity.y <= 0f)
+        else if (_movement.CurrentVelocity.y <= 0f)
         {
             IsJumpingSO.value = false;
         }

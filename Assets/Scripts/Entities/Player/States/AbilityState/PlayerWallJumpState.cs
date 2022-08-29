@@ -14,15 +14,15 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        conditionManager.UseJumpInput();
-        conditionManager.ResetAmountOfJumpsLeft();
-        conditionManager.DecreaseAmountOfJumpsLeft();
+        _temporaryComponent.UseJumpInput();
+        _temporaryComponent.ResetAmountOfJumpsLeft();
+        _temporaryComponent.DecreaseAmountOfJumpsLeft();
 
         int wallJumpMovementDirection = (_isTouchingWall ? -1 : 1) * _movementDir;
         Vector2 wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
 
-        movement.SetVelocityAtAngle(_playerData.wallJumpVelocity, wallJumpDirection, wallJumpMovementDirection);
-        conditionManager.CheckMovementDirection(wallJumpMovementDirection);
+        _movement.SetVelocityAtAngle(_playerData.wallJumpVelocity, wallJumpDirection, wallJumpMovementDirection);
+        _temporaryComponent.CheckMovementDirection(wallJumpMovementDirection);
     }
 
     /*

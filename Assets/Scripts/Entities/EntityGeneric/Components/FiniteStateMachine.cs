@@ -1,6 +1,4 @@
-using System.Data.SqlTypes;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class FiniteStateMachine : CoreComponent
@@ -14,7 +12,7 @@ public class FiniteStateMachine : CoreComponent
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
+
         _currentState.DoActions();
         GenericState nextState = _currentState.DoTransitions();
 
@@ -29,10 +27,10 @@ public class FiniteStateMachine : CoreComponent
     {
         base.Initialize(entity); 
 
-        //TODO Move core setup in a proper place and get rid on state list
+        //TODO Move core setup in a proper place and get rid of state list
         foreach (var state in _states)
         {
-            state.SetCore(entity);
+            state.Initialize(entity);
         }
 
         _currentState = _startingState;
@@ -46,8 +44,4 @@ public class FiniteStateMachine : CoreComponent
         _currentState = newState;
         _currentState.Enter();
     }
-
-    //Do stuff in states on animation triggers
-    public void AnimationTrigger() => _currentState.AnimationTrigger();
-    public void AnimationFinishedTrigger() => _currentState.AnimationFinishedTrigger();
 }

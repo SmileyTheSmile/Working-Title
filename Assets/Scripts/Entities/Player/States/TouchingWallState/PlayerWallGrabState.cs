@@ -13,7 +13,7 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     {
         base.Enter();
 
-        _holdPosition = _entity.transform.position;
+        _holdPosition = _core.transform.position;
 
         HoldPosition();
     }
@@ -48,8 +48,8 @@ public class PlayerWallGrabState : PlayerTouchingWallState
 
     private void HoldPosition()
     {
-        _entity.transform.position = _holdPosition;
+        _core.transform.position = _holdPosition;
 
-        movement.SetVelocityZero();
+        _movement.SetVelocityZero();
     }
 }

@@ -8,9 +8,9 @@ public class PlayerMoveState : PlayerGroundedState
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
 
-    protected AudioSourcePlayer _moveSound => conditionManager.moveSound;
+    protected AudioSourcePlayer _moveSound => _temporaryComponent.moveSound;
     protected float _lastStepTime;
-    protected float _stepDelay => conditionManager.stepDelay;
+    protected float _stepDelay => _temporaryComponent.stepDelay;
 
     public override void Enter()
     {
@@ -31,11 +31,9 @@ public class PlayerMoveState : PlayerGroundedState
         base.DoActions();
 
         if (_lastStepTime + _stepDelay < Time.time)
-        {
             Step();
-        }
 
-        movement.SetVelocityX(_playerData.movementVelocity * _inputX);
+        _movement.SetVelocityX(_playerData.movementVelocity * _inputX);
         //movement.AddForceX(_playerData.movementVelocity * _inputX, ForceMode2D.Impulse);
     }
 

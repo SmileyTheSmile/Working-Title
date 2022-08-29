@@ -11,10 +11,10 @@ public class PlayerJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        conditionManager.UseJumpInput();
-        conditionManager.DecreaseAmountOfJumpsLeft();
+        _temporaryComponent.UseJumpInput();
+        _temporaryComponent.DecreaseAmountOfJumpsLeft();
         
-        movement.SetVelocityY(_playerData.jumpVelocity);
+        _movement.SetVelocityY(_playerData.jumpVelocity);
 
         IsJumpingSO.value = true;
     }

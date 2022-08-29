@@ -2,9 +2,7 @@ using UnityEngine;
 
 public abstract class PlayerGroundedState : PlayerState
 {
-    protected Movement movement
-    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
-    private Movement _movement;
+    protected Movement _movement;
 
     [SerializeField] protected PlayerAttackState primaryAttackState;
     [SerializeField] protected PlayerAttackState secondaryAttackState;
@@ -52,19 +50,27 @@ public abstract class PlayerGroundedState : PlayerState
     protected bool _canAttack => CanAttackSO.value;
     protected bool _isReloading => IsReloadingSO.value;
 
+    public override void Initialize(EntityCore entity)
+    {
+        base.Initialize(entity);
+
+        if (_movement == null)
+            _movement = _core.GetCoreComponent<Movement>();
+    }
+
     public override void Enter()
     {
         base.Enter();
 
-        conditionManager.ResetAmountOfJumpsLeft();
-        conditionManager.ResetAmountOfCrouchesLeft();
+        _temporaryComponent.ResetAmountOfJumpsLeft();
+        _temporaryComponent.ResetAmountOfCrouchesLeft();
     }
 
     public override void DoActions()
     {
         base.DoActions();
 
-        conditionManager.CheckMovementDirection(_inputX);
+        _temporaryComponent.CheckMovementDirection(_inputX);
     }
 
     public override GenericState DoTransitions()

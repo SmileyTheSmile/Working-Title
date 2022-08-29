@@ -12,8 +12,8 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     
     protected int _movementDir => MovementDirSO.value;
 
-    protected AudioSourcePlayer _moveSound => conditionManager.moveSound;
-    protected float _stepDelay => conditionManager.stepDelay;
+    protected AudioSourcePlayer _moveSound => _temporaryComponent.moveSound;
+    protected float _stepDelay => _temporaryComponent.stepDelay;
     protected float _lastStepTime;
 
     public override void Enter()
@@ -22,7 +22,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
 
         Step();
 
-        conditionManager.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     private void Step()
@@ -41,7 +41,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
 
         _moveSound.Stop();
 
-        conditionManager.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void DoActions()
@@ -53,7 +53,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
             Step();
         }
 
-        movement.SetVelocityX(_playerData.crouchMovementVelocity * _movementDir);
+        _movement.SetVelocityX(_playerData.crouchMovementVelocity * _movementDir);
     }
 
     public override GenericState DoTransitions()

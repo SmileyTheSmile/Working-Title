@@ -2,9 +2,7 @@ using UnityEngine;
 
 public abstract class PlayerAbilityState : PlayerState
 {
-    protected Movement movement
-    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
-    private Movement _movement;
+    protected Movement _movement;
 
     [SerializeField] protected CollisionCheckTransitionCondition IsGroundedSO;
     [SerializeField] protected InputTransitionCondition IsPressingCrouchSO;
@@ -20,6 +18,13 @@ public abstract class PlayerAbilityState : PlayerState
     protected bool _hasStoppedFalling => HasStoppedFallingSO.value;
 
     protected bool _isAbilityDone;
+
+    public override void Initialize(EntityCore entity)
+    {
+        base.Initialize(entity);
+
+        _movement = _core.GetCoreComponent<Movement>();
+    }
 
     public override void Enter()
     {

@@ -9,7 +9,7 @@ public class PlayerLandState : PlayerGroundedState
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
 
-    protected AudioSourcePlayer _fallSound => conditionManager.fallSound;
+    protected AudioSourcePlayer _fallSound => _temporaryComponent.fallSound;
 
     public override void Enter()
     {

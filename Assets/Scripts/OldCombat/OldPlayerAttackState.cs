@@ -6,8 +6,8 @@ public class OldPlayerAttackState : PlayerAbilityState
 {
     private OldWeapon _weapon;
 
-    private int _inputX => conditionManager._normalizedInputXSO.value;
-    private int _movementDir => conditionManager._movementDirSO.value;
+    private int _inputX => _temporaryComponent._normalizedInputXSO.value;
+    private int _movementDir => _temporaryComponent._movementDirSO.value;
 
     private float _velocityToSet;
 
@@ -34,30 +34,30 @@ public class OldPlayerAttackState : PlayerAbilityState
     {
         base.DoActions();
 
-        conditionManager.CheckMovementDirection(_inputX);
+        _temporaryComponent.CheckMovementDirection(_inputX);
 
         if (_setVelocity)
         {
-            movement.SetVelocityX(_velocityToSet * _movementDir);
+            _movement.SetVelocityX(_velocityToSet * _movementDir);
         }
     }
 
-    public override void AnimationFinishedTrigger()
+    /*public override void AnimationFinishedTrigger()
     {
         base.AnimationFinishedTrigger();
 
         _isAbilityDone = true;
-    }
+    }*/
 
     public void SetWeapon(OldWeapon weapon)
     {
         _weapon = weapon;
-        _weapon.InitializeWeapon(this, _entity);
+        _weapon.InitializeWeapon(this, _core);
     }
 
     public void SetPlayerVelocity(float velocity)
     {
-        movement?.SetVelocityX(velocity * _movementDir);
+        _movement?.SetVelocityX(velocity * _movementDir);
 
         _velocityToSet = velocity;
         _setVelocity = true;

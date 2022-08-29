@@ -9,7 +9,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
 
-    protected AudioSourcePlayer _fallSound => conditionManager.fallSound;
+    protected AudioSourcePlayer _fallSound => _temporaryComponent.fallSound;
 
     public override void Enter()
     {
@@ -18,14 +18,14 @@ public class PlayerCrouchLandState : PlayerGroundedState
         if (_fallSound)
             _fallSound.Play();
 
-        conditionManager.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        conditionManager.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
     }
 
     public override GenericState DoTransitions()

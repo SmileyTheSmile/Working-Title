@@ -63,10 +63,10 @@ public class OldWeapon : MonoBehaviour
         state.SetFlipCheck(true);
     }
 
-    public virtual void AnimationFinishedTrigger()
+    /*public virtual void AnimationFinishedTrigger()
     {
         state.AnimationFinishedTrigger();
-    }
+    }*/
 
     public virtual void AnimationStartMovementTrigger()
     {

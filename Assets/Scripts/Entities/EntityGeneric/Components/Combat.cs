@@ -2,24 +2,25 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
-    private TemporaryComponent conditionManager
-    { get => _conditionManager ?? _entity.GetCoreComponent(ref _conditionManager); }
-    private TemporaryComponent _conditionManager;
+    private TemporaryComponent _temporaryComponent;
 
-    private Movement movement
-    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
 
     [SerializeField] private float _maxKnockbackTime = 0.2f;
     [SerializeField] private float _maxHealth;
 
-    private bool _isKnockbackActive = false;
+    private bool _isKnockbackActive;
     private float _knockbackStartTime;
     private float _currentHealth;
 
-    //Unity Awake
-    private void Awake()
+    public override void Initialize(EntityCore entity)
     {
+        base.Initialize(entity);
+
+        _movement = _entity.GetCoreComponent<Movement>();
+        _temporaryComponent = _entity.GetCoreComponent<TemporaryComponent>();
+
+        _isKnockbackActive = false;
         _currentHealth = _maxHealth;
     }
 
@@ -40,8 +41,8 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Apply knockback to entity
     public void Knockback(Vector2 angle, float strength, int direction)
     {
-        movement?.SetVelocityAtAngle(strength, angle, direction);
-        movement.CanSetVelocity = false;
+        _movement?.SetVelocityAtAngle(strength, angle, direction);
+        _movement.CanSetVelocity = false;
 
         _isKnockbackActive = true;
         _knockbackStartTime = Time.time;
@@ -50,9 +51,9 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Check if knockback should be stopped
     private void CheckKnockback()
     {
-        if ((_isKnockbackActive && movement.CurrentVelocity.y <= 0.0f && conditionManager.IsGroundedSO.value) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
+        if ((_isKnockbackActive && _movement.CurrentVelocity.y <= 0.0f && _temporaryComponent.IsGroundedSO.value) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
         {
-            movement.CanSetVelocity = true;
+            _movement.CanSetVelocity = true;
 
             _isKnockbackActive = false;
         }

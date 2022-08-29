@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Movement : CoreComponent
 {
     public Vector2 CurrentVelocity { get => _rigidBody.velocity; }
@@ -14,11 +16,11 @@ public class Movement : CoreComponent
     {
         base.Initialize(entity);
 
-        _rigidBody = GetComponentInParent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
         _rigidBody.velocity = Vector2.zero;
         CanSetVelocity = true;
 
-        _boxCollider = GetComponentInParent<BoxCollider2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
         DefaultSize = _boxCollider.size;
     }
 

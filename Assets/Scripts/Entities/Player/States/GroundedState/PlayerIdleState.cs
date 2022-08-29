@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
 
-        movement.SetVelocityX(0f);
+        _movement.SetVelocityX(0f);
     }
 
     public override GenericState DoTransitions()
@@ -20,9 +20,7 @@ public class PlayerIdleState : PlayerGroundedState
         var parentResult = base.DoTransitions();
 
         if (parentResult != null)
-        {
             return parentResult;
-        }
 
         if (_isMovingX)
         {

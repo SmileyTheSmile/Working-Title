@@ -2,9 +2,7 @@ using UnityEngine;
 
 public abstract class PlayerTouchingWallState : PlayerState
 {
-    protected Movement movement
-    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
-    private Movement _movement;
+    protected Movement _movement;
 
     [SerializeField] protected PlayerIdleState idleState;
     [SerializeField] protected PlayerInAirState inAirState;
@@ -36,6 +34,13 @@ public abstract class PlayerTouchingWallState : PlayerState
     protected bool _isMovingUp => IsMovingUpSO.value;
     protected bool _isMovingDown => IsMovingDownSO.value;
     protected bool _isMovingInCorrectDir => IsMovingInCorrectDirSO.value;
+
+    public override void Initialize(EntityCore entity)
+    {
+        base.Initialize(entity);
+
+        _movement = _core.GetCoreComponent<Movement>();
+    }
 
     public override GenericState DoTransitions()
     {

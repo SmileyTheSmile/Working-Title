@@ -58,8 +58,10 @@ public class TemporaryComponent : CoreComponent
     private int _amountOfCrouchesLeft;
     private PlayerCrouchingForm _crouchingForm;
 
-    private void Awake()
+    public override void Initialize(EntityCore entity)
     {
+        base.Initialize(entity);
+        
         _mainCamera = Camera.main;
         _crouchingForm = PlayerCrouchingForm.notCrouching;
         _facingDir = 1;

@@ -6,7 +6,7 @@ public abstract class GenericState : ScriptableObject
     [SerializeField] protected List<StateTransition> _transitions = new List<StateTransition>();
     [SerializeField] protected string _animBoolName;
 
-    protected EntityCore _entity;
+    protected EntityCore _core;
     protected float _startTime;
     protected bool _isAnimationFinished;
     protected bool _isExitingState;
@@ -25,9 +25,9 @@ public abstract class GenericState : ScriptableObject
         _isExitingState = true;
     }
     
-    public virtual void SetCore(EntityCore entity)
+    public virtual void Initialize(EntityCore entity)
     {
-        _entity = entity;
+        _core = entity;
     }
     
     //Do all the checks if the state should transition into another state
