@@ -7,7 +7,7 @@ public abstract class PlayerState : GenericState
 
     [SerializeField] protected PlayerData _playerData;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
 

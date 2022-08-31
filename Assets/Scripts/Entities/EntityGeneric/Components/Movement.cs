@@ -12,7 +12,7 @@ public class Movement : CoreComponent
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
 

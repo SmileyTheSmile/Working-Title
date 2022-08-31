@@ -4,49 +4,28 @@ using System;
 //TODO Get rid of this class and move everything in proper components
 public class TemporaryComponent : CoreComponent
 {
-    protected Movement movement
-    { get => _movement ?? _entity.GetCoreComponent(ref _movement); }
     private Movement _movement;
-    private WeaponHandler weaponHandler
-    { get => _weaponHandler ?? _entity.GetCoreComponent(ref _weaponHandler); }
     private WeaponHandler _weaponHandler;
-
-    private VisualController visualController
-    { get => _visualController ?? _entity.GetCoreComponent(ref _visualController); }
     private VisualController _visualController;
 
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private PlayerConditionTable _playerConditionTable;
+    [SerializeField] private PlayerInputHandler _playerInputHandler;
+
     [SerializeField] private Transform _ceilingCheckTransform;
     [SerializeField] private CollisionCheckTransitionCondition _ceilingCheck;
     [SerializeField] private CollisionCheckTransitionCondition _wallFront;
-    
-    public ScriptableInt _movementDirSO;
-    public CollisionCheckTransitionCondition IsGroundedSO;
-    public InputTransitionCondition IsMovingXSO;
-    public InputTransitionCondition IsMovingUpSO;
-    public InputTransitionCondition IsMovingDownSO;
-    public InputTransitionCondition _isPressingJumpSO;
-    public InputTransitionCondition _isJumpCanceledSO;
-    public InputTransitionCondition _isPressingGrabSO;
-    public InputTransitionCondition _isCrouchingSO;
-    public InputTransitionCondition _isPressingPrimaryAttackSO;
-    public InputTransitionCondition _isPressingSecondaryAttackSO;
-    public InputTransitionCondition _isPressingPauseSO;
-    public SupportTransitionCondition HasStoppedFalling;
-    public SupportTransitionCondition CanCrouchSO;
-    public SupportTransitionCondition CanJumpSO;
-    public SupportTransitionCondition IsMovingInCorrectDirSO;
 
-    public ScriptableInt _normalizedInputXSO;
-    public ScriptableInt _normalizedInputYSO;
-    public ScriptableInt _weaponSwitchInputSO;
+    //
+    public bool IsGrounded => _playerConditionTable.IsGrounded;
+    public int NormalizedInputX => _playerConditionTable.NormalizedInputX;
+    public int MovementDir => _playerConditionTable.MovementDir;
+    //
 
     public AudioSourcePlayer fallSound;
     public AudioSourcePlayer moveSound;
     public AudioSourcePlayer jumpSound;
 
-    public ScriptableVector3 _mousePositionInputSO;
-    public PlayerInputHandler _playerInputHandler;
     private float _jumpInputStartTime;
 
     private Camera _mainCamera;
@@ -58,19 +37,28 @@ public class TemporaryComponent : CoreComponent
     private int _amountOfCrouchesLeft;
     private PlayerCrouchingForm _crouchingForm;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
         
         _mainCamera = Camera.main;
         _crouchingForm = PlayerCrouchingForm.notCrouching;
         _facingDir = 1;
-        _movementDirSO.value = 1;
-
+        _playerConditionTable.MovementDir = 1;
         _jumpInputStartTime = Time.time;//jump input
+        
         //TODO Fix this not working after ScriptableObject references are made on second compile
         ResetAmountOfJumpsLeft();
         ResetAmountOfCrouchesLeft();
+    }
+
+    public override void SetupConnections()
+    {
+        base.SetupConnections();
+
+        _movement = _core.GetCoreComponent<Movement>();
+        _weaponHandler = _core.GetCoreComponent<WeaponHandler>();
+        _visualController = _core.GetCoreComponent<VisualController>();
     }
 
     private void OnEnable()
@@ -103,74 +91,73 @@ public class TemporaryComponent : CoreComponent
     {
         base.LogicUpdate();
 
-        HasStoppedFalling.value = movement.CurrentVelocity.y < 0.01;
-        CanCrouchSO.value = CanCrouch();
-        CanJumpSO.value = CanJump();
-        IsMovingInCorrectDirSO.value = (_normalizedInputXSO.value == _movementDirSO.value);
+        _playerConditionTable.HasStoppedFalling = _movement.CurrentVelocity.y < 0.01;
+        _playerConditionTable.CanCrouch = CanCrouch();
+        _playerConditionTable.CanJump = CanJump();
+        _playerConditionTable.IsMovingInCorrectDir = (_playerConditionTable.NormalizedInputX == _playerConditionTable.MovementDir);
 
-        if (_normalizedInputXSO.value == 0)
-            IsMovingXSO.value = false;
+        if (_playerConditionTable.NormalizedInputX == 0)
+            _playerConditionTable.IsMovingX = false;
         else
-            IsMovingXSO.value = true;
+            _playerConditionTable.IsMovingX = true;
 
-        switch (_normalizedInputYSO.value)
+        switch (_playerConditionTable.NormalizedInputY)
         {
             case > 0:
-                IsMovingUpSO.value = true;
-                IsMovingDownSO.value = false;
+                _playerConditionTable.IsMovingUp = true;
+                _playerConditionTable.IsMovingDown = false;
                 break;
             case < 0:
-                IsMovingUpSO.value = false;
-                IsMovingDownSO.value = true;
+                _playerConditionTable.IsMovingUp = false;
+                _playerConditionTable.IsMovingDown = true;
                 break;
             default:
-                IsMovingUpSO.value = false;
-                IsMovingDownSO.value = false;
+                _playerConditionTable.IsMovingUp = false;
+                _playerConditionTable.IsMovingDown = false;
                 break;
         }
-
         ProcessMouseInput();
         CheckJumpInputHoldTime();
     }
 
     public void OnMovement(Vector2 value)
     {
-        _normalizedInputXSO.value = Mathf.RoundToInt(value.x);
-        _normalizedInputYSO.value = Mathf.RoundToInt(value.y);
+        _playerConditionTable.NormalizedInputX = Mathf.RoundToInt(value.x);
+        _playerConditionTable.NormalizedInputY = Mathf.RoundToInt(value.y);
     }
 
     public void OnJump()
     {
-        _isPressingJumpSO.value = true;
-        _isJumpCanceledSO.value = false;
+        _playerConditionTable.IsPressingJump = true;
+        _playerConditionTable.IsJumpCanceled = false;
 
         _jumpInputStartTime = Time.time;
     }
 
     public void OnJumpCancelled()
     {
-        _isPressingJumpSO.value = false;
-        _isJumpCanceledSO.value = true;
+        _playerConditionTable.IsPressingJump = false;
+        _playerConditionTable.IsJumpCanceled = true;
     }
 
     public void OnGrab(bool value)
     {
-        _isPressingGrabSO.value = value;
+        _playerConditionTable.IsPressingGrab = value;
     }
 
     public void OnPrimaryAttack(bool value)
     {
-        _isPressingPrimaryAttackSO.value = value;
+        _playerConditionTable.IsPressingPrimaryAttack = value;
     }
 
     public void OnSecondaryAttack(bool value)
     {
-        _isPressingSecondaryAttackSO.value = value;
+        _playerConditionTable.IsPressingSecondaryAttack = value;
     }
 
     public void OnCrouch(bool value)
     {
-        _isCrouchingSO.value = value;
+        _playerConditionTable.IsPressingCrouch = value;
     }
 
     public void OnAim(Vector2 value)
@@ -180,7 +167,7 @@ public class TemporaryComponent : CoreComponent
 
     public void OnWeaponSwitch(Vector2 value)
     {
-        _weaponSwitchInputSO.value = (int)value.y;
+        _playerConditionTable.WeaponSwitchInput = (int)value.y;
     }
 
     public void OnPause()
@@ -192,7 +179,7 @@ public class TemporaryComponent : CoreComponent
     {
         Vector3 shiftedMouseInput = new Vector3(_rawMouseInput.x, _rawMouseInput.y, 10);
 
-        _mousePositionInputSO.value = _mainCamera.ScreenToWorldPoint(shiftedMouseInput);
+        _playerConditionTable.MousePosition = _mainCamera.ScreenToWorldPoint(shiftedMouseInput);
     }
 
 
@@ -201,7 +188,7 @@ public class TemporaryComponent : CoreComponent
     {
         if (Time.time >= _jumpInputStartTime + _playerData.jumpInputHoldTime)
         {
-            _isPressingJumpSO.value = false;
+            _playerConditionTable.IsPressingJump = false;
         }
     }
 
@@ -233,36 +220,36 @@ public class TemporaryComponent : CoreComponent
 
     public void ResetColliderHeight(float biggerHeight, float smallerHeight)
     {
-        movement.SetColliderSize(movement.DefaultSize);
-        movement.SetColliderOffset(Vector2.zero);
+        _movement.SetColliderSize(_movement.DefaultSize);
+        _movement.SetColliderOffset(Vector2.zero);
 
-        MoveCeilingCheck(biggerHeight, smallerHeight, movement.DefaultSize.y);
+        MoveCeilingCheck(biggerHeight, smallerHeight, _movement.DefaultSize.y);
     }
 
     public void SquashColliderDown(float biggerHeight, float smallerHeight)
     {
-        float height = movement.ColliderSize.y * smallerHeight;
+        float height = _movement.ColliderSize.y * smallerHeight;
 
-        movement.SetColliderOffsetY((height - movement.ColliderSize.y) / 2);
-        movement.SetColliderSizeY(height);
+        _movement.SetColliderOffsetY((height - _movement.ColliderSize.y) / 2);
+        _movement.SetColliderSizeY(height);
 
-        MoveCeilingCheck(smallerHeight, biggerHeight, movement.DefaultSize.y);
+        MoveCeilingCheck(smallerHeight, biggerHeight, _movement.DefaultSize.y);
     }
 
     public void Flip()
     {
         _facingDir *= -1;
 
-        weaponHandler?.FlipWeapon(_facingDir);
-        visualController?.FlipEntity(_facingDir);
+        _weaponHandler?.FlipWeapon(_facingDir);
+        _visualController?.FlipEntity(_facingDir);
     }
 
     //Change the movement direction of the entity based on the x input
     public void CheckMovementDirection(int inputX)
     {
-        if (inputX != 0 && inputX != _movementDirSO.value)
+        if (inputX != 0 && inputX != _playerConditionTable.MovementDir)
         {
-            _movementDirSO.value *= -1;
+            _playerConditionTable.MovementDir *= -1;
         }
     }
 
@@ -280,18 +267,18 @@ public class TemporaryComponent : CoreComponent
         }
     }
 
-    public void UseJumpInput() => _isPressingJumpSO.value = false;
+    public void UseJumpInput() => _playerConditionTable.IsPressingJump = false;
     public bool CanCrouch() => (_amountOfCrouchesLeft > 0);
     public void ResetAmountOfCrouchesLeft() => _amountOfCrouchesLeft = _playerData.amountOfCrouches;
     public void DecreaseAmountOfCrouchesLeft() => _amountOfCrouchesLeft--;
     public bool CanJump() => (_amountOfJumpsLeft > 0);
     public void ResetAmountOfJumpsLeft() => _amountOfJumpsLeft = _playerData.amountOfJumps;
     public void DecreaseAmountOfJumpsLeft() => _amountOfJumpsLeft--;
+}
 
-    private enum PlayerCrouchingForm
-    {
-        notCrouching,
-        crouchingDown,
-        crouchingUp
-    }
+public enum PlayerCrouchingForm
+{
+    notCrouching,
+    crouchingDown,
+    crouchingUp
 }

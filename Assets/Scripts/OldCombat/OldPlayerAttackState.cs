@@ -6,8 +6,8 @@ public class OldPlayerAttackState : PlayerAbilityState
 {
     private OldWeapon _weapon;
 
-    private int _inputX => _temporaryComponent._normalizedInputXSO.value;
-    private int _movementDir => _temporaryComponent._movementDirSO.value;
+    private int _inputX => _temporaryComponent.NormalizedInputX;
+    private int _movementDir => _temporaryComponent.MovementDir;
 
     private float _velocityToSet;
 

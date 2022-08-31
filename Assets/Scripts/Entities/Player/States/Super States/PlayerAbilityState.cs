@@ -19,7 +19,7 @@ public abstract class PlayerAbilityState : PlayerState
 
     protected bool _isAbilityDone;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
 

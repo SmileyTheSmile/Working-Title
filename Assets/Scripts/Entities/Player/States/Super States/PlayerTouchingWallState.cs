@@ -35,7 +35,7 @@ public abstract class PlayerTouchingWallState : PlayerState
     protected bool _isMovingDown => IsMovingDownSO.value;
     protected bool _isMovingInCorrectDir => IsMovingInCorrectDirSO.value;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
 

@@ -23,7 +23,7 @@ public class FiniteStateMachine : CoreComponent
     }
 
     //Start the state machine
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity); 
 

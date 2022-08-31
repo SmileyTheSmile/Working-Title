@@ -19,7 +19,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected ScriptableVector3 _mousePositionSO;
 
     protected Animator _weaponAnimator;
-    protected EntityCore _player;
+    protected Core _player;
     protected Vector2 _aimDirection;
 
     protected bool _isPressingAttackButton => _isPressingAttackButtonSO.value;
@@ -30,7 +30,7 @@ public abstract class Weapon : MonoBehaviour
     protected virtual void Awake()
     {
         _weaponAnimator = GetComponent<Animator>();
-        _player = GetComponentInParent<EntityCore>();
+        _player = GetComponentInParent<Core>();
     }
 
     public virtual void LogicUpdate()

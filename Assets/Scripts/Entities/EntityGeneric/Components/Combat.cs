@@ -13,15 +13,20 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     private float _knockbackStartTime;
     private float _currentHealth;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
 
-        _movement = _entity.GetCoreComponent<Movement>();
-        _temporaryComponent = _entity.GetCoreComponent<TemporaryComponent>();
-
         _isKnockbackActive = false;
         _currentHealth = _maxHealth;
+    }
+
+    public override void SetupConnections()
+    {
+        base.SetupConnections();
+
+        _movement = _core.GetCoreComponent<Movement>();
+        _temporaryComponent = _core.GetCoreComponent<TemporaryComponent>();
     }
 
     //Update the component's logic (Update)
@@ -51,7 +56,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Check if knockback should be stopped
     private void CheckKnockback()
     {
-        if ((_isKnockbackActive && _movement.CurrentVelocity.y <= 0.0f && _temporaryComponent.IsGroundedSO.value) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
+        if ((_isKnockbackActive && _movement.CurrentVelocity.y <= 0.0f && _temporaryComponent.IsGrounded) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
         {
             _movement.CanSetVelocity = true;
 

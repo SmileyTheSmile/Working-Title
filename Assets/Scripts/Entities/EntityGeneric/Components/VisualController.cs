@@ -8,7 +8,7 @@ public class VisualController : CoreComponent
     private Animator _animator;
     private SpriteRenderer _sprite;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
 

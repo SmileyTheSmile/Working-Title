@@ -8,7 +8,7 @@ public class OldWeapon : MonoBehaviour
     protected Animator baseAnimator;
     protected Animator weaponAnimator;
 
-    protected EntityCore entity;
+    protected Core entity;
 
     protected OldPlayerAttackState state;
 
@@ -47,7 +47,7 @@ public class OldWeapon : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void InitializeWeapon(OldPlayerAttackState state, EntityCore entity)
+    public void InitializeWeapon(OldPlayerAttackState state, Core entity)
     {
         this.state = state;
         this.entity = entity;

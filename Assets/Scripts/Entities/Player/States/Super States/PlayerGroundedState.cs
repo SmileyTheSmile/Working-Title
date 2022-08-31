@@ -4,6 +4,7 @@ public abstract class PlayerGroundedState : PlayerState
 {
     protected Movement _movement;
 
+    [SerializeField] private PlayerConditionTable _playerConditionTable;
     [SerializeField] protected PlayerAttackState primaryAttackState;
     [SerializeField] protected PlayerAttackState secondaryAttackState;
     [SerializeField] protected PlayerJumpState jumpState;
@@ -11,51 +12,35 @@ public abstract class PlayerGroundedState : PlayerState
     [SerializeField] protected PlayerInAirState inAirState;
     [SerializeField] protected PlayerCrouchInAirState crouchInAirState;
     [SerializeField] protected PlayerWallGrabState wallGrabState;
-
-    [SerializeField] protected ScriptableInt InputXSO;
-
-    [SerializeField] protected InputTransitionCondition IsPressingGrabSO;
-    [SerializeField] protected InputTransitionCondition IsPressingCrouchSO;
-    [SerializeField] protected InputTransitionCondition IsPressingJumpSO;
-    [SerializeField] protected InputTransitionCondition IsPressingPrimaryAttackSO;
-    [SerializeField] protected InputTransitionCondition IsPressingSecondaryAttackSO;
-    [SerializeField] protected InputTransitionCondition IsMovingXSO;
-    [SerializeField] protected CollisionCheckTransitionCondition IsGroundedSO;
     [SerializeField] protected CollisionCheckTransitionCondition IsTouchingCeilingSO;
     [SerializeField] protected CollisionCheckTransitionCondition IsTouchingWallFrontSO;
     [SerializeField] protected CollisionCheckTransitionCondition IsTouchingLedgeHorizontalSO;
-    [SerializeField] protected SupportTransitionCondition CanCrouchSO;
-    [SerializeField] protected SupportTransitionCondition CanJumpSO;
-    [SerializeField] protected SupportTransitionCondition IsJumpingSO;
-    [SerializeField] protected SupportTransitionCondition CanAttackSO;
-    [SerializeField] protected SupportTransitionCondition IsReloadingSO;
+    
+    protected int _inputX => _playerConditionTable.NormalizedInputX;
 
-    protected int _inputX => InputXSO.value;
+    protected bool _isPressingGrab => _playerConditionTable.IsPressingGrab;
+    protected bool _isPressingCrouch => _playerConditionTable.IsPressingCrouch;
+    protected bool _isPressingJump => _playerConditionTable.IsPressingJump;
+    protected bool _isPressingPrimaryAttack => _playerConditionTable.IsPressingPrimaryAttack;
+    protected bool _isPressingSecondaryAttack => _playerConditionTable.IsPressingSecondaryAttack;
+    protected bool _isMovingX => _playerConditionTable.IsMovingX;
 
-    protected bool _isPressingGrab => IsPressingGrabSO.value;
-    protected bool _isPressingCrouch => IsPressingCrouchSO.value;
-    protected bool _isPressingJump => IsPressingJumpSO.value;
-    protected bool _isPressingPrimaryAttack => IsPressingPrimaryAttackSO.value;
-    protected bool _isPressingSecondaryAttack => IsPressingSecondaryAttackSO.value;
-    protected bool _isMovingX => IsMovingXSO.value;
-
-    protected bool _isGrounded => IsGroundedSO.value;
+    protected bool _isGrounded => _playerConditionTable.IsGrounded;
     protected bool _isTouchingCeiling => IsTouchingCeilingSO.value;
     protected bool _isTouchingWall => IsTouchingWallFrontSO.value;
     protected bool _isTouchingLedge => IsTouchingLedgeHorizontalSO.value;
 
-    protected bool _canCrouch => CanCrouchSO.value;
-    protected bool _canJump => CanJumpSO.value;
-    protected bool _isJumping => IsJumpingSO.value;
-    protected bool _canAttack => CanAttackSO.value;
-    protected bool _isReloading => IsReloadingSO.value;
+    protected bool _canCrouch => _playerConditionTable.CanCrouch;
+    protected bool _canJump => _playerConditionTable.CanJump;
+    protected bool _isJumping => _playerConditionTable.IsPressingJump;
+    protected bool _canAttack => _playerConditionTable.CanAttack;
+    protected bool _isReloading => _playerConditionTable.IsReloading;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
 
-        if (_movement == null)
-            _movement = _core.GetCoreComponent<Movement>();
+        _movement = _core.GetCoreComponent<Movement>();
     }
 
     public override void Enter()

@@ -68,7 +68,7 @@ public class PlayerInAirState : PlayerState
     private float _airControlPercentage => _playerData.defaultAirControlPercentage;
     private bool _coyoteTime;
 
-    public override void Initialize(EntityCore entity)
+    public override void Initialize(Core entity)
     {
         base.Initialize(entity);
 
