@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Platformer.Input;
 
 //TODO Get rid of this class and move everything in proper components
 public class TemporaryComponent : CoreComponent
