@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49c674b871bd8c4d8d059e5b68dd81b, type: 3}
   m_Name: Player Crouch In Air State
   m_EditorClassIdentifier: 
-  _transitions: []
+  _transitions:
+  - condition:
+      ExpectedResult: 0
+      id: 0
+      Condition: {fileID: 0}
+    nextState: {fileID: 0}
+    expression: 
+    conditions: []
   _animBoolName: crouchInAir
   _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
   primaryAttackState: {fileID: 11400000, guid: 206e1647564bf384cbf665670c931bfe, type: 2}
