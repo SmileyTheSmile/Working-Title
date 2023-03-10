@@ -11,4 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: Assets/Scripts/Input/PlayerInputActions.cs
   wrapperClassName: 
-  wrapperCodeNamespace: Platformer.Input
+  wrapperCodeNamespace: 
