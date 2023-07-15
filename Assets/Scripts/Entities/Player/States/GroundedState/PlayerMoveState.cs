@@ -33,7 +33,7 @@ public class PlayerMoveState : PlayerGroundedState
         if (_lastStepTime + _stepDelay < Time.time)
             Step();
 
-        _movement.SetVelocityX(_playerData.movementVelocity * _inputX);
+        _movement.SetVelocityX(_playerData.movementVelocity * _conditions.NormalizedInputX);
         //movement.AddForceX(_playerData.movementVelocity * _inputX, ForceMode2D.Impulse);
     }
 
@@ -50,25 +50,16 @@ public class PlayerMoveState : PlayerGroundedState
     public override GenericState DoTransitions()
     {
         var parentResult = base.DoTransitions();
-
-        if (parentResult != null)
-        {
+        if (parentResult)
             return parentResult;
-        }
 
-        if (!_isMovingX)
-        {
-            if (_isPressingCrouch)
-            {
+        if (!_conditions.IsMovingX) {
+            if (_conditions.IsPressingCrouch) {
                 return crouchIdleState;
-            }
-            else
-            {
+            } else {
                 return idleState;
             }
-        }
-        else if (_isPressingCrouch)
-        {
+        } else if (_conditions.IsPressingCrouch) {
             return crouchMoveState;
         }
 

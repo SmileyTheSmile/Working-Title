@@ -12,27 +12,23 @@ public class PlayerCrouchInAirState : PlayerInAirState
 
         _temporaryComponent.DecreaseAmountOfCrouchesLeft();
 
-        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
     }
 
     public override GenericState DoTransitions()
     {
         var parentResult = base.DoTransitions();
-
-        if (parentResult != null)
-        {
+        if (parentResult)
             return parentResult;
-        }
 
-        if (!_isPressingCrouch && !_isGrounded)
-        {
+        if (!_conditions.IsPressingCrouch && !_conditions.IsGrounded) {
             return inAirState;
         }
 

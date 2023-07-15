@@ -22,7 +22,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
 
         Step();
 
-        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
     }
 
     private void Step()
@@ -41,7 +41,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
 
         _moveSound.Stop();
 
-        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
     }
 
     public override void DoActions()
@@ -59,27 +59,18 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     public override GenericState DoTransitions()
     {
         var parentResult = base.DoTransitions();
-
         if (parentResult != null)
-        {
             return parentResult;
-        }
 
-        if (_isMovingX)
+        if (_conditions.IsMovingX)
         {
-            if (!_isPressingCrouch && !_isTouchingCeiling)
-            {
+            if (!_conditions.IsPressingCrouch && !_conditions.IsTouchingCeiling) {
                 return moveState;
             }
-        }
-        else
-        {
-            if (!_isPressingCrouch && !_isTouchingCeiling)
-            {
+        } else {
+            if (!_conditions.IsPressingCrouch && !_conditions.IsTouchingCeiling) {
                 return idleState;
-            }
-            else
-            {
+            } else {
                 return crouchIdleState;
             }
         }

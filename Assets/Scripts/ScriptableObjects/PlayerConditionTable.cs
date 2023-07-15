@@ -16,6 +16,11 @@ public class PlayerConditionTable : ConditionTable
     public bool CanJump;
     public bool CanAttack;
     public bool IsMovingInCorrectDir;
+    public bool IsTouchingCeiling;
+    public bool IsTouchingWall;
+    public bool IsTouchingLedgeHorizontal;
+    public bool IsJumping;
+    
 
     public bool IsPressingJump;
     public bool IsPressingCrouch;
@@ -24,6 +29,7 @@ public class PlayerConditionTable : ConditionTable
     public bool IsPressingGrab;
     public bool IsPressingPrimaryAttack;
     public bool IsPressingSecondaryAttack;
+    
     public int NormalizedInputX;
     public int NormalizedInputY;
     public int WeaponSwitchInput;

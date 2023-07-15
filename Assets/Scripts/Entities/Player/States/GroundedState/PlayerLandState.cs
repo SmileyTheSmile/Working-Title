@@ -27,35 +27,21 @@ public class PlayerLandState : PlayerGroundedState
     public override GenericState DoTransitions()
     {
         var parentResult = base.DoTransitions();
-
-        if (parentResult != null)
-        {
+        if (parentResult)
             return parentResult;
-        }
 
-        if (_isMovingX)
+        if (_conditions.IsMovingX)
         {
-            if (_isPressingCrouch)
-            {
+            if (_conditions.IsPressingCrouch) {
                 return crouchMoveState;
-            }
-            else
-            {
+            } else {
                 return moveState;
             }
-        }
-        else
-        {
-            if (_isAnimationFinished)
-            {
-                if (_isPressingCrouch)
-                {
-                    return crouchIdleState;
-                }
-                else
-                {
-                    return idleState;
-                }
+        } else if (_isAnimationFinished) {
+            if (_conditions.IsPressingCrouch) {
+                return crouchIdleState;
+            } else {
+                return idleState;
             }
         }
 

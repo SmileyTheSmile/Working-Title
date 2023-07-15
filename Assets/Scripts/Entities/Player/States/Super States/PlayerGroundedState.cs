@@ -4,7 +4,8 @@ public abstract class PlayerGroundedState : PlayerState
 {
     protected Movement _movement;
 
-    [SerializeField] private PlayerConditionTable _playerConditionTable;
+    [SerializeField] protected PlayerConditionTable _conditions;
+
     [SerializeField] protected PlayerAttackState primaryAttackState;
     [SerializeField] protected PlayerAttackState secondaryAttackState;
     [SerializeField] protected PlayerJumpState jumpState;
@@ -12,29 +13,6 @@ public abstract class PlayerGroundedState : PlayerState
     [SerializeField] protected PlayerInAirState inAirState;
     [SerializeField] protected PlayerCrouchInAirState crouchInAirState;
     [SerializeField] protected PlayerWallGrabState wallGrabState;
-    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingCeilingSO;
-    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingWallFrontSO;
-    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingLedgeHorizontalSO;
-    
-    protected int _inputX => _playerConditionTable.NormalizedInputX;
-
-    protected bool _isPressingGrab => _playerConditionTable.IsPressingGrab;
-    protected bool _isPressingCrouch => _playerConditionTable.IsPressingCrouch;
-    protected bool _isPressingJump => _playerConditionTable.IsPressingJump;
-    protected bool _isPressingPrimaryAttack => _playerConditionTable.IsPressingPrimaryAttack;
-    protected bool _isPressingSecondaryAttack => _playerConditionTable.IsPressingSecondaryAttack;
-    protected bool _isMovingX => _playerConditionTable.IsMovingX;
-
-    protected bool _isGrounded => _playerConditionTable.IsGrounded;
-    protected bool _isTouchingCeiling => IsTouchingCeilingSO.value;
-    protected bool _isTouchingWall => IsTouchingWallFrontSO.value;
-    protected bool _isTouchingLedge => IsTouchingLedgeHorizontalSO.value;
-
-    protected bool _canCrouch => _playerConditionTable.CanCrouch;
-    protected bool _canJump => _playerConditionTable.CanJump;
-    protected bool _isJumping => _playerConditionTable.IsPressingJump;
-    protected bool _canAttack => _playerConditionTable.CanAttack;
-    protected bool _isReloading => _playerConditionTable.IsReloading;
 
     public override void Initialize(Core entity)
     {
@@ -55,44 +33,28 @@ public abstract class PlayerGroundedState : PlayerState
     {
         base.DoActions();
 
-        _temporaryComponent.CheckMovementDirection(_inputX);
+        _temporaryComponent.CheckMovementDirection(_conditions.NormalizedInputX);
     }
 
     public override GenericState DoTransitions()
     {
-        if (_isPressingPrimaryAttack && !_isTouchingCeiling && _canAttack && !_isReloading)
-        {
+        if (_conditions.IsPressingPrimaryAttack && !_conditions.IsTouchingCeiling && _conditions.CanAttack && !_conditions.IsReloading) {
             return primaryAttackState;
-        }
-        else if (_isPressingSecondaryAttack && !_isTouchingCeiling)
-        {
-            //return secondaryAttackState;
-            return null;
-        }
-        else if (((_isPressingJump || _isJumping) && _canJump && !_isTouchingCeiling))
-        {
-            if (_isPressingCrouch && _canCrouch)
-            {
+        } else if (_conditions.IsPressingSecondaryAttack && !_conditions.IsTouchingCeiling) {
+            return null; //secondaryAttackState;
+        } else if ((_conditions.IsPressingJump && _conditions.IsJumping) && _conditions.CanJump && !_conditions.IsTouchingCeiling) {
+            if (_conditions.IsPressingCrouch && _conditions.CanCrouch) {
                 return crouchJumpState;
-            }
-            else
-            {
+            } else {
                 return jumpState;
             }
-        }
-        else if (!_isGrounded)
-        {
-            if (_isPressingCrouch)
-            {
+        } else if (!_conditions.IsGrounded) {
+            if (_conditions.IsPressingCrouch) {
                 return crouchInAirState;
-            }
-            else
-            {
+            } else {
                 return inAirState;
             }
-        }
-        else if (_isTouchingWall && _isPressingGrab && _isTouchingLedge && !_isTouchingCeiling && !_isPressingCrouch)
-        {
+        } else if (_conditions.IsTouchingWall && _conditions.IsPressingGrab && _conditions.IsTouchingLedgeHorizontal && !_conditions.IsTouchingCeiling && !_conditions.IsPressingCrouch) {
             return wallGrabState;
         }
 

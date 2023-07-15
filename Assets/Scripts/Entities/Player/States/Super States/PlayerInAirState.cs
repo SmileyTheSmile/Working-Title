@@ -6,6 +6,8 @@ public class PlayerInAirState : PlayerState
 {
     protected Movement _movement;
 
+    [SerializeField] protected PlayerConditionTable _conditions;
+
     [SerializeField] protected PlayerAttackState primaryAttackState;
     [SerializeField] protected PlayerAttackState secondaryAttackState;
     [SerializeField] protected PlayerJumpState jumpState;
@@ -17,51 +19,6 @@ public class PlayerInAirState : PlayerState
     [SerializeField] protected PlayerLandState landState;
     [SerializeField] protected PlayerCrouchLandState crouchLandState;
     [SerializeField] protected PlayerLedgeClimbState ledgeClimbState;
-
-    [SerializeField] protected ScriptableInt InputXSO;
-
-    [SerializeField] protected InputTransitionCondition IsPressingGrabSO;
-    [SerializeField] protected InputTransitionCondition IsPressingCrouchSO;
-    [SerializeField] protected InputTransitionCondition IsPressingJumpSO;
-    [SerializeField] protected InputTransitionCondition IsJumpCanceledSO;
-    [SerializeField] protected InputTransitionCondition IsPressingPrimaryAttackSO;
-    [SerializeField] protected InputTransitionCondition IsPressingSecondaryAttackSO;
-
-    [SerializeField] protected CollisionCheckTransitionCondition IsGroundedSO;
-    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingWallFrontSO;
-    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingWallBackSO;
-    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingLedgeHorizontalSO;
-    [SerializeField] protected CollisionCheckTransitionCondition IsTouchingCeilingSO;
-
-    [SerializeField] protected SupportTransitionCondition IsJumpingSO;
-    [SerializeField] protected SupportTransitionCondition CanJumpSO;
-    [SerializeField] protected SupportTransitionCondition CanCrouchSO;
-    [SerializeField] protected SupportTransitionCondition HasStoppedFalling;
-    [SerializeField] protected SupportTransitionCondition IsMovingInCorrectDirSO;
-    [SerializeField] protected SupportTransitionCondition CanAttackSO;
-    [SerializeField] protected SupportTransitionCondition IsReloadingSO;
-
-    protected int _inputX => InputXSO.value;
-
-    protected bool _isPressingGrab => IsPressingGrabSO.value;
-    protected bool _isPressingCrouch => IsPressingCrouchSO.value;
-    protected bool _isPressingJump => IsPressingJumpSO.value;
-    protected bool _isJumpCanceled => IsJumpCanceledSO.value;
-    protected bool _isPressingPrimaryAttack => IsPressingPrimaryAttackSO.value;
-    protected bool _isPressingSecondaryAttack => IsPressingSecondaryAttackSO.value;
-
-    protected bool _isGrounded => IsGroundedSO.value;
-    protected bool _isTouchingWall => IsTouchingWallFrontSO.value;
-    protected bool _isTouchingWallBack => IsTouchingWallBackSO.value;
-    protected bool _isTouchingLedge => IsTouchingLedgeHorizontalSO.value;
-    protected bool _isTouchingCeiling => IsTouchingCeilingSO.value;
-
-    protected bool _canJump => CanJumpSO.value;
-    protected bool _canCrouch => CanCrouchSO.value;
-    protected bool _hasStoppedFalling => HasStoppedFalling.value;
-    protected bool _isMovingInCorrectDir => IsMovingInCorrectDirSO.value;
-    protected bool _canAttack => CanAttackSO.value;
-    protected bool _isReloading => IsReloadingSO.value;
 
     protected AudioSourcePlayer _jumpSound => _temporaryComponent.jumpSound;
 
@@ -92,10 +49,10 @@ public class PlayerInAirState : PlayerState
         CheckJumpMultiplier();
         CheckCoyoteTime();
 
-        _temporaryComponent.CheckMovementDirection(_inputX);
+        _temporaryComponent.CheckMovementDirection(_conditions.NormalizedInputX);
         
-        if (_inputX != 0)
-            _movement.SetVelocityX(_playerData.movementVelocity * _inputX * _airControlPercentage);
+        if (_conditions.NormalizedInputX != 0)
+            _movement.SetVelocityX(_playerData.movementVelocity * _conditions.NormalizedInputX * _airControlPercentage);
 
         _visualController?.SetAnimationFloat("velocityX", Mathf.Abs(_movement.CurrentVelocity.x));
         _visualController?.SetAnimationFloat("velocityY", _movement.CurrentVelocity.y);
@@ -103,58 +60,33 @@ public class PlayerInAirState : PlayerState
     
     public override GenericState DoTransitions()
     {
-        if (_isPressingPrimaryAttack && _canAttack && !_isReloading)
-        {
+        if (_conditions.IsPressingPrimaryAttack && _conditions.CanAttack && !_conditions.IsReloading) {
             return primaryAttackState;
-        }
-        else if (_isPressingSecondaryAttack)
-        {
-            return null;
-            //return secondaryAttackState;
-        }
-        else if (_isPressingJump && _canJump)
-        {
-            if (_isPressingCrouch)
-            {
+        } else if (_conditions.IsPressingSecondaryAttack) {
+            return null; //return secondaryAttackState;
+        } else if (_conditions.IsPressingJump && _conditions.CanJump) {
+            if (_conditions.IsPressingCrouch) {
                 return crouchJumpState;
-            }
-            else if (_isTouchingWall || _isTouchingWallBack || _coyoteTime)
-            {
+            } else if (_conditions.IsTouchingWall || _conditions.IsTouchingWall || _coyoteTime) {
                 return wallJumpState;
-            }
-            else
-            {
+            } else {
                 return jumpState;
             }
-        }
-        else if (_isGrounded && _hasStoppedFalling)
-        {
-            if (_isPressingCrouch)
-            {
+        } else if (_conditions.IsGrounded && _conditions.HasStoppedFalling) {
+            if (_conditions.IsPressingCrouch) {
                 return crouchLandState;
-            }
-            else
-            {
+            } else {
                 return landState;
             }
-        }
-        else if (_isTouchingWall && !_isPressingCrouch)
-        {
-            if (_isPressingGrab && _isTouchingLedge)
-            {
+        } else if (_conditions.IsTouchingWall && !_conditions.IsPressingCrouch) {
+            if (_conditions.IsPressingGrab && _conditions.IsTouchingLedgeHorizontal) {
                 return wallGrabState;
-            }
-            else if (_isMovingInCorrectDir && _hasStoppedFalling)
-            {
+            } else if (_conditions.IsMovingInCorrectDir && _conditions.HasStoppedFalling) {
                 return wallSlideState;
-            }
-            else if (!_isTouchingLedge && !_isGrounded && !_isTouchingCeiling)
-            {
+            } else if (!_conditions.IsTouchingLedgeHorizontal && !_conditions.IsGrounded && !_conditions.IsTouchingCeiling) {
                 return ledgeClimbState;
             }
-        }
-        else if (_isPressingCrouch && _canCrouch && !_isGrounded)
-        {
+        } else if (_conditions.IsPressingCrouch && _conditions.CanCrouch && !_conditions.IsGrounded) {
             return crouchInAirState;
         }
 
@@ -172,17 +104,14 @@ public class PlayerInAirState : PlayerState
 
     private void CheckJumpMultiplier()
     {
-        if (!IsJumpingSO.value)
+        if (!_conditions.IsJumping)
             return;
 
-        if (_isJumpCanceled)
-        {
+        if (_conditions.IsJumpCanceled) {
             _movement.SetVelocityY(_movement.CurrentVelocity.y * _playerData.variableJumpHeightMultiplier);
-            IsJumpingSO.value = false;
-        }
-        else if (_movement.CurrentVelocity.y <= 0f)
-        {
-            IsJumpingSO.value = false;
+            _conditions.IsJumping = false;
+        } else if (_movement.CurrentVelocity.y <= 0f) {
+            _conditions.IsJumping = false;
         }
     }
 

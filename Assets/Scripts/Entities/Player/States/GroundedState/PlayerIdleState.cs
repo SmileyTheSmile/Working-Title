@@ -18,23 +18,16 @@ public class PlayerIdleState : PlayerGroundedState
     public override GenericState DoTransitions()
     {
         var parentResult = base.DoTransitions();
-
-        if (parentResult != null)
+        if (parentResult)
             return parentResult;
 
-        if (_isMovingX)
-        {
-            if (_isPressingCrouch)
-            {
+        if (_conditions.IsMovingX) {
+            if (_conditions.IsPressingCrouch) {
                 return crouchMoveState;
-            }
-            else
-            {
+            } else {
                 return moveState;
             }
-        }
-        else if (_isPressingCrouch)
-        {
+        } else if (_conditions.IsPressingCrouch) {
             return crouchIdleState;
         }
 

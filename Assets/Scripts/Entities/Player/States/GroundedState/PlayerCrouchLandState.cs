@@ -18,48 +18,33 @@ public class PlayerCrouchLandState : PlayerGroundedState
         if (_fallSound)
             _fallSound.Play();
 
-        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _isPressingCrouch);
+        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
     }
 
     public override GenericState DoTransitions()
     {
         var parentResult = base.DoTransitions();
-
-        if (parentResult != null)
-        {
+        if (parentResult)
             return parentResult;
-        }
 
-        if (_isMovingX)
-        {
-            if (_isPressingCrouch)
-            {
+        if (_conditions.IsMovingX) {
+            if (_conditions.IsPressingCrouch) {
                 return crouchMoveState;
-            }
-            else
-            {
+            } else {
                 return moveState;
             }
-        }
-        else
-        {
-            if (_isAnimationFinished)
-            {
-                if (_isPressingCrouch)
-                {
-                    return crouchIdleState;
-                }
-                else
-                {
-                    return idleState;
-                }
+        } else if (_isAnimationFinished) {
+            if (_conditions.IsPressingCrouch) {
+                return crouchIdleState;
+            } else {
+                return idleState;
             }
         }
 
