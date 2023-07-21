@@ -8,11 +8,6 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     [SerializeField] protected PlayerIdleState idleState;
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
 
-    [SerializeField] protected ScriptableInt MovementDirSO;
-    
-    protected int _movementDir => MovementDirSO.value;
-
-    protected AudioSourcePlayer _moveSound => _temporaryComponent.moveSound;
     protected float _stepDelay => _temporaryComponent.stepDelay;
     protected float _lastStepTime;
 
@@ -29,17 +24,15 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     {
         _lastStepTime = Time.time;
 
-        if (_moveSound)
-        {
-            _moveSound.Play();
-        }
+        if (_sound.moveSound)
+            _sound.moveSound.Play();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _moveSound.Stop();
+        _sound.moveSound.Stop();
 
         _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
     }
@@ -53,7 +46,7 @@ public class PlayerCrouchMoveState : PlayerGroundedState
             Step();
         }
 
-        _movement.SetVelocityX(_playerData.crouchMovementVelocity * _movementDir);
+        _movement.SetVelocityX(_playerData.crouchMovementVelocity * _conditions.MovementDir);
     }
 
     public override GenericState DoTransitions()

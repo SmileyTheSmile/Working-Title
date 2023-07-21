@@ -7,14 +7,17 @@ public class Core : MonoBehaviour {
 
     private void Awake() {
         CoreComponent[] components = GetComponentsInChildren<CoreComponent>();
+        Debug.Log(components.Length);
 
         foreach (CoreComponent component in components) {
             AddComponent(component);
             component.Initialize(this);
         }
 
-        foreach (CoreComponent component in _coreComponents)
+        foreach (CoreComponent component in components)
             component.SetupConnections();
+
+        Debug.Log(_coreComponents.Count());
     }
 
     private void Update() {
@@ -28,6 +31,7 @@ public class Core : MonoBehaviour {
     }
 
     public void AddComponent(CoreComponent component) {
+        Debug.Log(component);
         if (!_coreComponents.Contains(component))
             _coreComponents.Add(component);
     }
@@ -38,7 +42,7 @@ public class Core : MonoBehaviour {
         if (component)
             return component;
 
-        Debug.LogWarning($"{typeof(T)} component not found on {transform.parent.name}");
+        Debug.LogWarning($"{typeof(T)} component not found.");
 
         return null;
 

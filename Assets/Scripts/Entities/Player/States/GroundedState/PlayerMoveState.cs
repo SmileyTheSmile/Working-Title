@@ -8,7 +8,6 @@ public class PlayerMoveState : PlayerGroundedState
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
 
-    protected AudioSourcePlayer _moveSound => _temporaryComponent.moveSound;
     protected float _lastStepTime;
     protected float _stepDelay => _temporaryComponent.stepDelay;
 
@@ -23,7 +22,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.Exit();
 
-        _moveSound.Stop();
+        _sound.moveSound.Stop();
     }
 
     public override void DoActions()
@@ -41,10 +40,8 @@ public class PlayerMoveState : PlayerGroundedState
     {
         _lastStepTime = Time.time;
 
-        if (_moveSound)
-        {
-            _moveSound.Play();
-        }
+        if (_sound.moveSound)
+            _sound.moveSound.Play();
     }
 
     public override GenericState DoTransitions()

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAbilityState
 {
-    [SerializeField] protected SupportTransitionCondition IsJumpingSO;
-
     public override void Enter()
     {
         base.Enter();

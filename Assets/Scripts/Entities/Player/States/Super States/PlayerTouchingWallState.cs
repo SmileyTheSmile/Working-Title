@@ -3,6 +3,8 @@ using UnityEngine;
 public abstract class PlayerTouchingWallState : PlayerState
 {
     protected Movement _movement;
+    protected SoundComponent _sound;
+    
     [SerializeField] protected PlayerConditionTable _conditions;
 
     [SerializeField] protected PlayerIdleState idleState;
@@ -16,6 +18,7 @@ public abstract class PlayerTouchingWallState : PlayerState
         base.Initialize(entity);
 
         _movement = _core.GetCoreComponent<Movement>();
+        _sound = _core.GetCoreComponent<SoundComponent>();
     }
 
     public override GenericState DoTransitions()

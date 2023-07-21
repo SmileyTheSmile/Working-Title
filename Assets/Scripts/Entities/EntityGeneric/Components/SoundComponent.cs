@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundComponent : MonoBehaviour
+public class SoundComponent : CoreComponent
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AudioSourcePlayer fallSound;
+    public AudioSourcePlayer moveSound;
+    public AudioSourcePlayer jumpSound;
 }

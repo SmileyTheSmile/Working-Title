@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInAirState : PlayerState
 {
     protected Movement _movement;
+    protected SoundComponent _sound;
 
     [SerializeField] protected PlayerConditionTable _conditions;
 
@@ -20,8 +21,6 @@ public class PlayerInAirState : PlayerState
     [SerializeField] protected PlayerCrouchLandState crouchLandState;
     [SerializeField] protected PlayerLedgeClimbState ledgeClimbState;
 
-    protected AudioSourcePlayer _jumpSound => _temporaryComponent.jumpSound;
-
     private float _airControlPercentage => _playerData.defaultAirControlPercentage;
     private bool _coyoteTime;
 
@@ -30,14 +29,15 @@ public class PlayerInAirState : PlayerState
         base.Initialize(entity);
 
         _movement = _core.GetCoreComponent<Movement>();
+        _sound = _core.GetCoreComponent<SoundComponent>();
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        if (_jumpSound)
-            _jumpSound.Play();
+        if (_sound.jumpSound)
+            _sound.jumpSound.Play();
 
         StartCoyoteTime();
     }

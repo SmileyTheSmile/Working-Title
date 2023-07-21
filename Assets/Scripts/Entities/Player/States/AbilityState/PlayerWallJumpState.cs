@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class PlayerWallJumpState : PlayerAbilityState
 {
-    [SerializeField] private CollisionCheckTransitionCondition IsTouchingWallFrontSO;
-    [SerializeField] private ScriptableInt _movementDirSO;
-
-    private bool _isTouchingWall => IsTouchingWallFrontSO.value;
-    private int _movementDir => _movementDirSO.value;
-
     public override void Enter()
     {
         base.Enter();
@@ -18,7 +12,7 @@ public class PlayerWallJumpState : PlayerAbilityState
         _temporaryComponent.ResetAmountOfJumpsLeft();
         _temporaryComponent.DecreaseAmountOfJumpsLeft();
 
-        int wallJumpMovementDirection = (_isTouchingWall ? -1 : 1) * _movementDir;
+        int wallJumpMovementDirection = (_conditions.IsTouchingWall ? -1 : 1) * _conditions.MovementDir;
         Vector2 wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
 
         _movement.SetVelocityAtAngle(_playerData.wallJumpVelocity, wallJumpDirection, wallJumpMovementDirection);

@@ -16,11 +16,6 @@ public class TemporaryComponent : CoreComponent
     [SerializeField] private CollisionCheckTransitionCondition _ceilingCheck;
     [SerializeField] private CollisionCheckTransitionCondition _wallFront;
 
-
-    public AudioSourcePlayer fallSound;
-    public AudioSourcePlayer moveSound;
-    public AudioSourcePlayer jumpSound;
-
     private float _jumpInputStartTime;
 
     private Camera _mainCamera;

@@ -9,14 +9,12 @@ public class PlayerCrouchLandState : PlayerGroundedState
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
 
-    protected AudioSourcePlayer _fallSound => _temporaryComponent.fallSound;
-
     public override void Enter()
     {
         base.Enter();
 
-        if (_fallSound)
-            _fallSound.Play();
+        if (_sound.fallSound)
+            _sound.fallSound.Play();
 
         _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
     }

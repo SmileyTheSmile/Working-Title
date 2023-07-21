@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class PlayerGroundedState : PlayerState
 {
     protected Movement _movement;
+    protected SoundComponent _sound;
 
     [SerializeField] protected PlayerConditionTable _conditions;
 
@@ -19,6 +20,7 @@ public abstract class PlayerGroundedState : PlayerState
         base.Initialize(entity);
 
         _movement = _core.GetCoreComponent<Movement>();
+        _sound = _core.GetCoreComponent<SoundComponent>();
     }
 
     public override void Enter()

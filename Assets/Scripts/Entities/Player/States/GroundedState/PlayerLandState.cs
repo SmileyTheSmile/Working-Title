@@ -9,8 +9,6 @@ public class PlayerLandState : PlayerGroundedState
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
 
-    protected AudioSourcePlayer _fallSound => _temporaryComponent.fallSound;
-
     public override void Enter()
     {
         base.Enter();
@@ -20,8 +18,8 @@ public class PlayerLandState : PlayerGroundedState
 
     protected virtual void Step()
     {
-        if (_fallSound)
-            _fallSound.Play();
+        if (_sound.fallSound)
+            _sound.fallSound.Play();
     }
     
     public override GenericState DoTransitions()

@@ -6,7 +6,6 @@ public class PlayerWallClimbState : PlayerTouchingWallState
 {
     [SerializeField] protected PlayerWallGrabState wallGrabState;
 
-    protected AudioSourcePlayer _moveSound => _temporaryComponent.moveSound;
     protected float _lastStepTime;
     protected float _stepDelay => _temporaryComponent.stepDelay;
 
@@ -21,7 +20,7 @@ public class PlayerWallClimbState : PlayerTouchingWallState
     {
         base.Exit();
 
-        _moveSound.Stop();
+        _sound.moveSound.Stop();
     }
 
     public override void DoActions()
@@ -40,10 +39,8 @@ public class PlayerWallClimbState : PlayerTouchingWallState
     {
         _lastStepTime = Time.time;
 
-        if (_moveSound)
-        {
-            _moveSound.Play();
-        }
+        if (_sound.moveSound)
+            _sound.moveSound.Play();
     }
 
     public override GenericState DoTransitions()
