@@ -32,13 +32,16 @@ public class Core : MonoBehaviour {
             _coreComponents.Add(component);
     }
 
-    public T GetCoreComponent<T>() where T:CoreComponent {
+    public T GetCoreComponent<T>() where T : CoreComponent {
         var component = _coreComponents.OfType<T>().FirstOrDefault();
 
-        if (component == null)
-            Debug.LogWarning($"{typeof(T)} component not found on {transform.parent.name}");
+        if (component)
+            return component;
 
-        return component;
+        Debug.LogWarning($"{typeof(T)} component not found on {transform.parent.name}");
+
+        return null;
+
     }
 
     public T GetCoreComponent<T>(ref T value) where T : CoreComponent {

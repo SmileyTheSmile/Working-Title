@@ -4,13 +4,13 @@ public class PlayerAim : CoreComponent
 {
     [SerializeField] private Transform _cursor;
     [SerializeField] private Transform _target;
-    [SerializeField] private ScriptableVector3 _mousePositionInputSO;
+    [SerializeField] protected PlayerConditionTable _conditions;
 
     [SerializeField] private ClampModes _clampMode = ClampModes.circle;
     [SerializeField] private Vector2 _clampThreshold = new Vector2(2f, 2f);
     [SerializeField] private float _clampRadius = 2.5f;
 
-    private Vector3 _mousePosition => _mousePositionInputSO.value;
+    private Vector3 _mousePosition => _conditions.MousePosition;
 
     public override void LogicUpdate()
     {

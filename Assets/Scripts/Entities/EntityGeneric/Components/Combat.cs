@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
-    private TemporaryComponent _temporaryComponent;
+    [SerializeField] private PlayerConditionTable _conditions;
 
     private Movement _movement;
 
@@ -26,7 +26,6 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
         base.SetupConnections();
 
         _movement = _core.GetCoreComponent<Movement>();
-        _temporaryComponent = _core.GetCoreComponent<TemporaryComponent>();
     }
 
     //Update the component's logic (Update)
@@ -56,7 +55,7 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     //Check if knockback should be stopped
     private void CheckKnockback()
     {
-        if ((_isKnockbackActive && _movement.CurrentVelocity.y <= 0.0f && _temporaryComponent.IsGrounded) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
+        if ((_isKnockbackActive && _movement.CurrentVelocity.y <= 0.0f && _conditions.IsGrounded) || (Time.time >= _knockbackStartTime + _maxKnockbackTime))
         {
             _movement.CanSetVelocity = true;
 

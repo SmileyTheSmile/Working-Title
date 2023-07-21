@@ -4,18 +4,12 @@ public abstract class PlayerAbilityState : PlayerState
 {
     protected Movement _movement;
 
-    [SerializeField] protected CollisionCheckTransitionCondition IsGroundedSO;
-    [SerializeField] protected InputTransitionCondition IsPressingCrouchSO;
-    [SerializeField] protected SupportTransitionCondition HasStoppedFallingSO;
-
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
     [SerializeField] protected PlayerInAirState inAirState;
     [SerializeField] protected PlayerCrouchInAirState crouchInAirState;
 
-    protected bool _isGrounded => IsGroundedSO.value;
-    protected bool _isPressingCrouch => IsPressingCrouchSO.value;
-    protected bool _hasStoppedFalling => HasStoppedFallingSO.value;
+    [SerializeField] protected PlayerConditionTable _conditions;
 
     protected bool _isAbilityDone;
 
@@ -40,9 +34,9 @@ public abstract class PlayerAbilityState : PlayerState
             return null;
         }
         
-        if (_isGrounded && _hasStoppedFalling)
+        if (_conditions.IsGrounded && _conditions.HasStoppedFalling)
         {
-            if (_isPressingCrouch)
+            if (_conditions.IsPressingCrouch)
             {
                 return crouchIdleState;
             }
@@ -51,9 +45,9 @@ public abstract class PlayerAbilityState : PlayerState
                 return idleState;
             }
         }
-        else if (!_isGrounded)
+        else if (!_conditions.IsGrounded)
         {
-            if (_isPressingCrouch)
+            if (_conditions.IsPressingCrouch)
             {
                 return crouchInAirState;
             }

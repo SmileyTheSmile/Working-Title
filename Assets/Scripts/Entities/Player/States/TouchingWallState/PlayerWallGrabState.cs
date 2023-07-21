@@ -34,11 +34,11 @@ public class PlayerWallGrabState : PlayerTouchingWallState
             return parentResult;
         }
 
-        if (_isMovingUp)
+        if (_conditions.IsMovingUp)
         {
             return wallClimbState;
         }
-        else if (_isMovingDown || !_isPressingGrab)
+        else if (_conditions.IsMovingDown || !_conditions.IsPressingGrab)
         {
             return wallSlideState;
         }

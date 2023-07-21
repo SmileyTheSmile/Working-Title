@@ -13,13 +13,13 @@ public class WallCheck : CollisionCheck
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2.right * (int)_wallChecktype * _movementDirection.value), _wallCheckDistance, _whatIsGround);
 
-        condition.value = hit;
+        _conditions.IsTouchingWall = hit;
     }
 
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
-        if (condition.value)
+        if (_conditions.IsTouchingWall)
             UnityEditor.Handles.color = Color.green;
         else
             UnityEditor.Handles.color = Color.blue;

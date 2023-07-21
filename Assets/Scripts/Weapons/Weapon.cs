@@ -15,15 +15,11 @@ public abstract class Weapon : MonoBehaviour
     { get => _weaponHandler ?? _player.GetCoreComponent(ref _weaponHandler); }
     private WeaponHandler _weaponHandler;
 
-    [SerializeField] protected InputTransitionCondition _isPressingAttackButtonSO;
-    [SerializeField] protected ScriptableVector3 _mousePositionSO;
+    [SerializeField] protected PlayerConditionTable _conditions;
 
     protected Animator _weaponAnimator;
     protected Core _player;
     protected Vector2 _aimDirection;
-
-    protected bool _isPressingAttackButton => _isPressingAttackButtonSO.value;
-    protected Vector3 _mousePosition => _mousePositionSO.value;
 
     protected float _aimAngle;
 
@@ -46,13 +42,13 @@ public abstract class Weapon : MonoBehaviour
 
     private void HandleAiming()
     {
-        _aimDirection = (_mousePosition - weaponHandler.transform.position).normalized;
+        _aimDirection = (_conditions.MousePosition - weaponHandler.transform.position).normalized;
         _aimAngle = Vector2.SignedAngle(Vector2.right, _aimDirection);
         weaponHandler.transform.localRotation = Quaternion.Euler(0f, 0f, _aimAngle);
     }
 
     private void HandlePlayerFacingDirection()
     {
-        conditionManager.CheckFacingDirection(_mousePosition, _player.transform.position);
+        conditionManager.CheckFacingDirection(_conditions.MousePosition, _player.transform.position);
     }
 }

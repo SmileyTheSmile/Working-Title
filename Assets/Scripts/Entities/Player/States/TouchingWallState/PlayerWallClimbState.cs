@@ -55,7 +55,7 @@ public class PlayerWallClimbState : PlayerTouchingWallState
             return parentResult;
         }
 
-        if (!_isMovingUp)
+        if (!_conditions.IsMovingUp)
         {
             return wallGrabState;
         }

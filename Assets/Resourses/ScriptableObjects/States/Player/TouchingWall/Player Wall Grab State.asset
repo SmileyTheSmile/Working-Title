@@ -15,20 +15,11 @@ MonoBehaviour:
   _transitions: []
   _animBoolName: wallGrab
   _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
+  _conditions: {fileID: 11400000, guid: e475078ab8da121458fbc7a4186c575f, type: 2}
   idleState: {fileID: 11400000, guid: b6b5da63f5281e9489b815bfc5c758b9, type: 2}
   inAirState: {fileID: 11400000, guid: 3ef4a3247a9d6c343a2a0e218977d7bb, type: 2}
   crouchIdleState: {fileID: 11400000, guid: 507958b03a463ae45b29b20d3c259590, type: 2}
   wallJumpState: {fileID: 11400000, guid: d2df0deaf2699a04594000b48aa711a0, type: 2}
   ledgeClimbState: {fileID: 11400000, guid: cd78ecc88eb92ad4fa0b352e0f6795e4, type: 2}
-  IsPressingGrabSO: {fileID: 11400000, guid: 685a940549da8d84e8424ad7cb4644ad, type: 2}
-  IsPressingCrouchSO: {fileID: 11400000, guid: 5c484b00522882c4ea99a376c1641e09, type: 2}
-  IsPressingJumpSO: {fileID: 11400000, guid: 8cd304ebf69087f4ea701ec1caa76f0e, type: 2}
-  IsMovingUpSO: {fileID: 11400000, guid: 8c7948718a9bfd74aa063fb5435e3dfd, type: 2}
-  IsMovingDownSO: {fileID: 11400000, guid: f2dc36c0bc589164fb54f17bd92d4fab, type: 2}
-  IsGroundedSO: {fileID: 11400000, guid: 12596c6aa15d67e469bea5a552d09a74, type: 2}
-  IsTouchingWallFrontSO: {fileID: 11400000, guid: 1c35970494ec4564092e80e3679a04bc, type: 2}
-  IsTouchingLedgeHorizontalSO: {fileID: 11400000, guid: 395434da307c2fb43b82935c28e04b38, type: 2}
-  IsTouchingCeilingSO: {fileID: 11400000, guid: a04e35ef07055d14d9bdd5a35405b6d2, type: 2}
-  IsMovingInCorrectDirSO: {fileID: 11400000, guid: 15579782449e93144b1f8bf7372077c6, type: 2}
   wallSlideState: {fileID: 11400000, guid: 188290344c18dc743b7e19577f0584fe, type: 2}
   wallClimbState: {fileID: 11400000, guid: b44db33ef4e09fa48bd4c01b17246a22, type: 2}

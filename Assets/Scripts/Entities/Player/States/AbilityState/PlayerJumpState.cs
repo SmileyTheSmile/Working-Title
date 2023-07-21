@@ -16,6 +16,6 @@ public class PlayerJumpState : PlayerAbilityState
         
         _movement.SetVelocityY(_playerData.jumpVelocity);
 
-        IsJumpingSO.value = true;
+        _conditions.IsJumping = true;
     }
 }

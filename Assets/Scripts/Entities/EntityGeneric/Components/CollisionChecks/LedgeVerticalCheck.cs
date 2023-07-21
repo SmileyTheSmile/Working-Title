@@ -10,6 +10,6 @@ public class LedgeVerticalCheck : CollisionCheck
 
     protected override void Update()
     {
-        condition.value = Physics2D.Raycast(transform.position, Vector2.right * _movementDirection.value, _ledgeCheckDistance, _whatIsGround);
+        // _conditions.IsTouchingLedgeVertical = Physics2D.Raycast(transform.position, Vector2.right * _movementDirection.value, _ledgeCheckDistance, _whatIsGround);
     }
 }

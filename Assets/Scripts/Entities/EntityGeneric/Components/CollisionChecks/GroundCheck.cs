@@ -15,13 +15,13 @@ public class GroundCheck : CollisionCheck
 
     protected override void Update()
     {
-        condition.value = Physics2D.OverlapBox(transform.position, new Vector2(_groundCheckWidth, _groundCheckHeight), 0f, _whatIsGround);
+        _conditions.IsGrounded = Physics2D.OverlapBox(transform.position, new Vector2(_groundCheckWidth, _groundCheckHeight), 0f, _whatIsGround);
     }
 
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
-        if (condition.value)
+        if (_conditions.IsGrounded)
             UnityEditor.Handles.color = Color.green;
         else
             UnityEditor.Handles.color = Color.blue;

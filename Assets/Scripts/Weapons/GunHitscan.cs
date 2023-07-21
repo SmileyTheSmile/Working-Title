@@ -56,7 +56,7 @@ public class GunHitscan : Gun
 
     private Vector2 GetBulletDirection()
     {
-        Vector2 bulletDirection = (_mousePosition - _firePoint.position).normalized;
+        Vector2 bulletDirection = (_conditions.MousePosition - _firePoint.position).normalized;
 
         if (_addBulletSpread)
             bulletDirection = AddBulletSpread(bulletDirection);

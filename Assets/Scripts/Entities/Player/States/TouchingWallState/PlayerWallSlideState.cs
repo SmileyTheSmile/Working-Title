@@ -55,7 +55,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
             return parentResult;
         }
 
-        if (_isPressingGrab && !_isMovingUp && !_isMovingDown)
+        if (_conditions.IsPressingGrab && !_conditions.IsMovingUp && !_conditions.IsMovingDown)
         {
             return wallGrabState;
         }
