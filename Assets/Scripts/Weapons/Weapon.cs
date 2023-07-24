@@ -49,6 +49,6 @@ public abstract class Weapon : MonoBehaviour
 
     private void HandlePlayerFacingDirection()
     {
-        conditionManager.CheckFacingDirection(_conditions.MousePosition, _player.transform.position);
+        conditionManager.UpdateFacingDirection();
     }
 }

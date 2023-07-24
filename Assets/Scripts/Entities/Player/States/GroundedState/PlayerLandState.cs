@@ -13,13 +13,7 @@ public class PlayerLandState : PlayerGroundedState
     {
         base.Enter();
 
-        Step();
-    }
-
-    protected virtual void Step()
-    {
-        if (_sound.fallSound)
-            _sound.fallSound.Play();
+        _temporaryComponent.Land();
     }
     
     public override GenericState DoTransitions()
@@ -30,15 +24,23 @@ public class PlayerLandState : PlayerGroundedState
 
         if (_conditions.IsMovingX)
         {
-            if (_conditions.IsPressingCrouch) {
+            if (_conditions.IsPressingCrouch)
+            {
                 return crouchMoveState;
-            } else {
+            }
+            else
+            {
                 return moveState;
             }
-        } else if (_isAnimationFinished) {
-            if (_conditions.IsPressingCrouch) {
+        }
+        else if (_isAnimationFinished)
+        {
+            if (_conditions.IsPressingCrouch)
+            {
                 return crouchIdleState;
-            } else {
+            }
+            else
+            {
                 return idleState;
             }
         }

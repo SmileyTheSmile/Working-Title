@@ -16,10 +16,8 @@ public class FiniteStateMachine : CoreComponent
         _currentState.DoActions();
         GenericState nextState = _currentState.DoTransitions();
 
-        if (nextState != null)
-        {
+        if (nextState)
             ChangeState(nextState);
-        }
     }
 
     //Start the state machine
@@ -29,9 +27,7 @@ public class FiniteStateMachine : CoreComponent
 
         //TODO Move core setup in a proper place and get rid of state list
         foreach (var state in _states)
-        {
             state.Initialize(entity);
-        }
 
         _currentState = _startingState;
         _currentState.Enter();

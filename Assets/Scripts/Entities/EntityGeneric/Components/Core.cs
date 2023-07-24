@@ -7,7 +7,6 @@ public class Core : MonoBehaviour {
 
     private void Awake() {
         CoreComponent[] components = GetComponentsInChildren<CoreComponent>();
-        Debug.Log(components.Length);
 
         foreach (CoreComponent component in components) {
             AddComponent(component);
@@ -16,8 +15,6 @@ public class Core : MonoBehaviour {
 
         foreach (CoreComponent component in components)
             component.SetupConnections();
-
-        Debug.Log(_coreComponents.Count());
     }
 
     private void Update() {
@@ -31,7 +28,6 @@ public class Core : MonoBehaviour {
     }
 
     public void AddComponent(CoreComponent component) {
-        Debug.Log(component);
         if (!_coreComponents.Contains(component))
             _coreComponents.Add(component);
     }

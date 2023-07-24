@@ -13,17 +13,15 @@ public class PlayerCrouchLandState : PlayerGroundedState
     {
         base.Enter();
 
-        if (_sound.fallSound)
-            _sound.fallSound.Play();
-
-        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
+        _temporaryComponent.Land();
+        _temporaryComponent.Crouch();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
+        _temporaryComponent.UnCrouch();
     }
 
     public override GenericState DoTransitions()
@@ -32,16 +30,25 @@ public class PlayerCrouchLandState : PlayerGroundedState
         if (parentResult)
             return parentResult;
 
-        if (_conditions.IsMovingX) {
-            if (_conditions.IsPressingCrouch) {
+        if (_conditions.IsMovingX)
+        {
+            if (_conditions.IsPressingCrouch)
+            {
                 return crouchMoveState;
-            } else {
+            }
+            else
+            {
                 return moveState;
             }
-        } else if (_isAnimationFinished) {
-            if (_conditions.IsPressingCrouch) {
+        }
+        else if (_isAnimationFinished)
+        {
+            if (_conditions.IsPressingCrouch)
+            {
                 return crouchIdleState;
-            } else {
+            }
+            else
+            {
                 return idleState;
             }
         }

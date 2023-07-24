@@ -6,22 +6,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player Condition Table", menuName = "Player Condition Table")]
 public class PlayerConditionTable : ConditionTable
 {
+    [SerializeField] private PlayerData _playerData;
+
     public bool IsGrounded;
-    public bool IsMovingX;
-    public bool IsMovingUp;
-    public bool IsMovingDown;
     public bool IsReloading;
-    public bool HasStoppedFalling;
-    public bool CanCrouch;
-    public bool CanJump;
-    public bool CanAttack;
-    public bool IsMovingInCorrectDir;
     public bool IsTouchingCeiling;
     public bool IsTouchingWall;
     public bool IsTouchingLedgeHorizontal;
     public bool IsJumping;
+    public bool HasStoppedFalling;
+    public bool CanAttack;
+    public bool IsMovingUp => NormalizedInputY > 0;
+    public bool IsMovingDown => NormalizedInputY < 0;
+    public bool IsMovingX => NormalizedInputX != 0;
+    public bool IsMovingInCorrectDir => NormalizedInputX == MovementDir;
+    public bool CanJump => NumberOfJumpsLeft > 0;
+    public bool CanCrouch => NumberOfCrouchesLeft > 0;
     
-
     public bool IsPressingJump;
     public bool IsPressingCrouch;
     public bool IsJumpCanceled;
@@ -29,11 +30,19 @@ public class PlayerConditionTable : ConditionTable
     public bool IsPressingGrab;
     public bool IsPressingPrimaryAttack;
     public bool IsPressingSecondaryAttack;
+    public bool IsInCoyoteTime;
     
     public int NormalizedInputX;
     public int NormalizedInputY;
     public int WeaponSwitchInput;
     public int MovementDir;
+    public int FacingDir;
+    public int NumberOfJumpsLeft;
+    public int NumberOfCrouchesLeft;
+
     public Vector3 MousePosition;
-    
+
+    public float JumpInputStartTime;
+    public float CoyoteTimeStartTime;
+    public float LastStepTime;
 }

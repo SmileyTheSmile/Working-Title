@@ -19,6 +19,11 @@ public class GroundCheck : CollisionCheck
     }
 
 #if UNITY_EDITOR
+    private Vector2 topLeft;
+    private Vector2 topRight;
+    private Vector2 bottomLeft;
+    private Vector2 bottomRight;
+
     void OnDrawGizmos()
     {
         if (_conditions.IsGrounded)
@@ -26,10 +31,15 @@ public class GroundCheck : CollisionCheck
         else
             UnityEditor.Handles.color = Color.blue;
 
-        UnityEditor.Handles.DrawLine(new Vector2(transform.position.x - _halfGroundCheckWidth, transform.position.y + _halfGroundCheckHeight), new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y + _halfGroundCheckHeight));
-        UnityEditor.Handles.DrawLine(new Vector2(transform.position.x - _halfGroundCheckWidth, transform.position.y + _halfGroundCheckHeight), new Vector2(transform.position.x - _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight));
-        UnityEditor.Handles.DrawLine(new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight), new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y + _halfGroundCheckHeight));
-        UnityEditor.Handles.DrawLine(new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight), new Vector2(transform.position.x - _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight));
+        topLeft = new Vector2(transform.position.x - _halfGroundCheckWidth, transform.position.y + _halfGroundCheckHeight);
+        topRight = new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y + _halfGroundCheckHeight);
+        bottomLeft = new Vector2(transform.position.x - _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight);
+        bottomRight = new Vector2(transform.position.x + _halfGroundCheckWidth, transform.position.y - _halfGroundCheckHeight);
+
+        UnityEditor.Handles.DrawLine(topLeft, topRight);
+        UnityEditor.Handles.DrawLine(topLeft, bottomLeft);
+        UnityEditor.Handles.DrawLine(bottomRight, topRight);
+        UnityEditor.Handles.DrawLine(bottomRight, bottomLeft);
     }
 #endif
 }

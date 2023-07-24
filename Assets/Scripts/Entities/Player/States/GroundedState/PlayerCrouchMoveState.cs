@@ -8,62 +8,50 @@ public class PlayerCrouchMoveState : PlayerGroundedState
     [SerializeField] protected PlayerIdleState idleState;
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
 
-    protected float _stepDelay => _temporaryComponent.stepDelay;
-    protected float _lastStepTime;
-
     public override void Enter()
     {
         base.Enter();
 
-        Step();
-
-        _temporaryComponent.CrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
-    }
-
-    private void Step()
-    {
-        _lastStepTime = Time.time;
-
-        if (_sound.moveSound)
-            _sound.moveSound.Play();
+        _temporaryComponent.Step();
+        _temporaryComponent.Crouch();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _sound.moveSound.Stop();
-
-        _temporaryComponent.UnCrouchDown(_playerData.standColliderHeight, _playerData.crouchColliderHeight, _conditions.IsPressingCrouch);
+        _temporaryComponent.StopMovementSound();
+        _temporaryComponent.UnCrouch();
     }
 
     public override void DoActions()
     {
         base.DoActions();
 
-        if (_lastStepTime + _stepDelay < Time.time)
-        {
-            Step();
-        }
-
-        _movement.SetVelocityX(_playerData.crouchMovementVelocity * _conditions.MovementDir);
+        _temporaryComponent.MoveOnGroundCrouched();
     }
 
     public override GenericState DoTransitions()
     {
         var parentResult = base.DoTransitions();
-        if (parentResult != null)
+        if (parentResult)
             return parentResult;
 
         if (_conditions.IsMovingX)
         {
-            if (!_conditions.IsPressingCrouch && !_conditions.IsTouchingCeiling) {
+            if (!_conditions.IsPressingCrouch && !_conditions.IsTouchingCeiling)
+            {
                 return moveState;
             }
-        } else {
-            if (!_conditions.IsPressingCrouch && !_conditions.IsTouchingCeiling) {
+        }
+        else
+        {
+            if (!_conditions.IsPressingCrouch && !_conditions.IsTouchingCeiling)
+            {
                 return idleState;
-            } else {
+            }
+            else
+            {
                 return crouchIdleState;
             }
         }

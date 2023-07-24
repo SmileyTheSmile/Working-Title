@@ -2,24 +2,13 @@ using UnityEngine;
 
 public abstract class PlayerAbilityState : PlayerState
 {
-    protected Movement _movement;
-
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
     [SerializeField] protected PlayerInAirState inAirState;
     [SerializeField] protected PlayerCrouchInAirState crouchInAirState;
 
-    [SerializeField] protected PlayerConditionTable _conditions;
-
     protected bool _isAbilityDone;
-
-    public override void Initialize(Core entity)
-    {
-        base.Initialize(entity);
-
-        _movement = _core.GetCoreComponent<Movement>();
-    }
-
+    
     public override void Enter()
     {
         base.Enter();

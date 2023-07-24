@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class PlayerState : GenericState
 {
+    [SerializeField] protected PlayerConditionTable _conditions;
+    
     protected TemporaryComponent _temporaryComponent;
     protected VisualController _visualController;
 

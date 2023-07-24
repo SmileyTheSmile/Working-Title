@@ -10,7 +10,7 @@ public class PlayerData : ScriptableObject
     [Header("Jump State")]
     public float jumpVelocity = 10f;
     public float jumpInputHoldTime = 0.2f;
-    public int amountOfJumps = 2;
+    public int numberOfJumps = 2;
 
     [Header("In Air State")]
     public float coyoteTime = 0.2f;
@@ -47,7 +47,8 @@ public class PlayerData : ScriptableObject
     public float crouchMovementVelocity = 5f;
     public float crouchColliderHeight = 0.5f;
     public float standColliderHeight = 1f;
-    public int amountOfCrouches = 2;
+    public float crouchHeightDifference => standColliderHeight - crouchColliderHeight;
+    public int numberOfCrouches = 2;
 
     public LayerMask whatIsGround;
 }

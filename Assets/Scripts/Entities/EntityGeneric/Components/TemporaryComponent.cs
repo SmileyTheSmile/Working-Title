@@ -1,30 +1,24 @@
 using UnityEngine;
 using System;
 
-//TODO Get rid of this class and move everything in proper components
 public class TemporaryComponent : CoreComponent
 {
-    private Movement _movement;
-    private WeaponHandler _weaponHandler;
-    private VisualController _visualController;
-    [SerializeField] private PlayerInputHandler _playerInputHandler;
-
-    [SerializeField] private PlayerData _playerData;
+    [SerializeField] private PlayerInputHandler _brain;
     [SerializeField] private PlayerConditionTable _conditions;
+    [SerializeField] private PlayerData _playerData;
 
     [SerializeField] private Transform _ceilingCheckTransform;
-    [SerializeField] private CollisionCheckTransitionCondition _ceilingCheck;
-    [SerializeField] private CollisionCheckTransitionCondition _wallFront;
 
-    private float _jumpInputStartTime;
+    private WeaponHandler _weaponHandler;
+    private VisualController _visualController;
+    private Collisions _collisions;
+    private Movement _movement;
+    private SoundComponent _sound;
 
     private Camera _mainCamera;
-    public float stepDelay;
-    private int _facingDir;
+    private float _stepDelay;
 
     private Vector2 _rawMouseInput;
-    private int _amountOfJumpsLeft;
-    private int _amountOfCrouchesLeft;
     private PlayerCrouchingForm _crouchingForm;
 
     public override void Initialize(Core entity)
@@ -33,84 +27,290 @@ public class TemporaryComponent : CoreComponent
         
         _mainCamera = Camera.main;
         _crouchingForm = PlayerCrouchingForm.notCrouching;
-        _facingDir = 1;
+        _conditions.FacingDir = 1;
         _conditions.MovementDir = 1;
-        _jumpInputStartTime = Time.time;//jump input
-        
-        //TODO Fix this not working after ScriptableObject references are made on second compile
-        ResetAmountOfJumpsLeft();
-        ResetAmountOfCrouchesLeft();
+        _conditions.JumpInputStartTime = Time.time;
+        _conditions.NumberOfJumpsLeft = _playerData.numberOfJumps;
+        _conditions.NumberOfCrouchesLeft = _playerData.numberOfCrouches;
     }
 
     public override void SetupConnections()
     {
         base.SetupConnections();
 
-        _movement = _core.GetCoreComponent<Movement>();
         _weaponHandler = _core.GetCoreComponent<WeaponHandler>();
         _visualController = _core.GetCoreComponent<VisualController>();
+        _collisions = _core.GetCoreComponent<Collisions>();
+        _movement = _core.GetCoreComponent<Movement>();
+        _sound = _core.GetCoreComponent<SoundComponent>();
     }
 
     private void OnEnable()
     {
-        _playerInputHandler.AimEvent += OnAim;
-        _playerInputHandler.JumpEvent += OnJump;
-        _playerInputHandler.GrabEvent += OnGrab;
-        _playerInputHandler.CrouchEvent += OnCrouch;
-        _playerInputHandler.MoveEvent += OnMovement;
-        _playerInputHandler.WeaponSwitchEvent += OnWeaponSwitch;
-        _playerInputHandler.JumpCanceledEvent += OnJumpCancelled;
-        _playerInputHandler.PrimaryAttackEvent += OnPrimaryAttack;
-        _playerInputHandler.SecondaryAttackEvent += OnSecondaryAttack;
+        _brain.AimEvent += OnAim;
+        _brain.JumpEvent += OnJump;
+        _brain.GrabEvent += OnGrab;
+        _brain.CrouchEvent += OnCrouch;
+        _brain.MoveEvent += ProcessMovement;
+        _brain.WeaponSwitchEvent += OnWeaponSwitch;
+        _brain.JumpCanceledEvent += OnJumpCancelled;
+        _brain.PrimaryAttackEvent += OnPrimaryAttack;
+        _brain.SecondaryAttackEvent += OnSecondaryAttack;
     }
 
     private void OnDisable()
     {
-        _playerInputHandler.AimEvent -= OnAim;
-        _playerInputHandler.JumpEvent -= OnJump;
-        _playerInputHandler.GrabEvent -= OnGrab;
-        _playerInputHandler.CrouchEvent -= OnCrouch;
-        _playerInputHandler.MoveEvent -= OnMovement;
-        _playerInputHandler.WeaponSwitchEvent -= OnWeaponSwitch;
-        _playerInputHandler.JumpCanceledEvent -= OnJumpCancelled;
-        _playerInputHandler.PrimaryAttackEvent -= OnPrimaryAttack;
-        _playerInputHandler.SecondaryAttackEvent -= OnSecondaryAttack;
+        _brain.AimEvent -= OnAim;
+        _brain.JumpEvent -= OnJump;
+        _brain.GrabEvent -= OnGrab;
+        _brain.CrouchEvent -= OnCrouch;
+        _brain.MoveEvent -= ProcessMovement;
+        _brain.WeaponSwitchEvent -= OnWeaponSwitch;
+        _brain.JumpCanceledEvent -= OnJumpCancelled;
+        _brain.PrimaryAttackEvent -= OnPrimaryAttack;
+        _brain.SecondaryAttackEvent -= OnSecondaryAttack;
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        _conditions.HasStoppedFalling = _movement.CurrentVelocity.y < 0.01;
-        _conditions.CanCrouch = CanCrouch();
-        _conditions.CanJump = CanJump();
-        _conditions.IsMovingInCorrectDir = (_conditions.NormalizedInputX == _conditions.MovementDir);
-
-        if (_conditions.NormalizedInputX == 0)
-            _conditions.IsMovingX = false;
-        else
-            _conditions.IsMovingX = true;
-
-        switch (_conditions.NormalizedInputY)
-        {
-            case > 0:
-                _conditions.IsMovingUp = true;
-                _conditions.IsMovingDown = false;
-                break;
-            case < 0:
-                _conditions.IsMovingUp = false;
-                _conditions.IsMovingDown = true;
-                break;
-            default:
-                _conditions.IsMovingUp = false;
-                _conditions.IsMovingDown = false;
-                break;
-        }
-        ProcessMouseInput();
-        CheckJumpInputHoldTime();
+        UpdateMouseInput();
     }
 
-    public void OnMovement(Vector2 value)
+#region Actions
+
+    public void ClimbLedge()
+    {
+        _movement.SetVelocityY(_playerData.ledgeClimbVelocity);
+    }
+
+    public void Crouch()
+    {
+        if (_crouchingForm == PlayerCrouchingForm.notCrouching && _conditions.IsPressingCrouch)
+        {
+            float biggerHeight = _playerData.standColliderHeight;
+            float smallerHeight = _playerData.crouchColliderHeight;
+
+            _crouchingForm = PlayerCrouchingForm.crouchingDown;
+
+            float height = _collisions.ColliderSize.y * smallerHeight;
+
+            _collisions.SetColliderOffsetY((height - _collisions.ColliderSize.y) / 2);
+            _collisions.SetColliderSizeY(height);
+
+            float moveDistance = (_playerData.crouchHeightDifference * _collisions.DefaultSize.y);
+            _ceilingCheckTransform.position -= Vector3.up * moveDistance;
+        }
+    }
+
+    public void CrouchInAir()
+    {
+        _conditions.NumberOfCrouchesLeft--;
+        Crouch();
+    }
+
+    public void UnCrouch()
+    {
+        if (((_crouchingForm == PlayerCrouchingForm.crouchingDown && !_conditions.IsPressingCrouch)
+        || !_conditions.IsTouchingWall) && !_conditions.IsTouchingCeiling)
+        {
+            float biggerHeight = _playerData.standColliderHeight;
+            float smallerHeight = _playerData.crouchColliderHeight;
+
+            _crouchingForm = PlayerCrouchingForm.notCrouching;
+
+            _collisions.SetColliderOffset(Vector2.zero);
+            _collisions.SetColliderSize(_collisions.DefaultSize);
+
+            float moveDistance = (_playerData.crouchHeightDifference * _collisions.DefaultSize.y);
+            _ceilingCheckTransform.position += Vector3.up * moveDistance;
+        }
+    }
+
+    public void Jump()
+    {
+        if (_sound.jumpSound)
+            _sound.jumpSound.Play();
+
+        _movement.SetVelocityY(_playerData.jumpVelocity);
+
+        _conditions.NumberOfJumpsLeft--;
+        _conditions.IsJumping = true;
+        _conditions.IsPressingJump = false;
+    }
+
+    public void WallJump()
+    {
+        if (_sound.jumpSound)
+            _sound.jumpSound.Play();
+
+        _conditions.MovementDir = (_conditions.IsTouchingWall ? -1 : 1) * _conditions.MovementDir;
+        UpdateMovementDirection();
+        
+        Vector2 wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
+        _movement.SetVelocityAtAngle(_playerData.wallJumpVelocity, wallJumpDirection, _conditions.MovementDir);
+
+        _conditions.NumberOfJumpsLeft = _playerData.numberOfJumps;
+        _conditions.NumberOfJumpsLeft--;
+        _conditions.IsPressingJump = false;
+    }
+
+    public void StopMoving()
+    {
+        _movement.SetVelocityZero();
+    }
+
+    public void Land()
+    {
+        if (_sound.fallSound)
+            _sound.fallSound.Play();
+
+        _conditions.NumberOfJumpsLeft = _playerData.numberOfJumps;
+        _conditions.NumberOfCrouchesLeft = _playerData.numberOfCrouches;
+    }
+
+    public void Step()
+    {
+        _conditions.LastStepTime = Time.time;
+
+        if (_sound.moveSound)
+            _sound.moveSound.Play();
+    }
+
+    public void StepContinuous()
+    {
+        if (_conditions.LastStepTime + _stepDelay >= Time.time)
+            Step();
+    }
+
+    public void SlideDown()
+    {
+        Step();
+        _movement.SetVelocityY(-_playerData.wallSlideVelocity);
+    }
+    
+    public void ClimbWall()
+    {
+        StepContinuous();
+        _movement.SetVelocityY(_playerData.wallClimbVelocity);
+    }
+
+    public void MoveOnGroundCrouched()
+    {
+        StepContinuous();
+        _movement.SetVelocityX(_playerData.crouchMovementVelocity * _conditions.MovementDir);
+    }
+
+    public void MoveOnGround()
+    {
+        StepContinuous();
+        _movement.SetVelocityX(_playerData.movementVelocity * _conditions.NormalizedInputX);
+        //movement.AddForceX(_playerData.movementVelocity * _inputX, ForceMode2D.Impulse);
+    }
+
+    public void MoveInAir()
+    {
+        if (_conditions.NormalizedInputX != 0)
+            _movement.SetVelocityX(_playerData.movementVelocity * _conditions.NormalizedInputX * _playerData.defaultAirControlPercentage);
+
+        _visualController?.SetAnimationFloat("velocityX", Mathf.Abs(_movement.CurrentVelocity.x));
+        _visualController?.SetAnimationFloat("velocityY", _movement.CurrentVelocity.y);
+    }
+
+    public void StopMovementSound()
+    {
+        _sound.moveSound.Stop();
+    }
+
+    public void HoldPosition()
+    {
+        //_core.transform.position = _conditions.HoldPosition;
+
+        //StopMoving();
+    }
+    
+    public void FreezeInPlace()
+    {
+        _movement.SetGravity(0f);
+
+        StopMoving();
+    }
+    
+    public void LetGoOfWall()
+    {
+        _movement.SetGravity(2f);
+    }
+
+    public void Flip()
+    {
+        _conditions.FacingDir *= -1;
+
+        _weaponHandler?.FlipWeapon(_conditions.FacingDir);
+        _visualController?.FlipEntity(_conditions.FacingDir);
+    }
+
+    public void StartCoyoteTime()
+    {
+        _conditions.IsInCoyoteTime = true;
+        _conditions.CoyoteTimeStartTime = Time.time;
+    }
+
+    public void UpdateMovementDirection()
+    {
+        if (_conditions.IsMovingX && !_conditions.IsMovingInCorrectDir)
+            _conditions.MovementDir *= -1;
+    }
+
+    public void UpdateFacingDirection()
+    {
+        Vector2 mouseDirection = (_conditions.MousePosition - _core.transform.position).normalized;
+
+        float angle = Vector2.SignedAngle(Vector2.right, mouseDirection);
+        angle = (angle > 90) ? angle - 270 : angle + 90;
+
+        if (Math.Sign(angle) != _conditions.FacingDir)
+            Flip();
+    }
+
+    public void UpdateCoyoteTime()
+    {
+        if (_conditions.IsInCoyoteTime && Time.time > _conditions.CoyoteTimeStartTime + _playerData.coyoteTime)
+        {
+            _conditions.IsInCoyoteTime = false;
+            _conditions.NumberOfJumpsLeft--;
+        }
+    }
+
+    public void UpdateJumpStatus()
+    {
+        if (!_conditions.IsJumping)
+            return;
+
+        if (_conditions.IsJumpCanceled)
+        {
+            _movement.SetVelocityY(_movement.CurrentVelocity.y * _playerData.variableJumpHeightMultiplier);
+            _conditions.IsJumping = false;
+        }
+        else if (_movement.CurrentVelocity.y <= 0f)
+        {
+            _conditions.IsJumping = false;
+        }
+
+        if (Time.time >= (_conditions.JumpInputStartTime + _playerData.jumpInputHoldTime))
+            _conditions.IsPressingJump = false;
+    }
+
+    public void UpdateFallStatus()
+    {
+        _conditions.HasStoppedFalling = _movement.CurrentVelocity.y < 0.01;
+    }
+
+#endregion
+
+#region Brain Input
+
+    public void ProcessMovement(Vector2 value)
     {
         _conditions.NormalizedInputX = Mathf.RoundToInt(value.x);
         _conditions.NormalizedInputY = Mathf.RoundToInt(value.y);
@@ -119,9 +319,10 @@ public class TemporaryComponent : CoreComponent
     public void OnJump()
     {
         _conditions.IsPressingJump = true;
+        
         _conditions.IsJumpCanceled = false;
 
-        _jumpInputStartTime = Time.time;
+        _conditions.JumpInputStartTime = Time.time;
     }
 
     public void OnJumpCancelled()
@@ -165,110 +366,19 @@ public class TemporaryComponent : CoreComponent
 
     }
 
-    private void ProcessMouseInput()
+#endregion
+    
+    private void UpdateMouseInput()
     {
         Vector3 shiftedMouseInput = new Vector3(_rawMouseInput.x, _rawMouseInput.y, 10);
 
         _conditions.MousePosition = _mainCamera.ScreenToWorldPoint(shiftedMouseInput);
     }
 
-
-    //Check if jump button has been held for the value in inputHoldTime
-    private void CheckJumpInputHoldTime()
+    public enum PlayerCrouchingForm
     {
-        if (Time.time >= _jumpInputStartTime + _playerData.jumpInputHoldTime)
-        {
-            _conditions.IsPressingJump = false;
-        }
+        notCrouching,
+        crouchingDown,
+        crouchingUp
     }
-
-    public void CrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
-    {
-        if (_crouchingForm == PlayerCrouchingForm.notCrouching && crouchInput)
-        {
-            _crouchingForm = PlayerCrouchingForm.crouchingDown;
-
-            SquashColliderDown(biggerHeight, smallerHeight);
-        }
-    }
-
-    public void UnCrouchDown(float biggerHeight, float smallerHeight, bool crouchInput)
-    {
-        if (((_crouchingForm == PlayerCrouchingForm.crouchingDown && !crouchInput)
-        || !_wallFront.value) && !_ceilingCheck.value)
-        {
-            _crouchingForm = PlayerCrouchingForm.notCrouching;
-
-            ResetColliderHeight(biggerHeight, smallerHeight);
-        }
-    }
-
-    public void MoveCeilingCheck(float oldHeight, float newHeight, float defaultColliderHeight)
-    {
-        _ceilingCheckTransform.position += Vector3.up * ((oldHeight - newHeight) * defaultColliderHeight);
-    }
-
-    public void ResetColliderHeight(float biggerHeight, float smallerHeight)
-    {
-        _movement.SetColliderSize(_movement.DefaultSize);
-        _movement.SetColliderOffset(Vector2.zero);
-
-        MoveCeilingCheck(biggerHeight, smallerHeight, _movement.DefaultSize.y);
-    }
-
-    public void SquashColliderDown(float biggerHeight, float smallerHeight)
-    {
-        float height = _movement.ColliderSize.y * smallerHeight;
-
-        _movement.SetColliderOffsetY((height - _movement.ColliderSize.y) / 2);
-        _movement.SetColliderSizeY(height);
-
-        MoveCeilingCheck(smallerHeight, biggerHeight, _movement.DefaultSize.y);
-    }
-
-    public void Flip()
-    {
-        _facingDir *= -1;
-
-        _weaponHandler?.FlipWeapon(_facingDir);
-        _visualController?.FlipEntity(_facingDir);
-    }
-
-    //Change the movement direction of the entity based on the x input
-    public void CheckMovementDirection(int inputX)
-    {
-        if (inputX != 0 && inputX != _conditions.MovementDir)
-        {
-            _conditions.MovementDir *= -1;
-        }
-    }
-
-    //Change the facing direction of the entity based on the mouse position
-    public void CheckFacingDirection(Vector2 mousePos, Vector2 playerPos)
-    {
-        Vector2 mouseDirection = (mousePos - playerPos).normalized;
-
-        float angle = Vector2.SignedAngle(Vector2.right, mouseDirection);
-        angle = (angle > 90) ? angle - 270 : angle + 90;
-
-        if (Math.Sign(angle) != _facingDir)
-        {
-            Flip();
-        }
-    }
-
-    public void UseJumpInput() => _conditions.IsPressingJump = false;
-    public bool CanCrouch() => (_amountOfCrouchesLeft > 0);
-    public void ResetAmountOfCrouchesLeft() => _amountOfCrouchesLeft = _playerData.amountOfCrouches;
-    public void DecreaseAmountOfCrouchesLeft() => _amountOfCrouchesLeft--;
-    public bool CanJump() => (_amountOfJumpsLeft > 0);
-    public void ResetAmountOfJumpsLeft() => _amountOfJumpsLeft = _playerData.amountOfJumps;
-    public void DecreaseAmountOfJumpsLeft() => _amountOfJumpsLeft--;
-}
-
-public enum PlayerCrouchingForm
-{
-    notCrouching,
-    crouchingDown,
-    crouchingUp
 }

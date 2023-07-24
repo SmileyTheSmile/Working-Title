@@ -64,7 +64,7 @@ public class PlayerInputHandler : ScriptableObject, PlayerInputActions.IGameplay
             GrabEvent.Invoke(false);
     }
 
-    public void OnPrimaryAttack(InputAction.CallbackContext context)
+    public void OnAttack1(InputAction.CallbackContext context)
     {
         if (context.started)
             PrimaryAttackEvent.Invoke(true);
@@ -72,7 +72,7 @@ public class PlayerInputHandler : ScriptableObject, PlayerInputActions.IGameplay
             PrimaryAttackEvent.Invoke(false);
     }
 
-    public void OnSecondaryAttack(InputAction.CallbackContext context)
+    public void OnAttack2(InputAction.CallbackContext context)
     {
         if (context.started)
             SecondaryAttackEvent.Invoke(true);
@@ -106,7 +106,7 @@ public class PlayerInputHandler : ScriptableObject, PlayerInputActions.IGameplay
             PauseEvent.Invoke(false);
     }
 
-    #endregion
+#endregion
 
 #region UI input
 

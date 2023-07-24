@@ -8,40 +8,25 @@ public class PlayerMoveState : PlayerGroundedState
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerIdleState idleState;
 
-    protected float _lastStepTime;
-    protected float _stepDelay => _temporaryComponent.stepDelay;
-
     public override void Enter()
     {
         base.Enter();
 
-        Step();
+        _temporaryComponent.Step();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _sound.moveSound.Stop();
+        _temporaryComponent.StopMovementSound();
     }
 
     public override void DoActions()
     {
         base.DoActions();
 
-        if (_lastStepTime + _stepDelay < Time.time)
-            Step();
-
-        _movement.SetVelocityX(_playerData.movementVelocity * _conditions.NormalizedInputX);
-        //movement.AddForceX(_playerData.movementVelocity * _inputX, ForceMode2D.Impulse);
-    }
-
-    private void Step()
-    {
-        _lastStepTime = Time.time;
-
-        if (_sound.moveSound)
-            _sound.moveSound.Play();
+        _temporaryComponent.MoveOnGround();
     }
 
     public override GenericState DoTransitions()
@@ -50,13 +35,18 @@ public class PlayerMoveState : PlayerGroundedState
         if (parentResult)
             return parentResult;
 
-        if (!_conditions.IsMovingX) {
-            if (_conditions.IsPressingCrouch) {
+        if (!_conditions.IsMovingX)
+        {
+            if (_conditions.IsPressingCrouch)
+            {
                 return crouchIdleState;
-            } else {
+            }
+            else
+            {
                 return idleState;
             }
-        } else if (_conditions.IsPressingCrouch) {
+        }
+        else if (_conditions.IsPressingCrouch) {
             return crouchMoveState;
         }
 

@@ -8,6 +8,6 @@ public class PlayerLedgeClimbState : PlayerAbilityState
     {
         base.Enter();
 
-        _movement.SetVelocityY(_playerData.ledgeClimbVelocity);
+        _temporaryComponent.ClimbLedge();
     }
 }

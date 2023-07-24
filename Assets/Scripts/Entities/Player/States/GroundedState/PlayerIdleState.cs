@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
 
-        _movement.SetVelocityX(0f);
+        _temporaryComponent.StopMoving();
     }
 
     public override GenericState DoTransitions()
@@ -21,13 +21,19 @@ public class PlayerIdleState : PlayerGroundedState
         if (parentResult)
             return parentResult;
 
-        if (_conditions.IsMovingX) {
-            if (_conditions.IsPressingCrouch) {
+        if (_conditions.IsMovingX)
+        {
+            if (_conditions.IsPressingCrouch)
+            {
                 return crouchMoveState;
-            } else {
+            }
+            else
+            {
                 return moveState;
             }
-        } else if (_conditions.IsPressingCrouch) {
+        }
+        else if (_conditions.IsPressingCrouch)
+        {
             return crouchIdleState;
         }
 

@@ -9,11 +9,6 @@ public class PlayerJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        _temporaryComponent.UseJumpInput();
-        _temporaryComponent.DecreaseAmountOfJumpsLeft();
-        
-        _movement.SetVelocityY(_playerData.jumpVelocity);
-
-        _conditions.IsJumping = true;
+        _temporaryComponent.Jump();
     }
 }

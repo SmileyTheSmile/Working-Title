@@ -6,33 +6,33 @@ public class PlayerWallGrabState : PlayerTouchingWallState
 {
     [SerializeField] protected PlayerWallSlideState wallSlideState;
     [SerializeField] protected PlayerWallClimbState wallClimbState;
-
-    private Vector2 _holdPosition;
     
     public override void Enter()
     {
         base.Enter();
 
-        _holdPosition = _core.transform.position;
+        _temporaryComponent.FreezeInPlace();
+    }
+    
+    public override void Exit()
+    {
+        base.Exit();
 
-        HoldPosition();
+        _temporaryComponent.LetGoOfWall();
     }
 
     public override void DoActions()
     {
         base.DoActions();
 
-        HoldPosition();
+        _temporaryComponent.HoldPosition();
     }
 
     public override GenericState DoTransitions()
     {
         var parentResult = base.DoTransitions();
-
-        if (parentResult != null)
-        {
+        if (parentResult)
             return parentResult;
-        }
 
         if (_conditions.IsMovingUp)
         {
@@ -44,12 +44,5 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         }
 
         return null;
-    }
-
-    private void HoldPosition()
-    {
-        _core.transform.position = _holdPosition;
-
-        _movement.SetVelocityZero();
     }
 }

@@ -6,12 +6,11 @@ using UnityEngine;
 public class WallCheck : CollisionCheck
 {
     [SerializeField] private WallCheckType _wallChecktype = WallCheckType.front;
-    [SerializeField] private ScriptableInt _movementDirection;
     [SerializeField] private float _wallCheckDistance = 0.6f;
 
     protected override void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2.right * (int)_wallChecktype * _movementDirection.value), _wallCheckDistance, _whatIsGround);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2.right * (int)_wallChecktype * _conditions.MovementDir), _wallCheckDistance, _whatIsGround);
 
         _conditions.IsTouchingWall = hit;
     }
@@ -24,7 +23,11 @@ public class WallCheck : CollisionCheck
         else
             UnityEditor.Handles.color = Color.blue;
 
-        UnityEditor.Handles.DrawLine(transform.position, new Vector2(transform.position.x + (int)_wallChecktype * _movementDirection.value * _wallCheckDistance, transform.position.y));
+        UnityEditor.Handles.DrawLine(transform.position,
+            new Vector2(
+                transform.position.x + (int)_wallChecktype * _conditions.MovementDir * _wallCheckDistance, transform.position.y
+            )
+        );
     }
 #endif
 

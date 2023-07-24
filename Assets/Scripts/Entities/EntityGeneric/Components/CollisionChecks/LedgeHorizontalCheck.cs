@@ -7,12 +7,11 @@ using UnityEngine;
 /// </summary>
 public class LedgeHorizontalCheck : CollisionCheck
 {
-    [SerializeField] private ScriptableInt _movementDirection;
     [SerializeField] private float _ledgeCheckDistance = 0.6f;
 
     protected override void Update()
     {
-        _conditions.IsTouchingLedgeHorizontal = Physics2D.Raycast(transform.position, Vector2.right * _movementDirection.value, _ledgeCheckDistance, _whatIsGround);
+        _conditions.IsTouchingLedgeHorizontal = Physics2D.Raycast(transform.position, Vector2.right * _conditions.MovementDir, _ledgeCheckDistance, _whatIsGround);
     }
 
 
@@ -24,7 +23,7 @@ public class LedgeHorizontalCheck : CollisionCheck
         else
             UnityEditor.Handles.color = Color.blue;
 
-        UnityEditor.Handles.DrawLine(transform.position, new Vector2(transform.position.x + _ledgeCheckDistance * _movementDirection.value, transform.position.y));
+        UnityEditor.Handles.DrawLine(transform.position, new Vector2(transform.position.x + _ledgeCheckDistance * _conditions.MovementDir, transform.position.y));
     }
 #endif
 }

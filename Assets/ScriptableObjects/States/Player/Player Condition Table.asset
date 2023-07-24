@@ -12,19 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc90be533349ed64e989bfbd5c11d18a, type: 3}
   m_Name: Player Condition Table
   m_EditorClassIdentifier: 
-  IsGrounded: 0
+  _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
+  IsGrounded: 1
   IsMovingX: 0
   IsMovingUp: 0
   IsMovingDown: 0
   IsReloading: 0
-  HasStoppedFalling: 0
-  CanCrouch: 0
-  CanJump: 0
-  CanAttack: 0
+  HasStoppedFalling: 1
+  CanAttack: 1
   IsMovingInCorrectDir: 0
+  IsTouchingCeiling: 0
+  IsTouchingWall: 0
+  IsTouchingLedgeHorizontal: 0
+  IsJumping: 0
   IsPressingJump: 0
   IsPressingCrouch: 0
-  IsJumpCanceled: 0
+  IsJumpCanceled: 1
   IsPressingPause: 0
   IsPressingGrab: 0
   IsPressingPrimaryAttack: 0
@@ -32,5 +35,5 @@ MonoBehaviour:
   NormalizedInputX: 0
   NormalizedInputY: 0
   WeaponSwitchInput: 0
-  MovementDir: 0
-  MousePosition: {x: 0, y: 0, z: 0}
+  MovementDir: -1
+  MousePosition: {x: 21.910816, y: 36.78786, z: 0}

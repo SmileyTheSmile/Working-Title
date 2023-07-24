@@ -2,24 +2,11 @@ using UnityEngine;
 
 public abstract class PlayerTouchingWallState : PlayerState
 {
-    protected Movement _movement;
-    protected SoundComponent _sound;
-    
-    [SerializeField] protected PlayerConditionTable _conditions;
-
     [SerializeField] protected PlayerIdleState idleState;
     [SerializeField] protected PlayerInAirState inAirState;
     [SerializeField] protected PlayerCrouchIdleState crouchIdleState;
     [SerializeField] protected PlayerWallJumpState wallJumpState;
     [SerializeField] protected PlayerLedgeClimbState ledgeClimbState;
-
-    public override void Initialize(Core entity)
-    {
-        base.Initialize(entity);
-
-        _movement = _core.GetCoreComponent<Movement>();
-        _sound = _core.GetCoreComponent<SoundComponent>();
-    }
 
     public override GenericState DoTransitions()
     {

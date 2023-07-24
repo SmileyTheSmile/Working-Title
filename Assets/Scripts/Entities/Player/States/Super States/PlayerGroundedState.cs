@@ -2,11 +2,6 @@ using UnityEngine;
 
 public abstract class PlayerGroundedState : PlayerState
 {
-    protected Movement _movement;
-    protected SoundComponent _sound;
-
-    [SerializeField] protected PlayerConditionTable _conditions;
-
     [SerializeField] protected PlayerAttackState primaryAttackState;
     [SerializeField] protected PlayerAttackState secondaryAttackState;
     [SerializeField] protected PlayerJumpState jumpState;
@@ -15,48 +10,46 @@ public abstract class PlayerGroundedState : PlayerState
     [SerializeField] protected PlayerCrouchInAirState crouchInAirState;
     [SerializeField] protected PlayerWallGrabState wallGrabState;
 
-    public override void Initialize(Core entity)
-    {
-        base.Initialize(entity);
-
-        _movement = _core.GetCoreComponent<Movement>();
-        _sound = _core.GetCoreComponent<SoundComponent>();
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-
-        _temporaryComponent.ResetAmountOfJumpsLeft();
-        _temporaryComponent.ResetAmountOfCrouchesLeft();
-    }
-
     public override void DoActions()
     {
         base.DoActions();
 
-        _temporaryComponent.CheckMovementDirection(_conditions.NormalizedInputX);
+        _temporaryComponent.UpdateMovementDirection();
     }
 
     public override GenericState DoTransitions()
     {
-        if (_conditions.IsPressingPrimaryAttack && !_conditions.IsTouchingCeiling && _conditions.CanAttack && !_conditions.IsReloading) {
+        if (_conditions.IsPressingPrimaryAttack && !_conditions.IsTouchingCeiling && _conditions.CanAttack && !_conditions.IsReloading)
+        {
             return primaryAttackState;
-        } else if (_conditions.IsPressingSecondaryAttack && !_conditions.IsTouchingCeiling) {
+        }
+        else if (_conditions.IsPressingSecondaryAttack && !_conditions.IsTouchingCeiling)
+        {
             return null; //secondaryAttackState;
-        } else if ((_conditions.IsPressingJump && _conditions.IsJumping) && _conditions.CanJump && !_conditions.IsTouchingCeiling) {
-            if (_conditions.IsPressingCrouch && _conditions.CanCrouch) {
+        }
+        else if ((_conditions.IsPressingJump && _conditions.IsJumping) && _conditions.CanJump && !_conditions.IsTouchingCeiling)
+        {
+            if (_conditions.IsPressingCrouch && _conditions.CanCrouch)
+            {
                 return crouchJumpState;
-            } else {
+            }
+            else
+            {
                 return jumpState;
             }
-        } else if (!_conditions.IsGrounded) {
-            if (_conditions.IsPressingCrouch) {
+        }
+        else if (!_conditions.IsGrounded)
+        {
+            if (_conditions.IsPressingCrouch)
+            {
                 return crouchInAirState;
-            } else {
+            }
+            else
+            {
                 return inAirState;
             }
-        } else if (_conditions.IsTouchingWall && _conditions.IsPressingGrab && _conditions.IsTouchingLedgeHorizontal && !_conditions.IsTouchingCeiling && !_conditions.IsPressingCrouch) {
+        } else if (_conditions.IsTouchingWall && _conditions.IsPressingGrab && _conditions.IsTouchingLedgeHorizontal && !_conditions.IsTouchingCeiling && !_conditions.IsPressingCrouch)
+        {
             return wallGrabState;
         }
 

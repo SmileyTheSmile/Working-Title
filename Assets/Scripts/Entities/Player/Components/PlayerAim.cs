@@ -10,8 +10,6 @@ public class PlayerAim : CoreComponent
     [SerializeField] private Vector2 _clampThreshold = new Vector2(2f, 2f);
     [SerializeField] private float _clampRadius = 2.5f;
 
-    private Vector3 _mousePosition => _conditions.MousePosition;
-
     public override void LogicUpdate()
     {
         UpdateCursorPosition();
@@ -20,7 +18,7 @@ public class PlayerAim : CoreComponent
 
     private void UpdateCursorPosition()
     {
-        _cursor.position = _mousePosition;
+        _cursor.position = _conditions.MousePosition;
     }
 
     private void UpdateCameraTargetPosition()
@@ -38,7 +36,7 @@ public class PlayerAim : CoreComponent
 
     private void ClampTargetInRect()
     {
-        Vector3 newTargetPosition = (base.transform.position + _mousePosition) / 2;
+        Vector3 newTargetPosition = (base.transform.position + _conditions.MousePosition) / 2;
 
         newTargetPosition.x = Mathf.Clamp(newTargetPosition.x, transform.position.x - _clampThreshold.x, transform.position.x + _clampThreshold.x);
         newTargetPosition.y = Mathf.Clamp(newTargetPosition.y, transform.position.y - _clampThreshold.y, transform.position.y + _clampThreshold.y);
@@ -48,7 +46,7 @@ public class PlayerAim : CoreComponent
 
     private void ClampTargetInCircle()
     {
-        Vector3 newTargetPosition = (_mousePosition - transform.position) / 2;
+        Vector3 newTargetPosition = (_conditions.MousePosition - transform.position) / 2;
         newTargetPosition = Vector3.ClampMagnitude(newTargetPosition, _clampRadius);
         _target.position = transform.position + newTargetPosition;
     }
