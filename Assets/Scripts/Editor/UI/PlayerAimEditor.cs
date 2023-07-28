@@ -6,7 +6,7 @@ class PlayerAimEditor : Editor
 {
     private SerializedProperty _target;
     private SerializedProperty _cursor;
-    private SerializedProperty _conditions;
+    private SerializedProperty _stats;
     private SerializedProperty _clampMode;
     private SerializedProperty _clampThreshold;
     private SerializedProperty _clampRadius;
@@ -29,7 +29,7 @@ class PlayerAimEditor : Editor
     {
         _target = serializedObject.FindProperty("_target");
         _cursor = serializedObject.FindProperty("_cursor");
-        _conditions = serializedObject.FindProperty("_conditions");
+        _stats = serializedObject.FindProperty("_stats");
         _clampMode = serializedObject.FindProperty("_clampMode");
         _clampThreshold = serializedObject.FindProperty("_clampThreshold");
         _clampRadius = serializedObject.FindProperty("_clampRadius");
@@ -39,7 +39,7 @@ class PlayerAimEditor : Editor
     {
         EditorGUILayout.ObjectField(_target, new GUIContent("Camera Target", "The point at which the camera is looking."));
         EditorGUILayout.ObjectField(_cursor, new GUIContent("Cursor", "The object that will serve as a cursor"));
-        EditorGUILayout.ObjectField(_conditions, new GUIContent("Mouse Pos SO", "The scriptable object of the mouse's current position."));
+        EditorGUILayout.ObjectField(_stats, new GUIContent("Mouse Pos SO", "The scriptable object of the mouse's current position."));
 
         EditorGUILayout.PropertyField(_clampMode, new GUIContent("Clamp Mode", "The way in which the camera target is clamped."));
 

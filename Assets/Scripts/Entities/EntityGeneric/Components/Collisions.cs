@@ -19,7 +19,7 @@ public class Collisions : CoreComponent
     public void SetColliderSize(Vector2 size) => _boxCollider.size = size;
     public void SetColliderSize(float width, float height) => _boxCollider.size = new Vector2(width, height);
     public void SetColliderSizeX(float width) => _boxCollider.size = new Vector2(width, _boxCollider.size.y);
-    public void SetColliderSizeY(float height) => _boxCollider.size = new Vector2(_boxCollider.size.x, height);
+    public void SetColliderHeight(float height) => _boxCollider.size = new Vector2(_boxCollider.size.x, height);
     public void SetColliderOffset(Vector2 offset) => _boxCollider.offset = offset;
     public void SetColliderOffset(float offsetX, float offsetY) => _boxCollider.offset = new Vector2(offsetX, offsetY);
     public void SetColliderOffsetX(float offsetX) => _boxCollider.offset = new Vector2(offsetX, _boxCollider.offset.y);

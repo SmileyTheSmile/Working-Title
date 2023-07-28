@@ -7,15 +7,15 @@ public abstract class Weapon : MonoBehaviour
     protected Movement movement
     { get => _movement ?? _player.GetCoreComponent(ref _movement); }
     private Movement _movement;
-    protected TemporaryComponent conditionManager
+    protected Player conditionManager
     { get => _conditionManager ?? _player.GetCoreComponent(ref _conditionManager); }
-    private TemporaryComponent _conditionManager;
+    private Player _conditionManager;
 
     protected WeaponHandler weaponHandler
     { get => _weaponHandler ?? _player.GetCoreComponent(ref _weaponHandler); }
     private WeaponHandler _weaponHandler;
 
-    [SerializeField] protected PlayerConditionTable _conditions;
+    [SerializeField] protected PlayerStats _conditions;
 
     protected Animator _weaponAnimator;
     protected Core _player;

@@ -10,23 +10,23 @@ public abstract class PlayerTouchingWallState : PlayerState
 
     public override GenericState DoTransitions()
     {
-        if (_conditions.IsPressingJump)
+        if (_stats.IsPressingJump)
         {
             return wallJumpState;
         }
-        else if (_conditions.IsGrounded && !_conditions.IsPressingGrab)
+        else if (_stats.IsGrounded && !_stats.IsPressingGrab)
         {
             return idleState;
         }
-        else if (_conditions.IsGrounded && _conditions.IsPressingCrouch && !_conditions.IsTouchingCeiling)
+        else if (_stats.IsGrounded && _stats.IsPressingCrouch && !_stats.IsTouchingCeiling)
         {
             return crouchIdleState;
         }
-        else if (!_conditions.IsTouchingWall || (!_conditions.IsMovingInCorrectDir && !_conditions.IsPressingGrab))
+        else if (!_stats.IsTouchingWall || (!_stats.IsMovingInCorrectDir && !_stats.IsPressingGrab))
         {
             return inAirState;
         }
-        else if (_conditions.IsTouchingWall && !_conditions.IsTouchingLedgeHorizontal && !_conditions.IsTouchingCeiling)
+        else if (_stats.IsTouchingWall && !_stats.IsTouchingLedgeHorizontal && !_stats.IsTouchingCeiling)
         {
             return ledgeClimbState;
         }

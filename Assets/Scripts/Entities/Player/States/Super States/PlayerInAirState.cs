@@ -20,37 +20,37 @@ public class PlayerInAirState : PlayerState
     {
         base.Enter();
 
-        _temporaryComponent.StartCoyoteTime();
+        _player.StartCoyoteTime();
     }
 
     public override void DoActions()
     {
         base.DoActions();
 
-        _temporaryComponent.UpdateFallStatus();
-        _temporaryComponent.UpdateCoyoteTime();
-        _temporaryComponent.UpdateJumpStatus();
-        _temporaryComponent.UpdateMovementDirection();
-        _temporaryComponent.MoveInAir();
+        _player.UpdateFallStatus();
+        _player.UpdateCoyoteTime();
+        _player.UpdateJumpStatus();
+        _player.UpdateMovementDirection();
+        _player.MoveInAir();
     }
     
     public override GenericState DoTransitions()
     {
-        if (_conditions.IsPressingPrimaryAttack && _conditions.CanAttack && !_conditions.IsReloading)
+        if (_stats.IsPressingPrimaryAttack && _stats.CanAttack && !_stats.IsReloading)
         {
             return primaryAttackState;
         }
-        else if (_conditions.IsPressingSecondaryAttack)
+        else if (_stats.IsPressingSecondaryAttack)
         {
             return null; //return secondaryAttackState;
         }
-        else if (_conditions.IsPressingJump && _conditions.CanJump)
+        else if (_stats.IsPressingJump && _stats.CanJump)
         {
-            if (_conditions.IsPressingCrouch)
+            if (_stats.IsPressingCrouch)
             {
                 return crouchJumpState;
             }
-            else if (_conditions.IsTouchingWall || _conditions.IsTouchingWall || _conditions.IsInCoyoteTime)
+            else if (_stats.IsTouchingWall || _stats.IsTouchingWall || _stats.IsInCoyoteTime)
             {
                 return wallJumpState;
             }
@@ -59,9 +59,9 @@ public class PlayerInAirState : PlayerState
                 return jumpState;
             }
         }
-        else if (_conditions.IsGrounded && _conditions.HasStoppedFalling)
+        else if (_stats.IsGrounded && _stats.HasStoppedFalling)
         {
-            if (_conditions.IsPressingCrouch)
+            if (_stats.IsPressingCrouch)
             {
                 return crouchLandState;
             }
@@ -70,22 +70,22 @@ public class PlayerInAirState : PlayerState
                 return landState;
             }
         }
-        else if (_conditions.IsTouchingWall && !_conditions.IsPressingCrouch)
+        else if (_stats.IsTouchingWall && !_stats.IsPressingCrouch)
         {
-            if (_conditions.IsPressingGrab && _conditions.IsTouchingLedgeHorizontal)
+            if (_stats.IsPressingGrab && _stats.IsTouchingLedgeHorizontal)
             {
                 return wallGrabState;
             }
-            else if (_conditions.IsMovingInCorrectDir && _conditions.HasStoppedFalling)
+            else if (_stats.IsMovingInCorrectDir && _stats.HasStoppedFalling)
             {
                 return wallSlideState;
             }
-            else if (!_conditions.IsTouchingLedgeHorizontal && !_conditions.IsGrounded && !_conditions.IsTouchingCeiling)
+            else if (!_stats.IsTouchingLedgeHorizontal && !_stats.IsGrounded && !_stats.IsTouchingCeiling)
             {
                 return ledgeClimbState;
             }
         }
-        else if (_conditions.IsPressingCrouch && _conditions.CanCrouch && !_conditions.IsGrounded)
+        else if (_stats.IsPressingCrouch && _stats.CanCrouch && !_stats.IsGrounded)
         {
             return crouchInAirState;
         }

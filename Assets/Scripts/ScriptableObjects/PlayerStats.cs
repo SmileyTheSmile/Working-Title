@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 [CreateAssetMenu(fileName = "Player Condition Table", menuName = "Player Condition Table")]
-public class PlayerConditionTable : ConditionTable
+public class PlayerStats : StatsTable
 {
-    [SerializeField] private PlayerData _playerData;
-
     public bool IsGrounded;
     public bool IsReloading;
     public bool IsTouchingCeiling;
@@ -16,12 +12,9 @@ public class PlayerConditionTable : ConditionTable
     public bool IsJumping;
     public bool HasStoppedFalling;
     public bool CanAttack;
-    public bool IsMovingUp => NormalizedInputY > 0;
-    public bool IsMovingDown => NormalizedInputY < 0;
-    public bool IsMovingX => NormalizedInputX != 0;
-    public bool IsMovingInCorrectDir => NormalizedInputX == MovementDir;
-    public bool CanJump => NumberOfJumpsLeft > 0;
-    public bool CanCrouch => NumberOfCrouchesLeft > 0;
+    public bool IsCrouchingDown;
+    public bool IsCrouchingUp;
+    public bool IsInCoyoteTime;
     
     public bool IsPressingJump;
     public bool IsPressingCrouch;
@@ -30,19 +23,26 @@ public class PlayerConditionTable : ConditionTable
     public bool IsPressingGrab;
     public bool IsPressingPrimaryAttack;
     public bool IsPressingSecondaryAttack;
-    public bool IsInCoyoteTime;
-    
     public int NormalizedInputX;
     public int NormalizedInputY;
     public int WeaponSwitchInput;
-    public int MovementDir;
-    public int FacingDir;
+    public Vector3 RawMousePosition;
+    
+    public int MovementDir = 1;
+    public int FacingDir = 1;
     public int NumberOfJumpsLeft;
-    public int NumberOfCrouchesLeft;
+    public int NumberOfInAirCrouchesLeft;
 
     public Vector3 MousePosition;
 
     public float JumpInputStartTime;
     public float CoyoteTimeStartTime;
     public float LastStepTime;
+    
+    public bool IsMovingUp => NormalizedInputY > 0;
+    public bool IsMovingDown => NormalizedInputY < 0;
+    public bool IsMovingX => NormalizedInputX != 0;
+    public bool IsMovingInCorrectDir => NormalizedInputX == MovementDir;
+    public bool CanJump => NumberOfJumpsLeft > 0;
+    public bool CanCrouch => NumberOfInAirCrouchesLeft > 0;
 }

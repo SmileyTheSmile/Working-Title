@@ -12,15 +12,15 @@ public class PlayerCrouchIdleState : PlayerGroundedState
     {
         base.Enter();
 
-        _temporaryComponent.StopMoving();
-        _temporaryComponent.Crouch();
+        _player.StopMoving();
+        _player.Crouch();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.UnCrouch();
+        _player.UnCrouch();
     }
 
     public override GenericState DoTransitions()
@@ -29,9 +29,9 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         if (parentResult)
             return parentResult;
 
-        if (_conditions.IsMovingX)
+        if (_stats.IsMovingX)
         {
-            if (_conditions.IsPressingCrouch || _conditions.IsTouchingCeiling)
+            if (_stats.IsPressingCrouch || _stats.IsTouchingCeiling)
             {
                 return crouchMoveState;
             }
@@ -40,7 +40,7 @@ public class PlayerCrouchIdleState : PlayerGroundedState
                 return moveState;
             }
         }
-        else if (!_conditions.IsPressingCrouch && !_conditions.IsTouchingCeiling)
+        else if (!_stats.IsPressingCrouch && !_stats.IsTouchingCeiling)
         {
             return idleState;
         }

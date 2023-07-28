@@ -14,22 +14,22 @@ public abstract class PlayerGroundedState : PlayerState
     {
         base.DoActions();
 
-        _temporaryComponent.UpdateMovementDirection();
+        _player.UpdateMovementDirection();
     }
 
     public override GenericState DoTransitions()
     {
-        if (_conditions.IsPressingPrimaryAttack && !_conditions.IsTouchingCeiling && _conditions.CanAttack && !_conditions.IsReloading)
+        if (_stats.IsPressingPrimaryAttack && !_stats.IsTouchingCeiling && _stats.CanAttack && !_stats.IsReloading)
         {
             return primaryAttackState;
         }
-        else if (_conditions.IsPressingSecondaryAttack && !_conditions.IsTouchingCeiling)
+        else if (_stats.IsPressingSecondaryAttack && !_stats.IsTouchingCeiling)
         {
             return null; //secondaryAttackState;
         }
-        else if ((_conditions.IsPressingJump && _conditions.IsJumping) && _conditions.CanJump && !_conditions.IsTouchingCeiling)
+        else if ((_stats.IsPressingJump && !_stats.IsJumping) && _stats.CanJump && !_stats.IsTouchingCeiling)
         {
-            if (_conditions.IsPressingCrouch && _conditions.CanCrouch)
+            if (_stats.IsPressingCrouch && _stats.CanCrouch)
             {
                 return crouchJumpState;
             }
@@ -38,9 +38,9 @@ public abstract class PlayerGroundedState : PlayerState
                 return jumpState;
             }
         }
-        else if (!_conditions.IsGrounded)
+        else if (!_stats.IsGrounded)
         {
-            if (_conditions.IsPressingCrouch)
+            if (_stats.IsPressingCrouch)
             {
                 return crouchInAirState;
             }
@@ -48,7 +48,7 @@ public abstract class PlayerGroundedState : PlayerState
             {
                 return inAirState;
             }
-        } else if (_conditions.IsTouchingWall && _conditions.IsPressingGrab && _conditions.IsTouchingLedgeHorizontal && !_conditions.IsTouchingCeiling && !_conditions.IsPressingCrouch)
+        } else if (_stats.IsTouchingWall && _stats.IsPressingGrab && _stats.IsTouchingLedgeHorizontal && !_stats.IsTouchingCeiling && !_stats.IsPressingCrouch)
         {
             return wallGrabState;
         }

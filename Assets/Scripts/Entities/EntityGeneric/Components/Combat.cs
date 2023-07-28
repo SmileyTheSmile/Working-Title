@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
-    [SerializeField] private PlayerConditionTable _conditions;
+    [SerializeField] private PlayerStats _conditions;
 
     private Movement _movement;
 

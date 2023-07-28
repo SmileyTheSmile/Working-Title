@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions: []
   _animBoolName: crouchMove
-  _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
-  _conditions: {fileID: 11400000, guid: e475078ab8da121458fbc7a4186c575f, type: 2}
+  _stats: {fileID: 11400000, guid: e475078ab8da121458fbc7a4186c575f, type: 2}
   primaryAttackState: {fileID: 11400000, guid: 206e1647564bf384cbf665670c931bfe, type: 2}
   secondaryAttackState: {fileID: 11400000, guid: a7ae12ca019a1c24b9f1f9ce0ca20239, type: 2}
   jumpState: {fileID: 11400000, guid: 4d864d1e055f057489fc773ce82e4b91, type: 2}
@@ -26,4 +25,3 @@ MonoBehaviour:
   moveState: {fileID: 11400000, guid: 8d637005230b4664d90c8c36d7167889, type: 2}
   idleState: {fileID: 11400000, guid: b6b5da63f5281e9489b815bfc5c758b9, type: 2}
   crouchIdleState: {fileID: 11400000, guid: 507958b03a463ae45b29b20d3c259590, type: 2}
-  MovementDirSO: {fileID: 11400000, guid: 3fd85ffc0a522c544b99abd8cb4a5f93, type: 2}

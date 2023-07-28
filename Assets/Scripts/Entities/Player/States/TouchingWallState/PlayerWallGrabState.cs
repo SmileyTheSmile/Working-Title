@@ -11,21 +11,14 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     {
         base.Enter();
 
-        _temporaryComponent.FreezeInPlace();
+        _player.FreezeInPlace();
     }
     
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.LetGoOfWall();
-    }
-
-    public override void DoActions()
-    {
-        base.DoActions();
-
-        _temporaryComponent.HoldPosition();
+        _player.LetGoOfWall();
     }
 
     public override GenericState DoTransitions()
@@ -34,11 +27,11 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         if (parentResult)
             return parentResult;
 
-        if (_conditions.IsMovingUp)
+        if (_stats.IsMovingUp)
         {
             return wallClimbState;
         }
-        else if (_conditions.IsMovingDown || !_conditions.IsPressingGrab)
+        else if (_stats.IsMovingDown || !_stats.IsPressingGrab)
         {
             return wallSlideState;
         }

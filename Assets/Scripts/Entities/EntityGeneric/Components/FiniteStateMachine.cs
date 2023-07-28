@@ -21,13 +21,13 @@ public class FiniteStateMachine : CoreComponent
     }
 
     //Start the state machine
-    public override void Initialize(Core entity)
+    public override void Initialize(Core core)
     {
-        base.Initialize(entity); 
+        base.Initialize(core); 
 
         //TODO Move core setup in a proper place and get rid of state list
         foreach (var state in _states)
-            state.Initialize(entity);
+            state.Initialize(core);
 
         _currentState = _startingState;
         _currentState.Enter();

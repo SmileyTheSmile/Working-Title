@@ -1,10 +1,10 @@
 using UnityEngine;
 using System;
 
-public class TemporaryComponent : CoreComponent
+public class Player : CoreComponent
 {
     [SerializeField] private PlayerInputHandler _brain;
-    [SerializeField] private PlayerConditionTable _conditions;
+    [SerializeField] private PlayerStats _stats;
     [SerializeField] private PlayerData _playerData;
 
     [SerializeField] private Transform _ceilingCheckTransform;
@@ -15,34 +15,31 @@ public class TemporaryComponent : CoreComponent
     private Movement _movement;
     private SoundComponent _sound;
 
-    private Camera _mainCamera;
-    private float _stepDelay;
-
-    private Vector2 _rawMouseInput;
-    private PlayerCrouchingForm _crouchingForm;
-
-    public override void Initialize(Core entity)
+    public override void Initialize(Core core)
     {
-        base.Initialize(entity);
-        
-        _mainCamera = Camera.main;
-        _crouchingForm = PlayerCrouchingForm.notCrouching;
-        _conditions.FacingDir = 1;
-        _conditions.MovementDir = 1;
-        _conditions.JumpInputStartTime = Time.time;
-        _conditions.NumberOfJumpsLeft = _playerData.numberOfJumps;
-        _conditions.NumberOfCrouchesLeft = _playerData.numberOfCrouches;
+        base.Initialize(core); 
+
+        _stats.NumberOfJumpsLeft = _playerData.numberOfJumps;
+        _stats.NumberOfInAirCrouchesLeft = _playerData.numberOfCrouches;
+
+        SetupConnections();
+        SetupStates();
     }
 
     public override void SetupConnections()
     {
-        base.SetupConnections();
+        base.SetupConnections(); 
 
         _weaponHandler = _core.GetCoreComponent<WeaponHandler>();
         _visualController = _core.GetCoreComponent<VisualController>();
         _collisions = _core.GetCoreComponent<Collisions>();
         _movement = _core.GetCoreComponent<Movement>();
         _sound = _core.GetCoreComponent<SoundComponent>();
+    }
+
+    private void SetupStates()
+    {
+
     }
 
     private void OnEnable()
@@ -71,54 +68,44 @@ public class TemporaryComponent : CoreComponent
         _brain.SecondaryAttackEvent -= OnSecondaryAttack;
     }
 
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-
-        UpdateMouseInput();
-    }
 
 #region Actions
 
+    //Movement, PlayerData
     public void ClimbLedge()
     {
         _movement.SetVelocityY(_playerData.ledgeClimbVelocity);
     }
 
+    //Collisions, PlayerData, CollisionSenses
     public void Crouch()
     {
-        if (_crouchingForm == PlayerCrouchingForm.notCrouching && _conditions.IsPressingCrouch)
+        if (!_stats.IsCrouchingDown)
         {
-            float biggerHeight = _playerData.standColliderHeight;
-            float smallerHeight = _playerData.crouchColliderHeight;
+            _stats.IsCrouchingDown = true;
 
-            _crouchingForm = PlayerCrouchingForm.crouchingDown;
-
-            float height = _collisions.ColliderSize.y * smallerHeight;
-
+            float height = _collisions.ColliderSize.y * _playerData.crouchColliderHeight;
             _collisions.SetColliderOffsetY((height - _collisions.ColliderSize.y) / 2);
-            _collisions.SetColliderSizeY(height);
+            _collisions.SetColliderHeight(height);
 
-            float moveDistance = (_playerData.crouchHeightDifference * _collisions.DefaultSize.y);
+            float moveDistance = _collisions.DefaultSize.y * _playerData.crouchHeightDifference;
             _ceilingCheckTransform.position -= Vector3.up * moveDistance;
         }
     }
 
+    //Collisions, PlayerData, Conditions, CollisionSenses
     public void CrouchInAir()
     {
-        _conditions.NumberOfCrouchesLeft--;
+        _stats.NumberOfInAirCrouchesLeft--;
         Crouch();
     }
 
+    //Collisions, PlayerData, CollisionSenses
     public void UnCrouch()
     {
-        if (((_crouchingForm == PlayerCrouchingForm.crouchingDown && !_conditions.IsPressingCrouch)
-        || !_conditions.IsTouchingWall) && !_conditions.IsTouchingCeiling)
+        if (_stats.IsCrouchingDown)
         {
-            float biggerHeight = _playerData.standColliderHeight;
-            float smallerHeight = _playerData.crouchColliderHeight;
-
-            _crouchingForm = PlayerCrouchingForm.notCrouching;
+            _stats.IsCrouchingDown = false;
 
             _collisions.SetColliderOffset(Vector2.zero);
             _collisions.SetColliderSize(_collisions.DefaultSize);
@@ -128,108 +115,114 @@ public class TemporaryComponent : CoreComponent
         }
     }
 
+    //Sound, Conditions, Movement
     public void Jump()
     {
         if (_sound.jumpSound)
             _sound.jumpSound.Play();
 
-        _movement.SetVelocityY(_playerData.jumpVelocity);
+        _stats.NumberOfJumpsLeft--;
+        _stats.IsJumping = true;
+        _stats.IsPressingJump = false;
 
-        _conditions.NumberOfJumpsLeft--;
-        _conditions.IsJumping = true;
-        _conditions.IsPressingJump = false;
+        _movement.SetVelocityY(_playerData.jumpVelocity);
     }
 
+    //Sound, Conditions, Movement
     public void WallJump()
     {
         if (_sound.jumpSound)
             _sound.jumpSound.Play();
 
-        _conditions.MovementDir = (_conditions.IsTouchingWall ? -1 : 1) * _conditions.MovementDir;
+        _stats.MovementDir = (_stats.IsTouchingWall ? -1 : 1) * _stats.MovementDir;
+        _stats.NumberOfJumpsLeft = _playerData.numberOfJumps;
+        _stats.NumberOfJumpsLeft--;
+        _stats.IsPressingJump = false;
         UpdateMovementDirection();
         
         Vector2 wallJumpDirection = (Vector2)(Quaternion.Euler(0, 0, _playerData.wallJumpAngle) * Vector2.right); //Temporary
-        _movement.SetVelocityAtAngle(_playerData.wallJumpVelocity, wallJumpDirection, _conditions.MovementDir);
+        _movement.SetVelocityAtAngle(_playerData.wallJumpVelocity, wallJumpDirection, _stats.MovementDir);
 
-        _conditions.NumberOfJumpsLeft = _playerData.numberOfJumps;
-        _conditions.NumberOfJumpsLeft--;
-        _conditions.IsPressingJump = false;
     }
 
+    //Movement
     public void StopMoving()
     {
         _movement.SetVelocityZero();
     }
 
+    //Sound, Conditions
     public void Land()
     {
         if (_sound.fallSound)
             _sound.fallSound.Play();
 
-        _conditions.NumberOfJumpsLeft = _playerData.numberOfJumps;
-        _conditions.NumberOfCrouchesLeft = _playerData.numberOfCrouches;
+        _stats.NumberOfJumpsLeft = _playerData.numberOfJumps;
+        _stats.NumberOfInAirCrouchesLeft = _playerData.numberOfCrouches;
     }
 
+    //Sound, Conditions
     public void Step()
     {
-        _conditions.LastStepTime = Time.time;
-
         if (_sound.moveSound)
             _sound.moveSound.Play();
+
+        _stats.LastStepTime = Time.time;
     }
 
+    //Sound, Conditions
     public void StepContinuous()
     {
-        if (_conditions.LastStepTime + _stepDelay >= Time.time)
+        if (_stats.LastStepTime + _playerData.StepDelay <= Time.time)
             Step();
     }
 
+    //Sound, Conditions, Movement
     public void SlideDown()
     {
-        Step();
+        StepContinuous();
         _movement.SetVelocityY(-_playerData.wallSlideVelocity);
     }
     
+    //Sound, Conditions, Movement
     public void ClimbWall()
     {
         StepContinuous();
         _movement.SetVelocityY(_playerData.wallClimbVelocity);
     }
 
+    //Sound, Conditions, Movement
     public void MoveOnGroundCrouched()
     {
         StepContinuous();
-        _movement.SetVelocityX(_playerData.crouchMovementVelocity * _conditions.MovementDir);
+        _movement.SetVelocityX(_playerData.crouchMovementVelocity * _stats.MovementDir);
     }
 
+    //Sound, Stats, Movement
     public void MoveOnGround()
     {
         StepContinuous();
-        _movement.SetVelocityX(_playerData.movementVelocity * _conditions.NormalizedInputX);
+        _movement.SetVelocityX(_playerData.movementVelocity * _stats.NormalizedInputX);
         //movement.AddForceX(_playerData.movementVelocity * _inputX, ForceMode2D.Impulse);
     }
 
+    //Movement, Visuals
     public void MoveInAir()
     {
-        if (_conditions.NormalizedInputX != 0)
-            _movement.SetVelocityX(_playerData.movementVelocity * _conditions.NormalizedInputX * _playerData.defaultAirControlPercentage);
+        if (_stats.IsMovingX)
+            _movement.SetVelocityX(_playerData.movementVelocity * _stats.NormalizedInputX * _playerData.defaultAirControlPercentage);
 
         _visualController?.SetAnimationFloat("velocityX", Mathf.Abs(_movement.CurrentVelocity.x));
         _visualController?.SetAnimationFloat("velocityY", _movement.CurrentVelocity.y);
     }
 
+    //Sound
     public void StopMovementSound()
     {
         _sound.moveSound.Stop();
     }
 
-    public void HoldPosition()
-    {
-        //_core.transform.position = _conditions.HoldPosition;
-
-        //StopMoving();
-    }
-    
+    //Movement
     public void FreezeInPlace()
     {
         _movement.SetGravity(0f);
@@ -237,128 +230,136 @@ public class TemporaryComponent : CoreComponent
         StopMoving();
     }
     
+    //Movement
     public void LetGoOfWall()
     {
         _movement.SetGravity(2f);
     }
 
+    //Stats, WeaponHandler, Visuals
     public void Flip()
     {
-        _conditions.FacingDir *= -1;
+        _stats.FacingDir *= -1;
 
-        _weaponHandler?.FlipWeapon(_conditions.FacingDir);
-        _visualController?.FlipEntity(_conditions.FacingDir);
+        _weaponHandler?.FlipWeapon(_stats.FacingDir);
+        _visualController?.FlipEntity(_stats.FacingDir);
     }
 
+    //Stats
     public void StartCoyoteTime()
     {
-        _conditions.IsInCoyoteTime = true;
-        _conditions.CoyoteTimeStartTime = Time.time;
+        _stats.IsInCoyoteTime = true;
+        _stats.CoyoteTimeStartTime = Time.time;
     }
 
+    //Stats
     public void UpdateMovementDirection()
     {
-        if (_conditions.IsMovingX && !_conditions.IsMovingInCorrectDir)
-            _conditions.MovementDir *= -1;
+        if (_stats.IsMovingX && !_stats.IsMovingInCorrectDir)
+            _stats.MovementDir *= -1;
     }
 
+    //Core, Stats
     public void UpdateFacingDirection()
     {
-        Vector2 mouseDirection = (_conditions.MousePosition - _core.transform.position).normalized;
+        Vector2 mouseDirection = (_stats.MousePosition - _core.transform.position).normalized;
 
         float angle = Vector2.SignedAngle(Vector2.right, mouseDirection);
         angle = (angle > 90) ? angle - 270 : angle + 90;
 
-        if (Math.Sign(angle) != _conditions.FacingDir)
+        if (Math.Sign(angle) != _stats.FacingDir)
             Flip();
     }
 
+    //Stats, PlayerData
     public void UpdateCoyoteTime()
     {
-        if (_conditions.IsInCoyoteTime && Time.time > _conditions.CoyoteTimeStartTime + _playerData.coyoteTime)
+        if (_stats.IsInCoyoteTime && Time.time > _stats.CoyoteTimeStartTime + _playerData.coyoteTime)
         {
-            _conditions.IsInCoyoteTime = false;
-            _conditions.NumberOfJumpsLeft--;
+            _stats.IsInCoyoteTime = false;
+            _stats.NumberOfJumpsLeft--;
         }
     }
 
+    //Stats, Movement, PlayerData
     public void UpdateJumpStatus()
     {
-        if (!_conditions.IsJumping)
+        if (!_stats.IsJumping)
             return;
 
-        if (_conditions.IsJumpCanceled)
+        if (_stats.IsJumpCanceled)
         {
             _movement.SetVelocityY(_movement.CurrentVelocity.y * _playerData.variableJumpHeightMultiplier);
-            _conditions.IsJumping = false;
+            _stats.IsJumping = false;
         }
         else if (_movement.CurrentVelocity.y <= 0f)
         {
-            _conditions.IsJumping = false;
+            _stats.IsJumping = false;
         }
-
-        if (Time.time >= (_conditions.JumpInputStartTime + _playerData.jumpInputHoldTime))
-            _conditions.IsPressingJump = false;
+        else if (Time.time >= (_stats.JumpInputStartTime + _playerData.jumpInputHoldTime))
+        {
+            _stats.IsPressingJump = false;
+        }
     }
 
+    //Stats, Movement
     public void UpdateFallStatus()
     {
-        _conditions.HasStoppedFalling = _movement.CurrentVelocity.y < 0.01;
+        _stats.HasStoppedFalling = _movement.CurrentVelocity.y < 0.01;
     }
 
 #endregion
+
 
 #region Brain Input
 
     public void ProcessMovement(Vector2 value)
     {
-        _conditions.NormalizedInputX = Mathf.RoundToInt(value.x);
-        _conditions.NormalizedInputY = Mathf.RoundToInt(value.y);
+        _stats.NormalizedInputX = Mathf.RoundToInt(value.x);
+        _stats.NormalizedInputY = Mathf.RoundToInt(value.y);
     }
 
     public void OnJump()
     {
-        _conditions.IsPressingJump = true;
-        
-        _conditions.IsJumpCanceled = false;
-
-        _conditions.JumpInputStartTime = Time.time;
+        _stats.IsPressingJump = true;
+        _stats.IsJumpCanceled = false;
+        _stats.JumpInputStartTime = Time.time;
     }
 
     public void OnJumpCancelled()
     {
-        _conditions.IsPressingJump = false;
-        _conditions.IsJumpCanceled = true;
+        _stats.IsPressingJump = false;
+        _stats.IsJumpCanceled = true;
     }
 
     public void OnGrab(bool value)
     {
-        _conditions.IsPressingGrab = value;
+        _stats.IsPressingGrab = value;
     }
 
     public void OnPrimaryAttack(bool value)
     {
-        _conditions.IsPressingPrimaryAttack = value;
+        _stats.IsPressingPrimaryAttack = value;
     }
 
     public void OnSecondaryAttack(bool value)
     {
-        _conditions.IsPressingSecondaryAttack = value;
+        _stats.IsPressingSecondaryAttack = value;
     }
 
     public void OnCrouch(bool value)
     {
-        _conditions.IsPressingCrouch = value;
+        _stats.IsPressingCrouch = value;
     }
 
     public void OnAim(Vector2 value)
     {
-        _rawMouseInput = value;
+        _stats.RawMousePosition = value;
     }
 
     public void OnWeaponSwitch(Vector2 value)
     {
-        _conditions.WeaponSwitchInput = (int)value.y;
+        _stats.WeaponSwitchInput = (int)value.y;
     }
 
     public void OnPause()
@@ -367,18 +368,6 @@ public class TemporaryComponent : CoreComponent
     }
 
 #endregion
-    
-    private void UpdateMouseInput()
-    {
-        Vector3 shiftedMouseInput = new Vector3(_rawMouseInput.x, _rawMouseInput.y, 10);
 
-        _conditions.MousePosition = _mainCamera.ScreenToWorldPoint(shiftedMouseInput);
-    }
 
-    public enum PlayerCrouchingForm
-    {
-        notCrouching,
-        crouchingDown,
-        crouchingUp
-    }
 }

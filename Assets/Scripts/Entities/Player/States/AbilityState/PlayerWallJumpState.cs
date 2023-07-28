@@ -8,7 +8,7 @@ public class PlayerWallJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        _temporaryComponent.WallJump();
+        _player.WallJump();
     }
 
     /*

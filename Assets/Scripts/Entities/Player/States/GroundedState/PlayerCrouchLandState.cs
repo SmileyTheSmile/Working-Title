@@ -13,15 +13,15 @@ public class PlayerCrouchLandState : PlayerGroundedState
     {
         base.Enter();
 
-        _temporaryComponent.Land();
-        _temporaryComponent.Crouch();
+        _player.Land();
+        _player.Crouch();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.UnCrouch();
+        _player.UnCrouch();
     }
 
     public override GenericState DoTransitions()
@@ -30,9 +30,9 @@ public class PlayerCrouchLandState : PlayerGroundedState
         if (parentResult)
             return parentResult;
 
-        if (_conditions.IsMovingX)
+        if (_stats.IsMovingX)
         {
-            if (_conditions.IsPressingCrouch)
+            if (_stats.IsPressingCrouch)
             {
                 return crouchMoveState;
             }
@@ -43,7 +43,7 @@ public class PlayerCrouchLandState : PlayerGroundedState
         }
         else if (_isAnimationFinished)
         {
-            if (_conditions.IsPressingCrouch)
+            if (_stats.IsPressingCrouch)
             {
                 return crouchIdleState;
             }

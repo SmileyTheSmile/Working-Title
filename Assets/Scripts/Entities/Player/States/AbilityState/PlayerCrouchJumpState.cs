@@ -8,13 +8,13 @@ public class PlayerCrouchJumpState : PlayerJumpState
     {
         base.Enter();
 
-        _temporaryComponent.Crouch();
+        _player.Crouch();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.UnCrouch();
+        _player.UnCrouch();
     }
 }

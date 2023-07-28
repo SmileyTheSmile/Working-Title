@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions: []
   _animBoolName: ledgeClimb
-  _playerData: {fileID: 11400000, guid: 1af0df27b5aa5a74b91877630f0832fc, type: 2}
+  _stats: {fileID: 11400000, guid: e475078ab8da121458fbc7a4186c575f, type: 2}
   crouchIdleState: {fileID: 11400000, guid: 507958b03a463ae45b29b20d3c259590, type: 2}
   idleState: {fileID: 11400000, guid: b6b5da63f5281e9489b815bfc5c758b9, type: 2}
   inAirState: {fileID: 11400000, guid: 3ef4a3247a9d6c343a2a0e218977d7bb, type: 2}
   crouchInAirState: {fileID: 11400000, guid: ea1a978daf95fc94bb8ce3c34e49fd48, type: 2}
-  _conditions: {fileID: 11400000, guid: e475078ab8da121458fbc7a4186c575f, type: 2}

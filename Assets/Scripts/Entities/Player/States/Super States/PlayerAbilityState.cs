@@ -23,9 +23,9 @@ public abstract class PlayerAbilityState : PlayerState
             return null;
         }
         
-        if (_conditions.IsGrounded && _conditions.HasStoppedFalling)
+        if (_stats.IsGrounded && _stats.HasStoppedFalling)
         {
-            if (_conditions.IsPressingCrouch)
+            if (_stats.IsPressingCrouch)
             {
                 return crouchIdleState;
             }
@@ -34,9 +34,9 @@ public abstract class PlayerAbilityState : PlayerState
                 return idleState;
             }
         }
-        else if (!_conditions.IsGrounded)
+        else if (!_stats.IsGrounded)
         {
-            if (_conditions.IsPressingCrouch)
+            if (_stats.IsPressingCrouch)
             {
                 return crouchInAirState;
             }

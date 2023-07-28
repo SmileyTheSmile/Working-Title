@@ -50,5 +50,7 @@ public class PlayerData : ScriptableObject
     public float crouchHeightDifference => standColliderHeight - crouchColliderHeight;
     public int numberOfCrouches = 2;
 
+
+    public float StepDelay = 3;
     public LayerMask whatIsGround;
 }

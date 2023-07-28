@@ -9,6 +9,6 @@ public class PlayerJumpState : PlayerAbilityState
     {
         base.Enter();
 
-        _temporaryComponent.Jump();
+        _player.Jump();
     }
 }

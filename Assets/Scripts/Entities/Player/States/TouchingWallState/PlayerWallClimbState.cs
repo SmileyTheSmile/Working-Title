@@ -10,21 +10,21 @@ public class PlayerWallClimbState : PlayerTouchingWallState
     {
         base.Enter();
 
-        _temporaryComponent.Step();
+        _player.Step();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.StopMovementSound();
+        _player.StopMovementSound();
     }
 
     public override void DoActions()
     {
         base.DoActions();
 
-        _temporaryComponent.ClimbWall();
+        _player.ClimbWall();
     }
 
     public override GenericState DoTransitions()
@@ -33,7 +33,7 @@ public class PlayerWallClimbState : PlayerTouchingWallState
         if (parentResult)
             return parentResult;
 
-        if (!_conditions.IsMovingUp)
+        if (!_stats.IsMovingUp)
         {
             return wallGrabState;
         }

@@ -7,19 +7,15 @@ public abstract class GenericState : ScriptableObject
     [SerializeField] protected string _animBoolName;
 
     protected Core _core;
-    protected float _startTime;
     protected bool _isAnimationFinished;
     protected bool _isExitingState;
 
-    //What to do when entering the state
     public virtual void Enter() 
     {
-        _startTime = Time.time;
         _isExitingState = false;
         _isAnimationFinished = false;
     }
 
-    //What to do when exiting the state
     public virtual void Exit()
     {
         _isExitingState = true;

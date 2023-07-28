@@ -10,21 +10,21 @@ public class PlayerWallSlideState : PlayerTouchingWallState
     {
         base.Enter();
 
-        _temporaryComponent.Step();
+        _player.Step();
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _temporaryComponent.StopMovementSound();
+        _player.StopMovementSound();
     }
     
     public override void DoActions()
     {
         base.DoActions();
 
-        _temporaryComponent.SlideDown();
+        _player.SlideDown();
     }
 
     public override GenericState DoTransitions()
@@ -33,7 +33,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
         if (parentResult)
             return parentResult;
 
-        if (_conditions.IsPressingGrab && !_conditions.IsMovingUp && !_conditions.IsMovingDown)
+        if (_stats.IsPressingGrab && !_stats.IsMovingUp && !_stats.IsMovingDown)
         {
             return wallGrabState;
         }

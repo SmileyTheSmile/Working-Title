@@ -15,7 +15,7 @@ MonoBehaviour:
   movementVelocity: 6
   jumpVelocity: 8
   jumpInputHoldTime: 0.2
-  amountOfJumps: 1
+  numberOfJumps: 2
   coyoteTime: 0.2
   variableJumpHeightMultiplier: 0.5
   defaultAirControlPercentage: 1
@@ -38,7 +38,8 @@ MonoBehaviour:
   crouchMovementVelocity: 4
   crouchColliderHeight: 0.45
   standColliderHeight: 1
-  amountOfCrouches: 1
+  numberOfCrouches: 2
+  StepDelay: 1.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
