@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(PlayerAim)), CanEditMultipleObjects]
-class PlayerAimEditor : GenericEditor
+[CustomEditor(typeof(PlayerInputHandler)), CanEditMultipleObjects]
+public class PlayerInputHandlerEditor : GenericEditor
 {
     private SerializedProperty _target;
     private SerializedProperty _cursor;
